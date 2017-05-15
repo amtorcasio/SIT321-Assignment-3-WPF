@@ -14,5 +14,10 @@ namespace SIT321_Assignment_3_WPF
     /// //TEST
     public partial class App : Application
     {
+        //APP ENTRY POINT AFTER base.OnStartup(e);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
     }
 }
