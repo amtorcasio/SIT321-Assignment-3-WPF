@@ -20,14 +20,15 @@ namespace SIT321_Assignment_3_WPF.Users
         { }
 
         public string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "\\Data\\";
-        private SqlConnection GetDatabaseSQLConnection()
+        protected SqlConnection GetDatabaseSQLConnection()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='" + PATH_DATA + "Database.mdf';Integrated Security=True");
         }
 
-        private DataContext GetDatabaseDataContext()
+        protected DataContext GetDatabaseDataContext()
         {
             return new DataContext(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename='" + PATH_DATA + "Database.mdf'; Integrated Security=True");
         }
+
     }
 }
