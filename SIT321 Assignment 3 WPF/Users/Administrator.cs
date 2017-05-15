@@ -30,7 +30,7 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     System.Diagnostics.Debug.Write("About to add user");
 
-                    SqlCommand command = new SqlCommand("INSERT INTO [dbo].[User] (Id, FirstName, LastName, Type, Status, Password, Email)" +
+                    SqlCommand command = new SqlCommand("INSERT INTO [User] (Id, FirstName, LastName, Type, Status, Password, Email)" +
                                                         "VALUES (@id, @firstName, @lastName, @type, @status, @password, @email)", connection);
                     command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
                     command.Parameters.Add("@firstName", SqlDbType.VarChar).Value = firstName;

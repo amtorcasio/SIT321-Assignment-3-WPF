@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.Linq;
-using System.IO;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
@@ -27,7 +26,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public void forgotPassword()
         { }
 
-        public static string PATH_DATA = Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
+        public string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "Data\\";
         protected SqlConnection GetDatabaseSQLConnection()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='" + PATH_DATA + "Database.mdf';Integrated Security=True");
