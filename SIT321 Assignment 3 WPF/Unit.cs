@@ -8,19 +8,37 @@ namespace SIT321_Assignment_3_WPF
 {
     class Unit
     {
-        public int ID;
-        public string Code;
-        public DateTime Year;
-        public int Trimester;
-        public int TotalLectures;
-        public int TotalPracticals;
+        private int ID;
+        private string Code;
+        private DateTime Year;
+        private int Trimester;
+        private int TotalLectures;
+        private int TotalPracticals;
+
+        // constructor
+        public Unit(string code, DateTime year, int tri, int tlec, int tprac)
+        {
+            Code = code;
+            Year = year;
+            Trimester = tri;
+            TotalLectures = tlec;
+            TotalPracticals = tprac;
+        }
     }
     
     class Assessment
     {
-        public int AssessmentID;
-        public string Name;
-        public int TotalMarks;
-        public decimal Weight;
+        private int AssessmentID;
+        private string Name;
+        private int TotalMarks;
+        private decimal Weight;
+
+        // constructor
+        public Assessment(string name, int tmark, decimal weight)
+        {
+            Name = name;
+            TotalMarks = tmark;
+            Weight = weight;
+        }
     }
 }
