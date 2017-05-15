@@ -11,6 +11,7 @@ namespace SIT321_Assignment_3_WPF
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    /// //TEST
     public partial class App : Application
     {
     }
