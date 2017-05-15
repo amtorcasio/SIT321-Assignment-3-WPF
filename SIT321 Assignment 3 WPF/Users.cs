@@ -8,7 +8,11 @@ namespace SIT321_Assignment_3_WPF
 {
     class User
     {
-
+        public int ID;
+        public string Firstname;
+        public string Lastname;
+        public string Email;
+        private string Password;
     }
 
     class Administrator : User
