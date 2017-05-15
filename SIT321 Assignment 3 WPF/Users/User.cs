@@ -6,12 +6,12 @@ namespace SIT321_Assignment_3_WPF.Users
 {
     class User
     {
-        public int ID;
-        public string Firstname;
-        public string Lastname;
-        public string Email;
-        private string Password;
-        public List<Unit> Units;
+        public int ID { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
+        private string Password { get; set; }
+        public List<Unit> Units { get; set; }
 
         public void changePassword()
         { }
