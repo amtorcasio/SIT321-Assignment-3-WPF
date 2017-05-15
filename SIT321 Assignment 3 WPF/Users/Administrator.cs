@@ -4,6 +4,15 @@ namespace SIT321_Assignment_3_WPF.Users
 {
     class Administrator : User
     {
+        // constructor
+        public Administrator(string fname, string lname, string email, string password)
+        {
+            Firstname = fname;
+            Lastname = lname;
+            Email = email;
+            Password = password;
+        }
+
         public void addUser(string fname, string lname, string email, string pass)
         { }
 
