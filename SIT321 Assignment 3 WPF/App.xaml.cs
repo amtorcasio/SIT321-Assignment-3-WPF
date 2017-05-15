@@ -13,7 +13,7 @@ namespace SIT321_Assignment_3_WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Administrator admin = new Administrator("hello", "there", "general", "kenobi");
+            Administrator admin = new Administrator("hello", "there", "general", "kenobi", "password");
 
             admin.addUser("12235", "andrea", "michele", "a@t.com", "wut", User.UserType.Administrator);
         }
