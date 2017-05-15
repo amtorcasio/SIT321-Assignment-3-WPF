@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using SIT321_Assignment_3_WPF.Users;
 
 namespace SIT321_Assignment_3_WPF
 {
@@ -18,6 +13,9 @@ namespace SIT321_Assignment_3_WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Administrator admin = new Administrator("hello", "there", "general", "kenobi");
+
+            admin.addUser("12235", "andrea", "michele", "a@t.com", "wut", User.UserType.Administrator);
         }
     }
 }

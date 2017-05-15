@@ -18,7 +18,8 @@ namespace SIT321_Assignment_3_WPF.Users
         //todo: SALT AND HASH PASSWORDS
         public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
         {
-            if(!DoesRecordExist(id))
+            User u = new Users.User() { ID = id };
+            if(!DoesRecordExist(u))
             {
                 SqlConnection connection = GetDatabaseSQLConnection();
 
@@ -28,12 +29,13 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     System.Diagnostics.Debug.Write("About to add user");
 
-                    SqlCommand command = new SqlCommand("INSERT INTO User (Id, FirstName, LastName, Type, Password, Email)" +
-                                                        "VALUES (@id, @firstName, @lastName, @type, @password, @email)", connection);
+                    SqlCommand command = new SqlCommand("INSERT INTO [User] (Id, FirstName, LastName, Type, Status, Password, Email)" +
+                                                        "VALUES (@id, @firstName, @lastName, @type, @status, @password, @email)", connection);
                     command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
                     command.Parameters.Add("@firstName", SqlDbType.VarChar).Value = firstName;
                     command.Parameters.Add("@lastName", SqlDbType.VarChar).Value = lastName;
-                    command.Parameters.Add("@type", SqlDbType.Int).Value = type;
+                    command.Parameters.Add("@type", SqlDbType.Int).Value = (int)type;
+                    command.Parameters.Add("@status", SqlDbType.Int).Value = 1;
                     command.Parameters.Add("@password", SqlDbType.VarChar).Value = pass;
                     command.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
 

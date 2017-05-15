@@ -26,7 +26,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public void forgotPassword()
         { }
 
-        public string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "\\Data\\";
+        public string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "Data\\";
         protected SqlConnection GetDatabaseSQLConnection()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='" + PATH_DATA + "Database.mdf';Integrated Security=True");
