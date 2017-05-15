@@ -7,8 +7,9 @@ namespace SIT321_Assignment_3_WPF.Users
     class Administrator : User
     {
         // constructor
-        public Administrator(string fname, string lname, string email, string password)
+        public Administrator(string id, string fname, string lname, string email, string password)
         {
+            ID = id;
             Firstname = fname;
             Lastname = lname;
             Email = email;
@@ -103,7 +104,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public void generateReport(Student s, Unit u)
         { }
 
-        private bool DoesRecordExist(User u)
+        public bool DoesRecordExist(User u)
         {
             return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + u.ID + "'");
         }
