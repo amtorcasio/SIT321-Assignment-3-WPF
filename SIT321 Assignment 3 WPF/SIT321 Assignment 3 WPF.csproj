@@ -70,11 +70,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Users\Administrator.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Users\Lecturer.cs" />
+    <Compile Include="Users\Student.cs" />
+    <Compile Include="Users\User.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

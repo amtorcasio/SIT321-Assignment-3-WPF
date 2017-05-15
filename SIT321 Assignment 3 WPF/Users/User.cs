@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIT321_Assignment_3_WPF
+namespace SIT321_Assignment_3_WPF.Users
 {
     class User
     {
@@ -14,22 +14,5 @@ namespace SIT321_Assignment_3_WPF
         public string Email;
         private string Password;
         public List<Unit> Units;
-    }
-
-    class Administrator : User
-    {
-        
-    }
-
-    class Lecturer : User
-    {
-
-    }
-
-    class Student : User
-    {
-        public Boolean AtRisk;
-        public decimal Performance;
-        public int Attendance;
     }
 }
