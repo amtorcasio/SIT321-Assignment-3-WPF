@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
@@ -57,5 +58,55 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public void generateReport(Student s, Unit u)
         { }
+
+        private bool DoesRecordExist(User u)
+        {
+            return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + u.ID + "'");
+        }
+
+        private bool DoesRecordExist(string queryString)
+        {
+            var connection = GetDatabaseSQLConnection();
+            SqlDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(queryString, connection);
+                reader = command.ExecuteReader();
+
+                int recordCount = 0;
+                while (reader.Read())
+                {
+                    recordCount++;
+                }
+
+                if (recordCount > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("DoesRecordExist Error: " + e.Message.ToString());
+                int count = 1;
+                Exception error = e.InnerException;
+                while (error != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("DoesRecordExist Nested Error " + count + ": " + error.Message.ToString());
+                    error = error.InnerException;
+                    count++;
+                }
+                return false;
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+
+                if (connection != null)
+                    connection.Close();
+            }
+        }
     }
 }
