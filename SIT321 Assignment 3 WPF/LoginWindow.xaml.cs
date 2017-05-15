@@ -22,6 +22,9 @@ namespace SIT321_Assignment_3_WPF
         public LoginWindow()
         {
             InitializeComponent();
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Focus();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
