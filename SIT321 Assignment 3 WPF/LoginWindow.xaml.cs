@@ -23,10 +23,5 @@ namespace SIT321_Assignment_3_WPF
         {
             InitializeComponent();
         }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }
