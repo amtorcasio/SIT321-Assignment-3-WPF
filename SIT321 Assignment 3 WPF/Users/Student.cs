@@ -4,8 +4,8 @@ namespace SIT321_Assignment_3_WPF.Users
 {
     class Student : User
     {
-        public Boolean AtRisk;
-        public decimal Performance;
-        public int Attendance;
+        public Boolean AtRisk { get; set; }
+        public decimal Performance { get; set; }
+        public int Attendance { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SIT321_Assignment_3_WPF.Users
+﻿using System;
+
+namespace SIT321_Assignment_3_WPF.Users
 {
     class Administrator : User
     {
