@@ -13,11 +13,12 @@ namespace SIT321_Assignment_3_WPF
         public string Lastname;
         public string Email;
         private string Password;
+        public List<Unit> Units;
     }
 
     class Administrator : User
     {
-
+        
     }
 
     class Lecturer : User
@@ -27,6 +28,8 @@ namespace SIT321_Assignment_3_WPF
 
     class Student : User
     {
-
+        public Boolean AtRisk;
+        public decimal Performance;
+        public int Attendance;
     }
 }
