@@ -6,6 +6,13 @@ namespace SIT321_Assignment_3_WPF.Users
 {
     class User
     {
+        public enum UserType
+        {
+            Administrator,
+            Lecturer,
+            Student
+        }
+
         public string ID { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }

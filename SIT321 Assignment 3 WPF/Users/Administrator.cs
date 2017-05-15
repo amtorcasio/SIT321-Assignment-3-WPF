@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace SIT321_Assignment_3_WPF.Users
@@ -14,8 +15,51 @@ namespace SIT321_Assignment_3_WPF.Users
             Password = password;
         }
 
-        public void addUser(string fname, string lname, string email, string pass)
-        { }
+        //todo: SALT AND HASH PASSWORDS
+        public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
+        {
+            if(!DoesRecordExist(id))
+            {
+                SqlConnection connection = GetDatabaseSQLConnection();
+
+                try
+                {
+                    connection.Open();
+
+                    System.Diagnostics.Debug.Write("About to add user");
+
+                    SqlCommand command = new SqlCommand("INSERT INTO User (Id, FirstName, LastName, Type, Password, Email)" +
+                                                        "VALUES (@id, @firstName, @lastName, @type, @password, @email)", connection);
+                    command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+                    command.Parameters.Add("@firstName", SqlDbType.VarChar).Value = firstName;
+                    command.Parameters.Add("@lastName", SqlDbType.VarChar).Value = lastName;
+                    command.Parameters.Add("@type", SqlDbType.Int).Value = type;
+                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = pass;
+                    command.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+
+                    command.ExecuteNonQuery();
+
+                    System.Diagnostics.Debug.Write("Finished adding members");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("addUser Error: " + e.Message.ToString());
+                    int count = 1;
+                    Exception error = e.InnerException;
+                    while (error != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("addUser Nested Error " + count + ": " + error.Message.ToString());
+                        error = error.InnerException;
+                        count++;
+                    }
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
 
         public void suspendUser(User u)
         { }
@@ -66,7 +110,7 @@ namespace SIT321_Assignment_3_WPF.Users
 
         private bool DoesRecordExist(string queryString)
         {
-            var connection = GetDatabaseSQLConnection();
+            SqlConnection connection = GetDatabaseSQLConnection();
             SqlDataReader reader = null;
 
             try
