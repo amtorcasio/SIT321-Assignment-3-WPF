@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
+using System.Data.SQLite.EF6;
+using System.Data.SQLite.Generic;
+using System.Data.SQLite.Linq;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
@@ -22,7 +25,7 @@ namespace SIT321_Assignment_3_WPF.Users
             User u = new Users.User() { ID = id };
             if(!DoesRecordExist(u))
             {
-                SqlConnection connection = GetDatabaseSQLConnection();
+                var connection = GetDatabaseSQLConnection();
 
                 try
                 {
@@ -30,15 +33,15 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     System.Diagnostics.Debug.Write("About to add user");
 
-                    SqlCommand command = new SqlCommand("INSERT INTO [User] (Id, FirstName, LastName, Type, Status, Password, Email)" +
-                                                        "VALUES (@id, @firstName, @lastName, @type, @status, @password, @email)", connection);
-                    command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
-                    command.Parameters.Add("@firstName", SqlDbType.VarChar).Value = firstName;
-                    command.Parameters.Add("@lastName", SqlDbType.VarChar).Value = lastName;
-                    command.Parameters.Add("@type", SqlDbType.Int).Value = (int)type;
-                    command.Parameters.Add("@status", SqlDbType.Int).Value = 1;
-                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = pass;
-                    command.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+                    SQLiteCommand command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO User (Id, FirstName, LastName, Type, Status, Password, Email) VALUES (@id, @firstName, @lastName, @type, @status, @password, @email)";
+                    command.Parameters.Add(new SQLiteParameter("@id", id));
+                    command.Parameters.Add(new SQLiteParameter("@firstName", firstName));
+                    command.Parameters.Add(new SQLiteParameter("@lastName",  lastName));
+                    command.Parameters.Add(new SQLiteParameter("@type", type));
+                    command.Parameters.Add(new SQLiteParameter("@status", 1));
+                    command.Parameters.Add(new SQLiteParameter("@password", pass));
+                    command.Parameters.Add(new SQLiteParameter("@email", email));
 
                     command.ExecuteNonQuery();
 
@@ -113,13 +116,13 @@ namespace SIT321_Assignment_3_WPF.Users
 
         private bool DoesRecordExist(string queryString)
         {
-            SqlConnection connection = GetDatabaseSQLConnection();
-            SqlDataReader reader = null;
+            var connection = GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(queryString, connection);
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 reader = command.ExecuteReader();
 
                 int recordCount = 0;
