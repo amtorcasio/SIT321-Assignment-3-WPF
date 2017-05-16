@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Assessment" Category="Table" Bounds="-205.018333333333,8.55984343271314,255.31,141.92" Group="Expanded" Label="Assessment" />
+    <Node Id="Assessment_Id" Category="Field Primary" Bounds="-185.018333333333,48.5598434327132,50,25.96" Description="bigint" Label="Id" />
+    <Node Id="Assessment_Name" Category="Field" Bounds="-105.018333333333,48.5598434327132,51.6966666666667,25.96" Description="nvarchar(100)" Label="Name" />
+    <Node Id="Assessment_TotalMarks" Category="Field" Bounds="-97.1716666666667,104.519843432713,77.34,25.96" Description="int" Label="TotalMarks" />
+    <Node Id="Assessment_UnitID" Category="Field Foreign" Bounds="-23.3216666666667,48.5598434327132,53.6133333333333,25.96" Description="int" Label="UnitID" />
+    <Node Id="Assessment_Weight" Category="Field" Bounds="-185.018333333333,104.519843432713,57.8466666666667,25.96" Description="numeric(18,0)" Label="Weight" />
+    <Node Id="Database" Category="Database" Bounds="-225.018333333333,-231.340156567287,806.79,657.68" Group="Expanded" Label="Database.db" />
+    <Node Id="Unit" Category="Table" Bounds="-72.0333333333334,208.459843432713,309.34,197.88" Group="Expanded" Label="Unit" />
+    <Node Id="Unit_Code" Category="Field" Bounds="27.9666666666666,248.459843432713,50,25.96" Description="nvarchar(100)" Label="Code" />
+    <Node Id="Unit_Id" Category="Field Primary" Bounds="-52.0333333333334,248.459843432713,50,25.96" Description="bigint" Label="Id" />
+    <Node Id="Unit_Name" Category="Field" Bounds="-52.0333333333334,304.419843432713,51.6966666666667,25.96" Description="nvarchar(500)" Label="Name" />
+    <Node Id="Unit_TotalLectures" Category="Field" Bounds="128.21,304.419843432713,89.0966666666667,25.96" Description="int" Label="TotalLectures" />
+    <Node Id="Unit_TotalPracticals" Category="Field" Bounds="-52.0333333333334,360.379843432713,94.3933333333333,25.96" Description="int" Label="TotalPracticals" />
+    <Node Id="Unit_Trimester" Category="Field" Bounds="29.6633333333333,304.419843432713,68.5466666666667,25.96" Description="numeric(1,0)" Label="Trimester" />
+    <Node Id="Unit_Year" Category="Field" Bounds="107.966666666667,248.459843432713,50,25.96" Description="numeric(4,0)" Label="Year" />
+    <Node Id="User" Category="Table" Bounds="267.501666666667,208.459843432713,294.27,197.88" Group="Expanded" Label="User" />
+    <Node Id="UserAssessment" Category="Table" Bounds="326.94,-191.340156567287,175.393333333333,141.92" Group="Expanded" Label="UserAssessment" />
+    <Node Id="UserAssessment_AssessmentID" Category="Field Primary" Bounds="346.94,-95.3801565672869,93.4666666666667,25.96" Description="int" Label="AssessmentID" />
+    <Node Id="UserAssessment_Mark" Category="Field" Bounds="346.94,-151.340156567287,50,25.96" Description="numeric(18,0)" Label="Mark" />
+    <Node Id="UserAssessment_UserID" Category="Field Primary" Bounds="426.94,-151.340156567287,55.3933333333334,25.96" Description="nvarchar(50)" Label="UserID" />
+    <Node Id="UserUnits" Category="Table" Bounds="81.2233333333333,-19.4201565672869,302.826666666667,197.88" Group="Expanded" Label="UserUnits" />
+    <Node Id="UserUnits_LectureAttendance" Category="Field" Bounds="242.413333333333,76.5398434327132,119.5,25.96" Description="int" Label="LectureAttendance" />
+    <Node Id="UserUnits_PracticalAttendance" Category="Field" Bounds="101.223333333333,132.499843432713,124.796666666667,25.96" Description="int" Label="PracticalAttendance" />
+    <Node Id="UserUnits_StaffFeedback" Category="Field Optional" Bounds="270.23,20.5798434327131,93.8200000000001,25.96" Description="ntext" Label="StaffFeedback" />
+    <Node Id="UserUnits_StudentFeedback" Category="Field Optional" Bounds="101.223333333333,76.5398434327132,111.19,25.96" Description="ntext" Label="StudentFeedback" />
+    <Node Id="UserUnits_UnitID" Category="Field Primary" Bounds="101.223333333333,20.5798434327131,53.6133333333333,25.96" Description="int" Label="UnitID" />
+    <Node Id="UserUnits_UserID" Category="Field Primary" Bounds="184.836666666667,20.5798434327131,55.3933333333333,25.96" Description="nvarchar(50)" Label="UserID" />
+    <Node Id="User_Email" Category="Field" Bounds="447.501666666667,248.459843432713,50,25.96" Description="nvarchar(500)" Label="Email" />
+    <Node Id="User_FirstName" Category="Field" Bounds="287.501666666667,360.379843432713,73.7966666666667,25.96" Description="nvarchar(500)" Label="FirstName" />
+    <Node Id="User_Id" Category="Field Primary" Bounds="287.501666666667,248.459843432713,50,25.96" Description="nvarchar(50)" Label="Id" />
+    <Node Id="User_LastName" Category="Field" Bounds="469.158333333333,304.419843432713,72.6133333333333,25.96" Description="nvarchar(500)" Label="LastName" />
+    <Node Id="User_Password" Category="Field" Bounds="369.611666666667,304.419843432713,69.5466666666667,25.96" Description="ntext" Label="Password" />
+    <Node Id="User_Status" Category="Field" Bounds="287.501666666666,304.419843432713,52.11,25.96" Description="numeric(1,0)" Label="Status" />
+    <Node Id="User_Type" Category="Field" Bounds="367.501666666667,248.459843432713,50,25.96" Description="numeric(1,0)" Label="Type" />
+  </Nodes>
+  <Links>
+    <Link Source="Assessment" Target="Assessment_Id" Category="Contains" />
+    <Link Source="Assessment" Target="Assessment_Name" Category="Contains" />
+    <Link Source="Assessment" Target="Assessment_TotalMarks" Category="Contains" />
+    <Link Source="Assessment" Target="Assessment_UnitID" Category="Contains" />
+    <Link Source="Assessment" Target="Assessment_Weight" Category="Contains" />
+    <Link Source="Assessment_UnitID" Target="Unit_Id" Category="Foreign Key" Label="FK_Assessment_0_0" />
+    <Link Source="Database" Target="Assessment" Category="Contains" />
+    <Link Source="Database" Target="Unit" Category="Contains" />
+    <Link Source="Database" Target="User" Category="Contains" />
+    <Link Source="Database" Target="UserAssessment" Category="Contains" />
+    <Link Source="Database" Target="UserUnits" Category="Contains" />
+    <Link Source="Unit" Target="Unit_Code" Category="Contains" />
+    <Link Source="Unit" Target="Unit_Id" Category="Contains" />
+    <Link Source="Unit" Target="Unit_Name" Category="Contains" />
+    <Link Source="Unit" Target="Unit_TotalLectures" Category="Contains" />
+    <Link Source="Unit" Target="Unit_TotalPracticals" Category="Contains" />
+    <Link Source="Unit" Target="Unit_Trimester" Category="Contains" />
+    <Link Source="Unit" Target="Unit_Year" Category="Contains" />
+    <Link Source="User" Target="User_Email" Category="Contains" />
+    <Link Source="User" Target="User_FirstName" Category="Contains" />
+    <Link Source="User" Target="User_Id" Category="Contains" />
+    <Link Source="User" Target="User_LastName" Category="Contains" />
+    <Link Source="User" Target="User_Password" Category="Contains" />
+    <Link Source="User" Target="User_Status" Category="Contains" />
+    <Link Source="User" Target="User_Type" Category="Contains" />
+    <Link Source="UserAssessment" Target="UserAssessment_AssessmentID" Category="Contains" />
+    <Link Source="UserAssessment" Target="UserAssessment_Mark" Category="Contains" />
+    <Link Source="UserAssessment" Target="UserAssessment_UserID" Category="Contains" />
+    <Link Source="UserAssessment_AssessmentID" Target="Assessment_Id" Category="Foreign Key" Label="FK_UserAssessment_1_0" />
+    <Link Source="UserAssessment_UserID" Target="User_Id" Category="Foreign Key" Label="FK_UserAssessment_0_0" />
+    <Link Source="UserUnits" Target="UserUnits_LectureAttendance" Category="Contains" />
+    <Link Source="UserUnits" Target="UserUnits_PracticalAttendance" Category="Contains" />
+    <Link Source="UserUnits" Target="UserUnits_StaffFeedback" Category="Contains" />
+    <Link Source="UserUnits" Target="UserUnits_StudentFeedback" Category="Contains" />
+    <Link Source="UserUnits" Target="UserUnits_UnitID" Category="Contains" />
+    <Link Source="UserUnits" Target="UserUnits_UserID" Category="Contains" />
+    <Link Source="UserUnits_UnitID" Target="Unit_Id" Category="Foreign Key" Label="FK_UserUnits_1_0" />
+    <Link Source="UserUnits_UserID" Target="User_Id" Category="Foreign Key" Label="FK_UserUnits_0_0" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="Database" />
+    <Category Id="Field" />
+    <Category Id="Field Foreign" />
+    <Category Id="Field Optional" />
+    <Category Id="Field Primary" />
+    <Category Id="Foreign Key" />
+    <Category Id="Table" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Description" Label="Description" Description="Description" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Table" ValueLabel="True">
+      <Condition Expression="HasCategory('Table')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Schema" ValueLabel="True">
+      <Condition Expression="HasCategory('Schema')" />
+      <Setter Property="Background" Value="#FF7F9169" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field" ValueLabel="True">
+      <Condition Expression="HasCategory('Field')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Database" ValueLabel="True">
+      <Condition Expression="HasCategory('Database')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>
