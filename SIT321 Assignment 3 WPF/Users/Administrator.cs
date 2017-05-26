@@ -40,7 +40,18 @@ namespace SIT321_Assignment_3_WPF.Users
                     command.Parameters.Add(new SQLiteParameter("@lastName",  lastName));
                     command.Parameters.Add(new SQLiteParameter("@type", type));
                     command.Parameters.Add(new SQLiteParameter("@status", 1));
-                    command.Parameters.Add(new SQLiteParameter("@password", pass));
+
+                    using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
+                    {
+                        byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pass));
+
+                        string hashed_pass = null;
+                        foreach (byte b in data)
+                            hashed_pass += b.ToString("x2");
+
+                        command.Parameters.Add(new SQLiteParameter("@password", hashed_pass));
+                    }
+                    //command.Parameters.Add(new SQLiteParameter("@password", pass));
                     command.Parameters.Add(new SQLiteParameter("@email", email));
 
                     command.ExecuteNonQuery();
