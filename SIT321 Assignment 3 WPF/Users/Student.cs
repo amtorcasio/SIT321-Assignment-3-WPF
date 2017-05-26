@@ -2,7 +2,7 @@
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    class Student : User
+    class Student : Account
     {
         // constructor
         public Student(string fname, string lname, string email, string password)

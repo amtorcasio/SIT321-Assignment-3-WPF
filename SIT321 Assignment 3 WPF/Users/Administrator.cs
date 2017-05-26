@@ -7,7 +7,7 @@ using System.Data.SQLite.Linq;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    class Administrator : User
+    class Administrator : Account
     {
         // constructor
         public Administrator(string id, string fname, string lname, string email, string password)
@@ -22,7 +22,7 @@ namespace SIT321_Assignment_3_WPF.Users
         //todo: SALT AND HASH PASSWORDS
         public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
         {
-            User u = new Users.User() { ID = id };
+            Account u = new Users.Account() { ID = id };
             if(!DoesRecordExist(u))
             {
                 var connection = GetDatabaseSQLConnection();
@@ -67,16 +67,16 @@ namespace SIT321_Assignment_3_WPF.Users
             }
         }
 
-        public void suspendUser(User u)
+        public void suspendUser(Account u)
         { }
 
-        public void terminateUser(User u)
+        public void terminateUser(Account u)
         { }
 
-        public void editUser(User u, string fname, string lname, string email, string pass)
+        public void editUser(Account u, string fname, string lname, string email, string pass)
         { }
 
-        public void removeUser(User u)
+        public void removeUser(Account u)
         { }
 
         public void addUnit(string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
@@ -109,7 +109,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public void generateReport(Student s, Unit u)
         { }
 
-        public bool DoesRecordExist(User u)
+        public bool DoesRecordExist(Account u)
         {
             return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + u.ID + "'");
         }

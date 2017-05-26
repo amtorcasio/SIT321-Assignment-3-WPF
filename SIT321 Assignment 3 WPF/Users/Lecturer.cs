@@ -1,6 +1,6 @@
 ﻿namespace SIT321_Assignment_3_WPF.Users
 {
-    class Lecturer : User
+    class Lecturer : Account
     {
         // constructor
         public Lecturer(string fname, string lname, string email, string password)
