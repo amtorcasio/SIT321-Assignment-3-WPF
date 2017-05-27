@@ -79,13 +79,73 @@ namespace SIT321_Assignment_3_WPF.Users
         }
 
         public void suspendUser(Account u)
-        { }
+        {
+            if (DoesRecordExist(u))
+            {
+                //todo : add on to code snippet
+                try
+                {
+                    var connection = GetDatabaseSQLConnection();
+
+                    SQLiteCommand command = connection.CreateCommand();
+                    command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
+                    command.Parameters.Add(new SQLiteParameter("@status", 0));
+                    command.Parameters.Add(new SQLiteParameter("@id", u.ID));
+
+                    command.ExecuteNonQuery();
+                    System.Diagnostics.Debug.Write("Member is suspended");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("suspendUser Error: " + e.Message.ToString());
+                }
+            }
+        }
 
         public void terminateUser(Account u)
-        { }
+        {
+            /* save a copy of the user's email,
+             * execute SQL command to delete user entry from database,
+             * alert user through email,
+             * release copy of email
+             */
+        }
 
         public void editUser(Account u, string fname, string lname, string email, string pass)
-        { }
+        {
+            if (DoesRecordExist(u))
+            {
+                //todo : add on to code snippet
+                try
+                {
+                    var connection = GetDatabaseSQLConnection();
+
+                    SQLiteCommand command = connection.CreateCommand();
+                    command.CommandText = "UPDATE Users SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
+                    command.Parameters.Add(new SQLiteParameter("@firstName", firstName));
+                    command.Parameters.Add(new SQLiteParameter("@lastName", lastName));
+                    command.Parameters.Add(new SQLiteParameter("@email", email));
+                    using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
+                    {
+                        byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pass));
+
+                        string hashed_pass = null;
+                        foreach (byte b in data)
+                            hashed_pass += b.ToString("x2");
+
+                        command.Parameters.Add(new SQLiteParameter("@password", hashed_pass));
+                    }
+                    command.Parameters.Add(new SQLiteParameter("@id", u.ID));
+
+                    command.ExecuteNonQuery();
+                    System.Diagnostics.Debug.Write("Member data modified");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("editUser Error: " + e.Message.ToString());
+                }
+            }
+        }
 
         public void removeUser(Account u)
         { }
