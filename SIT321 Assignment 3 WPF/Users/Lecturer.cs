@@ -2,6 +2,8 @@
 {
     class Lecturer : Account
     {
+        public System.Collections.Generic.List<Unit> Units;
+
         // constructor
         public Lecturer(string fname, string lname, string email, string password)
         {

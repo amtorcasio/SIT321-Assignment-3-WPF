@@ -2,7 +2,7 @@
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    class Student : Account
+    public class Student : Account
     {
         // constructor
         public Student(string fname, string lname, string email, string password)
@@ -14,8 +14,9 @@ namespace SIT321_Assignment_3_WPF.Users
         }
 
         public bool AtRisk { get; set; }
-        public decimal Performance { get; set; }
-        public int Attendance { get; set; }
+        //public decimal Performance { get; set; }
+        //public int Attendance { get; set; }
+        public System.Collections.Generic.Dictionary<Unit, Tuple<decimal, int>> Units;
 
         public void addFeedback(Student s, Unit u)
         { }

@@ -8,12 +8,12 @@ namespace SIT321_Assignment_3_WPF
 {
     class Unit
     {
-        private int ID;
-        private string Code;
-        private DateTime Year;
-        private int Trimester;
-        private int TotalLectures;
-        private int TotalPracticals;
+        public int ID {get; set;}
+        public string Code {get; set;}
+        public DateTime Year {get; set;}
+        public int Trimester {get; set;}
+        public int TotalLectures {get; set;}
+        public int TotalPracticals {get; set;}
 
         // constructor
         public Unit(string code, DateTime year, int tri, int tlec, int tprac)

@@ -83,9 +83,10 @@ namespace SIT321_Assignment_3_WPF.Users
             if (DoesRecordExist(u))
             {
                 //todo : add on to code snippet
+                var connection = GetDatabaseSQLConnection();
                 try
                 {
-                    var connection = GetDatabaseSQLConnection();
+                    connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
@@ -116,14 +117,15 @@ namespace SIT321_Assignment_3_WPF.Users
             if (DoesRecordExist(u))
             {
                 //todo : add on to code snippet
+                var connection = GetDatabaseSQLConnection();
                 try
                 {
-                    var connection = GetDatabaseSQLConnection();
+                    connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
-                    command.Parameters.Add(new SQLiteParameter("@firstName", firstName));
-                    command.Parameters.Add(new SQLiteParameter("@lastName", lastName));
+                    command.Parameters.Add(new SQLiteParameter("@firstName", fname));
+                    command.Parameters.Add(new SQLiteParameter("@lastName", lname));
                     command.Parameters.Add(new SQLiteParameter("@email", email));
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
@@ -138,7 +140,7 @@ namespace SIT321_Assignment_3_WPF.Users
                     command.Parameters.Add(new SQLiteParameter("@id", u.ID));
 
                     command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Member data modified");
+                    System.Diagnostics.Debug.Write("Data for member " + u.ID + " modified");
                 }
                 catch (Exception e)
                 {
@@ -148,16 +150,73 @@ namespace SIT321_Assignment_3_WPF.Users
         }
 
         public void removeUser(Account u)
-        { }
+        {
+            // what in the world is this for?
+        }
 
-        public void addUnit(string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
-        { }
+        public void addUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        {
+            //Do we need a DoesRecordExist function to check for existing units in its table?
+            //todo : add on to code snippet
+            var connection = GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "INSERT INTO Unit (Id, Name, Code, Year, Trimester, TotalLectures, TotalPracticals) VALUES (@id, @name, @code, @year, @trimester, @totallect, @totalprac)";
+                command.Parameters.Add("@id", id);
+                command.Parameters.Add("@name", name);
+                command.Parameters.Add("@code", code);
+                command.Parameters.Add("@year", year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
+                command.Parameters.Add("@trimester", trimester);
+                command.Parameters.Add("@totallect", totalLectures);
+                command.Parameters.Add("@totalprac", totalPracticals);
+
+                command.ExecuteNonQuery();
+                System.Diagnostics.Debug.Write("New unit added");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("addUnit Error: " + e.Message.ToString());
+            }
+        }
 
         public void editUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
-        { }
+        {
+            //todo : add on to code snippet
+            var connection = GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE TABLE Unit SET Name = @name, Code = @code, Year = @year, Trimester = @trimester, TotalLectures = @totallect, TotalPracticals = @totalprac WHERE Id = @id";
+                command.Parameters.Add("@name", name);
+                command.Parameters.Add("@code", code);
+                command.Parameters.Add("@year", year.Year);
+                command.Parameters.Add("@trimester", trimester);
+                command.Parameters.Add("@totallect", totalLectures);
+                command.Parameters.Add("@totalprac", totalPracticals);
+                command.Parameters.Add("@id", u.ID);
+
+                command.ExecuteNonQuery();
+                System.Diagnostics.Debug.Write("Unit " + name + " modified");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("editUnit Error: " + e.Message.ToString());
+            }
+        }
 
         public void removeUnit(Unit u)
-        { }
+        {
+            /* Check for associated classes
+             * do not remove when associations are present
+             */
+        }
 
         public void addStudentUnit(Student s, Unit u)
         { }
