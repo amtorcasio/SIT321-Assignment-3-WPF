@@ -35,11 +35,11 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "INSERT INTO User (Id, FirstName, LastName, Type, Status, Password, Email) VALUES (@id, @firstName, @lastName, @type, @status, @password, @email)";
-                    command.Parameters.Add(new SQLiteParameter("@id", id));
-                    command.Parameters.Add(new SQLiteParameter("@firstName", firstName));
-                    command.Parameters.Add(new SQLiteParameter("@lastName",  lastName));
-                    command.Parameters.Add(new SQLiteParameter("@type", type));
-                    command.Parameters.Add(new SQLiteParameter("@status", 1));
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@firstName", firstName);
+                    command.Parameters.AddWithValue("@lastName",  lastName);
+                    command.Parameters.AddWithValue("@type", type);
+                    command.Parameters.AddWithValue("@status", 1);
 
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
