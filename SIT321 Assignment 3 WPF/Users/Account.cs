@@ -5,7 +5,7 @@ using System.IO;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    public class Account
+    class Account
     {
         public enum UserType
         {

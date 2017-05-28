@@ -2,9 +2,9 @@
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    public class Lecturer : Account
+    class Lecturer : Account
     {
-        public List<Unit> Units;
+        public List<Unit> assignedUnits; // Lecturer.Units hides inherited member Acccount.Units
 
         // constructor
         public Lecturer(string fname, string lname, string email, string password)
@@ -13,6 +13,7 @@ namespace SIT321_Assignment_3_WPF.Users
             Lastname = lname;
             Email = email;
             Password = password;
+            assignedUnits = null;
         }
 
         public void addAssessment(Unit u, Assessment a)
