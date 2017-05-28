@@ -1,8 +1,10 @@
-﻿namespace SIT321_Assignment_3_WPF.Users
+﻿using System.Collections.Generic;
+
+namespace SIT321_Assignment_3_WPF.Users
 {
-    class Lecturer : Account
+    public class Lecturer : Account
     {
-        public System.Collections.Generic.List<Unit> Units;
+        public List<Unit> Units;
 
         // constructor
         public Lecturer(string fname, string lname, string email, string password)

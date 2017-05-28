@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
@@ -16,7 +16,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public bool AtRisk { get; set; }
         //public decimal Performance { get; set; }
         //public int Attendance { get; set; }
-        public System.Collections.Generic.Dictionary<Unit, Tuple<decimal, int>> Units;
+        public Dictionary<Unit, Tuple<decimal, int>> Units;
 
         public void addFeedback(Student s, Unit u)
         { }

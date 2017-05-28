@@ -7,7 +7,7 @@ using System.Data.SQLite.Linq;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
-    class Administrator : Account
+    public class Administrator : Account
     {
         // constructor
         public Administrator(string id, string fname, string lname, string email, string password)

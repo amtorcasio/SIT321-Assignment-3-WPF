@@ -1,12 +1,17 @@
-using System;
-using System.Text;
+using SIT321_Assignment_3_WPF.Users;
+using System.Collections.Generic;
 
 namespace SIT321_Assignment_3_WPF
 {
-    static class Utilities
+    public static class Utilities
     {
-        public void GetStudentData();
-        public void CheckIfStudentAtRisk();
-        public void AlertSARUsers();
+        public static void GetStudentData(Student s, Unit u)
+        { }
+
+        public static void CheckIfStudentAtRisk()
+        { }
+
+        public static void AlertSARUsers()
+        { }
     }
 }
