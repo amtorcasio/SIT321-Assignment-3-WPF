@@ -49,10 +49,10 @@ namespace SIT321_Assignment_3_WPF.Users
                         foreach (byte b in data)
                             hashed_pass += b.ToString("x2");
 
-                        command.Parameters.Add(new SQLiteParameter("@password", hashed_pass));
+                        command.Parameters.AddWithValue("@password", hashed_pass);
                     }
-                    //command.Parameters.Add(new SQLiteParameter("@password", pass));
-                    command.Parameters.Add(new SQLiteParameter("@email", email));
+                    //command.Parameters.AddWithValue("@password", pass));
+                    command.Parameters.AddWithValue("@email", email);
 
                     command.ExecuteNonQuery();
 
@@ -90,8 +90,8 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
-                    command.Parameters.Add(new SQLiteParameter("@status", 0));
-                    command.Parameters.Add(new SQLiteParameter("@id", u.ID));
+                    command.Parameters.AddWithValue("@status", 0);
+                    command.Parameters.AddWithValue("@id", u.ID);
 
                     command.ExecuteNonQuery();
                     System.Diagnostics.Debug.Write("Member is suspended");
@@ -124,9 +124,9 @@ namespace SIT321_Assignment_3_WPF.Users
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
-                    command.Parameters.Add(new SQLiteParameter("@firstName", fname));
-                    command.Parameters.Add(new SQLiteParameter("@lastName", lname));
-                    command.Parameters.Add(new SQLiteParameter("@email", email));
+                    command.Parameters.AddWithValue("@firstName", fname);
+                    command.Parameters.AddWithValue("@lastName", lname);
+                    command.Parameters.AddWithValue("@email", email);
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
                         byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pass));
@@ -135,9 +135,9 @@ namespace SIT321_Assignment_3_WPF.Users
                         foreach (byte b in data)
                             hashed_pass += b.ToString("x2");
 
-                        command.Parameters.Add(new SQLiteParameter("@password", hashed_pass));
+                        command.Parameters.AddWithValue("@password", hashed_pass);
                     }
-                    command.Parameters.Add(new SQLiteParameter("@id", u.ID));
+                    command.Parameters.AddWithValue("@id", u.ID);
 
                     command.ExecuteNonQuery();
                     System.Diagnostics.Debug.Write("Data for member " + u.ID + " modified");
@@ -166,13 +166,13 @@ namespace SIT321_Assignment_3_WPF.Users
 
                 SQLiteCommand command = connection.CreateCommand();
                 command.CommandText = "INSERT INTO Unit (Id, Name, Code, Year, Trimester, TotalLectures, TotalPracticals) VALUES (@id, @name, @code, @year, @trimester, @totallect, @totalprac)";
-                command.Parameters.Add("@id", id);
-                command.Parameters.Add("@name", name);
-                command.Parameters.Add("@code", code);
-                command.Parameters.Add("@year", year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
-                command.Parameters.Add("@trimester", trimester);
-                command.Parameters.Add("@totallect", totalLectures);
-                command.Parameters.Add("@totalprac", totalPracticals);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@code", code);
+                command.Parameters.AddWithValue("@year", year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
+                command.Parameters.AddWithValue("@trimester", trimester);
+                command.Parameters.AddWithValue("@totallect", totalLectures);
+                command.Parameters.AddWithValue("@totalprac", totalPracticals);
 
                 command.ExecuteNonQuery();
                 System.Diagnostics.Debug.Write("New unit added");
@@ -194,13 +194,13 @@ namespace SIT321_Assignment_3_WPF.Users
 
                 SQLiteCommand command = connection.CreateCommand();
                 command.CommandText = "UPDATE TABLE Unit SET Name = @name, Code = @code, Year = @year, Trimester = @trimester, TotalLectures = @totallect, TotalPracticals = @totalprac WHERE Id = @id";
-                command.Parameters.Add("@name", name);
-                command.Parameters.Add("@code", code);
-                command.Parameters.Add("@year", year.Year);
-                command.Parameters.Add("@trimester", trimester);
-                command.Parameters.Add("@totallect", totalLectures);
-                command.Parameters.Add("@totalprac", totalPracticals);
-                command.Parameters.Add("@id", u.ID);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@code", code);
+                command.Parameters.AddWithValue("@year", year.Year);
+                command.Parameters.AddWithValue("@trimester", trimester);
+                command.Parameters.AddWithValue("@totallect", totalLectures);
+                command.Parameters.AddWithValue("@totalprac", totalPracticals);
+                command.Parameters.AddWithValue("@id", u.ID);
 
                 command.ExecuteNonQuery();
                 System.Diagnostics.Debug.Write("Unit " + name + " modified");
