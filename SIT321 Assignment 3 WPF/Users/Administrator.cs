@@ -213,22 +213,42 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public void removeUnit(Unit u)
         {
-            /* Check for associated classes
+            /* check for associated classes
              * do not remove when associations are present
              */
         }
 
         public void addStudentUnit(Student s, Unit u)
-        { }
+        {
+            /* does Student and Unit exist in database?
+             * add unit to Student's assigned Units
+             * add relationship in database
+             */
+        }
 
         public void removeStudentUnit(Student s, Unit u)
-        { }
+        {
+            /* does Student and Unit exist in database?
+             * remove unit from Student's assigned Units
+             * remove relationship in database
+             */
+        }
 
         public void addLecturerUnit(Lecturer lec, Unit u)
-        { }
-        
+        {
+            /* does Lecturer and Unit exist in database?
+             * add unit to Lecturer's assigned Units
+             * add relationship in database
+             */
+        }
+
         public void removeLecturerUnit(Lecturer lec, Unit u)
-        { }
+        {
+            /* does Lecturer and Unit exist in database?
+             * remove unit from Lecturer's assigned Units
+             * remove relationship in database
+             */
+        }
 
         public void addFeedback(Student s, Unit u)
         { }
@@ -239,9 +259,25 @@ namespace SIT321_Assignment_3_WPF.Users
         public void generateReport(Student s, Unit u)
         { }
 
+        public Account searchAccountsById(string id)
+        {
+            return new Account();
+        }
+
+        public void searchAccountsByUnit(Unit u)
+        { }
+
+        public void searchUnits(string s)
+        { }
+        
         public bool DoesRecordExist(Account u)
         {
             return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + u.ID + "'");
+        }
+
+        public bool DoesRecordExist(Unit u)
+        {
+            return DoesRecordExist(@"SELECT 1 FROM Unit WHERE Id = " + u.ID);
         }
 
         private bool DoesRecordExist(string queryString)
