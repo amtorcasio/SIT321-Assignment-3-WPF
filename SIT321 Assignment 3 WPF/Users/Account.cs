@@ -3,6 +3,8 @@ using System.Data.SQLite;
 using System.Data.Linq;
 using System.IO;
 
+using SIT321_Assignment_3_WPF.Content;
+
 namespace SIT321_Assignment_3_WPF.Users
 {
     class Account
@@ -19,7 +21,9 @@ namespace SIT321_Assignment_3_WPF.Users
         public string Lastname { get; set; }
         public string Email { get; set; }
         protected string Password { get; set; }
-        public List<Unit> Units { get; set; }
+        
+        //removed; usertype Administrator does not directly participate in any unit.
+        //public List<Unit> Units { get; set; }
 
         public void changePassword()
         { }

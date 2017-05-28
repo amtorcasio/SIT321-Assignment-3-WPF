@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIT321_Assignment_3_WPF
+namespace SIT321_Assignment_3_WPF.Content
 {
     class Unit
     {
@@ -15,6 +15,8 @@ namespace SIT321_Assignment_3_WPF
         public int TotalLectures {get; set;}
         public int TotalPracticals {get; set;}
 
+        public List<Assessment> Assessments;
+
         // constructor
         public Unit(string code, DateTime year, int tri, int tlec, int tprac)
         {
@@ -23,22 +25,9 @@ namespace SIT321_Assignment_3_WPF
             Trimester = tri;
             TotalLectures = tlec;
             TotalPracticals = tprac;
+            Assessments = new List<Assessment>();
         }
     }
-    
-    class Assessment
-    {
-        private int AssessmentID;
-        private string Name;
-        private int TotalMarks;
-        private decimal Weight;
 
-        // constructor
-        public Assessment(string name, int tmark, decimal weight)
-        {
-            Name = name;
-            TotalMarks = tmark;
-            Weight = weight;
-        }
-    }
+    // moved Assessment class to respective .cs file
 }

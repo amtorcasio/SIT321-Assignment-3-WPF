@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace SIT321_Assignment_3_WPF
 {
     /// <summary>
@@ -32,7 +33,6 @@ namespace SIT321_Assignment_3_WPF
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
             // usernameBox.Text -> username, passwordBox.Password -> password
         }
     }

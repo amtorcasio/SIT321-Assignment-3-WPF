@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SIT321_Assignment_3_WPF.Content;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
@@ -13,14 +14,15 @@ namespace SIT321_Assignment_3_WPF.Users
             Email = email;
             Password = password;
 
-            assignedUnits = null;
+            Units = new Dictionary<Unit, Tuple<decimal, int>>();
         }
 
         public bool AtRisk { get; set; }
         //public decimal Performance { get; set; }
         //public int Attendance { get; set; }
-        public Dictionary<Unit, Tuple<decimal, int>> assignedUnits; // Student.Units hides inherited member Account.Units
+        public Dictionary<Unit, Tuple<decimal, int>> Units; // Student.Units hides inherited member Account.Units
 
+        /* moved to utilities.cs
         public void addFeedback(Student s, Unit u)
         { }
 
@@ -29,5 +31,6 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public void getStudentData(Student s, Unit u)
         { }
+        */
     }
 }

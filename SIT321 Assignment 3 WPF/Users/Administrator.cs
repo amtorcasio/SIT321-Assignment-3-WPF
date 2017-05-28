@@ -5,6 +5,8 @@ using System.Data.SQLite.EF6;
 using System.Data.SQLite.Generic;
 using System.Data.SQLite.Linq;
 
+using SIT321_Assignment_3_WPF.Content;
+
 namespace SIT321_Assignment_3_WPF.Users
 {
     class Administrator : Account
@@ -250,6 +252,7 @@ namespace SIT321_Assignment_3_WPF.Users
              */
         }
 
+        /* moved to utilities.cs
         public void addFeedback(Student s, Unit u)
         { }
 
@@ -258,6 +261,7 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public void generateReport(Student s, Unit u)
         { }
+        */
 
         public Account searchAccountsById(string id)
         {

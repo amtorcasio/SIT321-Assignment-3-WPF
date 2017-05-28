@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using SIT321_Assignment_3_WPF.Content;
 
 namespace SIT321_Assignment_3_WPF.Users
 {
     class Lecturer : Account
     {
-        public List<Unit> assignedUnits; // Lecturer.Units hides inherited member Acccount.Units
+        public List<Unit> Units; // Lecturer.Units hides inherited member Acccount.Units
 
         // constructor
         public Lecturer(string fname, string lname, string email, string password)
@@ -13,7 +14,7 @@ namespace SIT321_Assignment_3_WPF.Users
             Lastname = lname;
             Email = email;
             Password = password;
-            assignedUnits = null;
+            Units = new List<Unit>();
         }
 
         public void addAssessment(Unit u, Assessment a)
@@ -34,6 +35,7 @@ namespace SIT321_Assignment_3_WPF.Users
         public void editStudentAttendance(Student s, Unit u, int lec, int prac)
         { }
 
+        /* moved to utilities.cs
         public void addFeedback(Student s, Unit u)
         { }
 
@@ -45,5 +47,6 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public void generateReport(Student s, Unit u)
         { }
+        */
     }
 }
