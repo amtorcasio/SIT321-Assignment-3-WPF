@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SIT321_Assignment_3_WPF
+namespace SARMS
 {
     public enum UserType
     {
