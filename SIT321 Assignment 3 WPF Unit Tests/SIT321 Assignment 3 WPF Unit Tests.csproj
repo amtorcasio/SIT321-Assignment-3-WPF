@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SARMS\SARMS\SARMS.csproj">
+    <ProjectReference Include="..\SARMS\SARMS.csproj">
       <Project>{b90eea7d-e1ec-47b4-962a-fa5ea947c693}</Project>
       <Name>SARMS</Name>
     </ProjectReference>
