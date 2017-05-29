@@ -86,6 +86,33 @@ namespace SARMS.Users
         }
 
         #region Public Methods
+        public bool validateLogin(string id, string password)
+        {
+            var conn = GetDatabaseSQLConnection();
+
+            try
+            {
+                conn.Open();
+
+                SQLiteCommand c = conn.CreateCommand();
+                c.CommandText = @"SELECT 1 FROM Users WHERE Id = " + id + " AND Password = " + password;
+
+                SQLiteDataReader r = c.ExecuteReader();
+
+                int count = 0;
+                while (r.Read())
+                    count++;
+
+                if (count == 1)
+                    return true;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return false;
+        }
+
         public bool ChangePassword(string password)
         {
             var conn = GetDatabaseSQLConnection();
