@@ -1,17 +1,23 @@
 ﻿using System.Data.SQLite;
-using System.IO;
+using SARMS;
 
 namespace SARMS.Users
 {
     public class Account
     {
-
+        //private fields
         private int _ID;
-        public string ID { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        private string _password;
+
+        //public fields
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        protected string Password { get; set; }
+        public string Password { get; set; }
         
         //removed; usertype Administrator does not directly participate in any unit.
         //public List<Unit> Units { get; set; }
@@ -24,8 +30,8 @@ namespace SARMS.Users
         {
         }
 
-        public static string PATH_DATA = Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
-        //public static string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "Data\\";
+        public static string PATH_DATA = Utilities.GetPathData();
+
         protected SQLiteConnection GetDatabaseSQLConnection()
         {
             return new SQLiteConnection(@"Data Source="+ PATH_DATA + "Database.db;");

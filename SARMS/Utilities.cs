@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using SARMS.Users;
 using SARMS.Content;
@@ -15,6 +16,11 @@ namespace SARMS
     // a group of methods and variables that is shared throughout the entire project
     static class Utilities
     {
+        public static string GetPathData()
+        {
+            return Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
+        }
+
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
         public static void getStudentData(Student s, Unit u)
         {
