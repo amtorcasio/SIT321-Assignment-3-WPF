@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SARMS.Users;
 
 namespace SIT321_Assignment_3_WPF
 {
@@ -20,8 +21,11 @@ namespace SIT321_Assignment_3_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public Account LoggedInAccount { get; private set; }
+
+        public MainWindow(Account loggedInAccount)
         {
+            LoggedInAccount = loggedInAccount;
             InitializeComponent();
         }
     }
