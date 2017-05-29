@@ -37,10 +37,18 @@ namespace SARMS.Users
         { }
 
         public void addStudentAttendance(Student s, Unit u, bool lec, bool prac)
-        { }
+        {
+            if (!s.Units.ContainsKey(u))
+            {
+                s.Units.Add(u, new Tuple<decimal, int>(1, 1));
+            }
+        }
 
         public void editStudentAttendance(Student s, Unit u, int lec, int prac)
-        { }
+        {
+            var data = s.Units[u];
+            s.Units[u] = new Tuple<decimal, int>(data.Item1, data.Item2 + prac);
+        }
 
         public List<Account> viewSAR(Unit u)
         {
