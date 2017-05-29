@@ -1,6 +1,6 @@
 ﻿namespace SARMS.Data
 {
-    class StudentAssessment
+    public class StudentAssessment
     {
         private string _accountID;
         private int _assessmentID;

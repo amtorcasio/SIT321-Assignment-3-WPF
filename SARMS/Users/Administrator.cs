@@ -13,7 +13,7 @@ namespace SARMS.Users
 
         #region Public Methods
         //todo: SALT AND HASH PASSWORDS
-        public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
+        public void AddUser(string id, string firstName, string lastName, string email, string pass, UserType type)
         {
             Account u = new Account(this) { ID = id };
 
@@ -72,9 +72,9 @@ namespace SARMS.Users
             }
         }
 
-        public void suspendUser(Account u)
+        public void SuspendUser(Account a)
         {
-            if (DoesRecordExist(u))
+            if (DoesRecordExist(a))
             {
                 //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
@@ -85,7 +85,7 @@ namespace SARMS.Users
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
                     command.Parameters.AddWithValue("@status", 0);
-                    command.Parameters.AddWithValue("@id", u.ID);
+                    command.Parameters.AddWithValue("@id", a.ID);
 
                     command.ExecuteNonQuery();
                     System.Diagnostics.Debug.Write("Member is suspended");
@@ -97,7 +97,7 @@ namespace SARMS.Users
             }
         }
 
-        public void terminateUser(Account u)
+        public void TerminateUser(Account a)
         {
             /* save a copy of the user's email,
              * execute SQL command to delete user entry from database,
@@ -106,9 +106,9 @@ namespace SARMS.Users
              */
         }
 
-        public void editUser(Account u, string fname, string lname, string email, string pass)
+        public void EditUser(Account acc, string firstName, string lastName, string email, string password)
         {
-            if (DoesRecordExist(u))
+            if (DoesRecordExist(acc))
             {
                 //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
@@ -118,12 +118,12 @@ namespace SARMS.Users
 
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
-                    command.Parameters.AddWithValue("@firstName", fname);
-                    command.Parameters.AddWithValue("@lastName", lname);
+                    command.Parameters.AddWithValue("@firstName", firstName);
+                    command.Parameters.AddWithValue("@lastName", lastName);
                     command.Parameters.AddWithValue("@email", email);
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
-                        byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pass));
+                        byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
                         string hashed_pass = null;
                         foreach (byte b in data)
@@ -131,10 +131,10 @@ namespace SARMS.Users
 
                         command.Parameters.AddWithValue("@password", hashed_pass);
                     }
-                    command.Parameters.AddWithValue("@id", u.ID);
+                    command.Parameters.AddWithValue("@id", acc.ID);
 
                     command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Data for member " + u.ID + " modified");
+                    System.Diagnostics.Debug.Write("Data for member " + acc.ID + " modified");
                 }
                 catch (Exception e)
                 {
@@ -143,12 +143,12 @@ namespace SARMS.Users
             }
         }
 
-        public void removeUser(Account u)
+        public void RemoveUser(Account u)
         {
             // what in the world is this for?
         }
 
-        public void addUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public void AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
             //todo : add on to code snippet
@@ -177,7 +177,7 @@ namespace SARMS.Users
             }
         }
 
-        public void editUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public void EditUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //todo : add on to code snippet
             var connection = Utilities.GetDatabaseSQLConnection();
@@ -205,14 +205,14 @@ namespace SARMS.Users
             }
         }
 
-        public void removeUnit(Unit u)
+        public void RemoveUnit(Unit u)
         {
             /* check for associated classes
              * do not remove when associations are present
              */
         }
 
-        public void addStudentUnit(Student s, Unit u)
+        public void AddStudentUnit(Student s, Unit u)
         {
             /* does Student and Unit exist in database?
              * add unit to Student's assigned Units
@@ -220,7 +220,7 @@ namespace SARMS.Users
              */
         }
 
-        public void removeStudentUnit(Student s, Unit u)
+        public void RemoveStudentUnit(Student s, Unit u)
         {
             /* does Student and Unit exist in database?
              * remove unit from Student's assigned Units
@@ -228,7 +228,7 @@ namespace SARMS.Users
              */
         }
 
-        public void addLecturerUnit(Lecturer lec, Unit u)
+        public void AddLecturerUnit(Lecturer lec, Unit u)
         {
             /* does Lecturer and Unit exist in database?
              * add unit to Lecturer's assigned Units
@@ -236,7 +236,7 @@ namespace SARMS.Users
              */
         }
 
-        public void removeLecturerUnit(Lecturer lec, Unit u)
+        public void RemoveLecturerUnit(Lecturer lec, Unit u)
         {
             /* does Lecturer and Unit exist in database?
              * remove unit from Lecturer's assigned Units
@@ -244,15 +244,15 @@ namespace SARMS.Users
              */
         }
 
-        public Account searchAccountsById(int id)
+        public Account SearchAccountsById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void searchAccountsByUnit(Unit u)
+        public void SearchAccountsByUnit(Unit u)
         { }
 
-        public void searchUnits(string s)
+        public void SearchUnits(string s)
         { }
         
         public bool DoesRecordExist(Account u)

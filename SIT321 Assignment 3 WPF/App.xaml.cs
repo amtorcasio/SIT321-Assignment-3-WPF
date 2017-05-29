@@ -16,7 +16,7 @@ namespace SIT321_Assignment_3_WPF
             base.OnStartup(e);
             Administrator admin = new Administrator("1", "hello", "there", "kenobi", "password");
 
-            admin.addUser("12345", "andrea", "michele", "a@t.com", "wut", UserType.Administrator);
+            admin.AddUser("12345", "andrea", "michele", "a@t.com", "wut", UserType.Administrator);
         }
     }
 }

@@ -5,6 +5,7 @@ using SARMS.Users;
 using SARMS.Content;
 using System.Data.SQLite;
 using System.Net.Mail;
+using SARMS.Data;
 
 namespace SARMS
 {
@@ -29,9 +30,9 @@ namespace SARMS
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
-        public static Tuple<decimal,int> getStudentData(Student s, Unit u)
+        public static Tuple<StudentAssessment, StudentUnit> getStudentData(Student s, Unit u)
         {
-            return s.Units[u];
+            return new Tuple<StudentAssessment, StudentUnit>(s.Performance.Find(e => (e.AccountID == s.ID)), s.Units.Find(e => (e.UnitID == u.ID)));
         }
         
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
