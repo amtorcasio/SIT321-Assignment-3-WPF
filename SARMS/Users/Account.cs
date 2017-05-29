@@ -86,7 +86,7 @@ namespace SARMS.Users
         }
 
         #region Public Methods
-        public bool validateLogin(string id, string password)
+        public bool Login(string email, string password)
         {
             var connection = GetDatabaseSQLConnection();
 
@@ -94,13 +94,15 @@ namespace SARMS.Users
             {
                 connection.Open();
 
-                SQLiteCommand c = connection.CreateCommand();
-                c.CommandText = @"SELECT 1 FROM Users WHERE Id = @id AND Password = @password";
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = @"SELECT 1 FROM Users WHERE Id = @email AND Password = @password";
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@password", password);
 
-                SQLiteDataReader r = c.ExecuteReader();
+                SQLiteDataReader reader = command.ExecuteReader();
 
                 int count = 0;
-                while (r.Read())
+                while (reader.Read())
                     count++;
 
                 if (count == 1)
@@ -108,7 +110,7 @@ namespace SARMS.Users
             }
             catch (Exception e)
             {
-                throw e;
+                throw new Exception("A databases error occurred while logging in", e);
             }
             return false;
         }
