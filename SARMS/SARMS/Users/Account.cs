@@ -1,7 +1,7 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 
-namespace SIT321_Assignment_3_WPF.Users
+namespace SARMS.Users
 {
     class Account
     {

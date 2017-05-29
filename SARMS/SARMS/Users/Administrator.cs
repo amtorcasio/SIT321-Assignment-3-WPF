@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Data.SQLite;
-using System.Data.SQLite.EF6;
-using System.Data.SQLite.Generic;
-using System.Data.SQLite.Linq;
 
-using SIT321_Assignment_3_WPF.Content;
-
-namespace SIT321_Assignment_3_WPF.Users
+namespace SARMS.Users
 {
     class Administrator : Account
     {

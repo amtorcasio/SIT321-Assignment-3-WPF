@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SIT321_Assignment_3_WPF.Content;
 
-namespace SIT321_Assignment_3_WPF.Users
+namespace SARMS.Users
 {
     class Lecturer : Account
     {
