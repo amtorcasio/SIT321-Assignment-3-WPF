@@ -19,7 +19,7 @@ namespace SARMS.Users
 
             if(!DoesRecordExist(u))
             {
-                var connection = GetDatabaseSQLConnection();
+                var connection = Utilities.GetDatabaseSQLConnection();
 
                 try
                 {
@@ -77,7 +77,7 @@ namespace SARMS.Users
             if (DoesRecordExist(u))
             {
                 //todo : add on to code snippet
-                var connection = GetDatabaseSQLConnection();
+                var connection = Utilities.GetDatabaseSQLConnection();
                 try
                 {
                     connection.Open();
@@ -111,7 +111,7 @@ namespace SARMS.Users
             if (DoesRecordExist(u))
             {
                 //todo : add on to code snippet
-                var connection = GetDatabaseSQLConnection();
+                var connection = Utilities.GetDatabaseSQLConnection();
                 try
                 {
                     connection.Open();
@@ -152,7 +152,7 @@ namespace SARMS.Users
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
             //todo : add on to code snippet
-            var connection = GetDatabaseSQLConnection();
+            var connection = Utilities.GetDatabaseSQLConnection();
 
             try
             {
@@ -180,7 +180,7 @@ namespace SARMS.Users
         public void editUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //todo : add on to code snippet
-            var connection = GetDatabaseSQLConnection();
+            var connection = Utilities.GetDatabaseSQLConnection();
 
             try
             {
@@ -269,7 +269,7 @@ namespace SARMS.Users
         //Private methods
         private bool DoesRecordExist(string queryString)
         {
-            var connection = GetDatabaseSQLConnection();
+            var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
 
             try

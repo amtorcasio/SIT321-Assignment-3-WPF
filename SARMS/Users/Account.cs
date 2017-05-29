@@ -86,9 +86,9 @@ namespace SARMS.Users
         }
 
         #region Public Methods
-        public bool Login(string email, string password)
+        public static bool Login(string email, string password)
         {
-            var connection = GetDatabaseSQLConnection();
+            var connection = Utilities.GetDatabaseSQLConnection();
 
             try
             {
@@ -117,7 +117,7 @@ namespace SARMS.Users
 
         public bool ChangePassword(string password)
         {
-            var conn = GetDatabaseSQLConnection();
+            var conn = Utilities.GetDatabaseSQLConnection();
 
             return false;
         }
@@ -137,18 +137,6 @@ namespace SARMS.Users
             return "";
         }
         #endregion
-
-        //Protected Methods
-        protected SQLiteConnection GetDatabaseSQLConnection()
-        {
-            return new SQLiteConnection(@"Data Source="+ PATH_DATA + "Database.db;");
-        }
-
-        /* 
-        protected DataContext GetDatabaseDataContext()
-        {
-            return new DataContext(@"Data Source=(LocalDB)\v12.0; AttachDbFilename='" + PATH_DATA + "Database.mdf'; Integrated Security=True");
-        }*/
 
         //removed; usertype Administrator does not directly participate in any unit.
         //public List<Unit> Units { get; set; }

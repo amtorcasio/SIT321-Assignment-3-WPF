@@ -28,7 +28,7 @@
         public int PracticalAttendance
         {
             get { return _practicalAttendance; }
-            set { _lectureAttendance = value }
+            set { _lectureAttendance = value; }
         }
         public string StaffFeedback
         {
