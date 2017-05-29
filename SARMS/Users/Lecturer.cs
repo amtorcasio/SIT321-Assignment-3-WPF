@@ -13,10 +13,20 @@ namespace SARMS.Users
         { }
 
         public void addAssessment(Unit u, Assessment a)
-        { }
+        {
+            u.Assessments.Add(a);
+        }
 
         public void removeAssessment(Unit u, Assessment a)
-        { }
+        {
+            // find index of assessment in list and override it
+            int i = u.Assessments.IndexOf(a);
+            while (i < u.Assessments.Count - 1)
+                u.Assessments[i] = u.Assessments[i++];
+
+            // remove the last assessment on the list because it has overriden the previous list item
+            u.Assessments.RemoveAt(i);
+        }
 
         public void addStudentPerformance(Student s, Unit u, Assessment a, int Mark)
         { }
