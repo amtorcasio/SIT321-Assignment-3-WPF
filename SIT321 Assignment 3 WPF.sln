@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIT321 Assignment 3 WPF", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIT321 Assignment 3 WPF Unit Tests", "SIT321 Assignment 3 WPF Unit Tests\SIT321 Assignment 3 WPF Unit Tests.csproj", "{C3CD3D50-D4DF-4891-8B46-8ADCB02C17D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SARMS", "SARMS\SARMS.csproj", "{B90EEA7D-E1EC-47B4-962A-FA5EA947C693}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SARMS", "SARMS\SARMS\SARMS.csproj", "{B90EEA7D-E1EC-47B4-962A-FA5EA947C693}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
