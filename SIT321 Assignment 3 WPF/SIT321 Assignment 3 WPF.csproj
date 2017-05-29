@@ -106,19 +106,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Content\Assessment.cs" />
-    <Compile Include="Content\Unit.cs" />
     <Compile Include="DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Users\Account.cs" />
-    <Compile Include="Users\Administrator.cs" />
-    <Compile Include="Users\Lecturer.cs" />
-    <Compile Include="Users\Student.cs" />
-    <Compile Include="Utilities.cs" />
     <Page Include="DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
