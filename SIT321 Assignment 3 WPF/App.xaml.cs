@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SIT321_Assignment_3_WPF.Users;
 
 namespace SIT321_Assignment_3_WPF
 {
