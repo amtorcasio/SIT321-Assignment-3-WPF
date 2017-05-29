@@ -29,10 +29,13 @@ namespace SIT321_Assignment_3_WPF
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Account.Login(txtEmail.Text, txtPassword.Password))
+            Account result = Account.Login(txtEmail.Text, txtPassword.Password);
+            if (result != null)
             {
-                //Login function should pass account object
-                //new MainWindow(new Account());
+                var main = new MainWindow(result);
+                this.Hide();
+                main.Show();
+                main.Focus();
             }
             else
             {

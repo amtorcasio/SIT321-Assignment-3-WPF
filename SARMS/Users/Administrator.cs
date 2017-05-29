@@ -47,7 +47,7 @@ namespace SARMS.Users
 
                         command.Parameters.AddWithValue("@password", hashed_pass);
                     }*/
-                    command.Parameters.AddWithValue("@password", pass));
+                    command.Parameters.AddWithValue("@password", pass);
                     command.Parameters.AddWithValue("@email", email);
 
                     command.ExecuteNonQuery();

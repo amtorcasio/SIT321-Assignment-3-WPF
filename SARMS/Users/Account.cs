@@ -96,7 +96,7 @@ namespace SARMS.Users
                 connection.Open();
 
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = @"SELECT * FROM Users WHERE Id = @email AND Password = @password";
+                command.CommandText = @"SELECT * FROM User WHERE email = @email AND Password = @password";
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@password", password);
 
@@ -104,7 +104,8 @@ namespace SARMS.Users
 
                 if (reader.HasRows)
                 {
-                    switch ((UserType)reader[3])
+                    reader.Read();
+                    switch ((UserType)Convert.ToInt32(reader[3]))
                     {
                         case UserType.Administrator:
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
