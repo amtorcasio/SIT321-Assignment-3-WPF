@@ -106,12 +106,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Content\Assessment.cs" />
+    <Compile Include="Content\Unit.cs" />
     <Compile Include="DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Users\Account.cs" />
+    <Compile Include="Users\Administrator.cs" />
+    <Compile Include="Users\Lecturer.cs" />
+    <Compile Include="Users\Student.cs" />
+    <Compile Include="Utilities.cs" />
     <Page Include="DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,8 +194,8 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SARMS\SARMS\SARMS.csproj">
-      <Project>{0747ee02-c34c-4e07-a25e-dffeac56c4b3}</Project>
+    <ProjectReference Include="..\SARMS\SARMS\SARMS.csproj">
+      <Project>{b90eea7d-e1ec-47b4-962a-fa5ea947c693}</Project>
       <Name>SARMS</Name>
     </ProjectReference>
   </ItemGroup>
