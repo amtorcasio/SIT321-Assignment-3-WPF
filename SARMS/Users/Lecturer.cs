@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using SARMS.Content;
 
 namespace SARMS.Users
 {
-    class Lecturer : Account
+    public class Lecturer : Account
     {
         public List<Unit> Units; // Lecturer.Units hides inherited member Acccount.Units
 

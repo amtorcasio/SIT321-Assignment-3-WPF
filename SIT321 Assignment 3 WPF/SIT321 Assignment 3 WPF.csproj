@@ -160,7 +160,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -187,8 +189,8 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SARMS\SARMS\SARMS.csproj">
-      <Project>{b90eea7d-e1ec-47b4-962a-fa5ea947c693}</Project>
+    <ProjectReference Include="..\SARMS\SARMS.csproj">
+      <Project>{a495c6ec-010c-4ab1-a939-69e39f141921}</Project>
       <Name>SARMS</Name>
     </ProjectReference>
   </ItemGroup>

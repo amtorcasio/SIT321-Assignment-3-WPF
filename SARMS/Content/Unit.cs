@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SARMS.Content
 {
-    class Unit
+    public class Unit
     {
         public int ID {get; set;}
         public string Code {get; set;}

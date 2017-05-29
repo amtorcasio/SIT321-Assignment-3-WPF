@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using SARMS.Content;
 
 namespace SARMS.Users
 {
-    class Student : Account
+    public class Student : Account
     {
         // constructor
         public Student(string fname, string lname, string email, string password)

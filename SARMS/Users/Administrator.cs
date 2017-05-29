@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data.SQLite;
+using SARMS.Content;
 
 namespace SARMS.Users
 {
-    class Administrator : Account
+    public class Administrator : Account
     {
         // constructor
         public Administrator(string id, string fname, string lname, string email, string password)

@@ -1,6 +1,6 @@
 ﻿namespace SARMS.Content
 {
-    class Assessment
+    public class Assessment
     {
         private int AssessmentID;
         private string Name;

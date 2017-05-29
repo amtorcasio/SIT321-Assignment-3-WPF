@@ -3,10 +3,10 @@ using System.IO;
 
 namespace SARMS.Users
 {
-    class Account
+    public class Account
     {
-        
-        private int _ID
+
+        private int _ID;
         public string ID { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
