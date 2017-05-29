@@ -86,33 +86,47 @@ namespace SARMS.Users
         }
 
         #region Public Methods
-        public static bool Login(string email, string password)
+        public static Account Login(string email, string password)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
 
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = @"SELECT 1 FROM Users WHERE Id = @email AND Password = @password";
+                command.CommandText = @"SELECT * FROM Users WHERE Id = @email AND Password = @password";
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@password", password);
 
-                SQLiteDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
 
-                int count = 0;
-                while (reader.Read())
-                    count++;
-
-                if (count == 1)
-                    return true;
+                if (reader.HasRows)
+                {
+                    switch ((UserType)reader[3])
+                    {
+                        case UserType.Administrator:
+                            return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                        case UserType.Lecturer:
+                            return null;
+                        case UserType.Student:
+                            return null;
+                        default:
+                            return null;
+                    }
+                }
+                return null;
             }
             catch (Exception e)
             {
                 throw new Exception("A databases error occurred while logging in", e);
             }
-            return false;
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
+            }
         }
 
         public bool ChangePassword(string password)

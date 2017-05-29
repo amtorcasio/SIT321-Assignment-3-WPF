@@ -36,6 +36,7 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@type", type);
                     command.Parameters.AddWithValue("@status", 1);
 
+                    /*
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
                         byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pass));
@@ -45,8 +46,8 @@ namespace SARMS.Users
                             hashed_pass += b.ToString("x2");
 
                         command.Parameters.AddWithValue("@password", hashed_pass);
-                    }
-                    //command.Parameters.AddWithValue("@password", pass));
+                    }*/
+                    command.Parameters.AddWithValue("@password", pass));
                     command.Parameters.AddWithValue("@email", email);
 
                     command.ExecuteNonQuery();
@@ -135,6 +136,7 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@firstName", firstName);
                     command.Parameters.AddWithValue("@lastName", lastName);
                     command.Parameters.AddWithValue("@email", email);
+                    /*
                     using (System.Security.Cryptography.MD5 hash_object = System.Security.Cryptography.MD5.Create())
                     {
                         byte[] data = hash_object.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -144,7 +146,8 @@ namespace SARMS.Users
                             hashed_pass += b.ToString("x2");
 
                         command.Parameters.AddWithValue("@password", hashed_pass);
-                    }
+                    }*/
+                    command.Parameters.AddWithValue("@password", password);
                     command.Parameters.AddWithValue("@id", acc.ID);
 
                     command.ExecuteNonQuery();
