@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using SARMS.Content;
 
 namespace SARMS.Users
 {
@@ -84,26 +85,29 @@ namespace SARMS.Users
             _password = password;
         }
 
-        //Public Methods
-        public bool changePassword(string password)
+        #region Public Methods
+        public bool ChangePassword(string password)
         {
             var conn = GetDatabaseSQLConnection();
 
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
             return false;
         }
 
-        public static bool forgotPassword()
+        public static bool ForgotPassword()
         {
             return false;
         }
+
+        public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
+        {
+            return false;
+        }
+
+        public string GetFeedback(Account from, Student student, Unit unit)
+        {
+            return "";
+        }
+        #endregion
 
         //Protected Methods
         protected SQLiteConnection GetDatabaseSQLConnection()
