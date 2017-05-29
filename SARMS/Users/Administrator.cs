@@ -6,20 +6,17 @@ namespace SARMS.Users
 {
     public class Administrator : Account
     {
-        // constructor
-        public Administrator(int id, string fname, string lname, string email, string password)
-        {
-            _ID = id;
-            _firstName = fname;
-            _lastName = lname;
-            _email = email;
-            _password = password;
-        }
+        //Constructor
+        public Administrator(int id, string firstName, string lastName, string email, string password) :
+            base(id, firstName, lastName, email, password)
+        { }
 
+        #region Public Methods
         //todo: SALT AND HASH PASSWORDS
         public void addUser(int id, string firstName, string lastName, string email, string pass, UserType type)
         {
-            Account u = new Account() { ID = id };
+            Account u = new Account(this) { ID = id };
+
             if(!DoesRecordExist(u))
             {
                 var connection = GetDatabaseSQLConnection();
@@ -247,17 +244,6 @@ namespace SARMS.Users
              */
         }
 
-        /* moved to utilities.cs
-        public void addFeedback(Student s, Unit u)
-        { }
-
-        public void getFeedback(Student s, Unit u)
-        { }
-
-        public void generateReport(Student s, Unit u)
-        { }
-        */
-
         public Account searchAccountsById(int id)
         {
             throw new NotImplementedException();
@@ -278,7 +264,9 @@ namespace SARMS.Users
         {
             return DoesRecordExist(@"SELECT 1 FROM Unit WHERE Id = " + u.ID);
         }
+        #endregion
 
+        //Private methods
         private bool DoesRecordExist(string queryString)
         {
             var connection = GetDatabaseSQLConnection();

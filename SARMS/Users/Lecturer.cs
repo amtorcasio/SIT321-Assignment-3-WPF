@@ -8,14 +8,9 @@ namespace SARMS.Users
         public List<Unit> Units; // Lecturer.Units hides inherited member Acccount.Units
 
         // constructor
-        public Lecturer(string fname, string lname, string email, string password)
-        {
-            _firstName = fname;
-            _lastName = lname;
-            _email = email;
-            _password = password;
-            Units = new List<Unit>();
-        }
+        public Lecturer(int id, string firstName, string lastName, string email, string password) :
+            base (id, firstName, lastName, email, password)
+        { }
 
         public void addAssessment(Unit u, Assessment a)
         { }

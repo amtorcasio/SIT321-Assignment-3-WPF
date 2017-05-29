@@ -13,6 +13,8 @@ namespace SARMS.Users
         protected string _password;
 
         //public fields
+        public static string PATH_DATA = Utilities.GetPathData();
+        #region Getters and Setters
         public int ID
         {
             get
@@ -68,10 +70,21 @@ namespace SARMS.Users
                 _password = value;
             }
         }
+        #endregion
 
-        //removed; usertype Administrator does not directly participate in any unit.
-        //public List<Unit> Units { get; set; }
+        //Constructors
+        public Account(Administrator creator)
+        { }
+        protected Account(int id, string firstName, string lastName, string email, string password)
+        {
+            _ID = id;
+            _firstName = firstName;
+            _lastName = lastName;
+            _email = email;
+            _password = password;
+        }
 
+        //Public Methods
         public bool changePassword(string password)
         {
             var conn = GetDatabaseSQLConnection();
@@ -87,22 +100,24 @@ namespace SARMS.Users
             return false;
         }
 
-        public void forgotPassword()
+        public static bool forgotPassword()
         {
+            return false;
         }
 
-        public static string PATH_DATA = Utilities.GetPathData();
-
+        //Protected Methods
         protected SQLiteConnection GetDatabaseSQLConnection()
         {
             return new SQLiteConnection(@"Data Source="+ PATH_DATA + "Database.db;");
         }
 
-        /*
+        /* 
         protected DataContext GetDatabaseDataContext()
         {
             return new DataContext(@"Data Source=(LocalDB)\v12.0; AttachDbFilename='" + PATH_DATA + "Database.mdf'; Integrated Security=True");
         }*/
 
+        //removed; usertype Administrator does not directly participate in any unit.
+        //public List<Unit> Units { get; set; }
     }
 }
