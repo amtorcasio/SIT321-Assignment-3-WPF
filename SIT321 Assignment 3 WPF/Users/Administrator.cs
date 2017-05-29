@@ -24,7 +24,7 @@ namespace SIT321_Assignment_3_WPF.Users
         //todo: SALT AND HASH PASSWORDS
         public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
         {
-            Account u = new Users.Account() { ID = id };
+            Account u = new Account() { ID = id };
             if(!DoesRecordExist(u))
             {
                 var connection = GetDatabaseSQLConnection();
@@ -265,7 +265,7 @@ namespace SIT321_Assignment_3_WPF.Users
 
         public Account searchAccountsById(string id)
         {
-            return new Account();
+            return new Account() { ID = "" };
         }
 
         public void searchAccountsByUnit(Unit u)
