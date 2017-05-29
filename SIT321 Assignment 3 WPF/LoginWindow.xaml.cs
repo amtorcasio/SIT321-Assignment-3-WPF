@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SARMS.Users;
 
 
 namespace SIT321_Assignment_3_WPF
@@ -23,17 +24,29 @@ namespace SIT321_Assignment_3_WPF
         public LoginWindow()
         {
             InitializeComponent();
-
-            MainWindow main = new MainWindow();
-            main.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            main.Show();
-
             this.Focus();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            if(Account.Login(txtEmail.Text, txtPassword.Password))
+            {
+                //Login function should pass account object
+                //new MainWindow(new Account());
+            }
+            else
+            {
+                MessageBox.Show("Invalid login details", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
             // usernameBox.Text -> username, passwordBox.Password -> password
+        }
+
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsEnabled = false;
+            var forgotWin = new ForgottenPasswordWindow();
+            forgotWin.Show();
+            forgotWin.Focus();
         }
     }
 }
