@@ -14,12 +14,12 @@ namespace SARMS.Users
             base (id, firstName, lastName, email, password)
         { }
 
-        public void addAssessment(Unit u, Assessment a)
+        public void aAddAssessment(Unit u, Assessment a)
         {
             u.Assessments.Add(a);
         }
 
-        public void removeAssessment(Unit u, Assessment a)
+        public void RemoveAssessment(Unit u, Assessment a)
         {
             // find index of assessment in list and override it
             int i = u.Assessments.IndexOf(a);
@@ -30,16 +30,16 @@ namespace SARMS.Users
             u.Assessments.RemoveAt(i);
         }
 
-        public void addStudentPerformance(Student s, Unit u, Assessment a, int Mark)
+        public void AddStudentPerformance(Student s, Unit u, Assessment a, int Mark)
         { }
 
-        public void editStudentPerformance(Student s, Unit u, Assessment a, int Mark)
+        public void EditStudentPerformance(Student s, Unit u, Assessment a, int Mark)
         { }
 
-        public void addStudentAttendance(Student s, Unit u, bool lec, bool prac)
+        public void AddStudentAttendance(Student s, Unit u, bool lec, bool prac)
         { }
 
-        public void editStudentAttendance(Student s, Unit u, int lec, int prac)
+        public void EditStudentAttendance(Student s, Unit u, int lec, int prac)
         { }
 
         public List<Account> viewSAR(Unit u)
