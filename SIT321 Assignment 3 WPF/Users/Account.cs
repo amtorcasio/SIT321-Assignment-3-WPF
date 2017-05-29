@@ -26,10 +26,12 @@ namespace SIT321_Assignment_3_WPF.Users
         //public List<Unit> Units { get; set; }
 
         public void changePassword()
-        { }
+        {
+        }
 
         public void forgotPassword()
-        { }
+        {
+        }
 
         public static string PATH_DATA = Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
         //public static string PATH_DATA = System.AppDomain.CurrentDomain.BaseDirectory + "Data\\";
