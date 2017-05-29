@@ -14,7 +14,7 @@ namespace SARMS.Users
             base (id, firstName, lastName, email, password)
         { }
 
-        public void aAddAssessment(Unit u, Assessment a)
+        public void AddAssessment(Unit u, Assessment a)
         {
             u.Assessments.Add(a);
         }
