@@ -10,10 +10,10 @@ namespace SARMS.Users
         // constructor
         public Lecturer(string fname, string lname, string email, string password)
         {
-            Firstname = fname;
-            Lastname = lname;
-            Email = email;
-            Password = password;
+            _firstName = fname;
+            _lastName = lname;
+            _email = email;
+            _password = password;
             Units = new List<Unit>();
         }
 

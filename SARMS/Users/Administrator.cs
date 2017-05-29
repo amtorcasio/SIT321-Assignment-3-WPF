@@ -258,9 +258,9 @@ namespace SARMS.Users
         { }
         */
 
-        public Account searchAccountsById(string id)
+        public Account searchAccountsById(int id)
         {
-            return new Account() { ID = "" };
+            throw new NotImplementedException();
         }
 
         public void searchAccountsByUnit(Unit u)
