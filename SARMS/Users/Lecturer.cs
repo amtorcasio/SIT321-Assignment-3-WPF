@@ -36,11 +36,13 @@ namespace SARMS.Users
         public void EditStudentPerformance(Student s, Unit u, Assessment a, int Mark)
         { }
 
+        // boolean if the student attended the lecturer and practical or did not attend
         public void addStudentAttendance(Student s, Unit u, bool lec, bool prac)
         {
 
         }
 
+        // direct editing of values
         public void editStudentAttendance(Student s, Unit u, int lec, int prac)
         {
 
