@@ -32,7 +32,7 @@ namespace SARMS
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
         public static Tuple<StudentAssessment, StudentUnit> getStudentData(Student s, Unit u)
         {
-            return new Tuple<StudentAssessment, StudentUnit>(s.Performance.Find(e => (e.AccountID == s.ID)), s.Units.Find(e => (e.UnitID == u.ID)));
+            throw new NotImplementedException();
         }
         
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer

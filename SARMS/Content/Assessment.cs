@@ -1,6 +1,8 @@
-﻿namespace SARMS.Content
+﻿using System;
+
+namespace SARMS.Content
 {
-    public class Assessment
+    public class Assessment : IEquatable<Assessment>
     {
         private int AssessmentID;
         private string Name;
@@ -14,6 +16,29 @@
             Name = name;
             TotalMarks = tmark;
             Weight = weight;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var a = obj as Assessment;
+            return Equals(a);
+        }
+
+        public bool Equals(Assessment a)
+        {
+            if (a != null)
+            {
+                if (this.AssessmentID == a.AssessmentID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
