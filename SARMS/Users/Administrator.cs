@@ -7,13 +7,13 @@ namespace SARMS.Users
     public class Administrator : Account
     {
         //Constructor
-        public Administrator(int id, string firstName, string lastName, string email, string password) :
+        public Administrator(string id, string firstName, string lastName, string email, string password) :
             base(id, firstName, lastName, email, password)
         { }
 
         #region Public Methods
         //todo: SALT AND HASH PASSWORDS
-        public void addUser(int id, string firstName, string lastName, string email, string pass, UserType type)
+        public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
         {
             Account u = new Account(this) { ID = id };
 

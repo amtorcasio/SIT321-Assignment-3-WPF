@@ -7,7 +7,7 @@ namespace SARMS.Users
     public class Student : Account
     {
         // constructor
-        public Student(int id, string firstName, string lastName, string email, string password):
+        public Student(string id, string firstName, string lastName, string email, string password):
             base (id, firstName, lastName, email, password)
         {
             Units = new Dictionary<Unit, Tuple<decimal, int>>();

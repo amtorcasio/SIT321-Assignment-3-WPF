@@ -7,7 +7,7 @@ namespace SARMS.Users
     public class Account
     {
         //private fields
-        protected int _ID;
+        protected string _ID;
         protected string _firstName;
         protected string _lastName;
         protected string _email;
@@ -16,7 +16,7 @@ namespace SARMS.Users
         //public fields
         public static string PATH_DATA = Utilities.GetPathData();
         #region Getters and Setters
-        public int ID
+        public string ID
         {
             get
             {
@@ -76,7 +76,7 @@ namespace SARMS.Users
         //Constructors
         public Account(Administrator creator)
         { }
-        protected Account(int id, string firstName, string lastName, string email, string password)
+        protected Account(string id, string firstName, string lastName, string email, string password)
         {
             _ID = id;
             _firstName = firstName;
@@ -88,14 +88,14 @@ namespace SARMS.Users
         #region Public Methods
         public bool validateLogin(string id, string password)
         {
-            var conn = GetDatabaseSQLConnection();
+            var connection = GetDatabaseSQLConnection();
 
             try
             {
-                conn.Open();
+                connection.Open();
 
-                SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = @"SELECT 1 FROM Users WHERE Id = " + id + " AND Password = " + password;
+                SQLiteCommand c = connection.CreateCommand();
+                c.CommandText = @"SELECT 1 FROM Users WHERE Id = @id AND Password = @password";
 
                 SQLiteDataReader r = c.ExecuteReader();
 
