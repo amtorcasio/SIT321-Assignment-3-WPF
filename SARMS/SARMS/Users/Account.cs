@@ -1,8 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 
-using SIT321_Assignment_3_WPF.Content;
-
 namespace SIT321_Assignment_3_WPF.Users
 {
     class Account
