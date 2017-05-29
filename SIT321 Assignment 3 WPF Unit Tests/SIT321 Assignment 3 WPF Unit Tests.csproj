@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SARMS\SARMS.csproj">
-      <Project>{b90eea7d-e1ec-47b4-962a-fa5ea947c693}</Project>
-      <Name>SARMS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SIT321 Assignment 3 WPF\SIT321 Assignment 3 WPF.csproj">
       <Project>{493a633f-8278-463f-bfda-ddcb255a047c}</Project>
       <Name>SIT321 Assignment 3 WPF</Name>
