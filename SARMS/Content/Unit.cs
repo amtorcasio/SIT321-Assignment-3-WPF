@@ -25,6 +25,4 @@ namespace SARMS.Content
             Assessments = new List<Assessment>();
         }
     }
-
-    // moved Assessment class to respective .cs file
 }
