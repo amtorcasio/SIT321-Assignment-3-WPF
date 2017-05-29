@@ -24,9 +24,7 @@ namespace SARMS
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
         public static string getStudentData(Student s, Unit u)
         {
-            Tuple<decimal, int> data = null;
-            s.Units.TryGetValue(u, out data);
-
+            Tuple<decimal, int> data = s.Units[u];
             return "Performance: " + data.Item1 + "; Attendance: " + data.Item2 + " out of " + u.TotalPracticals;
         }
         
