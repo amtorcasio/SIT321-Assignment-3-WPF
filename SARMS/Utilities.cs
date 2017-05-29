@@ -22,10 +22,9 @@ namespace SARMS
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
-        public static string getStudentData(Student s, Unit u)
+        public static Tuple<decimal,int> getStudentData(Student s, Unit u)
         {
-            Tuple<decimal, int> data = s.Units[u];
-            return "Performance: " + data.Item1 + "; Attendance: " + data.Item2 + " out of " + u.TotalPracticals;
+            return s.Units[u];
         }
         
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
