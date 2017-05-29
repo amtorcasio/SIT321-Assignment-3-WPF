@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Data.Linq;
+﻿using System.Data.SQLite;
 using System.IO;
 
 using SIT321_Assignment_3_WPF.Content;
@@ -9,13 +7,8 @@ namespace SIT321_Assignment_3_WPF.Users
 {
     class Account
     {
-        public enum UserType
-        {
-            Administrator,
-            Lecturer,
-            Student
-        }
-
+        
+        private int _ID
         public string ID { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }

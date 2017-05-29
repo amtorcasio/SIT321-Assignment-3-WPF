@@ -5,6 +5,13 @@ using SIT321_Assignment_3_WPF.Content;
 
 namespace SIT321_Assignment_3_WPF
 {
+    public enum UserType
+    {
+        Administrator,
+        Lecturer,
+        Student
+    }
+
     // a group of methods and variables that is shared throughout the entire project
     static class Utilities
     {
