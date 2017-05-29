@@ -27,24 +27,6 @@ namespace SARMS
 
         }
         
-        // addFeedback accessible by UserTypes Administrator, Lecturer and Student
-        public static void addFeedback(Student s, Unit u)
-        {
-
-        }
-
-        // getFeedback accessible by UserTypes Administrator, Lecturer and Student
-        public static void getFeedback(Student s, Unit u)
-        {
-
-        }
-
-        // generateReport accessible by UserTypes Administrator and Lecturer
-        public static void generateReport(Student s, Unit u)
-        {
-
-        }
-
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
         public static bool isStudentAtRisk(Student s)
         {
