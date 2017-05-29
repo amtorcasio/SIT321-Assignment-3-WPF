@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
 using SARMS.Content;
 
 namespace SARMS.Users
@@ -39,6 +41,21 @@ namespace SARMS.Users
 
         public void editStudentAttendance(Student s, Unit u, int lec, int prac)
         { }
+
+        public List<Account> viewSAR(Unit u)
+        {
+            List<Account> SAR = new List<Account>();
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return new List<Account>();
+        }
 
         /* moved to utilities.cs
         public void addFeedback(Student s, Unit u)

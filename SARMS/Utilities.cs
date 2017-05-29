@@ -55,7 +55,6 @@ namespace SARMS
                 message.Subject = "The student " + atRisk.LastName + " " + atRisk.FirstName + " has been identified at risk";
                 message.Body = "Please check the feeback within the SARMS application";
                 client.Send(message);
-                // implement alert
             }
         }
 
