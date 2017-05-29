@@ -1,16 +1,16 @@
-﻿using System.Data.SQLite;
-using SARMS;
+﻿using System;
+using System.Data.SQLite;
 
 namespace SARMS.Users
 {
     public class Account
     {
         //private fields
-        private int _ID;
-        private string _firstName;
-        private string _lastName;
-        private string _email;
-        private string _password;
+        protected int _ID;
+        protected string _firstName;
+        protected string _lastName;
+        protected string _email;
+        protected string _password;
 
         //public fields
         public int ID { get; set; }
@@ -22,8 +22,19 @@ namespace SARMS.Users
         //removed; usertype Administrator does not directly participate in any unit.
         //public List<Unit> Units { get; set; }
 
-        public void changePassword()
+        public bool changePassword(string password)
         {
+            var conn = GetDatabaseSQLConnection();
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return false;
         }
 
         public void forgotPassword()

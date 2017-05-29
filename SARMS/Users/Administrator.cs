@@ -7,17 +7,17 @@ namespace SARMS.Users
     public class Administrator : Account
     {
         // constructor
-        public Administrator(string id, string fname, string lname, string email, string password)
+        public Administrator(int id, string fname, string lname, string email, string password)
         {
-            ID = id;
-            Firstname = fname;
-            Lastname = lname;
-            Email = email;
-            Password = password;
+            _ID = id;
+            _firstName = fname;
+            _lastName = lname;
+            _email = email;
+            _password = password;
         }
 
         //todo: SALT AND HASH PASSWORDS
-        public void addUser(string id, string firstName, string lastName, string email, string pass, UserType type)
+        public void addUser(int id, string firstName, string lastName, string email, string pass, UserType type)
         {
             Account u = new Account() { ID = id };
             if(!DoesRecordExist(u))
