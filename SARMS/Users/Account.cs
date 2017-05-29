@@ -122,7 +122,7 @@ namespace SARMS.Users
             return false;
         }
 
-        public static bool ForgotPassword()
+        public static bool ForgotPassword(string email)
         {
             return false;
         }
