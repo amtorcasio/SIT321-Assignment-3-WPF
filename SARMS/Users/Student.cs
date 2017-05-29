@@ -14,13 +14,13 @@ namespace SARMS.Users
         }
 
         public bool AtRisk { get; set; }
+        public int Attendance { get; set; }
 
         public List<StudentAssessment> Performance;
         public List<StudentUnit> Units;
 
         //public decimal Performance { get; set; }
-        //public int Attendance { get; set; }
-        //public Dictionary<Unit, Tuple<decimal, int>> Units; // Student.Units hides inherited member Account.Units
+        //public Dictionary<Unit, Tuple<decimal, int>> Units;
 
         /* moved to utilities.cs
         public void addFeedback(Student s, Unit u)
