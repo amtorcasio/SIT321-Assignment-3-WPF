@@ -22,9 +22,12 @@ namespace SARMS
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
-        public static void getStudentData(Student s, Unit u)
+        public static string getStudentData(Student s, Unit u)
         {
+            Tuple<decimal, int> data = null;
+            s.Units.TryGetValue(u, out data);
 
+            return "Performance: " + data.Item1 + "; Attendance: " + data.Item2 + " out of " + u.TotalPracticals;
         }
         
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
