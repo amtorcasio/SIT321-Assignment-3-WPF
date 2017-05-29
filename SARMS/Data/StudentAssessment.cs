@@ -1,20 +1,16 @@
-﻿namespace SARMS.Data
+﻿using SARMS.Content;
+
+namespace SARMS.Data
 {
     public class StudentAssessment
     {
-        private string _accountID;
-        private int _assessmentID;
+        private Assessment _assessment;
         private decimal _mark;
 
-        public string AccountID
+        public Assessment Assessment
         {
-            get { return _accountID; }
-            set { _accountID = value; }
-        }
-        public int AssessmentID
-        {
-            get { return _assessmentID; }
-            set { _assessmentID = value; }
+            get { return _assessment; }
+            set { _assessment = value; }
         }
         public decimal Mark
         {

@@ -110,9 +110,9 @@ namespace SARMS.Users
                         case UserType.Administrator:
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Lecturer:
-                            return null;
+                            return new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Student:
-                            return null;
+                            return new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         default:
                             return null;
                     }
@@ -133,6 +133,19 @@ namespace SARMS.Users
         public bool ChangePassword(string password)
         {
             var conn = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+
+            }
 
             return false;
         }

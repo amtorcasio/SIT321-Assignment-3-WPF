@@ -1,24 +1,20 @@
-﻿namespace SARMS.Data
+﻿using SARMS.Content;
+
+namespace SARMS.Data
 {
     public class StudentUnit
     {
-        private string _accountID;
-        private int _unitID;
+        private Unit _unit;
         private int _lectureAttendance;
         private int _practicalAttendance;
         private string _staffFeedback;
         private string _studentFeedback;
 
         #region Getters and Setters
-        public string AccountID
+        public Unit unit
         {
-            get { return _accountID; }
-            set { _accountID = value; }
-        }
-        public int UnitID
-        {
-            get { return _unitID; }
-            set { _unitID = value; }
+            get { return _unit; }
+            set { _unit = value; }
         }
         public int LectureAttendance
         {

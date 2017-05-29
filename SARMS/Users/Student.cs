@@ -10,11 +10,9 @@ namespace SARMS.Users
         // constructor
         public Student(string id, string firstName, string lastName, string email, string password):
             base (id, firstName, lastName, email, password)
-        {
-        }
+        { }
 
         public bool AtRisk { get; set; }
-        public int Attendance { get; set; }
 
         public List<StudentAssessment> Performance;
         public List<StudentUnit> Units;
