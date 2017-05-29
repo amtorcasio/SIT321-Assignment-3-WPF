@@ -48,31 +48,7 @@ namespace SARMS.Users
 
         public List<Account> viewSAR(Unit u)
         {
-            List<Account> SAR = new List<Account>();
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
             return new List<Account>();
         }
-
-        /* moved to utilities.cs
-        public void addFeedback(Student s, Unit u)
-        { }
-
-        public void getFeedback(Student s, Unit u)
-        { }
-
-        public void getStudentData(Student s, Unit u)
-        { }
-
-        public void generateReport(Student s, Unit u)
-        { }
-        */
     }
 }
