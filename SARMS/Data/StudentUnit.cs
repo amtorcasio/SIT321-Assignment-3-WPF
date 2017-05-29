@@ -2,7 +2,7 @@
 {
     public class StudentUnit
     {
-        private string _userID;
+        private string _accountID;
         private int _unitID;
         private int _lectureAttendance;
         private int _practicalAttendance;
@@ -10,10 +10,10 @@
         private string _studentFeedback;
 
         #region Getters and Setters
-        public string UserID
+        public string AccountID
         {
-            get { return _userID; }
-            set { _userID = value; }
+            get { return _accountID; }
+            set { _accountID = value; }
         }
         public int UnitID
         {
