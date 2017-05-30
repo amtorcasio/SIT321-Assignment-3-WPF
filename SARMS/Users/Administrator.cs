@@ -225,9 +225,35 @@ namespace SARMS.Users
 
         public void RemoveUnit(Unit unit)
         {
-            /* check for associated classes
-             * do not remove when associations are present
-             */
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+
+                // set unit id for removal
+                command.Parameters.AddWithValue("@uid", unit.ID);
+
+                // TABLE: UserUnits - Remove Records of Unit
+                command.CommandText = "DELETE FROM UserUnits WHERE UnitID = @uid";
+                command.ExecuteNonQuery();
+
+                // TABLE: Assessment - Remove Records of Unit
+                command.CommandText = "DELETE FROM Assessment WHERE UnitID = @uid";
+                command.ExecuteNonQuery();
+
+                // TABLE: Unit - Remove Records of Unit
+                command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                command.ExecuteNonQuery();
+
+                System.Diagnostics.Debug.Write("Unit " + unit.Name + " removed");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("RemoveUnit Error: " + e.Message.ToString());
+            }
         }
 
         public void AddStudentUnit(Student student, Unit unit)
