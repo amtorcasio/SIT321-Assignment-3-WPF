@@ -39,6 +39,8 @@ namespace SARMS.Users
         // boolean if the student attended the lecturer and practical or did not attend
         public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
+            //todo: add database side changes + practical changes
+            student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
 
         }
 
