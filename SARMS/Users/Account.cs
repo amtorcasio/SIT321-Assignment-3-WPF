@@ -201,13 +201,39 @@ namespace SARMS.Users
             }
         }
 
-        public string GetFeedback(Account from, Student student, Unit unit)
+        public void GetFeedback(Student student, Unit unit, out string staffFeeback, out string studentFeedback)
         {
-            return "";
+            var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT StaffFeedback, StudentFeedback FROM UserUnits WHERE UserID = @userID AND UnitID = @unitID";
+                command.Parameters.AddWithValue("@userID", student.ID);
+                command.Parameters.AddWithValue("@unitID", unit.ID);
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    staffFeeback = reader[0].ToString();
+                    studentFeedback = reader[0].ToString();
+                }
+
+                staffFeeback = null;
+                studentFeedback = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
         #endregion
-
-        //removed; usertype Administrator does not directly participate in any unit.
-        //public List<Unit> Units { get; set; }
     }
 }
