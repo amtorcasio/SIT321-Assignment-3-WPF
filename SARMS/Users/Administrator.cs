@@ -100,30 +100,6 @@ namespace SARMS.Users
             }
         }
 
-        public void TerminateUser(Account account)
-        {
-            /* save a copy of the user's email,
-             * execute SQL command to delete user entry from database,
-             * alert user through email,
-             * release copy of email
-             */
-             
-            SmtpClient client = new SmtpClient();
-            /*
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = "smtp.google.com";
-
-            MailMessage message = new MailMessage("admin@sarms.edu.au", account.Email);
-            message.Subject = "SARMS - Notice of termination for user account ";
-            message.Body = String.Format("Upon receiving this email, the account for user, {0} {1}, will be terminated and thus deleted from the SARMS database.", account.FirstName, account.LastName);
-            client.Send(message);
-            */
-
-            RemoveUser(account);
-        }
-
         public void EditUser(Account account, string firstName, string lastName, string email, string password)
         {
             if (DoesRecordExist(account))
