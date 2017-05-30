@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using SARMS.Users;
 using SARMS.Content;
 using System.Data.SQLite;
@@ -37,10 +38,52 @@ namespace SARMS
             return new Tuple<List<StudentAssessment>, StudentUnit>(performance, attendance);
         }
         
-        // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
-        public static bool IsStudentAtRisk(Student s)
+        // IsStudentAtRisk accessible by UserTypes Administrator and Lecturer
+        public static bool IsStudentAtRisk(Student student)
         {
-            throw new NotImplementedException();
+            student.AtRisk = false;
+            List<Account> accounts = new List<Account>();
+            //Check attendance
+            foreach (StudentUnit su in student.Units)
+            {
+                if ((su.LectureAttendance < (su.unit.TotalLectures / 2)) || 
+                    (su.PracticalAttendance < (su.unit.TotalPracticals / 2)))
+                {
+                    student.AtRisk = true;
+                    accounts.AddRange(FindLecturers(su.unit));
+                }
+            }
+            //Check performance
+            foreach (StudentAssessment sa in student.Performance)
+            {
+                if ((sa.Mark / sa.Assessment.TotalMarks) < 50.0M)
+                {
+                    student.AtRisk = true;
+                    accounts.AddRange(FindLecturers(sa.Assessment.unit));
+                }
+            }
+            //Compute alerts
+            if (student.AtRisk)
+            {
+                accounts.AddRange(FindAllAdmins());
+                AlertStudentAtRisk(accounts, student);
+            }
+            return student.AtRisk;
+        }
+
+        //todo: implement
+        private static List<Lecturer> FindLecturers(Unit u)
+        {
+            List<Lecturer> lecturers = new List<Lecturer>();
+
+            return lecturers;
+        }
+        //todo: implement
+        private static List<Administrator> FindAllAdmins()
+        {
+            List<Administrator> admins = new List<Administrator>();
+
+            return admins;
         }
 
         // alertStudentAtRisk called as a result of conditions triggered in isStudentAtRisk

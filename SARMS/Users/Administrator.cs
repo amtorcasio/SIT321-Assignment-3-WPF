@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Net.Mail;
+using System.Collections.Generic;
 using SARMS.Content;
 
 namespace SARMS.Users
@@ -266,8 +267,11 @@ namespace SARMS.Users
             throw new NotImplementedException();
         }
 
-        public void SearchAccountsByUnit(Unit u)
-        { }
+        public List<Account> SearchAccountsByUnit(Unit u)
+        {
+            List<Account> result = null;
+            return result;
+        }
 
         public void SearchUnits(string s)
         { }
