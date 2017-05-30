@@ -70,10 +70,10 @@ namespace SARMS.Users
             }
         }
 
-        public void AddStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
+        public void AddStudentPerformance(Student student, Assessment assessment, int mark)
         { }
 
-        public void EditStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
+        public void EditStudentPerformance(Student student, Assessment assessment, int mark)
         { }
 
         // boolean if the student attended the lecturer and practical or did not attend
