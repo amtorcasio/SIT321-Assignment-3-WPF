@@ -1,10 +1,12 @@
 ﻿using SARMS.Content;
+using SARMS.Users;
 
 namespace SARMS.Data
 {
     public class StudentUnit
     {
         private Unit _unit;
+        private Account _account;
         private int _lectureAttendance;
         private int _practicalAttendance;
         private string _staffFeedback;
@@ -35,6 +37,11 @@ namespace SARMS.Data
         {
             get { return _studentFeedback; }
             set { _studentFeedback = value; }
+        }
+        public Account account
+        {
+            get { return _account; }
+            set { _account = value; }
         }
         #endregion
     }
