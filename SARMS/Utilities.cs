@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using SARMS.Users;
 using SARMS.Content;
 using System.Data.SQLite;
@@ -147,20 +146,37 @@ namespace SARMS
         // email sent to any relevant users identified in isStudentAtRisk
         private static void AlertStudentAtRisk(List<Account> accounts, Student atRisk)
         {
+            string subject = "The student " + atRisk.LastName + " " + atRisk.FirstName + " has been identified at risk";
+            string body = "Please check the feeback within the SARMS application";
+            List<string> recipients = new List<string>();
+            foreach (Account a in accounts)
+            {
+                recipients.Add(a.Email);
+            }
+            SendMailMessagesFromAdmin(recipients, subject, body);
+        }
+
+        public static void SendMailMessageFromAdmin(string recipient, string subject, string body)
+        {
+            List<string> recipients = new List<string>() { recipient };
+            SendMailMessagesFromAdmin(recipients, subject, body);
+        }
+
+        public static void SendMailMessagesFromAdmin(List<string> recipients, string subject, string body)
+        {
             SmtpClient client = new SmtpClient();
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Host = "smtp.google.com";
-            foreach (Account a in accounts)
+            foreach (string address in recipients)
             {
-                MailMessage message = new MailMessage("admin@sarms.edu.au", a.Email);
-                message.Subject = "The student " + atRisk.LastName + " " + atRisk.FirstName + " has been identified at risk";
-                message.Body = "Please check the feeback within the SARMS application";
+                MailMessage message = new MailMessage("admin@sarms.edu.au", address);
+                message.Subject = subject;
+                message.Body = body;
                 client.Send(message);
             }
         }
-
         /* 
         protected DataContext GetDatabaseDataContext()
         {

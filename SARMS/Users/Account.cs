@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Net.Mail;
 using SARMS.Content;
 
 namespace SARMS.Users
@@ -126,6 +127,9 @@ namespace SARMS.Users
 
         public static bool ForgotPassword(string email)
         {
+            MailMessage message = new MailMessage();
+            SmtpClient client = new SmtpClient();
+
             return false;
         }
 
