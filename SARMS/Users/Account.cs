@@ -18,58 +18,28 @@ namespace SARMS.Users
         #region Getters and Setters
         public string ID
         {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
+            get { return _ID; }
+            set { _ID = value; }
         }
         public string FirstName
         {
-            get
-            {
-                return _firstName;
-            }
-            set
-            {
-                _firstName = value;
-            }
+            get { return _firstName; }
+            set { _firstName = value; }
         }
         public string LastName
         {
-            get
-            {
-                return _lastName;
-            }
-            set
-            {
-                _lastName = value;
-            }
+            get { return _lastName; }
+            set { _lastName = value; }
         }
         public string Email
         {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                _email = value;
-            }
+            get { return _email; }
+            set { _email = value; }
         }
         public string Password
         {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-            }
+            get { return _password; }
+            set { _password = value; }
         }
         #endregion
 
