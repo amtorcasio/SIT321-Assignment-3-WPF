@@ -187,9 +187,22 @@ namespace SARMS.Users
                 if (currentFeedback.Length > 0) currentFeedback += "\n";
 
                 command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
-                command.Parameters.AddWithValue("@feeback", currentFeedback + feedback);
+                string newfeedback = currentFeedback + feedback;
+                command.Parameters.AddWithValue("@feeback", newfeedback);
 
-                return command.ExecuteNonQuery() == 0 ? false : true;
+                if (command.ExecuteNonQuery() == 0)
+                    return false;
+
+                var studentUnit = student.Units.Find(e => (e.unit.ID == unit.ID));
+                if (by is Administrator || by is Lecturer)
+                {
+                    studentUnit.StaffFeedback = newfeedback;
+                }
+                else
+                {
+                    studentUnit.StudentFeedback = newfeedback;
+                }
+                return true;
             }
             catch (Exception)
             {
