@@ -270,6 +270,7 @@ namespace SARMS.Users
                 command.CommandText =   "INSERT INTO UserUnits" +
                                         "([UserID],[UnitID],[LectureAttendance],[PracticalAttendance],[StaffFeedback],[StudentFeedback])" +
                                         "VALUES( @sid, @unitid, 0, 0 )";
+
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
                 command.ExecuteNonQuery();
@@ -282,12 +283,28 @@ namespace SARMS.Users
             }
         }
 
+        // withdraw student from unit
         public void RemoveStudentUnit(Student student, Unit unit)
         {
-            /* does Student and Unit exist in database?
-             * remove unit from Student's assigned Units
-             * remove relationship in database
-             */
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+
+                command.CommandText = "DELETE FROM UserUnits WHERE UserID = @sid AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.ExecuteNonQuery();
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + "withdrawn from Unit " + unit.ID);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("RemoveStudentUnit Error: " + e.Message.ToString());
+            }
         }
 
         public void AddLecturerUnit(Lecturer lecturer, Unit unit)
