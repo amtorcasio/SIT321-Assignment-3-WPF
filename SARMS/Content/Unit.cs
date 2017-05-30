@@ -7,6 +7,7 @@ namespace SARMS.Content
     {
         #region Private Fields
         private int _id;
+        private string _name;
         private string _code;
         private DateTime _year;
         private int _trimester;
@@ -45,14 +46,20 @@ namespace SARMS.Content
             get { return _totalPracticals; }
             set { _totalPracticals = value; }
         }
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
         #endregion
 
         public List<Assessment> Assessments;
 
         // constructor
-        public Unit(int id, string code, DateTime year, int trimester, int totalLectures, int totalPracticals, List<Assessment> assessments)
+        public Unit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals, List<Assessment> assessments)
         {
             _id = id;
+            _name = name;
             _code = code;
             _year = year;
             _trimester = trimester;
