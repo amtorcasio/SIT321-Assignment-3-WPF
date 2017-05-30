@@ -165,10 +165,13 @@ namespace SARMS
         public static void SendMailMessagesFromAdmin(List<string> recipients, string subject, string body)
         {
             SmtpClient client = new SmtpClient();
-            client.Port = 25;
+            client.Port = 587;
+            client.EnableSsl = true;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Host = "smtp.google.com";
+            client.Timeout = 10000;
+            client.Host = "smtp.gmail.com";
+            client.Credentials = new System.Net.NetworkCredential("sarms.edu@gmail.com", "Sit321sarms");
             foreach (string address in recipients)
             {
                 MailMessage message = new MailMessage("admin@sarms.edu.au", address);
