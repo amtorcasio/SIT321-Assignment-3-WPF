@@ -33,7 +33,7 @@ namespace SIT321_Assignment_3_WPF
             if (result != null)
             {
                 var main = new MainWindow(result);
-                this.Hide();
+                this.Close();
                 main.Show();
                 main.Focus();
             }

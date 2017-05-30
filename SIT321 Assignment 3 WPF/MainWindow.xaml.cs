@@ -27,6 +27,9 @@ namespace SIT321_Assignment_3_WPF
         {
             LoggedInAccount = loggedInAccount;
             InitializeComponent();
+
+            lblName.Content = String.Format("{0}, {1}", loggedInAccount.LastName.ToUpper(), loggedInAccount.FirstName.ToUpper());
+            lblEmail.Content = "(" + loggedInAccount.Email + ")";
         }
     }
 }
