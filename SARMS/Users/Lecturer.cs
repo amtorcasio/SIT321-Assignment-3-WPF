@@ -44,10 +44,30 @@ namespace SARMS.Users
             }
         }
 
+        // remove assessment from unit
         public void RemoveAssessment(Unit unit, Assessment assessment)
         {
-            //todo:database side
-            unit.Assessments.Remove(assessment);
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM Assessment WHERE Id = @id AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@id", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.ExecuteNonQuery();
+
+                // remove assessment from unit after removal from database
+                unit.Assessments.Remove(assessment);
+
+                System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " removed");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("RemoveAssessment Error: " + e.Message.ToString());
+            }
         }
 
         public void AddStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
