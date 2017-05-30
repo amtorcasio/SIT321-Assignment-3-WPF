@@ -307,7 +307,7 @@ namespace SARMS.Users
             }
         }
 
-        // assign lecturer to unit
+        // allocate lecturer to unit
         public void AddLecturerUnit(Lecturer lecturer, Unit unit)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
@@ -326,7 +326,7 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@unitid", unit.ID);
                 command.ExecuteNonQuery();
 
-                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "assigned to Unit " + unit.ID);
+                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "allocated to Unit " + unit.ID);
             }
             catch (Exception e)
             {
@@ -334,12 +334,28 @@ namespace SARMS.Users
             }
         }
 
+        // lecturer deallocated from unit
         public void RemoveLecturerUnit(Lecturer lecturer, Unit unit)
         {
-            /* does Lecturer and Unit exist in database?
-             * remove unit from Lecturer's assigned Units
-             * remove relationship in database
-             */
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+
+                command.CommandText = "DELETE FROM UserUnits WHERE UserID = @lid AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@lid", lecturer.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.ExecuteNonQuery();
+
+                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "deallocated from Unit " + unit.ID);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("RemoveLecturerUnit Error: " + e.Message.ToString());
+            }
         }
 
         public Account SearchAccountsById(int id)
