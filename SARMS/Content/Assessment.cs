@@ -1,44 +1,53 @@
-﻿using System;
+﻿using SARMS.Content;
 
 namespace SARMS.Content
 {
-    public class Assessment : IEquatable<Assessment>
+    public class Assessment
     {
-        private int AssessmentID;
-        private string Name;
-        private int TotalMarks;
-        private decimal Weight;
+        #region Private Fields
+        private int _assessmentID;
+        private string _name;
+        private int _totalMarks;
+        private decimal _weight;
+        private Unit _unit;
+        #endregion
+
+        #region Getters and Setters
+        public int AssessmentID
+        {
+            get { return _assessmentID; }
+            set { _assessmentID = value; }
+        }
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int TotalMarks
+        {
+            get { return _totalMarks; }
+            set { _totalMarks = value; }
+        }
+        public decimal Weight
+        {
+            get { return _weight; }
+            set { _weight = value; }
+        }
+        public Unit unit
+        {
+            get { return _unit; }
+            set { _unit = value; }
+        }
+        #endregion
 
         // constructor
-        public Assessment(int id, string name, int tmark, decimal weight)
+        public Assessment(int id, string name, int totalMark, decimal weight, Unit unit)
         {
-            AssessmentID = id;
-            Name = name;
-            TotalMarks = tmark;
-            Weight = weight;
-        }
-
-        public override bool Equals(object obj)
-        {
-            var a = obj as Assessment;
-            return Equals(a);
-        }
-
-        public bool Equals(Assessment a)
-        {
-            if (a != null)
-            {
-                if (this.AssessmentID == a.AssessmentID)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            _assessmentID = id;
+            _name = name;
+            _totalMarks = totalMark;
+            _weight = weight;
+            _unit = unit;
         }
     }
 }
