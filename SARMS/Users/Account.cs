@@ -141,6 +141,7 @@ namespace SARMS.Users
 
                 if (reader.HasRows)
                 {
+                    reader.Read();
                     Utilities.SendMailMessageFromAdmin(email, "Password Restore", reader[0].ToString());
                     return true;
                 }
@@ -161,13 +162,34 @@ namespace SARMS.Users
 
         public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
         {
+            if (feedback.Trim().Length == 0) return false;
+
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
                 SQLiteCommand command = connection.CreateCommand();
-                return false;
+                string feedBackType = (by is Administrator || by is Lecturer) ? "StaffFeedback" : "StudentFeedback";
+                command.CommandText = "SELECT " + feedBackType + " FROM UserUnits WHERE UserID = @userID AND UnitID = @unitID";
+                command.Parameters.AddWithValue("@userID", student.ID);
+                command.Parameters.AddWithValue("@unitID", unit.ID);
+                reader = command.ExecuteReader();
+
+                string currentFeedback = "";
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    currentFeedback = reader[0].ToString();
+                }
+
+                if (currentFeedback.Length > 0) currentFeedback += "\n";
+
+                command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
+                command.Parameters.AddWithValue("@feeback", currentFeedback + feedback);
+
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
             catch (Exception)
             {
