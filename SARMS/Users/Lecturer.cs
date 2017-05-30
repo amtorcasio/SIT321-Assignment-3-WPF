@@ -30,7 +30,7 @@ namespace SARMS.Users
             unit.Assessments.RemoveAt(i);
         }
 
-        public void AddStudentPerformance(Student student, Unit unit, Assessment aassessment, int mark)
+        public void AddStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
         { }
 
         public void EditStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)

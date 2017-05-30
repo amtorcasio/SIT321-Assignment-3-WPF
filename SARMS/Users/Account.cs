@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using SARMS.Content;
 using SARMS.Data;
+using System.Collections.Generic;
 
 namespace SARMS.Users
 {
@@ -67,7 +68,7 @@ namespace SARMS.Users
                 connection.Open();
 
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = @"SELECT * FROM User WHERE email = @email AND Password = @password";
+                command.CommandText = "SELECT * FROM User WHERE email = @email AND Password = @password";
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@password", password);
 
@@ -82,8 +83,36 @@ namespace SARMS.Users
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Lecturer:
                             Lecturer result = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            command.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON Unit.Id = UserUnits.UnitID WHERE UserUnit.UserID = @id";
+                            command.Parameters.AddWithValue("@id", result.ID);
 
-                            break;
+                            reader = command.ExecuteReader();
+
+                            List<Unit> units = new List<Unit>();
+
+                            SQLiteCommand unitAssessmentsCmd = connection.CreateCommand();
+                            unitAssessmentsCmd.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
+                            SQLiteDataReader assessmentReader;
+
+                            while (reader.Read())
+                            {
+                                unitAssessmentsCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[0]));
+                                assessmentReader = unitAssessmentsCmd.ExecuteReader();
+                                List<Assessment> assessments = new List<Assessment>();
+                                Unit temp = new Unit(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(),
+                                    Convert.ToDateTime(reader[3]), Convert.ToInt32(reader[4]), Convert.ToInt32(reader[5]),
+                                    Convert.ToInt32(reader[6]));
+
+                                while (assessmentReader.Read())
+                                {
+                                    assessments.Add(new Assessment(Convert.ToInt32(assessmentReader[0]), assessmentReader[1].ToString(), Convert.ToInt32(assessmentReader[2]), Convert.ToDecimal(assessmentReader[3]), temp));
+                                }
+
+                                temp.Assessments = assessments;
+                                units.Add(temp);
+                            }
+                            result.Units = units;
+                            return result;
                         case UserType.Student:
                             return new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         default:

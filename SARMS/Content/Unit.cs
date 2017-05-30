@@ -56,7 +56,7 @@ namespace SARMS.Content
         public List<Assessment> Assessments;
 
         // constructor
-        public Unit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals, List<Assessment> assessments)
+        public Unit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             _id = id;
             _name = name;
@@ -65,7 +65,6 @@ namespace SARMS.Content
             _trimester = trimester;
             _totalLectures = totalLectures;
             _totalPracticals = totalPracticals;
-            Assessments = assessments;
         }
     }
 }
