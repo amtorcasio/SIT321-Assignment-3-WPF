@@ -108,7 +108,7 @@ namespace SARMS.Users
             try
             {
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand();
+                SQLiteCommand command = connection.CreateCommand();
                 command.CommandText = "UPDATE User SET Password = @password WHERE Id = @id";
                 command.Parameters.AddWithValue("@password", password);
                 command.Parameters.AddWithValue("@id", _ID);
@@ -133,7 +133,7 @@ namespace SARMS.Users
             try
             {
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand();
+                SQLiteCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT Password FROM User WHERE Email = @email";
                 command.Parameters.AddWithValue("@email", email);
 
@@ -155,13 +155,28 @@ namespace SARMS.Users
             }
             finally
             {
-
+                if (connection != null) connection.Close();
             }
         }
 
         public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
         {
-            return false;
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
 
         public string GetFeedback(Account from, Student student, Unit unit)
