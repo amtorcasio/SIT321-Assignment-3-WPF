@@ -141,22 +141,25 @@ namespace SARMS.Users
 
         public void RemoveUser(Account account)
         {
-            var connection = Utilities.GetDatabaseSQLConnection();
-
-            try
+            if (DoesRecordExist(account))
             {
-                connection.Open();
+                var connection = Utilities.GetDatabaseSQLConnection();
 
-                SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = "DELETE FROM Users WHERE Id = @id";
-                command.Parameters.AddWithValue("@id", account.ID);
+                try
+                {
+                    connection.Open();
 
-                command.ExecuteNonQuery();
-                System.Diagnostics.Debug.Write("Member account " + account.ID + " removed");
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("removeUser Error: " + e.Message.ToString());
+                    SQLiteCommand command = connection.CreateCommand();
+                    command.CommandText = "DELETE FROM Users WHERE Id = @id";
+                    command.Parameters.AddWithValue("@id", account.ID);
+
+                    command.ExecuteNonQuery();
+                    System.Diagnostics.Debug.Write("Member account " + account.ID + " removed");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("removeUser Error: " + e.Message.ToString());
+                }
             }
         }
 
