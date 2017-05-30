@@ -127,10 +127,36 @@ namespace SARMS.Users
 
         public static bool ForgotPassword(string email)
         {
-            MailMessage message = new MailMessage();
-            SmtpClient client = new SmtpClient();
+            var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
-            return false;
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command.CommandText = "SELECT Password FROM User WHERE Email = @email";
+                command.Parameters.AddWithValue("@email", email);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    Utilities.SendMailMessageFromAdmin(email, "Password Restore", reader[0].ToString());
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+            }
         }
 
         public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
