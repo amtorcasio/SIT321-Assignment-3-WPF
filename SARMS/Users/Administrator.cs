@@ -109,6 +109,7 @@ namespace SARMS.Users
              */
              
             SmtpClient client = new SmtpClient();
+            /*
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
@@ -118,6 +119,7 @@ namespace SARMS.Users
             message.Subject = "SARMS - Notice of termination for user account ";
             message.Body = String.Format("Upon receiving this email, the account for user, {0} {1}, will be terminated and thus deleted from the SARMS database.", account.FirstName, account.LastName);
             client.Send(message);
+            */
 
             RemoveUser(account);
         }
@@ -163,7 +165,23 @@ namespace SARMS.Users
 
         public void RemoveUser(Account account)
         {
-            // what in the world is this for?
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM Users WHERE Id = @id";
+                command.Parameters.AddWithValue("@id", account.ID);
+
+                command.ExecuteNonQuery();
+                System.Diagnostics.Debug.Write("Member account " + account.ID + " removed");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("removeUser Error: " + e.Message.ToString());
+            }
         }
 
         public void AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
