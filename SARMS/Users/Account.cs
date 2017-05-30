@@ -132,22 +132,26 @@ namespace SARMS.Users
 
         public bool ChangePassword(string password)
         {
-            var conn = Utilities.GetDatabaseSQLConnection();
+            var connection = Utilities.GetDatabaseSQLConnection();
 
             try
             {
-                
-            }
-            catch (Exception e)
-            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command.CommandText = "UPDATE User SET Password = @password WHERE Id = @id";
+                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@id", _ID);
 
+                return command.ExecuteNonQuery() == 0 ? false : true;
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
-
+                if (connection != null) connection.Close();
             }
-
-            return false;
         }
 
         public static bool ForgotPassword(string email)

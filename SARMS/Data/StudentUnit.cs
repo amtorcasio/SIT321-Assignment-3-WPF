@@ -24,7 +24,7 @@ namespace SARMS.Data
         public int PracticalAttendance
         {
             get { return _practicalAttendance; }
-            set { _lectureAttendance = value; }
+            set { _practicalAttendance = value; }
         }
         public string StaffFeedback
         {
