@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Net.Mail;
 using SARMS.Content;
+using SARMS.Data;
 
 namespace SARMS.Users
 {
@@ -212,6 +212,11 @@ namespace SARMS.Users
             {
                 if (connection != null) connection.Close();
             }
+        }
+
+        public StudentUnit GetFeedback(Student student, Unit unit)
+        {
+            return student.Units.Find(e => (e.unit.ID == unit.ID));
         }
 
         public void GetFeedback(Student student, Unit unit, out string staffFeeback, out string studentFeedback)
