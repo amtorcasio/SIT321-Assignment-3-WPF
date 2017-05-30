@@ -82,54 +82,125 @@ namespace SARMS.Users
                         case UserType.Administrator:
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Lecturer:
-                            Lecturer result = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
-                            command.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON Unit.Id = UserUnits.UnitID WHERE UserUnit.UserID = @id";
-                            command.Parameters.AddWithValue("@id", result.ID);
-
-                            reader = command.ExecuteReader();
-
-                            List<Unit> units = new List<Unit>();
-
-                            SQLiteCommand unitAssessmentsCmd = connection.CreateCommand();
-                            unitAssessmentsCmd.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
-                            SQLiteDataReader assessmentReader;
-
-                            while (reader.Read())
-                            {
-                                unitAssessmentsCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[0]));
-                                assessmentReader = unitAssessmentsCmd.ExecuteReader();
-                                List<Assessment> assessments = new List<Assessment>();
-                                Unit temp = new Unit(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(),
-                                    Convert.ToDateTime(reader[3]), Convert.ToInt32(reader[4]), Convert.ToInt32(reader[5]),
-                                    Convert.ToInt32(reader[6]));
-
-                                while (assessmentReader.Read())
-                                {
-                                    assessments.Add(new Assessment(Convert.ToInt32(assessmentReader[0]), assessmentReader[1].ToString(), Convert.ToInt32(assessmentReader[2]), Convert.ToDecimal(assessmentReader[3]), temp));
-                                }
-
-                                temp.Assessments = assessments;
-                                units.Add(temp);
-                            }
-                            result.Units = units;
-                            return result;
+                            return LoginLecturer(connection, command, reader);
                         case UserType.Student:
-                            return new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            return LoginStudent(connection, command, reader);
                         default:
                             return null;
                     }
                 }
                 return null;
             }
-            catch (Exception e)
-            {
-                throw new Exception("A databases error occurred while logging in", e);
-            }
             finally
             {
                 if (reader != null) reader.Close();
                 if (connection != null) connection.Close();
             }
+        }
+
+        private static Lecturer LoginLecturer(SQLiteConnection connection, SQLiteCommand command, SQLiteDataReader reader)
+        {
+            Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+            command.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON Unit.Id = UserUnits.UnitID WHERE UserUnit.UserID = @id";
+            command.Parameters.AddWithValue("@id", lecturer.ID);
+
+            reader = command.ExecuteReader();
+
+            List<Unit> units = new List<Unit>();
+
+            SQLiteCommand unitAssessmentsCmd = connection.CreateCommand();
+            unitAssessmentsCmd.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
+            SQLiteDataReader lecturerAssReader = null;
+
+
+            while (reader.Read())
+            {
+                unitAssessmentsCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[0]));
+                List<Assessment> assessments = new List<Assessment>();
+                Unit temp = new Unit(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(),
+                    Convert.ToDateTime(reader[3]), Convert.ToInt32(reader[4]), Convert.ToInt32(reader[5]),
+                    Convert.ToInt32(reader[6]));
+
+                try
+                {
+                    lecturerAssReader = unitAssessmentsCmd.ExecuteReader();
+                    while (lecturerAssReader.Read())
+                    {
+                        assessments.Add(new Assessment(Convert.ToInt32(lecturerAssReader[0]), lecturerAssReader[1].ToString(), Convert.ToInt32(lecturerAssReader[2]), Convert.ToDecimal(lecturerAssReader[3]), temp));
+                    }
+                    temp.Assessments = assessments;
+                    units.Add(temp);
+                }
+                finally
+                {
+                    if (lecturerAssReader != null) lecturerAssReader.Close();
+                }
+            }
+
+            lecturer.Units = units;
+            return lecturer;
+        }
+
+        private static Student LoginStudent(SQLiteConnection connection, SQLiteCommand command, SQLiteDataReader reader)
+        {
+            Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+
+            command.CommandText = "SELECT * FROM UserAssessment WHERE UserID = @id";
+            command.Parameters.AddWithValue("@id", student.ID);
+            reader = command.ExecuteReader();
+            List<StudentAssessment> performance = new List<StudentAssessment>();
+            List<Unit> units = new List<Unit>();
+
+            SQLiteCommand assessmentCmd = connection.CreateCommand();
+            assessmentCmd.CommandText = "SELECT * FROM ASSESSMENT WHERE UnitID = @id";
+            SQLiteDataReader studentAssReader = null;
+
+            while (reader.Read())
+            {
+                assessmentCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[1]));
+
+                try
+                {
+                    studentAssReader = assessmentCmd.ExecuteReader();
+                    studentAssReader.Read();
+
+                    int unitID = Convert.ToInt32(studentAssReader[4]);
+                    Unit unit = units.Find(e => (e.ID == unitID));
+                    if (unit != null)
+                    {
+                        Assessment assessment = new Assessment(Convert.ToInt32(studentAssReader[0]), studentAssReader[1].ToString(),
+                            Convert.ToInt32(studentAssReader[2]), Convert.ToDecimal(studentAssReader[3]), unit);
+                        continue;
+                    }
+
+                    SQLiteCommand unitCommand = connection.CreateCommand();
+                    unitCommand.CommandText = "SELECT * FROM UNIT WHERE Id = @id";
+                    unitCommand.Parameters.AddWithValue("@id", unitID);
+                    SQLiteDataReader unitReader = null;
+                    try
+                    {
+                        unitReader = unitCommand.ExecuteReader();
+                        unitReader.Read();
+
+                        unit = new Unit(Convert.ToInt32(unitReader[0]), unitReader[1].ToString(), unitReader[2].ToString(),
+                            Convert.ToDateTime(unitReader[3]), Convert.ToInt32(unitReader[4]), Convert.ToInt32(unitReader[5]),
+                            Convert.ToInt32(unitReader[6]));
+
+                        Assessment assessment = new Assessment(Convert.ToInt32(studentAssReader[0]), studentAssReader[1].ToString(),
+                        Convert.ToInt32(studentAssReader[2]), Convert.ToDecimal(studentAssReader[3]), unit);
+
+                    }
+                    finally
+                    {
+                        if (unitReader != null) unitReader.Close();
+                    }
+                }
+                finally
+                {
+                    if (studentAssReader != null) studentAssReader.Close();
+                }
+            }
+            return student;
         }
 
         public bool ChangePassword(string password)
