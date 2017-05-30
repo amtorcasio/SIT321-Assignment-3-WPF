@@ -307,12 +307,31 @@ namespace SARMS.Users
             }
         }
 
+        // assign lecturer to unit
         public void AddLecturerUnit(Lecturer lecturer, Unit unit)
         {
-            /* does Lecturer and Unit exist in database?
-             * add unit to Lecturer's assigned Units
-             * add relationship in database
-             */
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+
+                command.CommandText = "INSERT INTO UserUnits" +
+                                        "([UserID],[UnitID],[LectureAttendance],[PracticalAttendance],[StaffFeedback],[StudentFeedback])" +
+                                        "VALUES( @lid, @unitid )";
+
+                command.Parameters.AddWithValue("@lid", lecturer.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.ExecuteNonQuery();
+
+                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "assigned to Unit " + unit.ID);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("AddLecturerUnit Error: " + e.Message.ToString());
+            }
         }
 
         public void RemoveLecturerUnit(Lecturer lecturer, Unit unit)
