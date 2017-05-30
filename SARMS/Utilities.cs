@@ -174,7 +174,7 @@ namespace SARMS
             client.Credentials = new System.Net.NetworkCredential("sarms.edu@gmail.com", "Sit321sarms");
             foreach (string address in recipients)
             {
-                MailMessage message = new MailMessage("admin@sarms.edu.au", address);
+                MailMessage message = new MailMessage("sarms.edu@gmail.com", address);
                 message.Subject = subject;
                 message.Body = body;
                 client.Send(message);
