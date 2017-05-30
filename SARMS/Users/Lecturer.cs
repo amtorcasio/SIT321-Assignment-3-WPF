@@ -21,13 +21,8 @@ namespace SARMS.Users
 
         public void RemoveAssessment(Unit unit, Assessment assessment)
         {
-            // find index of assessment in list and override it
-            int i = unit.Assessments.IndexOf(assessment);
-            while (i < unit.Assessments.Count - 1)
-                unit.Assessments[i] = unit.Assessments[i++];
-
-            // remove the last assessment on the list because it has overriden the previous list item
-            unit.Assessments.RemoveAt(i);
+            //todo:database side
+            unit.Assessments.Remove(assessment);
         }
 
         public void AddStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
