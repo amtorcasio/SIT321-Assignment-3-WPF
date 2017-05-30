@@ -50,8 +50,9 @@ namespace SARMS.Content
         public List<Assessment> Assessments;
 
         // constructor
-        public Unit(string code, DateTime year, int trimester, int totalLectures, int totalPracticals, List<Assessment> assessments)
+        public Unit(int id, string code, DateTime year, int trimester, int totalLectures, int totalPracticals, List<Assessment> assessments)
         {
+            _id = id;
             _code = code;
             _year = year;
             _trimester = trimester;
