@@ -30,20 +30,22 @@ namespace SARMS
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
-        public static Tuple<StudentAssessment, StudentUnit> getStudentData(Student s, Unit u)
+        public static Tuple<List<StudentAssessment>, StudentUnit> GetStudentData(Student s, Unit u)
         {
-            throw new NotImplementedException();
+            List<StudentAssessment> performance = s.Performance.FindAll(e => (e.Assessment.unit.ID == u.ID));
+            StudentUnit attendance = s.Units.Find(e => (e.unit.ID == u.ID));
+            return new Tuple<List<StudentAssessment>, StudentUnit>(performance, attendance);
         }
         
         // isStudentAtRisk accessible by UserTypes Administrator and Lecturer
-        public static bool isStudentAtRisk(Student s)
+        public static bool IsStudentAtRisk(Student s)
         {
             throw new NotImplementedException();
         }
 
         // alertStudentAtRisk called as a result of conditions triggered in isStudentAtRisk
         // email sent to any relevant users identified in isStudentAtRisk
-        private static void alertStudentAtRisk(List<Account> accounts, Student atRisk)
+        private static void AlertStudentAtRisk(List<Account> accounts, Student atRisk)
         {
             SmtpClient client = new SmtpClient();
             client.Port = 25;
