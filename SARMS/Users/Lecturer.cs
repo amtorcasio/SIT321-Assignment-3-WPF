@@ -14,41 +14,41 @@ namespace SARMS.Users
             base (id, firstName, lastName, email, password)
         { }
 
-        public void AddAssessment(Unit u, Assessment a)
+        public void AddAssessment(Unit unit, Assessment assessment)
         {
-            u.Assessments.Add(a);
+            unit.Assessments.Add(assessment);
         }
 
-        public void RemoveAssessment(Unit u, Assessment a)
+        public void RemoveAssessment(Unit unit, Assessment assessment)
         {
             // find index of assessment in list and override it
-            int i = u.Assessments.IndexOf(a);
-            while (i < u.Assessments.Count - 1)
-                u.Assessments[i] = u.Assessments[i++];
+            int i = unit.Assessments.IndexOf(assessment);
+            while (i < unit.Assessments.Count - 1)
+                unit.Assessments[i] = unit.Assessments[i++];
 
             // remove the last assessment on the list because it has overriden the previous list item
-            u.Assessments.RemoveAt(i);
+            unit.Assessments.RemoveAt(i);
         }
 
-        public void AddStudentPerformance(Student s, Unit u, Assessment a, int Mark)
+        public void AddStudentPerformance(Student student, Unit unit, Assessment aassessment, int mark)
         { }
 
-        public void EditStudentPerformance(Student s, Unit u, Assessment a, int Mark)
+        public void EditStudentPerformance(Student student, Unit unit, Assessment assessment, int mark)
         { }
 
         // boolean if the student attended the lecturer and practical or did not attend
-        public void AddStudentAttendance(Student s, Unit u, bool lec, bool prac)
+        public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
 
         }
 
         // direct editing of values
-        public void EditStudentAttendance(Student s, Unit u, int lec, int prac)
+        public void EditStudentAttendance(Student student, Unit unit, int numLectures, int numPracticals)
         {
 
         }
 
-        public List<Account> viewSAR(Unit u)
+        public List<Account> viewSAR(Unit unit)
         {
             return new List<Account>();
         }
