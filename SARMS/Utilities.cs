@@ -75,15 +75,72 @@ namespace SARMS
         private static List<Lecturer> FindLecturers(Unit u)
         {
             List<Lecturer> lecturers = new List<Lecturer>();
+            var connection = GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
-            return lecturers;
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM User INNER JOIN UserUnits on User.Id = UserUnits.UserID WHERE UserUnits.UnitID = @unitID";
+                command.Parameters.AddWithValue("@unitID", u.ID);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        lecturers.Add(new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString()));
+                    }
+                }
+                return lecturers;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("A databases error occurred while searching for Lecturers related to unit " + u.ID, e);
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
+            }
         }
         //todo: implement
         private static List<Administrator> FindAllAdmins()
         {
             List<Administrator> admins = new List<Administrator>();
+            var connection = GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
-            return admins;
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM User WHERE Type = 0";
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        admins.Add(new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString()));
+                    }
+                }
+                return admins;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("A databases error occurred while retrieving all Administrators", e);
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
+            }
         }
 
         // alertStudentAtRisk called as a result of conditions triggered in isStudentAtRisk
