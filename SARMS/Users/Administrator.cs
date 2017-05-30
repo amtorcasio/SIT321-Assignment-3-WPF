@@ -75,9 +75,9 @@ namespace SARMS.Users
             }
         }
 
-        public void SuspendUser(Account a)
+        public void SuspendUser(Account account)
         {
-            if (DoesRecordExist(a))
+            if (DoesRecordExist(account))
             {
                 //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
@@ -88,7 +88,7 @@ namespace SARMS.Users
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
                     command.Parameters.AddWithValue("@status", 0);
-                    command.Parameters.AddWithValue("@id", a.ID);
+                    command.Parameters.AddWithValue("@id", account.ID);
 
                     command.ExecuteNonQuery();
                     System.Diagnostics.Debug.Write("Member is suspended");
@@ -100,7 +100,7 @@ namespace SARMS.Users
             }
         }
 
-        public void TerminateUser(Account a)
+        public void TerminateUser(Account account)
         {
             /* save a copy of the user's email,
              * execute SQL command to delete user entry from database,
@@ -114,17 +114,17 @@ namespace SARMS.Users
             client.UseDefaultCredentials = false;
             client.Host = "smtp.google.com";
 
-            MailMessage message = new MailMessage("admin@sarms.edu.au", a.Email);
+            MailMessage message = new MailMessage("admin@sarms.edu.au", account.Email);
             message.Subject = "SARMS - Notice of termination for user account ";
-            message.Body = String.Format("Upon receiving this email, the account for user, {0} {1}, will be terminated and thus deleted from the SARMS database.", a.FirstName, a.LastName);
+            message.Body = String.Format("Upon receiving this email, the account for user, {0} {1}, will be terminated and thus deleted from the SARMS database.", account.FirstName, account.LastName);
             client.Send(message);
 
-            RemoveUser(a);
+            RemoveUser(account);
         }
 
-        public void EditUser(Account acc, string firstName, string lastName, string email, string password)
+        public void EditUser(Account account, string firstName, string lastName, string email, string password)
         {
-            if (DoesRecordExist(acc))
+            if (DoesRecordExist(account))
             {
                 //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
@@ -149,10 +149,10 @@ namespace SARMS.Users
                         command.Parameters.AddWithValue("@password", hashed_pass);
                     }*/
                     command.Parameters.AddWithValue("@password", password);
-                    command.Parameters.AddWithValue("@id", acc.ID);
+                    command.Parameters.AddWithValue("@id", account.ID);
 
                     command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Data for member " + acc.ID + " modified");
+                    System.Diagnostics.Debug.Write("Data for member " + account.ID + " modified");
                 }
                 catch (Exception e)
                 {
@@ -161,7 +161,7 @@ namespace SARMS.Users
             }
         }
 
-        public void RemoveUser(Account u)
+        public void RemoveUser(Account account)
         {
             // what in the world is this for?
         }
@@ -223,14 +223,14 @@ namespace SARMS.Users
             }
         }
 
-        public void RemoveUnit(Unit u)
+        public void RemoveUnit(Unit unit)
         {
             /* check for associated classes
              * do not remove when associations are present
              */
         }
 
-        public void AddStudentUnit(Student s, Unit u)
+        public void AddStudentUnit(Student student, Unit unit)
         {
             /* does Student and Unit exist in database?
              * add unit to Student's assigned Units
@@ -238,7 +238,7 @@ namespace SARMS.Users
              */
         }
 
-        public void RemoveStudentUnit(Student s, Unit u)
+        public void RemoveStudentUnit(Student student, Unit unit)
         {
             /* does Student and Unit exist in database?
              * remove unit from Student's assigned Units
@@ -246,7 +246,7 @@ namespace SARMS.Users
              */
         }
 
-        public void AddLecturerUnit(Lecturer lec, Unit u)
+        public void AddLecturerUnit(Lecturer lecturer, Unit unit)
         {
             /* does Lecturer and Unit exist in database?
              * add unit to Lecturer's assigned Units
@@ -254,7 +254,7 @@ namespace SARMS.Users
              */
         }
 
-        public void RemoveLecturerUnit(Lecturer lec, Unit u)
+        public void RemoveLecturerUnit(Lecturer lecturer, Unit unit)
         {
             /* does Lecturer and Unit exist in database?
              * remove unit from Lecturer's assigned Units
@@ -267,23 +267,25 @@ namespace SARMS.Users
             throw new NotImplementedException();
         }
 
-        public List<Account> SearchAccountsByUnit(Unit u)
+        public List<Account> SearchAccountsByUnit(Unit unit)
         {
             List<Account> result = null;
             return result;
         }
 
-        public void SearchUnits(string s)
-        { }
-        
-        public bool DoesRecordExist(Account u)
+        public List<Unit> SearchUnits(string unitCode)
         {
-            return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + u.ID + "'");
+            throw new NotImplementedException();
+        }
+        
+        public bool DoesRecordExist(Account account)
+        {
+            return DoesRecordExist(@"SELECT 1 FROM User WHERE Id = '" + account.ID + "'");
         }
 
-        public bool DoesRecordExist(Unit u)
+        public bool DoesRecordExist(Unit unit)
         {
-            return DoesRecordExist(@"SELECT 1 FROM Unit WHERE Id = " + u.ID);
+            return DoesRecordExist(@"SELECT 1 FROM Unit WHERE Id = " + unit.ID);
         }
         #endregion
 
@@ -310,18 +312,9 @@ namespace SARMS.Users
                 else
                     return false;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                System.Diagnostics.Debug.WriteLine("DoesRecordExist Error: " + e.Message.ToString());
-                int count = 1;
-                Exception error = e.InnerException;
-                while (error != null)
-                {
-                    System.Diagnostics.Debug.WriteLine("DoesRecordExist Nested Error " + count + ": " + error.Message.ToString());
-                    error = error.InnerException;
-                    count++;
-                }
-                return false;
+                throw;
             }
             finally
             {
