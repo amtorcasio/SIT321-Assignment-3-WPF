@@ -112,6 +112,9 @@
     <Compile Include="AdminWindows\EditAccount.xaml.cs">
       <DependentUpon>EditAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindows\EditUnit.xaml.cs">
+      <DependentUpon>EditUnit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindows\SetUpAccount.xaml.cs">
       <DependentUpon>SetUpAccount.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindows\EditAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindows\EditUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
