@@ -16,13 +16,6 @@ namespace SARMS
         Student
     }
 
-    public enum UserStatus
-    {
-        Suspended,
-        Active,
-        AtRisk
-    }
-
     // a group of methods and variables that is shared throughout the entire project
     static class Utilities
     {
@@ -47,7 +40,7 @@ namespace SARMS
         // IsStudentAtRisk accessible by UserTypes Administrator and Lecturer
         public static bool IsStudentAtRisk(Student student)
         {
-            student.AtRisk = false;
+            bool atRisk = false;
             List<Account> accounts = new List<Account>();
             //Check attendance
             foreach (StudentUnit su in student.Units)
@@ -55,7 +48,8 @@ namespace SARMS
                 if ((su.LectureAttendance < (su.unit.TotalLectures / 2)) || 
                     (su.PracticalAttendance < (su.unit.TotalPracticals / 2)))
                 {
-                    student.AtRisk = true;
+                    su.AtRisk = true;
+                    atRisk = true;
                     accounts.AddRange(FindLecturers(su.unit));
                 }
             }
@@ -64,17 +58,19 @@ namespace SARMS
             {
                 if ((sa.Mark / sa.Assessment.TotalMarks) < 50.0M)
                 {
-                    student.AtRisk = true;
+                    var su = student.Units.Find(e => (e.unit.ID == sa.Assessment.unit.ID));
+                    su.AtRisk = true;
+                    atRisk = true;
                     accounts.AddRange(FindLecturers(sa.Assessment.unit));
                 }
             }
             //Compute alerts
-            if (student.AtRisk)
+            if (atRisk)
             {
                 accounts.AddRange(FindAllAdmins());
                 AlertStudentAtRisk(accounts, student);
             }
-            return student.AtRisk;
+            return atRisk;
         }
 
         //todo: implement
