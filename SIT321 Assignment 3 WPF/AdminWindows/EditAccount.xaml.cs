@@ -81,6 +81,29 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             bool accountedited = false;
             bool statuschanged = false;
 
+            // account edited check
+            if(txtFirstname.Text != Original.FirstName)
+            {
+                accountedited = true;
+            }
+            if (txtLastname.Text != Original.LastName)
+            {
+                accountedited = true;
+            }
+            if (txtEmail.Text != Original.Email)
+            {
+                accountedited = true;
+            }
+            if (psbPassword.Password != Original.Password)
+            {
+                accountedited = true;
+            }
+            // status change check
+            if (cboStatus.SelectedIndex != OriginalStatus)
+            {
+                statuschanged = true;
+            }
+
             // check if bool have been changed
             if (accountedited=false && statuschanged==false)
             {
