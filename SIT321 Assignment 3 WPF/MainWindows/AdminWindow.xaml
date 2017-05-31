@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="540" Width="960" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Student At Risk Monitoring System" Height="540" Width="960" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid Name="gridUserDetails" HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" />
 
-        <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-        <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="494,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="494,10,0,0" VerticalAlignment="Top"/>
 
-        <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="290" Margin="10,121,0,0" VerticalAlignment="Top" Width="450"/>
-        <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="290" Margin="494,121,0,0" VerticalAlignment="Top" Width="450"/>
+        <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450"/>
+        <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450"/>
         <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="694,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown"/>
 
         <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="604,479,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>

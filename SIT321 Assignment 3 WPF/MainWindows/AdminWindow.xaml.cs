@@ -32,8 +32,6 @@ namespace SIT321_Assignment_3_WPF
         {
             LoggedInAccount = lAccount as Administrator;
             InitializeComponent();
-            
-            gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
             PopulateList();
         }
 

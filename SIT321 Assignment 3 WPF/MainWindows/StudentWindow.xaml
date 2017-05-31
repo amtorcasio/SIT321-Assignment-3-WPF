@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="Student At Risk Management System:" Height="540" Width="960" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="lsbUnits" HorizontalAlignment="Left" Height="420" Margin="30,60,0,0" VerticalAlignment="Top" Width="420"/>
-        <TextBlock x:Name="txtUnits" HorizontalAlignment="Left" Margin="30,36,0,0" TextWrapping="Wrap" Text="Units" VerticalAlignment="Top"/>
-        <Button x:Name="btnShowReport" Content="Generate Report" HorizontalAlignment="Left" Margin="468,432,0,0" VerticalAlignment="Top" Width="102" IsEnabled="False"/>
+        <ListBox x:Name="lsbUnits" HorizontalAlignment="Left" Height="427" Margin="10,41,0,0" VerticalAlignment="Top" Width="420"/>
+        <Label x:Name="lbUnits" Content="Units" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnShowReport" Content="Generate Report" HorizontalAlignment="Left" Margin="321,473,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="Auto" IsEnabled="False"/>
 
     </Grid>
 </Window>
