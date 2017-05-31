@@ -124,6 +124,9 @@
     <Compile Include="Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\LecturerWindow.xaml.cs">
+      <DependentUpon>LecturerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShowUserDetails.xaml.cs">
       <DependentUpon>ShowUserDetails.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ShowUserDetails.xaml">
