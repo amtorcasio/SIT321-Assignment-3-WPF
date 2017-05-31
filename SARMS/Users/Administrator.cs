@@ -353,9 +353,49 @@ namespace SARMS.Users
             }
         }
 
-        public Account SearchAccountsById(int id)
+        public Account SearchAccountsById(string id)
         {
-            throw new NotImplementedException();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+            Account temp = new Account(this);
+
+            try
+            {
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM User WHERE Id = @id";
+                command.Parameters.AddWithValue("@id", id);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    temp.ID = id;
+                    temp.FirstName = reader[1].ToString();
+                    temp.LastName = reader[2].ToString();
+                    temp.Password = reader[5].ToString();
+                    temp.Email = reader[6].ToString();
+
+                    switch ((UserType)Convert.ToInt32(reader[3]))
+                    {
+                        case UserType.Administrator:
+                            return temp as Administrator;
+                        case UserType.Lecturer:
+                            return temp as Lecturer;
+                        case UserType.Student:
+                            return temp as Student;
+                        default:
+                            return null;
+                    }
+                }
+                return null;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
         }
 
         public List<Account> SearchAccountsByUnit(Unit unit)
