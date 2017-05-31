@@ -84,7 +84,9 @@ namespace SARMS.Users
                         case UserType.Lecturer:
                             return LoginLecturer(connection, command, reader);
                         case UserType.Student:
-                            return LoginStudent(connection, command, reader);
+                            Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            LoginStudent(ref student);
+                            return student;
                         default:
                             return null;
                     }
@@ -141,66 +143,134 @@ namespace SARMS.Users
             return lecturer;
         }
 
-        private static Student LoginStudent(SQLiteConnection connection, SQLiteCommand command, SQLiteDataReader reader)
+        private static void LoginStudent(ref Student student)
         {
-            Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+            student.Units = GetStudentUnitInfo(student);
+            student.Performance = GetStudentPerformance(student, student.Units);
+        }
 
-            command.CommandText = "SELECT * FROM UserAssessment WHERE UserID = @id";
-            command.Parameters.AddWithValue("@id", student.ID);
-            reader = command.ExecuteReader();
-            List<StudentAssessment> performance = new List<StudentAssessment>();
-            List<Unit> units = new List<Unit>();
+        protected static List<StudentUnit> GetStudentUnitInfo(Student student)
+        {
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+            List<StudentUnit> result = new List<StudentUnit>();
+            Dictionary<string, Unit> units = new Dictionary<string, Unit>();
 
-            SQLiteCommand assessmentCmd = connection.CreateCommand();
-            assessmentCmd.CommandText = "SELECT * FROM ASSESSMENT WHERE UnitID = @id";
-            SQLiteDataReader studentAssReader = null;
-
-            while (reader.Read())
+            try
             {
-                assessmentCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[1]));
+                connection.Open();
 
-                try
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM UserUnits WHERE UserID = @id";
+                command.Parameters.AddWithValue("@id", student.ID);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    studentAssReader = assessmentCmd.ExecuteReader();
-                    studentAssReader.Read();
-
-                    int unitID = Convert.ToInt32(studentAssReader[4]);
-                    Unit unit = units.Find(e => (e.ID == unitID));
-                    if (unit != null)
+                    Unit temp = null;
+                    string unitID = reader[1].ToString();
+                    if (!units.TryGetValue(unitID, out temp))
                     {
-                        Assessment assessment = new Assessment(Convert.ToInt32(studentAssReader[0]), studentAssReader[1].ToString(),
-                            Convert.ToInt32(studentAssReader[2]), Convert.ToDecimal(studentAssReader[3]), unit);
-                        continue;
+                        temp = GetUnitInfo(unitID);
+                        units.Add(unitID, temp);
                     }
 
-                    SQLiteCommand unitCommand = connection.CreateCommand();
-                    unitCommand.CommandText = "SELECT * FROM UNIT WHERE Id = @id";
-                    unitCommand.Parameters.AddWithValue("@id", unitID);
-                    SQLiteDataReader unitReader = null;
-                    try
+                    result.Add(new StudentUnit()
                     {
-                        unitReader = unitCommand.ExecuteReader();
-                        unitReader.Read();
-
-                        unit = new Unit(Convert.ToInt32(unitReader[0]), unitReader[1].ToString(), unitReader[2].ToString(),
-                            Convert.ToDateTime(unitReader[3]), Convert.ToInt32(unitReader[4]), Convert.ToInt32(unitReader[5]),
-                            Convert.ToInt32(unitReader[6]));
-
-                        Assessment assessment = new Assessment(Convert.ToInt32(studentAssReader[0]), studentAssReader[1].ToString(),
-                        Convert.ToInt32(studentAssReader[2]), Convert.ToDecimal(studentAssReader[3]), unit);
-
-                    }
-                    finally
-                    {
-                        if (unitReader != null) unitReader.Close();
-                    }
-                }
-                finally
-                {
-                    if (studentAssReader != null) studentAssReader.Close();
+                        account = student,
+                        unit = temp,
+                        LectureAttendance = Convert.ToInt32(reader[2]),
+                        PracticalAttendance = Convert.ToInt32(reader[3]),
+                        StaffFeedback = reader[4].ToString(),
+                        StudentFeedback = reader[5].ToString()
+                    });
                 }
             }
-            return student;
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
+
+            return result;
+        }
+
+        protected static Unit GetUnitInfo(string ID)
+        {
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+            Unit result = null;
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Unit WHERE Id = @id";
+                command.Parameters.AddWithValue("@id", ID);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    result = new Unit(
+                        Convert.ToInt32(reader[0]),
+                        reader[1].ToString(),
+                        reader[2].ToString(),
+                        Convert.ToDateTime(reader[3]),
+                        Convert.ToInt32(reader[4]),
+                        Convert.ToInt32(reader[5]),
+                        Convert.ToInt32(reader[6]));
+                }
+                result.Assessments = GetUnitAssessments(result);
+
+                return result;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
+        }
+
+        protected static List<Assessment> GetUnitAssessments(Unit u)
+        {
+            List<Assessment> result = new List<Assessment>();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
+                command.Parameters.AddWithValue("@id", u.ID);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result.Add(new Assessment(Convert.ToInt32(reader[0]), reader[1].ToString(),
+                        Convert.ToInt32(reader[2]), Convert.ToDecimal(reader[3]), u));
+                }
+                return result;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
+        }
+
+
+
+        protected static List<StudentAssessment> GetStudentPerformance(Student student, List<StudentUnit> studentUnit)
+        {
+            List<StudentAssessment> result = new List<StudentAssessment>();
+
+            return result;
         }
 
         public bool ChangePassword(string password)
