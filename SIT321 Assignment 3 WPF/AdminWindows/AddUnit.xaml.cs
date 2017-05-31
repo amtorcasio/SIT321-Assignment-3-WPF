@@ -90,7 +90,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 long longunitid = long.Parse(unitid);
 
-                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper(), (txtCodeLetters.Text.ToUpper() + CodeNumbers.ToString()),
+                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumbers.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
 
                 if(Admin.DoesRecordExist(NewUnit))
