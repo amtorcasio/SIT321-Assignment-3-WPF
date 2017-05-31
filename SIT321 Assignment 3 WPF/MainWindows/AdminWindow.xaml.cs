@@ -88,7 +88,7 @@ namespace SIT321_Assignment_3_WPF
                         }
                     }
 
-                    c.Close();
+                    c.Dispose();
                 }
                 catch (Exception e)
                 {
