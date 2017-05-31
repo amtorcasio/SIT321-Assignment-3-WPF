@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="EditAccount" Height="300" Width="300">
+        Title="EditAccount" Height="351.502" Width="543.348">
     <Grid>
-        
+        <Label x:Name="lblid" Content="ID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblFirstname" Content="Firstname:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.499"/>
+        <Label x:Name="lblLastname" Content="Lastname:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblEmail" Content="Email:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
