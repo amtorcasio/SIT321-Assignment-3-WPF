@@ -33,14 +33,24 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Admin = admin;      // make class admin equal to passed administrator
             Unitee = unitee;
 
+            // regex split unitcode
             var numAlpha = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             var match = numAlpha.Match(Unitee.Code);
 
             var alpha = match.Groups["Alpha"].Value;
             var num = match.Groups["Numeric"].Value;
 
+            // fill form
             txtName.Text = Unitee.Name;
+            txtCodeLetters.Text = alpha;
+            txtCodeNumbers.Text = num;
+            txtYear.Text = Unitee.Year.ToString();
+            txtTrimester.Text = Unitee.Trimester.ToString();
+            txtTotalLectures.Text = Unitee.TotalLectures.ToString();
+            txtTotalPracticals.Text = Unitee.TotalPracticals.ToString();
             
+
+
         }
     }
 }
