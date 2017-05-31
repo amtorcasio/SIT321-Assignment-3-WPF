@@ -26,6 +26,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private Administrator Admin;
         private Account Editee;
         private Account Original;
+        private int OriginalStatus;
 
         // Edit Account window
         public EditAccount(Administrator admin, Account editee)
@@ -46,7 +47,9 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             txtLastname.Text = Original.LastName;
             txtEmail.Text = Original.Email;
             psbPassword.Password = Original.Password;
-            cboStatus.SelectedIndex = Admin.GetStatus(Original);
+            OriginalStatus = Admin.GetStatus(Original);
+
+
         }
     }
 }
