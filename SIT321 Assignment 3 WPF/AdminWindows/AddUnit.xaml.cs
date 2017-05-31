@@ -38,6 +38,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         {
             string formatfix = string.Empty;
             int CodeNumbers, Trimester, TotalLectures, TotalPracticals;
+            string CodeNumStr;
             string CodeLetters;
             DateTime year;
             string unitid;
@@ -69,6 +70,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 }
                 year = Convert.ToDateTime("01/01/"+txtYear.Text);
                 CodeLetters = txtCodeLetters.Text.ToUpper();
+                CodeNumStr = txtCodeNumbers.Text;
             }
             catch(Exception ex)
             {
@@ -84,11 +86,11 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 // compile unit id
                 unitid = (  (int)CodeLetters[0]).ToString() + ((int)CodeLetters[1]).ToString() + ((int)CodeLetters[2]).ToString() +
-                    CodeNumbers.ToString() + Trimester.ToString() + int.Parse(txtYear.Text).ToString();
+                    CodeNumStr.ToString() + Trimester.ToString() + int.Parse(txtYear.Text).ToString();
 
                 long longunitid = long.Parse(unitid);
 
-                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumbers.ToString()),
+                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
 
                 if(Admin.DoesRecordExist(NewUnit))
@@ -97,7 +99,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     return;
                 }
 
-                Admin.AddUnit(longunitid, NewUnit.Name, (txtCodeLetters.Text.ToUpper() + CodeNumbers.ToString()),
+                Admin.AddUnit(longunitid, NewUnit.Name, (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     year, NewUnit.Trimester, NewUnit.TotalLectures, NewUnit.TotalPracticals);
                 MessageBox.Show("Unit: " + NewUnit.Code + " successfuly added to database", "Success");
                 Close();

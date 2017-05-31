@@ -573,18 +573,16 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@unitid", unitid);
                     reader = command.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        Unit temp = new Unit(long.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
-                        return temp;
-                    }
-                    return null;
+                    reader.Read();
+                    Unit temp = new Unit(long.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                    return temp;
                 }
                 finally
                 {
                     if (command != null) command.Dispose();
                     if (connection != null) connection.Close();
-                    if (reader != null) reader.Close();
+                    //if (reader != null) reader.Close();
+                    //if (reader.IsClosed == false) reader.Close();
                 }
             }
         }
