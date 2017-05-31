@@ -16,13 +16,6 @@ namespace SARMS
         Student
     }
 
-    public enum UserStatus
-    {
-        Suspended,
-        Active,
-        AtRisk
-    }
-
     // a group of methods and variables that is shared throughout the entire project
     static class Utilities
     {
