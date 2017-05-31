@@ -17,18 +17,5 @@ namespace SARMS.Users
         public List<StudentAssessment> Performance;
         public List<StudentUnit> Units;
 
-        //public decimal Performance { get; set; }
-        //public Dictionary<Unit, Tuple<decimal, int>> Units;
-
-        /* moved to utilities.cs
-        public void addFeedback(Student s, Unit u)
-        { }
-
-        public void getFeedback(Student s, Unit u)
-        { }
-
-        public void getStudentData(Student s, Unit u)
-        { }
-        */
     }
 }

@@ -33,7 +33,7 @@ namespace SIT321_Assignment_3_WPF
                 if ((loggedInAccount as Student).AtRisk)
                     lblName.Content += "(AT RISK)";
 
-            lblUsertype.Content = loggedInAccount.GetType().Name;
+            //lblUsertype.Content = loggedInAccount.GetType().Name;
         }
     }
 }
