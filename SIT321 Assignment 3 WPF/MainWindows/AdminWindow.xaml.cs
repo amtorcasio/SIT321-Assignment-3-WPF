@@ -30,7 +30,12 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
-            
+
+            /* populate listboxes in window with respective data
+             * GetSQLDatabaseConnection
+             */
+
+            var conn = Utilities.GetDatabaseSQLConnection();
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
