@@ -70,18 +70,101 @@ namespace SARMS.Users
             }
         }
 
+        // add student performance to assessment
         public void AddStudentPerformance(Student student, Assessment assessment, int mark)
-        { }
+        {
+            var connection = Utilities.GetDatabaseSQLConnection();
 
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText =   "INSERT INTO [UserAssessment] ([UserID],[AssessmentID],[Mark])" +
+                                        "VALUES (@sid, @assid, @mark)";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@mark", mark);
+                command.ExecuteNonQuery();
+
+                // compile StudentAssessment
+                Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment();
+                TempStudentAssessment.account = student;
+                TempStudentAssessment.Assessment = assessment;
+                TempStudentAssessment.Mark = mark;
+
+                // add student performance on assessment
+                student.Performance.Add(TempStudentAssessment);
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " added");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("AddStudentPerformance Error: " + e.Message.ToString());
+            }
+        }
+
+        // edit student performance data
         public void EditStudentPerformance(Student student, Assessment assessment, int mark)
-        { }
+        {
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText =   "UPDATE [UserAssessment]" +
+                                        "SET [AssessmentID] = @assid," +
+                                            "[Mark] = @mark" +
+                                        "WHERE UserID = @sid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@mark", mark);
+                command.ExecuteNonQuery();
+
+                // edit student performance on assessment
+                student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " updated");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("EditStudentPerformance Error: " + e.Message.ToString());
+            }
+        }
 
         // boolean if the student attended the lecturer and practical or did not attend
         public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
-            //todo: add database side changes + practical changes
-            student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
+            var connection = Utilities.GetDatabaseSQLConnection();
 
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE [UserUnits] SET "+
+                                             "[LectureAttendance] = [LectureAttendance] + @lectbool," +
+                                             "[PracticalAttendance] = [PracticalAttendance] + @pracbool" +
+                                             "WHERE UserID = @sid AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.Parameters.AddWithValue("@lectbool", Convert.ToInt32(didAttentLecture));
+                command.Parameters.AddWithValue("@pracbool", Convert.ToInt32(didAttendPractical));
+
+                command.ExecuteNonQuery();
+
+                // edit student performance on assessment
+                student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
+                student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " AttendedLecture:" + didAttentLecture.ToString() + " AttendedPractical:" + didAttendPractical.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("AddStudentAttendance Error: " + e.Message.ToString());
+            }
         }
 
         // direct editing of values
