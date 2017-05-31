@@ -146,6 +146,7 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
+            btnEditUser.IsEnabled = false;
             btnAddUser.IsEnabled = false;
             btnAddUnit.IsEnabled = false;
             var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
@@ -251,6 +252,7 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnAddUnit_Click(object sender, RoutedEventArgs e)
         {
+            btnEditUnit.IsEnabled = false;
             btnAddUnit.IsEnabled = false;
             btnAddUser.IsEnabled = false;
             var addunitwindow = new AdminWindows.AddUnit(LoggedInAccount);
