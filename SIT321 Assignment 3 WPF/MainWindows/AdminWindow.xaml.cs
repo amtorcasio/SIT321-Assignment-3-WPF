@@ -28,11 +28,18 @@ namespace SIT321_Assignment_3_WPF
 
         private List<string> listedUsers;
         private List<string> listedUnits;
+        EventHandler re_populate_lists;     // repopulate list with event handler
 
         public AdminWindow(Account lAccount)
         {
             LoggedInAccount = lAccount as Administrator;
             InitializeComponent();
+            PopulateList();
+            re_populate_lists = new EventHandler(PopulateList);
+        }
+
+        private void PopulateList(object sender, EventArgs e)
+        {
             PopulateList();
         }
 
@@ -41,6 +48,8 @@ namespace SIT321_Assignment_3_WPF
             // clear listboxes if previously populated
             listedUsers = new List<string>();
             listedUnits = new List<string>();
+            listUnits.Items.Clear();
+            listUsers.Items.Clear();
 
 
             // Get database connection to populate listboxes
@@ -107,6 +116,8 @@ namespace SIT321_Assignment_3_WPF
             var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
             adduserWindow.Show();
             adduserWindow.Focus();
+
+            adduserWindow.Closed += re_populate_lists;
         }
 
         private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
@@ -191,6 +202,7 @@ namespace SIT321_Assignment_3_WPF
             var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
             editUserWindow.Show();
             editUserWindow.Focus();
+            editUserWindow.Closed += re_populate_lists;
         }
     }
 }
