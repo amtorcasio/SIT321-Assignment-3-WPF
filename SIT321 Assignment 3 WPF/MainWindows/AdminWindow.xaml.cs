@@ -88,7 +88,7 @@ namespace SIT321_Assignment_3_WPF
                             {
                                 listedUnits.Add(r[0].ToString());
                                 ListBoxItem lbi = new ListBoxItem();
-                                lbi.Content = r[1];
+                                lbi.Content = r[3].ToString()+r[1].ToString();
                                 lbi.FontSize = 14;
                                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
