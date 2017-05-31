@@ -35,6 +35,18 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Admin = admin;          // make class admin equal to passed administrator
             Editee = editee;        // set account to be edited
             Original = editee;      // set account to be referenced on the course of the editing
+
+            // fill combo box
+            cboStatus.Items.Add(new ComboBoxItem().Content = "Suspended");
+            cboStatus.Items.Add(new ComboBoxItem().Content = "Active");
+
+            // set up form
+            txtID.Text = Original.ID;
+            txtFirstname.Text = Original.FirstName;
+            txtLastname.Text = Original.LastName;
+            txtEmail.Text = Original.Email;
+            psbPassword.Password = Original.Password;
+            cboStatus.SelectedIndex = 
         }
     }
 }

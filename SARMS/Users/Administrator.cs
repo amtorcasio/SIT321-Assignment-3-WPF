@@ -99,6 +99,31 @@ namespace SARMS.Users
             return false;
         }
 
+        // un-suspend a user
+        public bool ReactivateUser(Account account)
+        {
+            if (DoesRecordExist(account))
+            {
+                var connection = Utilities.GetDatabaseSQLConnection();
+                try
+                {
+                    connection.Open();
+
+                    SQLiteCommand command = connection.CreateCommand();
+                    command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
+                    command.Parameters.AddWithValue("@status", 1);
+                    command.Parameters.AddWithValue("@id", account.ID);
+
+                    return command.ExecuteNonQuery() == 0 ? false : true;
+                }
+                finally
+                {
+                    if (connection != null) connection.Close();
+                }
+            }
+            return false;
+        }
+
         public bool EditUser(Account account, string firstName, string lastName, string email, string password)
         {
             if (DoesRecordExist(account))
