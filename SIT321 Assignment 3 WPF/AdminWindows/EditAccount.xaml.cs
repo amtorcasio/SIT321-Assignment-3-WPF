@@ -25,7 +25,6 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         // class instance accounts
         private Administrator Admin;
         private Account Editee;
-        private Account Original;
         private int OriginalStatus;
         private string originalF, originalL, originalE, originalP = "";
 
@@ -46,12 +45,12 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             cboStatus.Items.Add(new ComboBoxItem().Content = "Active");
 
             // set up form
-            txtID.Text = Original.ID;
-            txtFirstname.Text = Original.FirstName;
-            txtLastname.Text = Original.LastName;
-            txtEmail.Text = Original.Email;
-            psbPassword.Password = Original.Password;
-            OriginalStatus = Admin.GetStatus(Original);
+            txtID.Text = editee.ID;
+            txtFirstname.Text = originalF;
+            txtLastname.Text = originalL;
+            txtEmail.Text = originalE;
+            psbPassword.Password = originalP;
+            OriginalStatus = Admin.GetStatus(editee);
             cboStatus.SelectedIndex = OriginalStatus;
 
         }
@@ -66,7 +65,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             else
             {
                 // remove user method call
-                if(Admin.RemoveUser(Original))
+                if(Admin.RemoveUser(Editee))
                 {
                     MessageBox.Show("Account Removed, Closing Window");
                     Close();
