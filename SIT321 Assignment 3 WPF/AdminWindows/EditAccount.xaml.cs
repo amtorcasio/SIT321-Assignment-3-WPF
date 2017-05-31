@@ -88,7 +88,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 Editee.FirstName = txtFirstname.Text;
                 accountedited = true;
-                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblFirstname.Content,Original.FirstName, Editee.FirstName);
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblFirstname.Content, Original.FirstName, Editee.FirstName);
             }
             if (txtLastname.Text != Original.LastName)
             {
@@ -124,11 +124,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
             else
             {
-                if (MessageBox.Show("Are you sure you wish to make the following changes?" + finalynmsg, "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-                {
-                    //do no stuff
-                }
-                else
+                if (MessageBox.Show("Are you sure you wish to make the following changes?" + finalynmsg, "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     // account has been edited
                     if (accountedited)
