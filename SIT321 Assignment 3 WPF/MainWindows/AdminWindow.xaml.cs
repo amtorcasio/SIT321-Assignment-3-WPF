@@ -155,7 +155,7 @@ namespace SIT321_Assignment_3_WPF
             if ((sender as ListBox).Name == listUsers.Name)
                 btnEditUser.IsEnabled = true;
             else
-                btnEditUnit.IsEnabled = true;
+                btnEditUnit.IsEnabled = false;
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
