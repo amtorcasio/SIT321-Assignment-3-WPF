@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="AddUnit" Height="300" Width="300" WindowStartupLocation="CenterScreen">
+        Title="AddUnit" Height="193.133" Width="522.747" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblCode" Content="Code:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblYear" Content="Year:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblTrimester" Content="Trimester:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
+        <TextBox x:Name="txtCode" HorizontalAlignment="Left" Height="23" Margin="80,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
+        <TextBox x:Name="txtYear" HorizontalAlignment="Left" Height="23" Margin="80,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
+        <TextBox x:Name="txtTrimester" HorizontalAlignment="Left" Height="23" Margin="80,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
+        <Button x:Name="btnAdd" Content="Add Unit" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Height="23" Width="495"/>
+
     </Grid>
 </Window>
