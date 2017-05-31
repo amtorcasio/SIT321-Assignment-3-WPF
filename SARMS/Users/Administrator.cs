@@ -382,9 +382,13 @@ namespace SARMS.Users
                         case UserType.Administrator:
                             return temp as Administrator;
                         case UserType.Lecturer:
-                            return temp as Lecturer;
+                            var lecturer = temp as Lecturer;
+                            LoadLecturer(ref lecturer);
+                            return lecturer;
                         case UserType.Student:
-                            return temp as Student;
+                            var student = temp as Student;
+                            LoadStudent(ref student);
+                            return student;
                         default:
                             return null;
                     }
@@ -400,7 +404,47 @@ namespace SARMS.Users
 
         public List<Account> SearchAccountsByUnit(Unit unit)
         {
-            List<Account> result = null;
+            List<Account> result = new List<Account>();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM User INNER JOIN UserUnits ON User.Id = UserUnits.UserID WHERE UserUnits.UnitID = @id";
+                command.Parameters.AddWithValue("@id", unit.ID);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    switch ((UserType)Convert.ToInt32(reader[3]))
+                    {
+                        //UserType.Administrator should not happen
+                        case UserType.Administrator:
+                            result.Add(new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString()));
+                            break;
+                        case UserType.Lecturer:
+                            Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            LoadLecturer(ref lecturer);
+                            result.Add(lecturer);
+                            break;
+                        case UserType.Student:
+                            Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            LoadStudent(ref student);
+                            result.Add(student);
+                            break;
+                        default:
+                            return null;
+                    }
+                }
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+
+            }
             return result;
         }
 

@@ -9,9 +9,11 @@
     <Grid>
         <Grid Name="gridUserDetails" HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" />
         <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
-        <ListBox HorizontalAlignment="Left" Height="257" Margin="10,126,0,0" VerticalAlignment="Top" Width="339"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,388,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="774"/>
-        <ListBox HorizontalAlignment="Left" Height="257" Margin="445,126,0,0" VerticalAlignment="Top" Width="339"/>
+        <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="404,100,0,0" VerticalAlignment="Top"/>
+        <ListBox HorizontalAlignment="Left" Height="257" Margin="10,126,0,0" VerticalAlignment="Top" Width="380"/>
+        <ListBox HorizontalAlignment="Left" Height="257" Margin="404,126,0,0" VerticalAlignment="Top" Width="380"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="534,391,0,0" TextWrapping="Wrap" Text="Enter query here..." VerticalAlignment="Top" Width="250"/>
+        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="444,396,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

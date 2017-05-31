@@ -106,7 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminWindow.xaml.cs">
+    <Compile Include="AdminWindows\SetUpAccount.xaml.cs">
+      <DependentUpon>SetUpAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DebugWindow.xaml.cs">
@@ -121,7 +124,11 @@
     <Compile Include="ShowUserDetails.xaml.cs">
       <DependentUpon>ShowUserDetails.xaml</DependentUpon>
     </Compile>
-    <Page Include="AdminWindow.xaml">
+    <Page Include="AdminWindows\SetUpAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,9 +204,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MainWindows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SARMS\SARMS.csproj">
       <Project>{a495c6ec-010c-4ab1-a939-69e39f141921}</Project>
