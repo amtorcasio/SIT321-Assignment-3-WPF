@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF"
         mc:Ignorable="d"
-        Title="Student At Risk Monitoring System" Height="540" Width="960" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Student At Risk Monitoring System" Height="550" Width="970" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -18,7 +18,7 @@
         <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="604,479,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>
         <RadioButton Name="DBFilterUnits" Content="Search units" HorizontalAlignment="Left" Margin="516,479,0,0" VerticalAlignment="Top" Click="DBFilterUnits_Click"/>
 
-        <Button Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="844,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto"/>
+        <Button Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="844,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUser_Click"/>
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
         <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto"/>
