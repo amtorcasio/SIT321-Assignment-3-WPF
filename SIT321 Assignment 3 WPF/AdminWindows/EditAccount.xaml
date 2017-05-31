@@ -13,13 +13,14 @@
         <Label x:Name="lblEmail" Content="Email:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblStatus" Content="Status:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="23" Margin="85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440" IsEnabled="False"/>
+        <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="23" Margin="85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" IsEnabled="False"/>
         <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="23" Margin="85,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
         <TextBox x:Name="txtLastname" HorizontalAlignment="Left" Height="23" Margin="85,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="85,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
         <PasswordBox x:Name="psbPassword" HorizontalAlignment="Left" Margin="85,114,0,0" VerticalAlignment="Top" Width="440" Height="23"/>
         <ComboBox x:Name="cboStatus" HorizontalAlignment="Left" Margin="85,140,0,0" VerticalAlignment="Top" Width="440"/>
         <Button x:Name="btnEdit" Content="Edit Account" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="515" Height="30"/>
+        <Button x:Name="btnRemove" Content="Remove User" HorizontalAlignment="Left" Margin="379,10,0,0" VerticalAlignment="Top" Width="146" Height="23" Background="#FFFFDDDD"/>
 
     </Grid>
 </Window>
