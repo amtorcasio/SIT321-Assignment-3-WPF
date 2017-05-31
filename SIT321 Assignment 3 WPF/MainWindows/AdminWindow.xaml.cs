@@ -24,26 +24,23 @@ namespace SIT321_Assignment_3_WPF
     {
         public Administrator LoggedInAccount { get; private set; }
 
-        public AdminWindow(Administrator lAccount)
+        public AdminWindow(Account lAccount)
         {
-            LoggedInAccount = lAccount;
+            LoggedInAccount = lAccount as Administrator;
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
-            InitializeEvents();
             
         }
 
-        private void InitializeEvents()
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            txtDBQuery.KeyDown += new KeyEventHandler(txtDBQuery_Enter);
-            
-            btnAddUser.Click += new RoutedEventHandler(AddNewUser_Clicked);
-            DBFilterUnits.Click += new RoutedEventHandler(RadioButton_Checked);
-            DBFilterUsers.Click += new RoutedEventHandler(RadioButton_Checked);
+            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
+            adduserWindow.Show();
+            adduserWindow.Focus();
         }
 
-        private void txtDBQuery_Enter(object sender, KeyEventArgs e)
+        private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -59,18 +56,16 @@ namespace SIT321_Assignment_3_WPF
                 {
                     MessageBox.Show("DB queried with only Users filtered");
                 }
-                    
+
             }
         }
 
-        private void AddNewUser_Clicked(object sender, RoutedEventArgs e)
+        private void DBFilterUsers_Click(object sender, RoutedEventArgs e)
         {
-            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
-            adduserWindow.Show();
-            adduserWindow.Focus();
+            txtDBQuery.Focus();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void DBFilterUnits_Click(object sender, RoutedEventArgs e)
         {
             txtDBQuery.Focus();
         }
