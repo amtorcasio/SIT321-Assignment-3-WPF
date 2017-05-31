@@ -124,7 +124,7 @@ namespace SARMS.Users
             return false;
         }
 
-        // un-suspend a user
+        // get user status a user
         public int GetStatus(Account account)
         {
             if (DoesRecordExist(account))
