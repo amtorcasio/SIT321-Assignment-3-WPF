@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="AddUnit" Height="300" Width="300">
+        Title="AddUnit" Height="300" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         
     </Grid>
