@@ -25,6 +25,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             InitializeComponent();
             LoggedIn = lecturer;
+            lsbUnits.DataContext = lecturer.Units;
         }
     }
 }

@@ -1,12 +1,21 @@
-﻿<Window x:Class="SIT321_Assignment_3_WPF.MainWindows.LecturerWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.MainWindows"
+        xmlns:SARMS="clr-namespace:SARMS;assembly=SARMS" x:Class="SIT321_Assignment_3_WPF.MainWindows.LecturerWindow"
         mc:Ignorable="d"
-        Title="LecturerWindow" Height="300" Width="300">
+        Title="Student At Risk Management System:" Height="388" Width="876" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Label x:Name="lblUnits" Content="Units" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="71"/>
+        <ListView x:Name="lsvUnits" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="850" Margin="10,41,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>
