@@ -63,12 +63,13 @@ namespace SARMS.Users
         {
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM User WHERE email = @email AND Password = @password";
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@password", password);
@@ -98,6 +99,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (reader != null) reader.Close();
                 if (connection != null) connection.Close();
             }
@@ -123,13 +125,14 @@ namespace SARMS.Users
         {
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
+            SQLiteCommand command = null;
             List<StudentUnit> result = new List<StudentUnit>();
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM UserUnits WHERE UserID = @id";
                 command.Parameters.AddWithValue("@id", user.ID);
 
@@ -152,6 +155,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
             }
@@ -163,13 +167,14 @@ namespace SARMS.Users
         {
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
+            SQLiteCommand command = null;
             Unit result = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM Unit WHERE Id = @id";
                 command.Parameters.AddWithValue("@id", ID);
 
@@ -193,6 +198,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
             }
@@ -202,12 +208,13 @@ namespace SARMS.Users
         {
             List<Assessment> result = new List<Assessment>();
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
                 command.Parameters.AddWithValue("@id", u.ID);
 
@@ -222,6 +229,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
             }
@@ -231,12 +239,13 @@ namespace SARMS.Users
         {
             List<StudentAssessment> result = new List<StudentAssessment>();
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT Mark FROM UserAssessment WHERE UserID = @userID AND AssessmentID = @assID";
                 command.Parameters.AddWithValue("@userID", student.ID);
 
@@ -258,6 +267,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
                 if (reader != null) connection.Close();
             }
@@ -267,11 +277,12 @@ namespace SARMS.Users
         public bool ChangePassword(string password)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "UPDATE User SET Password = @password WHERE Id = @id";
                 command.Parameters.AddWithValue("@password", password);
                 command.Parameters.AddWithValue("@id", _ID);
@@ -280,6 +291,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -287,12 +299,13 @@ namespace SARMS.Users
         public static bool ForgotPassword(string email)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT Password FROM User WHERE Email = @email";
                 command.Parameters.AddWithValue("@email", email);
 
@@ -315,6 +328,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -324,12 +338,13 @@ namespace SARMS.Users
             if (feedback.Trim().Length == 0) return false;
 
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 string feedBackType = (by is Administrator || by is Lecturer) ? "StaffFeedback" : "StudentFeedback";
                 command.CommandText = "SELECT " + feedBackType + " FROM UserUnits WHERE UserID = @userID AND UnitID = @unitID";
                 command.Parameters.AddWithValue("@userID", student.ID);
@@ -369,6 +384,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -381,12 +397,13 @@ namespace SARMS.Users
         public void GetFeedback(Student student, Unit unit, out string staffFeeback, out string studentFeedback)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT StaffFeedback, StudentFeedback FROM UserUnits WHERE UserID = @userID AND UnitID = @unitID";
                 command.Parameters.AddWithValue("@userID", student.ID);
                 command.Parameters.AddWithValue("@unitID", unit.ID);
@@ -408,6 +425,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }

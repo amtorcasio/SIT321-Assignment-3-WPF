@@ -78,13 +78,14 @@ namespace SARMS
             List<Lecturer> lecturers = new List<Lecturer>();
             using (var connection = GetDatabaseSQLConnection())
             {
+                SQLiteCommand command = null;
                 SQLiteDataReader reader = null;
 
                 try
                 {
                     connection.Open();
 
-                    SQLiteCommand command = connection.CreateCommand();
+                    command = connection.CreateCommand();
                     command.CommandText = @"SELECT * FROM User INNER JOIN UserUnits on User.Id = UserUnits.UserID WHERE UserUnits.UnitID = @unitID";
                     command.Parameters.AddWithValue("@unitID", u.ID);
 
@@ -105,6 +106,7 @@ namespace SARMS
                 }
                 finally
                 {
+                    if (command != null) command.Dispose();
                     if (reader != null) reader.Close();
                     if (connection != null) connection.Close();
                 }
@@ -116,13 +118,14 @@ namespace SARMS
             List<Administrator> admins = new List<Administrator>();
             using (var connection = GetDatabaseSQLConnection())
             {
+                SQLiteCommand command = null;
                 SQLiteDataReader reader = null;
 
                 try
                 {
                     connection.Open();
 
-                    SQLiteCommand command = connection.CreateCommand();
+                    command = connection.CreateCommand();
                     command.CommandText = @"SELECT * FROM User WHERE Type = 0";
 
                     reader = command.ExecuteReader();
@@ -142,6 +145,7 @@ namespace SARMS
                 }
                 finally
                 {
+                    if (command != null) command.Dispose();
                     if (reader != null) reader.Close();
                     if (connection != null) connection.Close();
                 }

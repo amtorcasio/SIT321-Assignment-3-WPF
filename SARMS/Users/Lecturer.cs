@@ -19,11 +19,12 @@ namespace SARMS.Users
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
+            SQLiteCommand command = null;
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText =   "INSERT INTO [Assessment] ([Id],[Name],[TotalMarks],[Weight],[UnitID])" +
                                         "VALUES(@aid, @aname, @atotalm, @weight, @unitid)";
                 command.Parameters.AddWithValue("@id", assessment.AssessmentID);
@@ -43,6 +44,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -51,12 +53,13 @@ namespace SARMS.Users
         public bool RemoveAssessment(Unit unit, Assessment assessment)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "DELETE FROM Assessment WHERE Id = @id AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@id", assessment.AssessmentID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
@@ -72,6 +75,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -80,12 +84,13 @@ namespace SARMS.Users
         public bool AddStudentPerformance(Student student, Assessment assessment, int mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText =   "INSERT INTO [UserAssessment] ([UserID],[AssessmentID],[Mark])" +
                                         "VALUES (@sid, @assid, @mark)";
                 command.Parameters.AddWithValue("@sid", student.ID);
@@ -109,6 +114,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -117,12 +123,13 @@ namespace SARMS.Users
         public bool EditStudentPerformance(Student student, Assessment assessment, int mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText =   "UPDATE [UserAssessment]" +
                                         "SET [AssessmentID] = @assid," +
                                             "[Mark] = @mark" +
@@ -142,6 +149,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -150,12 +158,13 @@ namespace SARMS.Users
         public bool AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "UPDATE [UserUnits] SET "+
                                              "[LectureAttendance] = [LectureAttendance] + @lectbool," +
                                              "[PracticalAttendance] = [PracticalAttendance] + @pracbool" +
@@ -178,6 +187,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -186,12 +196,13 @@ namespace SARMS.Users
         public bool EditStudentAttendance(Student student, Unit unit, int numLectures, int numPracticals)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "UPDATE [UserUnits] SET " +
                                              "[LectureAttendance] = @lect," +
                                              "[PracticalAttendance] = @prac" +
@@ -214,6 +225,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
         }
@@ -225,13 +237,14 @@ namespace SARMS.Users
             List<Account> SARs = new List<Account>();
 
             var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteCommand command = null;
             SQLiteDataReader reader = null;
 
             try
             {
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                command = connection.CreateCommand();
                 command.CommandText = "SELECT [UserID] FROM [UserUnits] WHERE UnitID = @unitid AND AtRisk = 1";
                 command.Parameters.AddWithValue("@unitid", unit.ID);
 
@@ -271,6 +284,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (command != null) command.Dispose();
                 if (reader != null) reader.Close();
                 if (connection != null) connection.Close();
             }

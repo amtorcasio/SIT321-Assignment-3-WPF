@@ -149,12 +149,12 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
+            Account SelectedUser;
             using (var conn = Utilities.GetDatabaseSQLConnection())
             {
                 try
                 {
                     conn.Open();
-                    Account SelectedUser;
 
                     using (SQLiteCommand c = conn.CreateCommand())
                     {
@@ -181,17 +181,16 @@ namespace SIT321_Assignment_3_WPF
                             }
                         }
                     }
-                    conn.Close();
-
-                    var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
-                    editUserWindow.Show();
-                    editUserWindow.Focus();
                 }
                 catch (Exception exc)
                 {
                     throw exc;
                 }
             }
+
+            var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
+            editUserWindow.Show();
+            editUserWindow.Focus();
         }
     }
 }
