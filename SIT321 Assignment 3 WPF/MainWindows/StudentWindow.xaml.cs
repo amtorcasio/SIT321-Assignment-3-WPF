@@ -28,7 +28,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             LoggedInAccount = lAccount as Student;
             InitializeComponent();
 
-            
+            PopulateList();
         }
 
         private void PopulateList(object sender, EventArgs e)
@@ -47,7 +47,8 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 conn.Open();
 
                 System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM User";
+                c.CommandText = "SELECT * FROM UserUnits WHERE UserID = @id";
+                c.Parameters.AddWithValue("@id", LoggedInAccount.ID);
                 System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
 
                 if (r.HasRows)
@@ -71,10 +72,38 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             }
         }
 
-            private void ListItem_Clicked(object sender, RoutedEventArgs e)
+        private void ListItem_Clicked(object sender, RoutedEventArgs e)
         {
             if ((sender as ListBox).Name == lsbUnits.Name)
                 btnShowReport.IsEnabled = true;
+        }
+
+        private void btnShowReport_Clicked(object sender, RoutedEventArgs e)
+        {
+            /*var conn = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                conn.Open();
+
+                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
+
+                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
+                r.Read();
+                Account SelectedUser;
+
+                var winReport = //todo add window for report Generation
+                winReport.Show();
+                winReport.Focus();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            finally
+            {
+                conn.Close();
+            }*/
         }
     }
 }
