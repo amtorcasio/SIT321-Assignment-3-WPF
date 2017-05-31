@@ -15,7 +15,7 @@ namespace SARMS.Users
         { }
 
         // add assessment to unit
-        public void AddAssessment(Unit unit, Assessment assessment)
+        public bool AddAssessment(Unit unit, Assessment assessment)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -31,23 +31,24 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@atotalm", assessment.TotalMarks);
                 command.Parameters.AddWithValue("@weight", assessment.Weight);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // add assessment to unit after added to database
-                unit.Assessments.Add(assessment);
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " added");
+                if (success)
+                {
+                    // add assessment to unit after added to database
+                    unit.Assessments.Add(assessment);
+                    return success;
+                }
+                return false;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("AddAssessment Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // remove assessment from unit
-        public void RemoveAssessment(Unit unit, Assessment assessment)
+        public bool RemoveAssessment(Unit unit, Assessment assessment)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -59,23 +60,24 @@ namespace SARMS.Users
                 command.CommandText = "DELETE FROM Assessment WHERE Id = @id AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@id", assessment.AssessmentID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // remove assessment from unit after removal from database
-                unit.Assessments.Remove(assessment);
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " removed");
+                if (success)
+                {
+                    // add assessment to unit after added to database
+                    unit.Assessments.Remove(assessment);
+                    return success;
+                }
+                return false;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("RemoveAssessment Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // add student performance to assessment
-        public void AddStudentPerformance(Student student, Assessment assessment, int mark)
+        public bool AddStudentPerformance(Student student, Assessment assessment, int mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -89,29 +91,30 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
                 command.Parameters.AddWithValue("@mark", mark);
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // compile StudentAssessment
-                Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment();
-                TempStudentAssessment.account = student;
-                TempStudentAssessment.Assessment = assessment;
-                TempStudentAssessment.Mark = mark;
+                if (success)
+                {
+                    // compile StudentAssessment
+                    Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment();
+                    TempStudentAssessment.account = student;
+                    TempStudentAssessment.Assessment = assessment;
+                    TempStudentAssessment.Mark = mark;
 
-                // add student performance on assessment
-                student.Performance.Add(TempStudentAssessment);
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " added");
+                    // add student performance on assessment
+                    student.Performance.Add(TempStudentAssessment);
+                    return success;
+                }
+                return success;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("AddStudentPerformance Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // edit student performance data
-        public void EditStudentPerformance(Student student, Assessment assessment, int mark)
+        public bool EditStudentPerformance(Student student, Assessment assessment, int mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -127,23 +130,24 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
                 command.Parameters.AddWithValue("@mark", mark);
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // edit student performance on assessment
-                student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " updated");
+                if (success)
+                {
+                    // edit student performance on assessment
+                    student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+                    return success;
+                }
+                return success;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("EditStudentPerformance Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // boolean if the student attended the lecturer and practical or did not attend
-        public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
+        public bool AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -161,24 +165,25 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@lectbool", Convert.ToInt32(didAttentLecture));
                 command.Parameters.AddWithValue("@pracbool", Convert.ToInt32(didAttendPractical));
 
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // add student attendanceon on unit
-                student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
-                student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " AttendedLecture:" + didAttentLecture.ToString() + " AttendedPractical:" + didAttendPractical.ToString());
+                if (success)
+                {
+                    // add student attendanceon on unit
+                    student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
+                    student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
+                    return success;
+                }
+                return success;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("AddStudentAttendance Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // direct editing of values
-        public void EditStudentAttendance(Student student, Unit unit, int numLectures, int numPracticals)
+        public bool EditStudentAttendance(Student student, Unit unit, int numLectures, int numPracticals)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -196,19 +201,20 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@lect", numLectures);
                 command.Parameters.AddWithValue("@prac", numPracticals);
 
-                command.ExecuteNonQuery();
+                bool success = command.ExecuteNonQuery() == 0 ? false : true;
 
-                // edit student attendanceon on unit
-                student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance = numLectures;
-                student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance = numPracticals;
-
-                connection.Close();
-
-                System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " LectureCount:" + numLectures.ToString() + " PracticalCount:" + numPracticals.ToString());
+                if (success)
+                {
+                    // edit student attendanceon on unit
+                    student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance = numLectures;
+                    student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance = numPracticals;
+                    return success;
+                }
+                return success;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("EditStudentAttendance Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
@@ -253,6 +259,7 @@ namespace SARMS.Users
                     reader.Read();
 
                     Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                    LoadStudent(ref student);
                     SARs.Add(student);
 
                     reader = null;      // prepare reader for next query
@@ -267,7 +274,6 @@ namespace SARMS.Users
                 if (reader != null) reader.Close();
                 if (connection != null) connection.Close();
             }
-
             return SARs;
         }
     }

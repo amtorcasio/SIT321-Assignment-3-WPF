@@ -182,8 +182,8 @@ namespace SARMS.Users
                         Convert.ToInt32(reader[0]),
                         reader[1].ToString(),
                         reader[2].ToString(),
-                        Convert.ToDateTime(reader[3]),
-                        Convert.ToInt32(reader[4]),
+                        Convert.ToInt16(reader[3]),
+                        Convert.ToByte(reader[4]),
                         Convert.ToInt32(reader[5]),
                         Convert.ToInt32(reader[6]));
                 }

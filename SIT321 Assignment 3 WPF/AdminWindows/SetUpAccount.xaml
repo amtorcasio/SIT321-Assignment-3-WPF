@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="SetUpAccount" Height="300" Width="300">
+        Title="SetUpAccount" Height="243.348" Width="512.447">
     <Grid>
-        
+        <Label x:Name="lblFirstname" Content="Firstname:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblLastname" Content="Lastname:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblEmail" Content="Email:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAccountType" Content="Account Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPassword" Content="Please Enter Password:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPassword2" Content="Enter Password Again:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cboAccountType" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="341"/>
+        <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="23" Margin="150,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <TextBox x:Name="txtLastname" HorizontalAlignment="Left" Height="23" Margin="150,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="150,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <TextBox x:Name="txtPassword1" HorizontalAlignment="Left" Height="23" Margin="150,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <TextBox x:Name="txtPassword2" HorizontalAlignment="Left" Height="23" Margin="150,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <Button x:Name="btnCreateAccount" Content="Create Account" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="481" Height="28" Click="btnCreateAccount_Click"/>
+
     </Grid>
 </Window>
