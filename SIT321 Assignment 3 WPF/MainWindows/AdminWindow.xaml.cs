@@ -181,6 +181,7 @@ namespace SIT321_Assignment_3_WPF
                                 default:
                                     return;
                             }
+                            r.Close();
                         }
                     }
                     conn.Close();
