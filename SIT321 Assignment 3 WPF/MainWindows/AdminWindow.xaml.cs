@@ -29,15 +29,22 @@ namespace SIT321_Assignment_3_WPF
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
+            InitializeEvents();
+            
+        }
 
+        private void InitializeEvents()
+        {
             txtDBQuery.KeyDown += new KeyEventHandler(txtDBQuery_Enter);
+
+            DBFilterUnits.Click += new RoutedEventHandler(RadioButton_Checked);
+            DBFilterUsers.Click += new RoutedEventHandler(RadioButton_Checked);
         }
 
         private void txtDBQuery_Enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                MessageBox.Show(txtDBQuery.Text);
                 if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == false)
                 {
                     // do we want to filter both tables at the same time?
@@ -52,6 +59,11 @@ namespace SIT321_Assignment_3_WPF
                 }
                     
             }
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            txtDBQuery.Focus();
         }
     }
 }
