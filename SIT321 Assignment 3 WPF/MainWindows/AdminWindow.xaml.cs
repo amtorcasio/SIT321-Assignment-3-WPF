@@ -26,10 +26,32 @@ namespace SIT321_Assignment_3_WPF
         public AdminWindow(Account lAccount)
         {
             LoggedInAccount = lAccount;
-
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
+
+            txtDBQuery.KeyDown += new KeyEventHandler(txtDBQuery_Enter);
+        }
+
+        private void txtDBQuery_Enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                MessageBox.Show(txtDBQuery.Text);
+                if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == false)
+                {
+                    // do we want to filter both tables at the same time?
+                }
+                else if (DBFilterUnits.IsChecked == true && DBFilterUsers.IsChecked == false)
+                {
+                    MessageBox.Show("DB queried with only Units filtered");
+                }
+                else if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == true)
+                {
+                    MessageBox.Show("DB queried with only Users filtered");
+                }
+                    
+            }
         }
     }
 }
