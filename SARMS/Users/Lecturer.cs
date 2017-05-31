@@ -155,7 +155,7 @@ namespace SARMS.Users
 
                 command.ExecuteNonQuery();
 
-                // edit student performance on assessment
+                // add student attendanceon on unit
                 student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
                 student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
 
@@ -170,7 +170,34 @@ namespace SARMS.Users
         // direct editing of values
         public void EditStudentAttendance(Student student, Unit unit, int numLectures, int numPracticals)
         {
+            var connection = Utilities.GetDatabaseSQLConnection();
 
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE [UserUnits] SET " +
+                                             "[LectureAttendance] = @lect," +
+                                             "[PracticalAttendance] = @prac" +
+                                             "WHERE UserID = @sid AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.Parameters.AddWithValue("@lect", numLectures);
+                command.Parameters.AddWithValue("@prac", numPracticals);
+
+                command.ExecuteNonQuery();
+
+                // edit student attendanceon on unit
+                student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance = numLectures;
+                student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance = numPracticals;
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " LectureCount:" + numLectures.ToString() + " PracticalCount:" + numPracticals.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("EditStudentAttendance Error: " + e.Message.ToString());
+            }
         }
 
         public List<Account> viewSAR(Unit unit)
