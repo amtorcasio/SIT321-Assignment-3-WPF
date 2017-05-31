@@ -270,26 +270,38 @@ namespace SARMS.Users
             }
         }
 
-        public bool EditUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public void EditUnit(long oldunitid, Unit newunit)
         {
             using (var connection = Utilities.GetDatabaseSQLConnection())
             {
                 SQLiteCommand command = null;
                 try
                 {
+                    // add the edited unit
+                    AddUnit(newunit.ID, newunit.Name, newunit.Code, Convert.ToDateTime("01/01/" + newunit.Year.ToString()), newunit.Trimester, newunit.TotalLectures, newunit.TotalPracticals);
+
+                    // begin process to delink old unit and link newunit
                     connection.Open();
 
                     command = connection.CreateCommand();
-                    command.CommandText = "UPDATE TABLE Unit SET Name = @name, Code = @code, Year = @year, Trimester = @trimester, TotalLectures = @totallect, TotalPracticals = @totalprac WHERE Id = @id";
-                    command.Parameters.AddWithValue("@name", name);
-                    command.Parameters.AddWithValue("@code", code);
-                    command.Parameters.AddWithValue("@year", year.Year);
-                    command.Parameters.AddWithValue("@trimester", trimester);
-                    command.Parameters.AddWithValue("@totallect", totalLectures);
-                    command.Parameters.AddWithValue("@totalprac", totalPracticals);
-                    command.Parameters.AddWithValue("@id", u.ID);
+                    command.Parameters.AddWithValue("@uid", oldunitid);
+                    command.Parameters.AddWithValue("@newid", newunit.ID);
 
-                    return command.ExecuteNonQuery() == 0 ? false : true;
+                    if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UnitID = " + oldunitid))
+                    {
+                        // TABLE: UserUnits - Remove Records of Unit
+                        command.CommandText = "UPDATE UserUnits SET UnitID = @newid WHERE UnitID = @uid";
+                        command.ExecuteNonQuery();
+                    }
+                    if (DoesRecordExist("SELECT 1 FROM Assessment WHERE UnitID = " + oldunitid))
+                    {
+                        // TABLE: Assessment - Remove Records of Unit
+                        command.CommandText = "UPDATE Assessment SET UnitID = @newid WHERE UnitID = @uid";
+                        command.ExecuteNonQuery();
+                    }
+                    // TABLE: Unit - Remove Records of Unit
+                    command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                    command.ExecuteNonQuery();
                 }
                 finally
                 {
