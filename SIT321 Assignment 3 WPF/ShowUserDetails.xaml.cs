@@ -12,26 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using SARMS.Users;
 
 namespace SIT321_Assignment_3_WPF
 {
     /// <summary>
-    /// Interaction logic for AdminWindow.xaml
+    /// Interaction logic for ShowUserDetails.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ShowUserDetails : UserControl
     {
-        public Account LoggedInAccount { get; private set; }
-
-        public MainWindow(Account loggedInAccount)
+        public ShowUserDetails(Account a)
         {
-            LoggedInAccount = loggedInAccount;
             InitializeComponent();
             
-            lblName.Content = String.Format("{0}, {1} ", loggedInAccount.LastName.ToUpper(), loggedInAccount.FirstName.ToUpper());
-
-            string usertype = loggedInAccount.GetType().Name;
-            lblUsertype.Content = usertype;
+            lblName.Content = String.Format("{0}, {1}", a.LastName, a.FirstName);
+            lblUsertype.Content = a.GetType().Name;
         }
     }
 }

@@ -79,7 +79,6 @@ namespace SARMS.Users
         {
             if (DoesRecordExist(account))
             {
-                //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
                 try
                 {
@@ -104,7 +103,6 @@ namespace SARMS.Users
         {
             if (DoesRecordExist(account))
             {
-                //todo : add on to code snippet
                 var connection = Utilities.GetDatabaseSQLConnection();
                 try
                 {
@@ -166,7 +164,6 @@ namespace SARMS.Users
         public bool AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
-            //todo : add on to code snippet
             var connection = Utilities.GetDatabaseSQLConnection();
 
             try
@@ -191,9 +188,8 @@ namespace SARMS.Users
             }
         }
 
-        public void EditUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public bool EditUnit(Unit u, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
-            //todo : add on to code snippet
             var connection = Utilities.GetDatabaseSQLConnection();
 
             try
@@ -210,12 +206,11 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@totalprac", totalPracticals);
                 command.Parameters.AddWithValue("@id", u.ID);
 
-                command.ExecuteNonQuery();
-                System.Diagnostics.Debug.Write("Unit " + name + " modified");
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("editUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
@@ -232,28 +227,36 @@ namespace SARMS.Users
                 // set unit id for removal
                 command.Parameters.AddWithValue("@uid", unit.ID);
 
-                // TABLE: UserUnits - Remove Records of Unit
-                command.CommandText = "DELETE FROM UserUnits WHERE UnitID = @uid";
-                command.ExecuteNonQuery();
+                if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UnitID = " + unit.ID))
+                {
+                    // TABLE: UserUnits - Remove Records of Unit
+                    command.CommandText = "DELETE FROM UserUnits WHERE UnitID = @uid";
+                    command.ExecuteNonQuery();
+                }
 
-                // TABLE: Assessment - Remove Records of Unit
-                command.CommandText = "DELETE FROM Assessment WHERE UnitID = @uid";
-                command.ExecuteNonQuery();
+                if (DoesRecordExist("SELECT 1 FROM Assessments WHERE UnitID = " + unit.ID))
+                {
+                    // TABLE: Assessment - Remove Records of Unit
+                    command.CommandText = "DELETE FROM Assessment WHERE UnitID = @uid";
+                    command.ExecuteNonQuery();
+                }
 
-                // TABLE: Unit - Remove Records of Unit
-                command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
-                command.ExecuteNonQuery();
+                if (DoesRecordExist(unit))
+                {
+                    // TABLE: Unit - Remove Records of Unit
+                    command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                    command.ExecuteNonQuery();
+                }
 
-                System.Diagnostics.Debug.Write("Unit " + unit.ID + " removed");
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("RemoveUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // enroll student to unit
-        public void AddStudentUnit(Student student, Unit unit)
+        public bool AddStudentUnit(Student student, Unit unit)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -269,18 +272,17 @@ namespace SARMS.Users
 
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
 
-                System.Diagnostics.Debug.Write("Student " + student.ID + "enrolled to Unit " + unit.ID);
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("AddStudentUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // withdraw student from unit
-        public void RemoveStudentUnit(Student student, Unit unit)
+        public bool RemoveStudentUnit(Student student, Unit unit)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -293,18 +295,17 @@ namespace SARMS.Users
                 command.CommandText = "DELETE FROM UserUnits WHERE UserID = @sid AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
 
-                System.Diagnostics.Debug.Write("Student " + student.ID + "withdrawn from Unit " + unit.ID);
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("RemoveStudentUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // allocate lecturer to unit
-        public void AddLecturerUnit(Lecturer lecturer, Unit unit)
+        public bool AddLecturerUnit(Lecturer lecturer, Unit unit)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -320,18 +321,17 @@ namespace SARMS.Users
 
                 command.Parameters.AddWithValue("@lid", lecturer.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
 
-                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "allocated to Unit " + unit.ID);
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("AddLecturerUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
         // lecturer deallocated from unit
-        public void RemoveLecturerUnit(Lecturer lecturer, Unit unit)
+        public bool RemoveLecturerUnit(Lecturer lecturer, Unit unit)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
 
@@ -344,19 +344,58 @@ namespace SARMS.Users
                 command.CommandText = "DELETE FROM UserUnits WHERE UserID = @lid AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@lid", lecturer.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
-                command.ExecuteNonQuery();
 
-                System.Diagnostics.Debug.Write("Lecturer " + lecturer.ID + "deallocated from Unit " + unit.ID);
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("RemoveLecturerUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
-        public Account SearchAccountsById(int id)
+        public Account SearchAccountsById(string id)
         {
-            throw new NotImplementedException();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+            Account temp = new Account(this);
+
+            try
+            {
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM User WHERE Id = @id";
+                command.Parameters.AddWithValue("@id", id);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    temp.ID = id;
+                    temp.FirstName = reader[1].ToString();
+                    temp.LastName = reader[2].ToString();
+                    temp.Password = reader[5].ToString();
+                    temp.Email = reader[6].ToString();
+
+                    switch ((UserType)Convert.ToInt32(reader[3]))
+                    {
+                        case UserType.Administrator:
+                            return temp as Administrator;
+                        case UserType.Lecturer:
+                            return temp as Lecturer;
+                        case UserType.Student:
+                            return temp as Student;
+                        default:
+                            return null;
+                    }
+                }
+                return null;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
         }
 
         public List<Account> SearchAccountsByUnit(Unit unit)

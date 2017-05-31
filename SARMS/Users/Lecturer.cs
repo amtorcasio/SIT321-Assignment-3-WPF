@@ -36,6 +36,8 @@ namespace SARMS.Users
                 // add assessment to unit after added to database
                 unit.Assessments.Add(assessment);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " added");
             }
             catch (Exception e)
@@ -61,6 +63,8 @@ namespace SARMS.Users
 
                 // remove assessment from unit after removal from database
                 unit.Assessments.Remove(assessment);
+
+                connection.Close();
 
                 System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " removed");
             }
@@ -96,6 +100,8 @@ namespace SARMS.Users
                 // add student performance on assessment
                 student.Performance.Add(TempStudentAssessment);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " added");
             }
             catch (Exception e)
@@ -125,6 +131,8 @@ namespace SARMS.Users
 
                 // edit student performance on assessment
                 student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+
+                connection.Close();
 
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " updated");
             }
@@ -159,6 +167,8 @@ namespace SARMS.Users
                 student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
                 student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " AttendedLecture:" + didAttentLecture.ToString() + " AttendedPractical:" + didAttendPractical.ToString());
             }
             catch (Exception e)
@@ -192,6 +202,8 @@ namespace SARMS.Users
                 student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance = numLectures;
                 student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance = numPracticals;
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " LectureCount:" + numLectures.ToString() + " PracticalCount:" + numPracticals.ToString());
             }
             catch (Exception e)
@@ -200,9 +212,63 @@ namespace SARMS.Users
             }
         }
 
+        // view student at risk
         public List<Account> viewSAR(Unit unit)
         {
-            return new List<Account>();
+            // create empty return variable
+            List<Account> SARs = new List<Account>();
+
+            var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT [UserID] FROM [UserUnits] WHERE UnitID = @unitid AND AtRisk = 1";
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+
+                reader = command.ExecuteReader();
+
+                // list to append at risk students
+                List<string> StudentatRiskIDList = new List<string>();
+
+                // get student at risk id list list
+                while (reader.Read())
+                {
+                    StudentatRiskIDList.Add(reader[0].ToString());
+                }
+                reader = null;      // prepare reader for next query
+                command = null;     // null the SQLiteCommand
+
+                // select all students at risk
+                foreach (string id in StudentatRiskIDList)
+                {
+                    command = connection.CreateCommand();   // create command
+                    command.CommandText = "SELECT * FROM User WHERE Id = @sid";
+                    command.Parameters.AddWithValue("@sid", id);
+
+                    reader = command.ExecuteReader();
+                    reader.Read();
+
+                    Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                    SARs.Add(student);
+
+                    reader = null;      // prepare reader for next query
+                    command = null;     // null the SQLiteCommand
+                }
+
+                connection.Close();
+
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
+            }
+
+            return SARs;
         }
     }
 }
