@@ -46,7 +46,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             txtLastname.Text = Original.LastName;
             txtEmail.Text = Original.Email;
             psbPassword.Password = Original.Password;
-            
+            cboStatus.SelectedIndex = Admin.GetStatus(Original);
         }
     }
 }
