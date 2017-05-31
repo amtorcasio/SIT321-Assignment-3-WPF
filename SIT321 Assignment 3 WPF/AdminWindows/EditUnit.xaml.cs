@@ -94,7 +94,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 CodeLetters = txtCodeLetters.Text.ToUpper();
                 CodeNumStr = txtCodeNumbers.Text;
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                 throw ex;
             }

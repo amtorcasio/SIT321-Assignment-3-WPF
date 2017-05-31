@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="EditUnit" Height="289.7" Width="529.185">
+        Title="EditUnit" Height="289.7" Width="529.185" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
         <Label x:Name="lblCode" Content="Code: (e.g. SIT | 321)" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
