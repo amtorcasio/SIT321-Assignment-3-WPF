@@ -49,48 +49,44 @@ namespace SIT321_Assignment_3_WPF
                 try
                 {
                     conn.Open();
-                    using (SQLiteCommand c = conn.CreateCommand())
-                    {
-                        c.CommandText = "SELECT * FROM User";
-                        using (SQLiteDataReader r = c.ExecuteReader())
-                        {
-                            if (r.HasRows)
-                            {
-                                while (r.Read())
-                                {
-                                    listedUsers.Add(r[0].ToString());
-                                    ListBoxItem lbi = new ListBoxItem();
-                                    lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
-                                    lbi.FontSize = 14;
-                                    lbi.Padding = new Thickness(5, 5, 5, 5);
 
-                                    listUsers.Items.Add(lbi);
-                                }
+                    SQLiteCommand c = conn.CreateCommand();
+                    c.CommandText = "SELECT * FROM User";
+                    using (SQLiteDataReader r = c.ExecuteReader())
+                    {
+                        if (r.HasRows)
+                        {
+                            while (r.Read())
+                            {
+                                listedUsers.Add(r[0].ToString());
+                                ListBoxItem lbi = new ListBoxItem();
+                                lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
+                                lbi.FontSize = 14;
+                                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                                listUsers.Items.Add(lbi);
                             }
                         }
                     }
 
-                    using (SQLiteCommand c = conn.CreateCommand())
+                    c = conn.CreateCommand();
+                    c.CommandText = "SELECT * FROM Unit";
+                    using (SQLiteDataReader r = c.ExecuteReader())
                     {
-                        c.CommandText = "SELECT * FROM Unit";
-                        using (SQLiteDataReader r = c.ExecuteReader())
+                        if (r.HasRows)
                         {
-                            if (r.HasRows)
+                            while (r.Read())
                             {
-                                while (r.Read())
-                                {
-                                    listedUnits.Add(r[0].ToString());
-                                    ListBoxItem lbi = new ListBoxItem();
-                                    lbi.Content = r[1];
-                                    lbi.FontSize = 14;
-                                    lbi.Padding = new Thickness(5, 5, 5, 5);
+                                listedUnits.Add(r[0].ToString());
+                                ListBoxItem lbi = new ListBoxItem();
+                                lbi.Content = r[1];
+                                lbi.FontSize = 14;
+                                lbi.Padding = new Thickness(5, 5, 5, 5);
 
-                                    listUnits.Items.Add(lbi);
-                                }
+                                listUnits.Items.Add(lbi);
                             }
                         }
                     }
-                    conn.Close();
                 }
                 catch (Exception e)
                 {
