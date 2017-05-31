@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="SetUpAccount" Height="243.348" Width="512.447" WindowStartupLocation="CenterScreen">
+        Title="SetUpAccount" Height="223" Width="522" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="lblFirstname" Content="Firstname:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblLastname" Content="Lastname:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
