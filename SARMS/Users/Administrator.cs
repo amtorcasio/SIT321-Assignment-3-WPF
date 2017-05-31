@@ -240,7 +240,7 @@ namespace SARMS.Users
             else return false;
         }
 
-        public bool AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public bool AddUnit(long id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
             using (var connection = Utilities.GetDatabaseSQLConnection())
