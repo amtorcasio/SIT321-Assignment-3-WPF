@@ -108,6 +108,10 @@ namespace SIT321_Assignment_3_WPF
             {
                 throw e;
             }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
