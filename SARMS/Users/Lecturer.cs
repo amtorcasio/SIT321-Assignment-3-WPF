@@ -88,7 +88,7 @@ namespace SARMS.Users
                 command.ExecuteNonQuery();
 
                 // compile StudentAssessment
-                Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment;
+                Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment();
                 TempStudentAssessment.account = student;
                 TempStudentAssessment.Assessment = assessment;
                 TempStudentAssessment.Mark = mark;
@@ -103,6 +103,7 @@ namespace SARMS.Users
                 System.Diagnostics.Debug.WriteLine("AddStudentPerformance Error: " + e.Message.ToString());
             }
         }
+
 
         public void EditStudentPerformance(Student student, Assessment assessment, int mark)
         { }
