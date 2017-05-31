@@ -117,7 +117,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
 
             // check if bool have been changed
-            if (accountedited=false && statuschanged==false)
+            if (accountedited==false && statuschanged==false)
             {
                 MessageBox.Show("No Changes have been made to the account ... Closing Window", "Nothin has Happened");
                 Close();
