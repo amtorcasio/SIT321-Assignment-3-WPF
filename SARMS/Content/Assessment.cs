@@ -54,6 +54,11 @@ namespace SARMS.Content
             return true;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         // constructor
         public Assessment(int id, string name, int totalMark, decimal weight, Unit unit)
         {
