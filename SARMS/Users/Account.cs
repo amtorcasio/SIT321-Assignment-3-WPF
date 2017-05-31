@@ -156,8 +156,8 @@ namespace SARMS.Users
             finally
             {
                 if (command != null) command.Dispose();
-                if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
             }
 
             return result;
@@ -199,8 +199,8 @@ namespace SARMS.Users
             finally
             {
                 if (command != null) command.Dispose();
-                if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
             }
         }
 
@@ -230,8 +230,8 @@ namespace SARMS.Users
             finally
             {
                 if (command != null) command.Dispose();
-                if (connection != null) connection.Close();
                 if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
             }
         }
 
@@ -268,8 +268,8 @@ namespace SARMS.Users
             finally
             {
                 if (command != null) command.Dispose();
-                if (connection != null) connection.Close();
                 if (reader != null) connection.Close();
+                if (connection != null) connection.Close();
             }
             
         }
