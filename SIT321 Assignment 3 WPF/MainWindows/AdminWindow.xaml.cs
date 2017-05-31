@@ -80,10 +80,10 @@ namespace SIT321_Assignment_3_WPF
                                         lbi.Background = System.Windows.Media.Brushes.OrangeRed;
                                         break;
                                     case UserType.Lecturer:
-                                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
+                                        lbi.Background = System.Windows.Media.Brushes.Aqua;
                                         break;
                                     case UserType.Student:
-                                        lbi.Background = System.Windows.Media.Brushes.LightGreen;
+                                        lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
                                         break;
                                     default:
                                         return;
@@ -100,6 +100,7 @@ namespace SIT321_Assignment_3_WPF
                     {
                         if (r.HasRows)
                         {
+                            int count = 0;
                             while (r.Read())
                             {
                                 listedUnits.Add(r[0].ToString());
@@ -108,7 +109,20 @@ namespace SIT321_Assignment_3_WPF
                                 lbi.FontSize = 14;
                                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
+                                switch(count % 2)
+                                {
+                                    case 0:
+                                        lbi.Background = System.Windows.Media.Brushes.LightGray;
+                                        break;
+                                    case 1:
+                                        lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                                        break;
+                                    default:
+                                        return;
+                                }
+
                                 listUnits.Items.Add(lbi);
+                                count++;
                             }
                         }
                     }
