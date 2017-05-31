@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using SARMS;
 using SARMS.Users;
 
-namespace SIT321_Assignment_3_WPF
+namespace SIT321_Assignment_3_WPF.MainWindows
 {
     /// <summary>
     /// Interaction logic for AdminWindow.xaml

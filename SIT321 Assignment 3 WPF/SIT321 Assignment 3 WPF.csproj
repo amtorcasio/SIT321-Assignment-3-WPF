@@ -121,6 +121,12 @@
     <Compile Include="Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\LecturerWindow.xaml.cs">
+      <DependentUpon>LecturerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\StudentWindow.xaml.cs">
+      <DependentUpon>StudentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShowUserDetails.xaml.cs">
       <DependentUpon>ShowUserDetails.xaml</DependentUpon>
     </Compile>
@@ -156,6 +162,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindows\LecturerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\StudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShowUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
