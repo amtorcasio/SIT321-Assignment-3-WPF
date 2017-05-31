@@ -124,6 +124,38 @@ namespace SARMS.Users
             return false;
         }
 
+        // un-suspend a user
+        public int GetStatus(Account account)
+        {
+            if (DoesRecordExist(account))
+            {
+                var connection = Utilities.GetDatabaseSQLConnection();
+                try
+                {
+                    connection.Open();
+
+                    SQLiteCommand command = connection.CreateCommand();
+                    SQLiteDataReader reader = null;
+                    command.CommandText = "SELECT Status FROM Users WHERE Id = @id";
+                    command.Parameters.AddWithValue("@id", account.ID);
+
+                    command.ExecuteNonQuery();
+                    reader = command.ExecuteReader();
+                    reader.Read();
+
+                    int result;
+                    int.TryParse(reader[0].ToString(), out result);
+
+                    return result;
+                }
+                finally
+                {
+                    if (connection != null) connection.Close();
+                }
+            }
+            return -1;
+        }
+
         public bool EditUser(Account account, string firstName, string lastName, string email, string password)
         {
             if (DoesRecordExist(account))
