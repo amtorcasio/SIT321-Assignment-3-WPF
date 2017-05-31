@@ -85,7 +85,7 @@ namespace SARMS.Users
                     connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
-                    command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
+                    command.CommandText = "UPDATE User SET Status = @status WHERE Id = @id";
                     command.Parameters.AddWithValue("@status", 0);
                     command.Parameters.AddWithValue("@id", account.ID);
 
@@ -110,7 +110,7 @@ namespace SARMS.Users
                     connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
-                    command.CommandText = "UPDATE Users SET Status = @status WHERE Id = @id";
+                    command.CommandText = "UPDATE User SET Status = @status WHERE Id = @id";
                     command.Parameters.AddWithValue("@status", 1);
                     command.Parameters.AddWithValue("@id", account.ID);
 
@@ -165,7 +165,7 @@ namespace SARMS.Users
                     connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
-                    command.CommandText = "UPDATE Users SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
+                    command.CommandText = "UPDATE User SET FirstName = @firstname, LastName = @lastname, Email = @email, Password = @password WHERE Id = @id";
                     command.Parameters.AddWithValue("@firstName", firstName);
                     command.Parameters.AddWithValue("@lastName", lastName);
                     command.Parameters.AddWithValue("@email", email);
@@ -204,7 +204,7 @@ namespace SARMS.Users
                     connection.Open();
 
                     SQLiteCommand command = connection.CreateCommand();
-                    command.CommandText = "DELETE FROM Users WHERE Id = @id";
+                    command.CommandText = "DELETE FROM User WHERE Id = @id";
                     command.Parameters.AddWithValue("@id", account.ID);
 
                     return command.ExecuteNonQuery() == 0 ? false : true;
