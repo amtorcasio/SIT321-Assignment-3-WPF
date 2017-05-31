@@ -139,7 +139,6 @@ namespace SARMS.Users
                     command.CommandText = "SELECT Status FROM Users WHERE Id = @id";
                     command.Parameters.AddWithValue("@id", account.ID);
 
-                    command.ExecuteNonQuery();
                     reader = command.ExecuteReader();
                     reader.Read();
 
