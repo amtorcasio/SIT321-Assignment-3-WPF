@@ -21,11 +21,17 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     /// </summary>
     public partial class SetUpAccount : Window
     {
-        public SetUpAccount(Administrator Admin)
+        private Administrator Admin;
+
+        public SetUpAccount(Administrator temp)
         {
             InitializeComponent();
 
+            // populate combobox
             cboAccountType.DataContext = Enum.GetNames(typeof(UserType));
+
+            // make class admin equal to logged in administrator
+            Admin = temp;
         }
 
         private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
