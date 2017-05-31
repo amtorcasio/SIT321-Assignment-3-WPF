@@ -100,6 +100,8 @@ namespace SIT321_Assignment_3_WPF
                     }
                 }
 
+                conn.Close();
+
                 // group both listboxes under one event handler
                 listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
                 listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
@@ -107,10 +109,6 @@ namespace SIT321_Assignment_3_WPF
             catch (Exception e)
             {
                 throw e;
-            }
-            finally
-            {
-                conn.Close();
             }
         }
 
@@ -192,6 +190,8 @@ namespace SIT321_Assignment_3_WPF
                         return;
                 }
 
+                conn.Close();
+
                 var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
                 editUserWindow.Show();
                 editUserWindow.Focus();
@@ -201,10 +201,6 @@ namespace SIT321_Assignment_3_WPF
             catch (Exception exc)
             {
                 throw exc;
-            }
-            finally
-            {
-                conn.Close();
             }
             
         }
