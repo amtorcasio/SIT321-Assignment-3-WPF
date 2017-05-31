@@ -73,6 +73,21 @@ namespace SIT321_Assignment_3_WPF
                                 lbi.FontSize = 14;
                                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
+                                switch ((UserType)Convert.ToInt32(r[3]))
+                                {
+                                    case UserType.Administrator:
+                                        lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                        break;
+                                    case UserType.Lecturer:
+                                        lbi.Background = System.Windows.Media.Brushes.LightYellow;
+                                        break;
+                                    case UserType.Student:
+                                        lbi.Background = System.Windows.Media.Brushes.WhiteSmoke;
+                                        break;
+                                    default:
+                                        return;
+                                }
+
                                 listUsers.Items.Add(lbi);
                             }
                         }
