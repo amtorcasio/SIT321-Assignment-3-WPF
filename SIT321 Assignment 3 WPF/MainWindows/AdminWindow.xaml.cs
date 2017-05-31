@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 using SARMS;
 using SARMS.Users;
@@ -59,57 +60,63 @@ namespace SIT321_Assignment_3_WPF
 
 
             // Get database connection to populate listboxes
-            var conn = Utilities.GetDatabaseSQLConnection();
-            try
+            using (var conn = Utilities.GetDatabaseSQLConnection())
             {
-                conn.Open();
-
-                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM User";
-                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
-
-                if (r.HasRows)
+                try
                 {
-                    while (r.Read())
+                    conn.Open();
+                    using (SQLiteCommand c = conn.CreateCommand())
                     {
-                        listedUsers.Add(r[0].ToString());
-                        ListBoxItem lbi = new ListBoxItem();
-                        lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
-                        lbi.FontSize = 14;
-                        lbi.Padding = new Thickness(5,5,5,5);
+                        c.CommandText = "SELECT * FROM User";
+                        using (SQLiteDataReader r = c.ExecuteReader())
+                        {
+                            if (r.HasRows)
+                            {
+                                while (r.Read())
+                                {
+                                    listedUsers.Add(r[0].ToString());
+                                    ListBoxItem lbi = new ListBoxItem();
+                                    lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
+                                    lbi.FontSize = 14;
+                                    lbi.Padding = new Thickness(5, 5, 5, 5);
 
-                        listUsers.Items.Add(lbi);
+                                    listUsers.Items.Add(lbi);
+                                }
+                            }
+                        }
+                    }
+
+                    using (SQLiteCommand c = conn.CreateCommand())
+                    {
+                        c.CommandText = "SELECT * FROM Unit";
+                        using (SQLiteDataReader r = c.ExecuteReader())
+                        {
+                            if (r.HasRows)
+                            {
+                                while (r.Read())
+                                {
+                                    listedUnits.Add(r[0].ToString());
+                                    ListBoxItem lbi = new ListBoxItem();
+                                    lbi.Content = r[1];
+                                    lbi.FontSize = 14;
+                                    lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                                    listUnits.Items.Add(lbi);
+                                }
+                            }
+                        }
                     }
                 }
-
-                c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM Unit";
-                r = c.ExecuteReader();
-
-                if (r.HasRows)
+                catch (Exception e)
                 {
-                    while (r.Read())
-                    {
-                        listedUnits.Add(r[0].ToString());
-                        ListBoxItem lbi = new ListBoxItem();
-                        lbi.Content = r[1];
-                        lbi.FontSize = 14;
-                        lbi.Padding = new Thickness(5, 5, 5, 5);
-
-                        listUnits.Items.Add(lbi);
-                    }
+                    throw e;
                 }
-
-                conn.Close();
-
-                // group both listboxes under one event handler
-                listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
-                listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+
+            // group both listboxes under one event handler
+            listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
+            listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -161,48 +168,50 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            var conn = Utilities.GetDatabaseSQLConnection();
-
-            try
+            using (var conn = Utilities.GetDatabaseSQLConnection())
             {
-                conn.Open();
-
-                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM User WHERE Id = @id";
-                c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
-
-                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
-                r.Read();
-                Account SelectedUser;
-
-                switch ((UserType)Convert.ToInt32(r[3]))
+                try
                 {
-                    case UserType.Administrator:
-                        SelectedUser = new Administrator(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
-                        break;
-                    case UserType.Lecturer:
-                        SelectedUser = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
-                        break;
-                    case UserType.Student:
-                        SelectedUser = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
-                        break;
-                    default:
-                        return;
+                    conn.Open();
+                    Account SelectedUser;
+
+                    using (SQLiteCommand c = conn.CreateCommand())
+                    {
+                        c.CommandText = "SELECT * FROM User WHERE Id = @id";
+                        c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+                        using (SQLiteDataReader r = c.ExecuteReader())
+                        {
+                            r.Read();
+
+                            switch ((UserType)Convert.ToInt32(r[3]))
+                            {
+                                case UserType.Administrator:
+                                    SelectedUser = new Administrator(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                    break;
+                                case UserType.Lecturer:
+                                    SelectedUser = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                    break;
+                                case UserType.Student:
+                                    SelectedUser = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                    break;
+                                default:
+                                    return;
+                            }
+                        }
+                    }
+
+                    var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
+                    editUserWindow.Show();
+                    editUserWindow.Focus();
+
+                    editUserWindow.Closed += new EventHandler(PopulateList);
                 }
-
-                conn.Close();
-
-                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
-                editUserWindow.Show();
-                editUserWindow.Focus();
-
-                editUserWindow.Closed += new EventHandler(PopulateList);
+                catch (Exception exc)
+                {
+                    throw exc;
+                }
             }
-            catch (Exception exc)
-            {
-                throw exc;
-            }
-            
         }
     }
 }
