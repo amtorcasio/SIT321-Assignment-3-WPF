@@ -84,11 +84,11 @@ namespace SARMS.Users
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Lecturer:
                             Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
-                            LoginLecturer(ref lecturer);
+                            LoadLecturer(ref lecturer);
                             return lecturer;
                         case UserType.Student:
                             Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
-                            LoginStudent(ref student);
+                            LoadStudent(ref student);
                             return student;
                         default:
                             return null;
@@ -103,7 +103,7 @@ namespace SARMS.Users
             }
         }
 
-        private static void LoginLecturer(ref Lecturer lecturer)
+        protected static void LoadLecturer(ref Lecturer lecturer)
         {
             List<Unit> units = new List<Unit>();
             foreach (StudentUnit su in GetUserUnitInfo(lecturer))
@@ -113,7 +113,7 @@ namespace SARMS.Users
             lecturer.Units = units;
         }
 
-        private static void LoginStudent(ref Student student)
+        protected static void LoadStudent(ref Student student)
         {
             student.Units = GetUserUnitInfo(student);
             student.Performance = GetStudentPerformance(student, student.Units);

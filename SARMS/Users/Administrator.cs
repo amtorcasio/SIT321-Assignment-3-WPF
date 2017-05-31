@@ -382,9 +382,13 @@ namespace SARMS.Users
                         case UserType.Administrator:
                             return temp as Administrator;
                         case UserType.Lecturer:
-                            return temp as Lecturer;
+                            var lecturer = temp as Lecturer;
+                            LoadLecturer(ref lecturer);
+                            return lecturer;
                         case UserType.Student:
-                            return temp as Student;
+                            var student = temp as Student;
+                            LoadStudent(ref student);
+                            return student;
                         default:
                             return null;
                     }
@@ -401,6 +405,8 @@ namespace SARMS.Users
         public List<Account> SearchAccountsByUnit(Unit unit)
         {
             List<Account> result = null;
+            //SQLiteConnection connection = 
+
             return result;
         }
 
