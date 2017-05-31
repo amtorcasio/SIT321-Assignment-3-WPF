@@ -36,27 +36,11 @@ namespace SIT321_Assignment_3_WPF
             PopulateList();
         }
 
-        private void PopulateList(object sender, EventArgs e)
-        {
-            PopulateList();
-        }
-
         private void PopulateList()
         {
             // clear listboxes if previously populated
-            listUsers.Items.Clear();
-            listUnits.Items.Clear();
-
-            // check lists. if never created, create new; if created, clear list
-            if (listedUsers != null)
-                listedUsers.Clear();
-            else
-                listedUsers = new List<string>();
-
-            if (listedUnits != null)
-                listedUnits.Clear();
-            else
-                listedUnits = new List<string>();
+            listedUsers = new List<string>();
+            listedUnits = new List<string>();
 
 
             // Get database connection to populate listboxes
@@ -124,8 +108,6 @@ namespace SIT321_Assignment_3_WPF
             var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
             adduserWindow.Show();
             adduserWindow.Focus();
-
-            adduserWindow.Closed += new EventHandler(PopulateList);
         }
 
         private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
@@ -204,8 +186,6 @@ namespace SIT321_Assignment_3_WPF
                     var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
                     editUserWindow.Show();
                     editUserWindow.Focus();
-
-                    editUserWindow.Closed += new EventHandler(PopulateList);
                 }
                 catch (Exception exc)
                 {
