@@ -84,6 +84,7 @@ namespace SARMS.Users
                         case UserType.Lecturer:
                             Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                             LoginLecturer(ref lecturer);
+                            return lecturer;
                         case UserType.Student:
                             Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                             LoginStudent(ref student);
