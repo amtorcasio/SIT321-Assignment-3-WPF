@@ -70,8 +70,39 @@ namespace SARMS.Users
             }
         }
 
+        // add student performance to assessment
         public void AddStudentPerformance(Student student, Assessment assessment, int mark)
-        { }
+        {
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText =   "INSERT INTO [UserAssessment] ([UserID],[AssessmentID],[Mark])" +
+                                        "VALUES (@sid, @assid, @mark)";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@mark", mark);
+                command.ExecuteNonQuery();
+
+                // compile StudentAssessment
+                Data.StudentAssessment TempStudentAssessment = new Data.StudentAssessment;
+                TempStudentAssessment.account = student;
+                TempStudentAssessment.Assessment = assessment;
+                TempStudentAssessment.Mark = mark;
+
+                // add student performance on assessment
+                student.Performance.Add(TempStudentAssessment);
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " added");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("AddStudentPerformance Error: " + e.Message.ToString());
+            }
+        }
 
         public void EditStudentPerformance(Student student, Assessment assessment, int mark)
         { }
@@ -81,6 +112,7 @@ namespace SARMS.Users
         {
             //todo: add database side changes + practical changes
             student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
+            student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
 
         }
 
