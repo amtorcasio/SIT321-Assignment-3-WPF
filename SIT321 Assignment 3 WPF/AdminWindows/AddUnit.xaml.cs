@@ -11,21 +11,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SARMS;
 using SARMS.Users;
+using SARMS.Content;
+using System.Net.Mail;
 
-namespace SIT321_Assignment_3_WPF.MainWindows
+namespace SIT321_Assignment_3_WPF.AdminWindows
 {
     /// <summary>
-    /// Interaction logic for LecturerWindow.xaml
+    /// Interaction logic for AddUnit.xaml
     /// </summary>
-    public partial class LecturerWindow : Window
+    public partial class AddUnit : Window
     {
-        private Lecturer LoggedIn;
-        public LecturerWindow(Lecturer lecturer)
+        // class instance accounts
+        private Administrator Admin;
+
+        public AddUnit(Administrator admin)
         {
             InitializeComponent();
-            LoggedIn = lecturer;
-            //lsbUnits.DataContext = lecturer.Units;
+
+            Admin = admin;      // make class admin equal to passed administrator
+
+
         }
     }
 }

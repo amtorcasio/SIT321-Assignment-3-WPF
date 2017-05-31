@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using SARMS;
 using SARMS.Users;
+using SARMS.Content;
 
 namespace SIT321_Assignment_3_WPF
 {
@@ -23,6 +24,9 @@ namespace SIT321_Assignment_3_WPF
     public partial class AdminWindow : Window
     {
         public Administrator LoggedInAccount { get; private set; }
+
+        private List<string> listedUsers;
+        private List<string> listedUnits;
 
         public AdminWindow(Account lAccount)
         {
@@ -40,10 +44,23 @@ namespace SIT321_Assignment_3_WPF
 
         private void PopulateList()
         {
-            // clear list if previously populated
+            // clear listboxes if previously populated
             listUsers.Items.Clear();
             listUnits.Items.Clear();
 
+            // check lists. if never created, create new; if created, clear list
+            if (listedUsers != null)
+                listedUsers.Clear();
+            else
+                listedUsers = new List<string>();
+
+            if (listedUnits != null)
+                listedUnits.Clear();
+            else
+                listedUnits = new List<string>();
+
+
+            // Get database connection to populate listboxes
             var conn = Utilities.GetDatabaseSQLConnection();
             try
             {
@@ -57,6 +74,7 @@ namespace SIT321_Assignment_3_WPF
                 {
                     while (r.Read())
                     {
+                        listedUsers.Add(r[0].ToString());
                         ListBoxItem lbi = new ListBoxItem();
                         lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
                         lbi.FontSize = 14;
@@ -74,6 +92,7 @@ namespace SIT321_Assignment_3_WPF
                 {
                     while (r.Read())
                     {
+                        listedUnits.Add(r[0].ToString());
                         ListBoxItem lbi = new ListBoxItem();
                         lbi.Content = r[1];
                         lbi.FontSize = 14;
@@ -138,6 +157,33 @@ namespace SIT321_Assignment_3_WPF
                 btnEditUser.IsEnabled = true;
             else
                 btnEditUnit.IsEnabled = true;
+        }
+
+        private void btnEditUser_Click(object sender, RoutedEventArgs e)
+        {
+            var conn = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                conn.Open();
+
+                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
+                c.CommandText = "SELECT * FROM User WHERE Id = @id LIMIT 1";
+                c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
+                r.Read();
+                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, ...);
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
         }
     }
 }

@@ -112,6 +112,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             if (cboStatus.SelectedIndex != OriginalStatus)
             {
                 statuschanged = true;
+
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblStatus.Content, cboStatus.Items[OriginalStatus].ToString(), cboStatus.SelectedItem.ToString());
             }
 
             // check if bool have been changed
@@ -122,25 +124,31 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
             else
             {
-                // account has been edited
-                if(accountedited)
+                if (MessageBox.Show("Are you sure you wish to make the following changes?" + finalynmsg, "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
-                    // edit user
-                    Admin.EditUser(Editee, Editee.FirstName, Editee.LastName, Editee.Email, Editee.Password);
+                    //do no stuff
                 }
-                // change to status has taken place
-                if(statuschanged)
+                else
                 {
-                    if(cboStatus.SelectedIndex == 0)
+                    // account has been edited
+                    if (accountedited)
                     {
-                        // suspend user
-                        Admin.SuspendUser(Editee);
+                        // edit user
+                        Admin.EditUser(Editee, Editee.FirstName, Editee.LastName, Editee.Email, Editee.Password);
                     }
-                    else if(cboStatus.SelectedIndex == 1)
+                    // change to status has taken place
+                    if (statuschanged)
                     {
-                        // reactivate user
-                        Admin.ReactivateUser(Editee);
-
+                        if (cboStatus.SelectedIndex == 0)
+                        {
+                            // suspend user
+                            Admin.SuspendUser(Editee);
+                        }
+                        else if (cboStatus.SelectedIndex == 1)
+                        {
+                            // reactivate user
+                            Admin.ReactivateUser(Editee);
+                        }
                     }
                 }
             }
