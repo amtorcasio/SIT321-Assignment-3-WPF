@@ -6,7 +6,7 @@ namespace SARMS.Content
     public class Unit
     {
         #region Private Fields
-        private int _id;
+        private long _id;
         private string _name;
         private string _code;
         private int _year;
@@ -16,7 +16,7 @@ namespace SARMS.Content
         #endregion
 
         #region Getters and Setters
-        public int ID
+        public long ID
         {
             get { return _id; }
             set { _id = value; }
@@ -56,7 +56,7 @@ namespace SARMS.Content
         public List<Assessment> Assessments;
 
         // constructor
-        public Unit(int id, string name, string code, int year, int trimester, int totalLectures, int totalPracticals)
+        public Unit(long id, string name, string code, int year, int trimester, int totalLectures, int totalPracticals)
         {
             _id = id;
             _name = name;
