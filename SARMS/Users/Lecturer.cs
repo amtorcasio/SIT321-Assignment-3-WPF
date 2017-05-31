@@ -200,9 +200,63 @@ namespace SARMS.Users
             }
         }
 
+        // view student at risk
         public List<Account> viewSAR(Unit unit)
         {
-            return new List<Account>();
+            // create empty return variable
+            List<Account> SARs = new List<Account>();
+
+            var connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT [UserID] FROM [UserUnits] WHERE UnitID = @unitid AND AtRisk = 1";
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+
+                reader = command.ExecuteReader();
+
+                // list to append at risk students
+                List<string> StudentatRiskIDList = new List<string>();
+
+                // get student at risk id list list
+                while (reader.Read())
+                {
+                    StudentatRiskIDList.Add(reader[0].ToString());
+                }
+                reader = null;      // prepare reader for next query
+                command = null;     // null the SQLiteCommand
+
+                // select all students at risk
+                foreach (string id in StudentatRiskIDList)
+                {
+                    command = connection.CreateCommand();   // create command
+                    command.CommandText = "SELECT * FROM User WHERE Id = @sid";
+                    command.Parameters.AddWithValue("@sid", id);
+
+                    reader = command.ExecuteReader();
+                    reader.Read();
+
+                    Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                    SARs.Add(student);
+
+                    reader = null;      // prepare reader for next query
+                    command = null;     // null the SQLiteCommand
+                }
+
+                connection.Close();
+
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (connection != null) connection.Close();
+            }
+
+            return SARs;
         }
     }
 }
