@@ -25,8 +25,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         // class instance accounts
         private Administrator Admin;
         private Account Editee;
-        private Account Original;
         private int OriginalStatus;
+        private string originalF, originalL, originalE, originalP = "";
 
         // Edit Account window
         public EditAccount(Administrator admin, Account editee)
@@ -35,19 +35,22 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
             Admin = admin;          // make class admin equal to passed administrator
             Editee = editee;        // set account to be edited
-            Original = editee;      // set account to be referenced on the course of the editing
+            originalF = editee.FirstName;
+            originalL = editee.LastName;
+            originalE = editee.Email;
+            originalP = editee.Password;
 
             // fill combo box
             cboStatus.Items.Add(new ComboBoxItem().Content = "Suspended");
             cboStatus.Items.Add(new ComboBoxItem().Content = "Active");
 
             // set up form
-            txtID.Text = Original.ID;
-            txtFirstname.Text = Original.FirstName;
-            txtLastname.Text = Original.LastName;
-            txtEmail.Text = Original.Email;
-            psbPassword.Password = Original.Password;
-            OriginalStatus = Admin.GetStatus(Original);
+            txtID.Text = editee.ID;
+            txtFirstname.Text = originalF;
+            txtLastname.Text = originalL;
+            txtEmail.Text = originalE;
+            psbPassword.Password = originalP;
+            OriginalStatus = Admin.GetStatus(editee);
             cboStatus.SelectedIndex = OriginalStatus;
 
         }
@@ -62,7 +65,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             else
             {
                 // remove user method call
-                if(Admin.RemoveUser(Original))
+                if(Admin.RemoveUser(Editee))
                 {
                     MessageBox.Show("Account Removed, Closing Window");
                     Close();
@@ -84,29 +87,29 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             string finalynmsg = "";     // final yes/no msgbox message to accept changes
 
             // account edited check
-            if(txtFirstname.Text != Original.FirstName)
+            if(txtFirstname.Text != originalF)
             {
                 Editee.FirstName = txtFirstname.Text;
                 accountedited = true;
-                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblFirstname.Content, Original.FirstName, Editee.FirstName);
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblFirstname.Content, originalF, Editee.FirstName);
             }
-            if (txtLastname.Text != Original.LastName)
+            if (txtLastname.Text != originalL)
             {
                 Editee.LastName = txtLastname.Text;
                 accountedited = true;
-                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblLastname.Content, Original.LastName, Editee.LastName);
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblLastname.Content, originalL, Editee.LastName);
             }
-            if (txtEmail.Text != Original.Email)
+            if (txtEmail.Text != originalE)
             {
                 Editee.Email = txtEmail.Text;
                 accountedited = true;
-                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblEmail.Content, Original.Email, Editee.Email);
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblEmail.Content, originalE, Editee.Email);
             }
-            if (psbPassword.Password != Original.Password)
+            if (psbPassword.Password != originalP)
             {
                 Editee.Password = psbPassword.Password;
                 accountedited = true;
-                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblPassword.Content, Original.Password, Editee.Password);
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblPassword.Content, originalP, Editee.Password);
             }
             // status change check
             if (cboStatus.SelectedIndex != OriginalStatus)
