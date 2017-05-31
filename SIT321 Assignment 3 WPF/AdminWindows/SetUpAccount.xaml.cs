@@ -38,7 +38,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
         {
             // create attempt for new id
-            string id = txtFirstname.Text[0] + txtLastname.Text.Substring(0, 6);
+            string id = txtFirstname.Text[0] + txtLastname.Text.Substring(0, txtLastname.Text.Length);
 
             try
             {
@@ -51,7 +51,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
 
             // check if user id exists
-            if (Admin.SearchAccountsById(id) == null)
+            if (!Admin.DoesRecordExist(new Account(Admin) { ID = id }))
             {
                 Admin.AddUser(id, txtFirstname.Text, txtLastname.Text, txtEmail.Text, psbPassword.Password, (UserType)Enum.Parse(typeof(UserType), cboAccountType.SelectedValue.ToString()));
             }
