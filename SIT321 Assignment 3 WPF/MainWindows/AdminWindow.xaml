@@ -20,7 +20,7 @@
 
         <Button Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="844,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUser_Click"/>
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
-        <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto"/>
+        <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUnit_Click"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto"/>
 
     </Grid>

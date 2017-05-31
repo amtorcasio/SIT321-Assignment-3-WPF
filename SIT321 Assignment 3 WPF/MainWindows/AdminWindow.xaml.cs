@@ -204,5 +204,14 @@ namespace SIT321_Assignment_3_WPF
             editUserWindow.Focus();
             editUserWindow.Closed += re_populate_lists;
         }
+
+        private void btnAddUnit_Click(object sender, RoutedEventArgs e)
+        {
+            var addunitwindow = new AdminWindows.AddUnit(LoggedInAccount);
+            addunitwindow.Show();
+            addunitwindow.Focus();
+
+            addunitwindow.Closed += re_populate_lists;
+        }
     }
 }
