@@ -173,7 +173,6 @@ namespace SIT321_Assignment_3_WPF
 
                 System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
                 r.Read();
-
                 Account SelectedUser;
 
                 switch ((UserType)Convert.ToInt32(r[3]))
@@ -191,7 +190,7 @@ namespace SIT321_Assignment_3_WPF
                         return;
                 }
 
-                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
+                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser)
             }
             catch (Exception exc)
             {
