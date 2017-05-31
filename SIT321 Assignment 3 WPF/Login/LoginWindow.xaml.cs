@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS.Users;
+using SIT321_Assignment_3_WPF.MainWindows;
 
 
 namespace SIT321_Assignment_3_WPF
@@ -35,6 +36,10 @@ namespace SIT321_Assignment_3_WPF
                 Window nextWindow = null;
                 if (result is Administrator)
                     nextWindow = new AdminWindow(result as Administrator);
+                else if (result is Lecturer)
+                    nextWindow = new LecturerWindow(result as Lecturer);
+                else if (result is Student)
+                    nextWindow = new StudentWindow(result as Student);
 
                 this.Close(); // this.Hide();
                 nextWindow.Show();
