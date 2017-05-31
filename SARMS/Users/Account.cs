@@ -154,7 +154,6 @@ namespace SARMS.Users
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
             List<StudentUnit> result = new List<StudentUnit>();
-            Dictionary<string, Unit> units = new Dictionary<string, Unit>();
 
             try
             {
@@ -168,13 +167,7 @@ namespace SARMS.Users
 
                 while (reader.Read())
                 {
-                    Unit temp = null;
-                    string unitID = reader[1].ToString();
-                    if (!units.TryGetValue(unitID, out temp))
-                    {
-                        temp = GetUnitInfo(unitID);
-                        units.Add(unitID, temp);
-                    }
+                    Unit temp = GetUnitInfo(reader[1].ToString());
 
                     result.Add(new StudentUnit()
                     {
@@ -264,13 +257,41 @@ namespace SARMS.Users
             }
         }
 
-
-
-        protected static List<StudentAssessment> GetStudentPerformance(Student student, List<StudentUnit> studentUnit)
+        protected static List<StudentAssessment> GetStudentPerformance(Student student, List<StudentUnit> units)
         {
             List<StudentAssessment> result = new List<StudentAssessment>();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
 
-            return result;
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT Mark FROM UserAssessment WHERE UserID = @userID AND AssessmentID = @assID";
+                command.Parameters.AddWithValue("@userID", student.ID);
+
+                foreach (StudentUnit su in units)
+                {
+                    foreach (Assessment ass in su.unit.Assessments)
+                    {
+                        command.Parameters.AddWithValue("@assID", ass.AssessmentID);
+                        reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            result.Add(new StudentAssessment() { account = student, Assessment = ass, Mark = Convert.ToDecimal(reader[0]) });
+                        }
+                    }
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) connection.Close();
+            }
+            
         }
 
         public bool ChangePassword(string password)
