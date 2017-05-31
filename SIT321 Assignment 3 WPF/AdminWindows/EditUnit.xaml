@@ -21,7 +21,7 @@
         <TextBox x:Name="txtTotalPracticals" HorizontalAlignment="Left" Height="23" Margin="130,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
         <TextBox x:Name="txtCodeNumbers" HorizontalAlignment="Left" Height="23" Margin="190,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60"/>
         <Button x:Name="btnEdit" Content="Edit Unit" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Height="23" Width="495" Click="btnAdd_Click"/>
-        <Button x:Name="btnRemoveUnit" Content="Remove Unit" HorizontalAlignment="Left" Margin="375,37,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="btnRemoveUnit" Content="Remove Unit" HorizontalAlignment="Left" Margin="375,37,0,0" VerticalAlignment="Top" Width="130" Click="btnRemoveUnit_Click"/>
 
     </Grid>
 </Window>

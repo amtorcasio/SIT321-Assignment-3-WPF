@@ -339,12 +339,9 @@ namespace SARMS.Users
                         command.ExecuteNonQuery();
                     }
 
-                    if (DoesRecordExist(unit))
-                    {
-                        // TABLE: Unit - Remove Records of Unit
-                        command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
-                        command.ExecuteNonQuery();
-                    }
+                    // TABLE: Unit - Remove Records of Unit
+                    command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                    command.ExecuteNonQuery();
 
                 }
                 finally

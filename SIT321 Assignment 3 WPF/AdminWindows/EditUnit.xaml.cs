@@ -126,5 +126,10 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 Close();
             }
         }
+
+        private void btnRemoveUnit_Click(object sender, RoutedEventArgs e)
+        {
+            Admin.RemoveUnit(Unitee);
+        }
     }
 }
