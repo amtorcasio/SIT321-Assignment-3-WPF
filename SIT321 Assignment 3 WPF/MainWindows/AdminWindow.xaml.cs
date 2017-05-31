@@ -40,8 +40,11 @@ namespace SIT321_Assignment_3_WPF
 
         private void PopulateList()
         {
-            var conn = Utilities.GetDatabaseSQLConnection();
+            // clear list if previously populated
+            listUsers.Items.Clear();
+            listUnits.Items.Clear();
 
+            var conn = Utilities.GetDatabaseSQLConnection();
             try
             {
                 conn.Open();
@@ -79,6 +82,10 @@ namespace SIT321_Assignment_3_WPF
                         listUnits.Items.Add(lbi);
                     }
                 }
+
+                // group both listboxes under one event handler
+                listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
+                listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
             }
             catch (Exception e)
             {
@@ -103,11 +110,11 @@ namespace SIT321_Assignment_3_WPF
                 {
                     // do we want to filter both tables at the same time?
                 }
-                else if (DBFilterUnits.IsChecked == true && DBFilterUsers.IsChecked == false)
+                else if (DBFilterUnits.IsChecked == true)
                 {
                     MessageBox.Show("DB queried with only Units filtered");
                 }
-                else if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == true)
+                else if (DBFilterUnits.IsChecked == false)
                 {
                     MessageBox.Show("DB queried with only Users filtered");
                 }
@@ -123,6 +130,10 @@ namespace SIT321_Assignment_3_WPF
         private void DBFilterUnits_Click(object sender, RoutedEventArgs e)
         {
             txtDBQuery.Focus();
+        }
+
+        private void ListItem_Clicked(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
