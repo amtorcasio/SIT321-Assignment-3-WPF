@@ -12,11 +12,7 @@
         <Label x:Name="lblEmail" Content="Email:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAccountType" Content="Account Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPassword" Content="Please Enter Password:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cboAccountType" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="341">
-            <ComboBoxItem Content="Administrator"/>
-            <ComboBoxItem Content="Lecturer"/>
-            <ComboBoxItem Cursor="None" Content="Student"/>
-        </ComboBox>
+        <ComboBox x:Name="cboAccountType" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="341"/>
         <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="23" Margin="150,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
         <TextBox x:Name="txtLastname" HorizontalAlignment="Left" Height="23" Margin="150,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="150,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>

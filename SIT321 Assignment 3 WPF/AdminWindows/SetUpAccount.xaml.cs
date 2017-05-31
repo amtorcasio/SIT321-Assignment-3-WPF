@@ -31,7 +31,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             // populate combobox
             var usertypes = Enum.GetNames(typeof(UserType));
             foreach (string u in usertypes)
-                cboAccountType.Items.Add(u);
+                cboAccountType.Items.Add(new ComboBoxItem().Content = u);
 
             // make class admin equal to logged in administrator
             Admin = temp;
