@@ -33,13 +33,52 @@ namespace SIT321_Assignment_3_WPF
             PopulateList();
         }
 
+        private void PopulateList(object sender, EventArgs e)
+        {
+            PopulateList();
+        }
+
         private void PopulateList()
         {
             var conn = Utilities.GetDatabaseSQLConnection();
 
             try
             {
+                conn.Open();
 
+                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
+                c.CommandText = "SELECT * FROM User";
+                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
+
+                if (r.HasRows)
+                {
+                    while (r.Read())
+                    {
+                        ListBoxItem lbi = new ListBoxItem();
+                        lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
+                        lbi.FontSize = 14;
+                        lbi.Padding = new Thickness(5,5,5,5);
+
+                        listUsers.Items.Add(lbi);
+                    }
+                }
+
+                c = conn.CreateCommand();
+                c.CommandText = "SELECT * FROM Unit";
+                r = c.ExecuteReader();
+
+                if (r.HasRows)
+                {
+                    while (r.Read())
+                    {
+                        ListBoxItem lbi = new ListBoxItem();
+                        lbi.Content = r[1];
+                        lbi.FontSize = 14;
+                        lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                        listUnits.Items.Add(lbi);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -52,6 +91,8 @@ namespace SIT321_Assignment_3_WPF
             var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
             adduserWindow.Show();
             adduserWindow.Focus();
+
+            adduserWindow.Closed += new EventHandler(PopulateList);
         }
 
         private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
