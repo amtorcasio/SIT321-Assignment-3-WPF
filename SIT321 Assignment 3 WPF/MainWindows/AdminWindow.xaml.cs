@@ -42,6 +42,7 @@ namespace SIT321_Assignment_3_WPF
         {
             PopulateList();
             btnEditUser.IsEnabled = false;
+            btnEditUnit.IsEnabled = false;
         }
 
         private void PopulateList()
