@@ -29,7 +29,7 @@ namespace SIT321_Assignment_3_WPF
 
             InitializeComponent();
 
-            Control userdetails = new ShowUserDetails(String.Format("{0}, {1}", lAccount.LastName, lAccount.FirstName), lAccount.GetType().Name);
+            Control userdetails = new ShowUserDetails(lAccount);
             userdetails.Margin = new Thickness(10, 10, 0, 0);
 
             grid.Children.Add(userdetails);
