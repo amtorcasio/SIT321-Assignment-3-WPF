@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using SARMS;
 using SARMS.Users;
 
 namespace SIT321_Assignment_3_WPF
@@ -36,7 +37,8 @@ namespace SIT321_Assignment_3_WPF
         private void InitializeEvents()
         {
             txtDBQuery.KeyDown += new KeyEventHandler(txtDBQuery_Enter);
-
+            
+            btnAddUser.Click += new RoutedEventHandler(AddNewUser_Clicked);
             DBFilterUnits.Click += new RoutedEventHandler(RadioButton_Checked);
             DBFilterUsers.Click += new RoutedEventHandler(RadioButton_Checked);
         }
@@ -59,6 +61,13 @@ namespace SIT321_Assignment_3_WPF
                 }
                     
             }
+        }
+
+        private void AddNewUser_Clicked(object sender, RoutedEventArgs e)
+        {
+            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount as Administrator);
+            adduserWindow.Show();
+            adduserWindow.Focus();
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
