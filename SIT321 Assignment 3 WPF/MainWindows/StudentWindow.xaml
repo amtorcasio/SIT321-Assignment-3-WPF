@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="StudentWindow" Height="300" Width="300">
     <Grid>
-        
+        <Grid x:Name="gridUserDetails" HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" />
+
     </Grid>
 </Window>
