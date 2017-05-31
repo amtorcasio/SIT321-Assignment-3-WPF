@@ -82,7 +82,9 @@ namespace SARMS.Users
                         case UserType.Administrator:
                             return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                         case UserType.Lecturer:
-                            return LoginLecturer(connection, command, reader);
+                            Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                            LoginLecturer(ref lecturer);
+                            return lecturer;
                         case UserType.Student:
                             Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                             LoginStudent(ref student);
@@ -100,56 +102,23 @@ namespace SARMS.Users
             }
         }
 
-        private static Lecturer LoginLecturer(SQLiteConnection connection, SQLiteCommand command, SQLiteDataReader reader)
+        private static void LoginLecturer(ref Lecturer lecturer)
         {
-            Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
-            command.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON Unit.Id = UserUnits.UnitID WHERE UserUnit.UserID = @id";
-            command.Parameters.AddWithValue("@id", lecturer.ID);
-
-            reader = command.ExecuteReader();
-
             List<Unit> units = new List<Unit>();
-
-            SQLiteCommand unitAssessmentsCmd = connection.CreateCommand();
-            unitAssessmentsCmd.CommandText = "SELECT * FROM Assessment WHERE UnitID = @id";
-            SQLiteDataReader lecturerAssReader = null;
-
-
-            while (reader.Read())
+            foreach (StudentUnit su in GetUserUnitInfo(lecturer))
             {
-                unitAssessmentsCmd.Parameters.AddWithValue("@id", Convert.ToInt32(reader[0]));
-                List<Assessment> assessments = new List<Assessment>();
-                Unit temp = new Unit(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(),
-                    Convert.ToDateTime(reader[3]), Convert.ToInt32(reader[4]), Convert.ToInt32(reader[5]),
-                    Convert.ToInt32(reader[6]));
-
-                try
-                {
-                    lecturerAssReader = unitAssessmentsCmd.ExecuteReader();
-                    while (lecturerAssReader.Read())
-                    {
-                        assessments.Add(new Assessment(Convert.ToInt32(lecturerAssReader[0]), lecturerAssReader[1].ToString(), Convert.ToInt32(lecturerAssReader[2]), Convert.ToDecimal(lecturerAssReader[3]), temp));
-                    }
-                    temp.Assessments = assessments;
-                    units.Add(temp);
-                }
-                finally
-                {
-                    if (lecturerAssReader != null) lecturerAssReader.Close();
-                }
+                units.Add(GetUnitInfo(su.unit.ID.ToString()));
             }
-
             lecturer.Units = units;
-            return lecturer;
         }
 
         private static void LoginStudent(ref Student student)
         {
-            student.Units = GetStudentUnitInfo(student);
+            student.Units = GetUserUnitInfo(student);
             student.Performance = GetStudentPerformance(student, student.Units);
         }
 
-        protected static List<StudentUnit> GetStudentUnitInfo(Student student)
+        protected static List<StudentUnit> GetUserUnitInfo(Account user)
         {
             SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
             SQLiteDataReader reader = null;
@@ -161,7 +130,7 @@ namespace SARMS.Users
 
                 SQLiteCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM UserUnits WHERE UserID = @id";
-                command.Parameters.AddWithValue("@id", student.ID);
+                command.Parameters.AddWithValue("@id", user.ID);
 
                 reader = command.ExecuteReader();
 
@@ -171,7 +140,7 @@ namespace SARMS.Users
 
                     result.Add(new StudentUnit()
                     {
-                        account = student,
+                        account = user,
                         unit = temp,
                         LectureAttendance = Convert.ToInt32(reader[2]),
                         PracticalAttendance = Convert.ToInt32(reader[3]),
