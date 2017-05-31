@@ -17,7 +17,7 @@ using SARMS.Users;
 namespace SIT321_Assignment_3_WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AdminWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -29,27 +29,9 @@ namespace SIT321_Assignment_3_WPF
             InitializeComponent();
             
             lblName.Content = String.Format("{0}, {1} ", loggedInAccount.LastName.ToUpper(), loggedInAccount.FirstName.ToUpper());
-            if (loggedInAccount is Student)
-                if ((loggedInAccount as Student).AtRisk)
-                    lblName.Content += "(AT RISK)";
 
-            ChangeUserControls(loggedInAccount.GetType().Name);
-        }
-
-        private void ChangeUserControls(string type)
-        {
-            gridBase.Children.Clear();
-
-            // Does the new grid in the added UserControls overlap or replace the current grid in the window?
-            switch (type)
-            {
-                case "Administrator":
-                    gridBase.Children.Add(new AdministratorControls());
-                    break;
-
-                default:
-                    break;
-            }
+            string usertype = loggedInAccount.GetType().Name;
+            lblUsertype.Content = usertype;
         }
     }
 }
