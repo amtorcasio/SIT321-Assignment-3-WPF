@@ -56,6 +56,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             if (!Admin.DoesRecordExist(new Account(Admin) { ID = id }))
             {
                 Admin.AddUser(id, txtFirstname.Text, txtLastname.Text, txtEmail.Text, psbPassword.Password, (UserType)Enum.Parse(typeof(UserType), cboAccountType.SelectedValue.ToString()));
+                this.Close();
             }
             else
             {
