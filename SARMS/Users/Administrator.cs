@@ -142,7 +142,7 @@ namespace SARMS.Users
                     reader = command.ExecuteReader();
                     reader.Read();
 
-                    int result;
+                    int result = -1;
                     int.TryParse(reader[0].ToString(), out result);
 
                     return result;
