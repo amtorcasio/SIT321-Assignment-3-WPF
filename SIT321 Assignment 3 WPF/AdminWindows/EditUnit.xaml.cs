@@ -23,8 +23,10 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     {
         // class instance accounts
         private Administrator Admin;
+        private Account Unitee;
+        private Account Original;
 
-        public EditUnit(Administrator admin)
+        public EditUnit(Administrator admin, Unit unitee)
         {
             InitializeComponent();
 

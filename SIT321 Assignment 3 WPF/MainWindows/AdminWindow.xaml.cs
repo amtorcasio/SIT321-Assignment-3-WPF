@@ -254,37 +254,12 @@ namespace SIT321_Assignment_3_WPF
         {
             Unit SelectedUnit;
 
-            using (var conn = Utilities.GetDatabaseSQLConnection())
-            {
-                try
-                {
-                    conn.Open();
+            SelectedUnit = LoggedInAccount.GetUnit( long.Parse(listedUnits[listUnits.SelectedIndex]) );
 
-                    using (SQLiteCommand c = conn.CreateCommand())
-                    {
-                        c.CommandText = "SELECT * FROM User WHERE Id = @id";
-                        c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
-
-                        using (SQLiteDataReader r = c.ExecuteReader())
-                        {
-                            r.Read();
-
-                            switch ()
-                            {
-                            }
-                        }
-                    }
-                }
-                catch (Exception exc)
-                {
-                    throw exc;
-                }
-            }
-
-            var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUser);
-            editUserWindow.Show();
-            editUserWindow.Focus();
-            editUserWindow.Closed += re_populate_lists;
+            var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUnit);
+            editUnitWindow.Show();
+            editUnitWindow.Focus();
+            editUnitWindow.Closed += re_populate_lists;
         }
     }
 }
