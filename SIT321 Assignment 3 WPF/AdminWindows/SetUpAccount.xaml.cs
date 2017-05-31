@@ -48,7 +48,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
             catch (FormatException)
             {
-                lblStatus.Content = "Email is incorrect format";
+                MessageBox.Show("Email is in incorrect format", "Formatting Issue");
                 return;
             }
 

@@ -17,7 +17,6 @@
         <TextBox x:Name="txtLastname" HorizontalAlignment="Left" Height="23" Margin="150,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="150,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
         <Button x:Name="btnCreateAccount" Content="Create Account" HorizontalAlignment="Left" Margin="13,145,0,0" VerticalAlignment="Top" Width="481" Height="28" Click="btnCreateAccount_Click"/>
-        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="13,178,0,0" VerticalAlignment="Top" Foreground="Red"/>
         <PasswordBox x:Name="psbPassword" HorizontalAlignment="Left" Margin="150,114,0,0" VerticalAlignment="Top" Width="341" Height="26"/>
 
     </Grid>
