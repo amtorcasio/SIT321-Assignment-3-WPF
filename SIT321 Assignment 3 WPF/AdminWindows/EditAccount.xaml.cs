@@ -25,19 +25,16 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         // class instance accounts
         private Administrator Admin;
         private Account Editee;
+        private Account Original;
 
         // Edit Account window
         public EditAccount(Administrator admin, Account editee)
         {
             InitializeComponent();
 
-            // make class admin equal to passed administrator
-            Admin = admin;
-
-            // set account to be edited
-            Editee = editee;
-
-
+            Admin = admin;          // make class admin equal to passed administrator
+            Editee = editee;        // set account to be edited
+            Original = editee;      // set account to be referenced on the course of the editing
         }
     }
 }
