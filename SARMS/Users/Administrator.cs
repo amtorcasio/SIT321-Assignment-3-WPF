@@ -448,9 +448,32 @@ namespace SARMS.Users
             return result;
         }
 
-        public List<Unit> SearchUnits(string unitCode)
+        public Unit SearchUnit(string unitCode)
         {
-            throw new NotImplementedException();
+            SQLiteConnection connection = Utilities.GetDatabaseSQLConnection();
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+
+                command.CommandText = "SELECT * FROM Unit WHERE Code = @code ORDER BY Year, Trimester DESC LIMIT 1";
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    Unit temp = new Unit(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                    temp.Assessments = GetUnitAssessments(temp);
+                    return temp;
+                }
+                return null;
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+                if (reader != null) reader.Close();
+            }
         }
         
         public bool DoesRecordExist(Account account)
