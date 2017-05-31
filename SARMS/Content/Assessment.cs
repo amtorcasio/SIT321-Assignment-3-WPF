@@ -1,8 +1,8 @@
-﻿using SARMS.Content;
+﻿using System;
 
 namespace SARMS.Content
 {
-    public class Assessment
+    public class Assessment : IEquatable<Assessment>
     {
         #region Private Fields
         private int _assessmentID;
@@ -39,6 +39,25 @@ namespace SARMS.Content
             set { _unit = value; }
         }
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Assessment;
+            if (other != null) return Equals(other);
+            else return false;
+        }
+
+        public bool Equals(Assessment other)
+        {
+            if (other == null) return false;
+            if (other.AssessmentID != this.AssessmentID) return false;
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
         // constructor
         public Assessment(int id, string name, int totalMark, decimal weight, Unit unit)
