@@ -71,7 +71,7 @@ namespace SARMS.Users
                     finally
                     {
                         if (connection != null)
-                            connection.Close();
+                            connection.Dispose();
                     }
                 }
             }
@@ -96,7 +96,7 @@ namespace SARMS.Users
                     }
                     finally
                     {
-                        if (connection != null) connection.Close();
+                        if (connection != null) connection.Dispose();
                     }
                 }
             }
@@ -123,7 +123,7 @@ namespace SARMS.Users
                     }
                     finally
                     {
-                        if (connection != null) connection.Close();
+                        if (connection != null) connection.Dispose();
                     }
                 }
             }
@@ -156,7 +156,7 @@ namespace SARMS.Users
                     }
                     finally
                     {
-                        if (connection != null) connection.Close();
+                        if (connection != null) connection.Dispose();
                     }
                 }
             }
@@ -196,7 +196,7 @@ namespace SARMS.Users
                     }
                     finally
                     {
-                        if (connection != null) connection.Close();
+                        if (connection != null) connection.Dispose();
                     }
                 }
             }
@@ -221,7 +221,7 @@ namespace SARMS.Users
                     }
                     finally
                     {
-                        if (connection != null) connection.Close();
+                        if (connection != null) connection.Dispose();
                     }
                 }
             }
@@ -252,7 +252,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -280,7 +280,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -323,7 +323,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -351,7 +351,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -376,7 +376,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -404,7 +404,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -429,7 +429,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                 }
             }
         }
@@ -479,7 +479,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                     if (reader != null) reader.Close();
                 }
             }
@@ -526,7 +526,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
 
                 }
                 return result;
@@ -557,7 +557,7 @@ namespace SARMS.Users
                 }
                 finally
                 {
-                    if (connection != null) connection.Close();
+                    if (connection != null) connection.Dispose();
                     if (reader != null) reader.Close();
                 }
             }
@@ -608,7 +608,7 @@ namespace SARMS.Users
                         reader.Close();
 
                     if (connection != null)
-                        connection.Close();
+                        connection.Dispose();
                 }
             }
         }

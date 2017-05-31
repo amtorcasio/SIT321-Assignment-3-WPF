@@ -87,6 +87,8 @@ namespace SIT321_Assignment_3_WPF
                             }
                         }
                     }
+
+                    c.Dispose();
                 }
                 catch (Exception e)
                 {
@@ -177,10 +179,9 @@ namespace SIT321_Assignment_3_WPF
                                 default:
                                     return;
                             }
-                            r.Close();
                         }
                     }
-                    conn.Close();
+                    conn.Dispose();
 
                     var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
                     editUserWindow.Show();
