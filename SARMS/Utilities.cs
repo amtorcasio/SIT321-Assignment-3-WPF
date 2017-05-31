@@ -17,7 +17,7 @@ namespace SARMS
     }
 
     // a group of methods and variables that is shared throughout the entire project
-    static class Utilities
+    public static class Utilities
     {
         public static SQLiteConnection GetDatabaseSQLConnection()
         {
