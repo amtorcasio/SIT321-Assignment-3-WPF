@@ -53,6 +53,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             OriginalStatus = Admin.GetStatus(editee);
             cboStatus.SelectedIndex = OriginalStatus;
 
+            lblPassword.ToolTip = psbPassword.Password;
         }
 
         // remove user from database
