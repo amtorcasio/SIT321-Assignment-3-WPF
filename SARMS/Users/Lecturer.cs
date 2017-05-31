@@ -104,9 +104,35 @@ namespace SARMS.Users
             }
         }
 
-
+        // edit student performance data
         public void EditStudentPerformance(Student student, Assessment assessment, int mark)
-        { }
+        {
+            var connection = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText =   "UPDATE [UserAssessment]" +
+                                        "SET [AssessmentID] = @assid," +
+                                            "[Mark] = @mark" +
+                                        "WHERE UserID = @sid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@mark", mark);
+                command.ExecuteNonQuery();
+
+                // edit student performance on assessment
+                student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " updated");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("EditStudentPerformance Error: " + e.Message.ToString());
+            }
+        }
 
         // boolean if the student attended the lecturer and practical or did not attend
         public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
