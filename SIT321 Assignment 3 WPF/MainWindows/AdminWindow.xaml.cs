@@ -41,6 +41,7 @@ namespace SIT321_Assignment_3_WPF
         private void PopulateList(object sender, EventArgs e)
         {
             PopulateList();
+            btnEditUser.IsEnabled = false;
         }
 
         private void PopulateList()
@@ -79,10 +80,10 @@ namespace SIT321_Assignment_3_WPF
                                         lbi.Background = System.Windows.Media.Brushes.OrangeRed;
                                         break;
                                     case UserType.Lecturer:
-                                        lbi.Background = System.Windows.Media.Brushes.LightYellow;
+                                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
                                         break;
                                     case UserType.Student:
-                                        lbi.Background = System.Windows.Media.Brushes.WhiteSmoke;
+                                        lbi.Background = System.Windows.Media.Brushes.LightYellow;
                                         break;
                                     default:
                                         return;
@@ -103,7 +104,7 @@ namespace SIT321_Assignment_3_WPF
                             {
                                 listedUnits.Add(r[0].ToString());
                                 ListBoxItem lbi = new ListBoxItem();
-                                lbi.Content = r[3].ToString()+r[1].ToString();
+                                lbi.Content = r[2].ToString()+r[1].ToString();
                                 lbi.FontSize = 14;
                                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
