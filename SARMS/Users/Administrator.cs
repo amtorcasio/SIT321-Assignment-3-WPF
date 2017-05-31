@@ -332,7 +332,7 @@ namespace SARMS.Users
                         command.ExecuteNonQuery();
                     }
 
-                    if (DoesRecordExist("SELECT 1 FROM Assessments WHERE UnitID = " + unit.ID))
+                    if (DoesRecordExist("SELECT 1 FROM Assessment WHERE UnitID = " + unit.ID))
                     {
                         // TABLE: Assessment - Remove Records of Unit
                         command.CommandText = "DELETE FROM Assessment WHERE UnitID = @uid";
