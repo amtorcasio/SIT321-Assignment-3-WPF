@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="EditAccount" Height="266.169" Width="543.348" WindowStartupLocation="CenterScreen">
+        Title="EditAccount" Height="276" Width="553" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="lblid" Content="ID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblFirstname" Content="Firstname:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.499"/>

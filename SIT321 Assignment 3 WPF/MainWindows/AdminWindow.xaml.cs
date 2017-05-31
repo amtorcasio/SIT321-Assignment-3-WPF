@@ -191,6 +191,8 @@ namespace SIT321_Assignment_3_WPF
                 }
 
                 var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
+                editUserWindow.Show();
+                editUserWindow.Focus();
             }
             catch (Exception exc)
             {
