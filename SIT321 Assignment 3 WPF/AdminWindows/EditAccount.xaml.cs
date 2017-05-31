@@ -51,5 +51,19 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
 
         }
+
+        // remove user from database
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you wish to remove user forever?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                //do no stuff
+            }
+            else
+            {
+                // remove user method call
+                Admin.RemoveUser(Original);
+            }
+        }
     }
 }
