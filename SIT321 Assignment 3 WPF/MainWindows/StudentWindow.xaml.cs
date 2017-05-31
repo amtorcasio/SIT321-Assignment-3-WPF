@@ -77,5 +77,4 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 btnShowReport.IsEnabled = true;
         }
     }
-    }
 }

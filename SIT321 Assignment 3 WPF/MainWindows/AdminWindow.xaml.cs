@@ -173,6 +173,24 @@ namespace SIT321_Assignment_3_WPF
 
                 System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
                 r.Read();
+                Account SelectedUser;
+
+                switch ((UserType)Convert.ToInt32(r[3]))
+                {
+                    case UserType.Administrator:
+                        SelectedUser = new Administrator(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                        break;
+                    case UserType.Lecturer:
+                        SelectedUser = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                        break;
+                    case UserType.Student:
+                        SelectedUser = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                        break;
+                    default:
+                        return;
+                }
+
+                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser)
             }
             catch (Exception exc)
             {
