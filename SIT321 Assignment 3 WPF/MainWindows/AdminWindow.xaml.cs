@@ -22,9 +22,9 @@ namespace SIT321_Assignment_3_WPF
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public Account LoggedInAccount { get; private set; }
+        public Administrator LoggedInAccount { get; private set; }
 
-        public AdminWindow(Account lAccount)
+        public AdminWindow(Administrator lAccount)
         {
             LoggedInAccount = lAccount;
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace SIT321_Assignment_3_WPF
 
         private void AddNewUser_Clicked(object sender, RoutedEventArgs e)
         {
-            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount as Administrator);
+            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
             adduserWindow.Show();
             adduserWindow.Focus();
         }
