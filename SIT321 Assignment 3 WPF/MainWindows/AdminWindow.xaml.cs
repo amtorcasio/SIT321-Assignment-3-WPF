@@ -173,7 +173,6 @@ namespace SIT321_Assignment_3_WPF
 
                 System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
                 r.Read();
-                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, ...);
             }
             catch (Exception exc)
             {
