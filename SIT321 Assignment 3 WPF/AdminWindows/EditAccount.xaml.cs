@@ -22,14 +22,22 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     /// </summary>
     public partial class EditAccount : Window
     {
+        // class instance accounts
         private Administrator Admin;
+        private Account Editee;
 
-        public EditAccount(Administrator temp)
+        // Edit Account window
+        public EditAccount(Administrator admin, Account editee)
         {
             InitializeComponent();
 
-            // make class admin equal to logged in administrator
-            Admin = temp;
+            // make class admin equal to passed administrator
+            Admin = admin;
+
+            // set account to be edited
+            Editee = editee;
+
+
         }
     }
 }
