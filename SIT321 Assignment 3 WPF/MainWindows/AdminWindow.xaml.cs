@@ -168,7 +168,7 @@ namespace SIT321_Assignment_3_WPF
                 conn.Open();
 
                 System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM User WHERE Id = @id LIMIT 1";
+                c.CommandText = "SELECT * FROM User WHERE Id = @id";
                 c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
 
                 System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
