@@ -26,16 +26,38 @@ namespace SIT321_Assignment_3_WPF
             InitializeComponent();
             this.Focus();
         }
+        public Account LoggedInAccount { get; private set; }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            Account loggedInAccount = LoggedInAccount;
+            string accountType = loggedInAccount.GetType().Name;
             Account result = Account.Login(txtEmail.Text, txtPassword.Password);
             if (result != null)
             {
-                var win = new AdminWindow(result);
-                this.Close(); // this.Hide();
-                win.Show();
-                win.Focus();
+                switch (accountType)
+                {
+                    case "Administrator":
+                        var aWin = new AdminWindow(result);
+                        this.Close();
+                        aWin.Show();
+                        aWin.Focus();
+                        break;
+                    case "Lecturer":
+                        var lWin = new LecturerWindow(result);
+                        this.Close();
+                        lWin.Show();
+                        lWin.Focus();
+                        break;
+                    case "Student":
+                        var sWin = new StudentWindow(result);
+                        this.Close();
+                        sWin.Show();
+                        sWin.Focus();
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
