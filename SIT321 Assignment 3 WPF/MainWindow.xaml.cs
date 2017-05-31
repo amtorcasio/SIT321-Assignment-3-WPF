@@ -29,9 +29,9 @@ namespace SIT321_Assignment_3_WPF
             InitializeComponent();
             
             lblName.Content = String.Format("{0}, {1} ", loggedInAccount.LastName.ToUpper(), loggedInAccount.FirstName.ToUpper());
-            if (loggedInAccount is Student)
-                if ((loggedInAccount as Student).AtRisk)
-                    lblName.Content += "(AT RISK)";
+            //if (loggedInAccount is Student)
+                //if ((loggedInAccount as Student).AtRisk)
+                    //lblName.Content += "(AT RISK)";
 
             ChangeUserControls(loggedInAccount.GetType().Name);
         }
