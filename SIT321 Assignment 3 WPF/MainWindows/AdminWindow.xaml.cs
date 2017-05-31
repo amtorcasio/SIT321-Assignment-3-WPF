@@ -83,7 +83,7 @@ namespace SIT321_Assignment_3_WPF
                                         lbi.Background = System.Windows.Media.Brushes.LightBlue;
                                         break;
                                     case UserType.Student:
-                                        lbi.Background = System.Windows.Media.Brushes.LightYellow;
+                                        lbi.Background = System.Windows.Media.Brushes.LightGreen;
                                         break;
                                     default:
                                         return;
