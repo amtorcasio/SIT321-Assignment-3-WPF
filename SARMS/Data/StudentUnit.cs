@@ -11,6 +11,7 @@ namespace SARMS.Data
         private int _practicalAttendance;
         private string _staffFeedback;
         private string _studentFeedback;
+        private bool _atRisk;
 
         #region Getters and Setters
         public Unit unit
@@ -42,6 +43,11 @@ namespace SARMS.Data
         {
             get { return _account; }
             set { _account = value; }
+        }
+        public bool AtRisk
+        {
+            get { return _atRisk; }
+            set { _atRisk = value; }
         }
         #endregion
     }

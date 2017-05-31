@@ -12,8 +12,6 @@ namespace SARMS.Users
             base (id, firstName, lastName, email, password)
         { }
 
-        public bool AtRisk { get; set; }
-
         public List<StudentAssessment> Performance;
         public List<StudentUnit> Units;
 

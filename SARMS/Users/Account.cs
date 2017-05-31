@@ -43,6 +43,7 @@ namespace SARMS.Users
             get { return _password; }
             set { _password = value; }
         }
+
         #endregion
 
         //Constructors
@@ -276,10 +277,6 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@id", _ID);
 
                 return command.ExecuteNonQuery() == 0 ? false : true;
-            }
-            catch (Exception)
-            {
-                throw;
             }
             finally
             {

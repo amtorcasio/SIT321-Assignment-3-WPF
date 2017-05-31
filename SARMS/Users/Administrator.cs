@@ -75,7 +75,7 @@ namespace SARMS.Users
             }
         }
 
-        public void SuspendUser(Account account)
+        public bool SuspendUser(Account account)
         {
             if (DoesRecordExist(account))
             {
@@ -90,17 +90,17 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@status", 0);
                     command.Parameters.AddWithValue("@id", account.ID);
 
-                    command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Member is suspended");
+                    return command.ExecuteNonQuery() == 0 ? false : true;
                 }
-                catch (Exception e)
+                finally
                 {
-                    System.Diagnostics.Debug.WriteLine("suspendUser Error: " + e.Message.ToString());
+                    if (connection != null) connection.Close();
                 }
             }
+            return false;
         }
 
-        public void EditUser(Account account, string firstName, string lastName, string email, string password)
+        public bool EditUser(Account account, string firstName, string lastName, string email, string password)
         {
             if (DoesRecordExist(account))
             {
@@ -129,17 +129,17 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@password", password);
                     command.Parameters.AddWithValue("@id", account.ID);
 
-                    command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Data for member " + account.ID + " modified");
+                    return command.ExecuteNonQuery() == 0 ? false : true;
                 }
-                catch (Exception e)
+                finally
                 {
-                    System.Diagnostics.Debug.WriteLine("editUser Error: " + e.Message.ToString());
+                    if (connection != null) connection.Close();
                 }
             }
+            else return false;
         }
 
-        public void RemoveUser(Account account)
+        public bool RemoveUser(Account account)
         {
             if (DoesRecordExist(account))
             {
@@ -153,17 +153,17 @@ namespace SARMS.Users
                     command.CommandText = "DELETE FROM Users WHERE Id = @id";
                     command.Parameters.AddWithValue("@id", account.ID);
 
-                    command.ExecuteNonQuery();
-                    System.Diagnostics.Debug.Write("Member account " + account.ID + " removed");
+                    return command.ExecuteNonQuery() == 0 ? false : true;
                 }
-                catch (Exception e)
+                finally
                 {
-                    System.Diagnostics.Debug.WriteLine("removeUser Error: " + e.Message.ToString());
+                    if (connection != null) connection.Close();
                 }
             }
+            else return false;
         }
 
-        public void AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public bool AddUnit(int id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
             //todo : add on to code snippet
@@ -183,12 +183,11 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@totallect", totalLectures);
                 command.Parameters.AddWithValue("@totalprac", totalPracticals);
 
-                command.ExecuteNonQuery();
-                System.Diagnostics.Debug.Write("New unit added");
+                return command.ExecuteNonQuery() == 0 ? false : true;
             }
-            catch (Exception e)
+            finally
             {
-                System.Diagnostics.Debug.WriteLine("addUnit Error: " + e.Message.ToString());
+                if (connection != null) connection.Close();
             }
         }
 
