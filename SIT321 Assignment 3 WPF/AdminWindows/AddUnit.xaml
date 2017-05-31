@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="AddUnit" Height="220.487" Width="522.747" WindowStartupLocation="CenterScreen">
+        Title="AddUnit" Height="246.183" Width="522.747" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
-        <Label x:Name="lblCode" Content="Code:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
-        <Label x:Name="lblYear" Content="Year:" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
-        <Label x:Name="lblTrimester" Content="Trimester:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="80,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
-        <TextBox x:Name="txtCode" HorizontalAlignment="Left" Height="23" Margin="80,63,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
-        <TextBox x:Name="txtYear" HorizontalAlignment="Left" Height="23" Margin="80,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
-        <TextBox x:Name="txtTrimester" HorizontalAlignment="Left" Height="23" Margin="80,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425"/>
-        <Button x:Name="btnAdd" Content="Add Unit" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Height="23" Width="495"/>
-        <Label x:Name="lblidconstructed" Content="ID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
-        <TextBox x:Name="txtidConstructed" HorizontalAlignment="Left" Height="23" Margin="80,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="425" IsEnabled="False"/>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblCode" Content="Code: (e.g. SIT | 321)" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblYear" Content="Year:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <Label x:Name="lblTrimester" Content="Trimester:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="130,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
+        <TextBox x:Name="txtCodeLetters" HorizontalAlignment="Left" Height="23" Margin="130,36,0,0" Text="" VerticalAlignment="Top" Width="60" TextWrapping="Wrap" TextAlignment="Right"/>
+        <TextBox x:Name="txtYear" HorizontalAlignment="Left" Height="23" Margin="130,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
+        <TextBox x:Name="txtTrimester" HorizontalAlignment="Left" Height="23" Margin="130,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
+        <Button x:Name="btnAdd" Content="Add Unit" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Height="23" Width="495" Click="btnAdd_Click"/>
+        <Label x:Name="lblTotalLectures" Content="Total Lectures:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <TextBox x:Name="txtTotalLectures" HorizontalAlignment="Left" Height="23" Margin="130,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
+        <Label x:Name="lblTotalPracticals" Content="Total Practicals:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.537,0.481"/>
+        <TextBox x:Name="txtTotalPracticals" HorizontalAlignment="Left" Height="23" Margin="130,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="375"/>
+        <TextBox x:Name="txtCodeNumbers" HorizontalAlignment="Left" Height="23" Margin="190,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60"/>
 
     </Grid>
 </Window>

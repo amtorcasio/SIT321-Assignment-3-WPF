@@ -9,8 +9,8 @@ namespace SARMS.Content
         private int _id;
         private string _name;
         private string _code;
-        private short _year;
-        private byte _trimester;
+        private int _year;
+        private int _trimester;
         private int _totalLectures;
         private int _totalPracticals;
         #endregion
@@ -26,12 +26,12 @@ namespace SARMS.Content
             get { return _code; }
             set { _code = value; }
         }
-        public short Year
+        public int Year
         {
             get { return _year; }
             set { _year = value; }
         }
-        public byte Trimester
+        public int Trimester
         {
             get { return _trimester; }
             set { _trimester = value; }
@@ -56,7 +56,7 @@ namespace SARMS.Content
         public List<Assessment> Assessments;
 
         // constructor
-        public Unit(int id, string name, string code, short year, byte trimester, int totalLectures, int totalPracticals)
+        public Unit(int id, string name, string code, int year, int trimester, int totalLectures, int totalPracticals)
         {
             _id = id;
             _name = name;

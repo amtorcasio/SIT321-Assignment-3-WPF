@@ -255,7 +255,7 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@name", name);
                     command.Parameters.AddWithValue("@code", code);
-                    command.Parameters.AddWithValue("@year", year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
+                    command.Parameters.AddWithValue("@year", year.Year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
                     command.Parameters.AddWithValue("@trimester", trimester);
                     command.Parameters.AddWithValue("@totallect", totalLectures);
                     command.Parameters.AddWithValue("@totalprac", totalPracticals);
