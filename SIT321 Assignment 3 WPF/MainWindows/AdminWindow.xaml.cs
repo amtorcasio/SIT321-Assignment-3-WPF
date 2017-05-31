@@ -43,6 +43,8 @@ namespace SIT321_Assignment_3_WPF
             PopulateList();
             btnEditUser.IsEnabled = false;
             btnEditUnit.IsEnabled = false;
+            btnAddUser.IsEnabled = true;
+            btnAddUnit.IsEnabled = true;
         }
 
         private void PopulateList()
@@ -144,6 +146,8 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
+            btnAddUser.IsEnabled = false;
+            btnAddUnit.IsEnabled = false;
             var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
             adduserWindow.Show();
             adduserWindow.Focus();
@@ -197,6 +201,9 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
+            btnAddUnit.IsEnabled = false;
+            btnAddUser.IsEnabled = false;
+            btnEditUser.IsEnabled = false;
             Account SelectedUser;
             using (var conn = Utilities.GetDatabaseSQLConnection())
             {
@@ -244,6 +251,8 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnAddUnit_Click(object sender, RoutedEventArgs e)
         {
+            btnAddUnit.IsEnabled = false;
+            btnAddUser.IsEnabled = false;
             var addunitwindow = new AdminWindows.AddUnit(LoggedInAccount);
             addunitwindow.Show();
             addunitwindow.Focus();
@@ -253,6 +262,9 @@ namespace SIT321_Assignment_3_WPF
 
         private void btnEditUnit_Click(object sender, RoutedEventArgs e)
         {
+            btnAddUnit.IsEnabled = false;
+            btnAddUser.IsEnabled = false;
+            btnEditUnit.IsEnabled = false;
             Unit SelectedUnit;
 
             SelectedUnit = LoggedInAccount.GetUnit( long.Parse(listedUnits[listUnits.SelectedIndex]) );
