@@ -78,25 +78,35 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            // check booleans
             bool accountedited = false;
             bool statuschanged = false;
+            string finalynmsg = "";     // final yes/no msgbox message to accept changes
 
             // account edited check
             if(txtFirstname.Text != Original.FirstName)
             {
+                Editee.FirstName = txtFirstname.Text;
                 accountedited = true;
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblFirstname.Content,Original.FirstName, Editee.FirstName);
             }
             if (txtLastname.Text != Original.LastName)
             {
+                Editee.LastName = txtLastname.Text;
                 accountedited = true;
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblLastname.Content, Original.LastName, Editee.LastName);
             }
             if (txtEmail.Text != Original.Email)
             {
+                Editee.Email = txtEmail.Text;
                 accountedited = true;
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblEmail.Content, Original.Email, Editee.Email);
             }
             if (psbPassword.Password != Original.Password)
             {
+                Editee.Password = psbPassword.Password;
                 accountedited = true;
+                finalynmsg += string.Format("\n {0}\t{1} -> {2}", lblPassword.Content, Original.Password, Editee.Password);
             }
             // status change check
             if (cboStatus.SelectedIndex != OriginalStatus)
