@@ -87,6 +87,30 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 MessageBox.Show("No Changes have been made to the account ... Closing Window", "Nothin has Happened");
                 Close();
             }
+            else
+            {
+                // account has been edited
+                if(accountedited)
+                {
+                    // edit user
+                    Admin.EditUser(Editee, Editee.FirstName, Editee.LastName, Editee.Email, Editee.Password);
+                }
+                // change to status has taken place
+                if(statuschanged)
+                {
+                    if(cboStatus.SelectedIndex == 0)
+                    {
+                        // suspend user
+                        Admin.SuspendUser(Editee);
+                    }
+                    else if(cboStatus.SelectedIndex == 1)
+                    {
+                        // reactivate user
+                        Admin.ReactivateUser(Editee);
+
+                    }
+                }
+            }
 
         }
     }
