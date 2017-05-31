@@ -136,7 +136,7 @@ namespace SARMS.Users
 
                     SQLiteCommand command = connection.CreateCommand();
                     SQLiteDataReader reader = null;
-                    command.CommandText = "SELECT Status FROM Users WHERE Id = @id";
+                    command.CommandText = "SELECT Status FROM User WHERE Id = @id";
                     command.Parameters.AddWithValue("@id", account.ID);
 
                     reader = command.ExecuteReader();
