@@ -33,8 +33,15 @@ namespace SIT321_Assignment_3_WPF
                 if ((loggedInAccount as Student).AtRisk)
                     lblName.Content += "(AT RISK)";
 
+            ChangeUserControls(loggedInAccount.GetType().Name);
+        }
+
+        private void ChangeUserControls(string type)
+        {
             gridBase.Children.Clear();
-            switch (loggedInAccount.GetType().Name)
+
+            // Does the new grid in the added UserControls overlap or replace the current grid in the window?
+            switch (type)
             {
                 case "Administrator":
                     gridBase.Children.Add(new AdministratorControls());
