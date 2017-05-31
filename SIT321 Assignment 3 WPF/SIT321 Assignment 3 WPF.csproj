@@ -133,9 +133,6 @@
     <Compile Include="MainWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShowUserDetails.xaml.cs">
-      <DependentUpon>ShowUserDetails.xaml</DependentUpon>
-    </Compile>
     <Page Include="AdminWindows\AddUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,10 +170,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindows\StudentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ShowUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
