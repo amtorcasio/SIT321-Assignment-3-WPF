@@ -62,8 +62,32 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             else
             {
                 // remove user method call
-                Admin.RemoveUser(Original);
+                if(Admin.RemoveUser(Original))
+                {
+                    MessageBox.Show("Account Removed, Closing Window");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Could Not be Removed, Closing Window");
+                    Close();
+                }
+                
             }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            bool accountedited = false;
+            bool statuschanged = false;
+
+            // check if bool have been changed
+            if (accountedited=false && statuschanged==false)
+            {
+                MessageBox.Show("No Changes have been made to the account ... Closing Window", "Nothin has Happened");
+                Close();
+            }
+
         }
     }
 }
