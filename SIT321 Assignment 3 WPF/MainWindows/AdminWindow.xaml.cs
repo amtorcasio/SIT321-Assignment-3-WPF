@@ -30,7 +30,21 @@ namespace SIT321_Assignment_3_WPF
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
-            
+            PopulateList();
+        }
+
+        private void PopulateList()
+        {
+            var conn = Utilities.GetDatabaseSQLConnection();
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
