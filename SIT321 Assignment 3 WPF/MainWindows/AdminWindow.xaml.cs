@@ -134,6 +134,10 @@ namespace SIT321_Assignment_3_WPF
 
         private void ListItem_Clicked(object sender, RoutedEventArgs e)
         {
+            if ((sender as ListBox).Name == listUsers.Name)
+                btnAddUser.IsEnabled = true;
+            else
+                btnAddUnit.IsEnabled = true;
         }
     }
 }
