@@ -197,7 +197,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MainWindows\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SARMS\SARMS.csproj">
       <Project>{a495c6ec-010c-4ab1-a939-69e39f141921}</Project>
