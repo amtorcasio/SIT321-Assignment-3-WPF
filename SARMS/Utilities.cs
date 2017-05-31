@@ -73,7 +73,6 @@ namespace SARMS
             return atRisk;
         }
 
-        //todo: implement
         private static List<Lecturer> FindLecturers(Unit u)
         {
             List<Lecturer> lecturers = new List<Lecturer>();
@@ -109,7 +108,7 @@ namespace SARMS
                 if (connection != null) connection.Close();
             }
         }
-        //todo: implement
+
         private static List<Administrator> FindAllAdmins()
         {
             List<Administrator> admins = new List<Administrator>();
