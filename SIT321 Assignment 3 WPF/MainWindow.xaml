@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label x:Name="lblName" Content="insert name here" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" FontSize="20"/>
-        <Label x:Name="lblUsertype" Content="insert email here" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto"/>
-        <ContentControl Content="ContentControl" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="481" Width="772"/>
-
+        <Label x:Name="lblName" Content="insert name here" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" FontSize="20" />
+        <Label x:Name="lblUsertype" Content="insert email here" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <Grid x:Name="gridBase" Height="481" Margin="10,78,0,0" VerticalAlignment="Top" Width="772"/>
     </Grid>
 </Window>
