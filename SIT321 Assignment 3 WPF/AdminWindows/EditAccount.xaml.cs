@@ -152,6 +152,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                             Admin.ReactivateUser(Editee);
                         }
                     }
+                    Close();
                 }
             }
 
