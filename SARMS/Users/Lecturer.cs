@@ -36,6 +36,8 @@ namespace SARMS.Users
                 // add assessment to unit after added to database
                 unit.Assessments.Add(assessment);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " added");
             }
             catch (Exception e)
@@ -61,6 +63,8 @@ namespace SARMS.Users
 
                 // remove assessment from unit after removal from database
                 unit.Assessments.Remove(assessment);
+
+                connection.Close();
 
                 System.Diagnostics.Debug.Write("Assessment " + assessment.AssessmentID + " removed");
             }
@@ -96,6 +100,8 @@ namespace SARMS.Users
                 // add student performance on assessment
                 student.Performance.Add(TempStudentAssessment);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " added");
             }
             catch (Exception e)
@@ -125,6 +131,8 @@ namespace SARMS.Users
 
                 // edit student performance on assessment
                 student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+
+                connection.Close();
 
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", assessment " + assessment.AssessmentID + " with mark " + mark + " updated");
             }
@@ -159,6 +167,8 @@ namespace SARMS.Users
                 student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
                 student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
 
+                connection.Close();
+
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " AttendedLecture:" + didAttentLecture.ToString() + " AttendedPractical:" + didAttendPractical.ToString());
             }
             catch (Exception e)
@@ -191,6 +201,8 @@ namespace SARMS.Users
                 // edit student attendanceon on unit
                 student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance = numLectures;
                 student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance = numPracticals;
+
+                connection.Close();
 
                 System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " LectureCount:" + numLectures.ToString() + " PracticalCount:" + numPracticals.ToString());
             }

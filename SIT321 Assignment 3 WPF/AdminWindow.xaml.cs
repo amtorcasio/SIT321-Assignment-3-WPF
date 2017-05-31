@@ -28,8 +28,8 @@ namespace SIT321_Assignment_3_WPF
             LoggedInAccount = lAccount;
 
             InitializeComponent();
-
-            Control userdetails = new ShowUserDetails(String.Format("{0}, {1}", lAccount.FirstName, lAccount.LastName), lAccount.GetType().Name);
+            
+            gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
         }
     }
 }

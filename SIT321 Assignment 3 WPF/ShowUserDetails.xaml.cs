@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using SARMS.Users;
+
 namespace SIT321_Assignment_3_WPF
 {
     /// <summary>
@@ -20,12 +22,12 @@ namespace SIT321_Assignment_3_WPF
     /// </summary>
     public partial class ShowUserDetails : UserControl
     {
-        public ShowUserDetails(string name, string type)
+        public ShowUserDetails(Account a)
         {
             InitializeComponent();
-
-            lblName.Content = name;
-            lblUsertype.Content = type;
+            
+            lblName.Content = String.Format("{0}, {1}", a.LastName, a.FirstName);
+            lblUsertype.Content = a.GetType().Name;
         }
     }
 }

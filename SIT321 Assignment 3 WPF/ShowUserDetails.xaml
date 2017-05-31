@@ -9,6 +9,5 @@
     <Grid>
         <Label Name="lblName" Content="insert name here" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="lblUsertype" Content="insert usertype here" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
-
     </Grid>
 </UserControl>
