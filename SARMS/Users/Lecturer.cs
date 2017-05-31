@@ -137,10 +137,34 @@ namespace SARMS.Users
         // boolean if the student attended the lecturer and practical or did not attend
         public void AddStudentAttendance(Student student, Unit unit, bool didAttentLecture, bool didAttendPractical)
         {
-            //todo: add database side changes + practical changes
-            student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
-            student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
+            var connection = Utilities.GetDatabaseSQLConnection();
 
+            try
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE [UserUnits] SET "+
+                                             "[LectureAttendance] = [LectureAttendance] + @lectbool," +
+                                             "[PracticalAttendance] = [PracticalAttendance] + @pracbool" +
+                                             "WHERE UserID = @sid AND UnitID = @unitid";
+                command.Parameters.AddWithValue("@sid", student.ID);
+                command.Parameters.AddWithValue("@unitid", unit.ID);
+                command.Parameters.AddWithValue("@lectbool", Convert.ToInt32(didAttentLecture));
+                command.Parameters.AddWithValue("@pracbool", Convert.ToInt32(didAttendPractical));
+
+                command.ExecuteNonQuery();
+
+                // edit student performance on assessment
+                student.Units.Find(e => (e.unit.ID == unit.ID)).LectureAttendance += (didAttentLecture ? 1 : 0);
+                student.Units.Find(e => (e.unit.ID == unit.ID)).PracticalAttendance += (didAttendPractical ? 1 : 0);
+
+                System.Diagnostics.Debug.Write("Student " + student.ID + ", unit " + unit.ID + " AttendedLecture:" + didAttentLecture.ToString() + " AttendedPractical:" + didAttendPractical.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("AddStudentAttendance Error: " + e.Message.ToString());
+            }
         }
 
         // direct editing of values
