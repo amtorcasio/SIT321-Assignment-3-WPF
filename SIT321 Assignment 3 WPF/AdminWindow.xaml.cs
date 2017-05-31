@@ -28,11 +28,8 @@ namespace SIT321_Assignment_3_WPF
             LoggedInAccount = lAccount;
 
             InitializeComponent();
-
-            Control userdetails = new ShowUserDetails(lAccount);
-            userdetails.Margin = new Thickness(10, 10, 0, 0);
-
-            grid.Children.Add(userdetails);
+            
+            gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
         }
     }
 }

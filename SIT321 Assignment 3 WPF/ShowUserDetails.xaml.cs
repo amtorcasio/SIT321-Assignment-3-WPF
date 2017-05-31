@@ -26,7 +26,7 @@ namespace SIT321_Assignment_3_WPF
         {
             InitializeComponent();
             
-            lblName.Content = String.Format("{0}, {1}", a.LastName, a.FirstName));
+            lblName.Content = String.Format("{0}, {1}", a.LastName, a.FirstName);
             lblUsertype.Content = a.GetType().Name;
         }
     }
