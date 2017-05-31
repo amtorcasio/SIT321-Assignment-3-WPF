@@ -30,20 +30,27 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             InitializeComponent();
             
             gridUserDetails.Children.Add(new ShowUserDetails(lAccount));
-            InitializeEvents();
             
         }
 
-        private void InitializeEvents()
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            txtDBQuery.KeyDown += new KeyEventHandler(txtDBQuery_Enter);
-            
-            btnAddUser.Click += new RoutedEventHandler(AddNewUser_Clicked);
-            DBFilterUnits.Click += new RoutedEventHandler(RadioButton_Checked);
-            DBFilterUsers.Click += new RoutedEventHandler(RadioButton_Checked);
+            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
+            adduserWindow.Show();
+            adduserWindow.Focus();
         }
 
-        private void txtDBQuery_Enter(object sender, KeyEventArgs e)
+        private void DBFilterUsers_Checked(object sender, RoutedEventArgs e)
+        {
+            txtDBQuery.Focus();
+        }
+
+        private void DBFilterUnits_Checked(object sender, RoutedEventArgs e)
+        {
+            txtDBQuery.Focus();
+        }
+
+        private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -59,20 +66,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 {
                     MessageBox.Show("DB queried with only Users filtered");
                 }
-                    
             }
-        }
-
-        private void AddNewUser_Clicked(object sender, RoutedEventArgs e)
-        {
-            var adduserWindow = new AdminWindows.SetUpAccount(LoggedInAccount);
-            adduserWindow.Show();
-            adduserWindow.Focus();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            txtDBQuery.Focus();
         }
     }
 }

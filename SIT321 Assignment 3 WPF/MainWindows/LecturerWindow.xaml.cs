@@ -23,6 +23,8 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         public LecturerWindow(Lecturer lecturer)
         {
             InitializeComponent();
+
+            gridUserDetails.Children.Add(new ShowUserDetails(lecturer));
         }
     }
 }
