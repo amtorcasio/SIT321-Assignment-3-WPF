@@ -32,10 +32,10 @@ namespace SIT321_Assignment_3_WPF
             Account result = Account.Login(txtEmail.Text, txtPassword.Password);
             if (result != null)
             {
-                var main = new MainWindow(result);
+                var win = new AdminWindow(result);
                 this.Close(); // this.Hide();
-                main.Show();
-                main.Focus();
+                win.Show();
+                win.Focus();
             }
             else
             {

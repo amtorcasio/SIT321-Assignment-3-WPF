@@ -10,19 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using SARMS.Users;
 
 namespace SIT321_Assignment_3_WPF
 {
     /// <summary>
-    /// Interaction logic for AdministratorControls.xaml
+    /// Interaction logic for AdminWindow.xaml
     /// </summary>
-    public partial class AdministratorControls : UserControl
+    public partial class AdminWindow : Window
     {
-        public AdministratorControls()
+        public Account LoggedInAccount { get; private set; }
+
+        public AdminWindow(Account lAccount)
         {
+            LoggedInAccount = lAccount;
+
             InitializeComponent();
+
+            Control userdetails = new ShowUserDetails(String.Format("{0}, {1}", lAccount.FirstName, lAccount.LastName), lAccount.GetType().Name);
         }
     }
 }
