@@ -209,14 +209,13 @@ namespace SARMS.Users
             {
                 using (var connection = Utilities.GetDatabaseSQLConnection())
                 {
-
                     try
                     {
                         connection.Open();
 
                         SQLiteCommand command = connection.CreateCommand();
-                        command.CommandText = "DELETE FROM User WHERE Id = @id";
-                        command.Parameters.AddWithValue("@id", account.ID);
+                        command.CommandText = "DELETE FROM User WHERE Id = @aid";
+                        command.Parameters.AddWithValue("@aid", account.ID);
 
                         return command.ExecuteNonQuery() == 0 ? false : true;
                     }
