@@ -190,7 +190,7 @@ namespace SIT321_Assignment_3_WPF
                         return;
                 }
 
-                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser)
+                var editUserWindow = new AdminWindows.EditAccount(LoggedInAccount, SelectedUser);
             }
             catch (Exception exc)
             {
