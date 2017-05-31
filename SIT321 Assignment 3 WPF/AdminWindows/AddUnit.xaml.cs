@@ -32,8 +32,6 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             InitializeComponent();
 
             Admin = admin;      // make class admin equal to passed administrator
-
-
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

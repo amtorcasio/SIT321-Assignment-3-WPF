@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SARMS.Users;
+using SARMS.Content;
 
 namespace SIT321_Assignment_3_WPF.AdminWindows
 {
@@ -19,9 +21,14 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     /// </summary>
     public partial class EditUnit : Window
     {
-        public EditUnit()
+        // class instance accounts
+        private Administrator Admin;
+
+        public EditUnit(Administrator admin)
         {
             InitializeComponent();
+
+            Admin = admin;      // make class admin equal to passed administrator
         }
     }
 }

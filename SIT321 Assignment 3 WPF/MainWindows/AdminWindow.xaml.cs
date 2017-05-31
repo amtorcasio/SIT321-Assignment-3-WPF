@@ -183,9 +183,15 @@ namespace SIT321_Assignment_3_WPF
         private void ListItem_Clicked(object sender, RoutedEventArgs e)
         {
             if ((sender as ListBox).Name == listUsers.Name)
+            {
                 btnEditUser.IsEnabled = true;
-            else
                 btnEditUnit.IsEnabled = false;
+            }
+            else
+            {
+                btnEditUser.IsEnabled = false;
+                btnEditUnit.IsEnabled = true;
+            }
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
@@ -242,6 +248,43 @@ namespace SIT321_Assignment_3_WPF
             addunitwindow.Focus();
 
             addunitwindow.Closed += re_populate_lists;
+        }
+
+        private void btnEditUnit_Click(object sender, RoutedEventArgs e)
+        {
+            Unit SelectedUnit;
+
+            using (var conn = Utilities.GetDatabaseSQLConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    using (SQLiteCommand c = conn.CreateCommand())
+                    {
+                        c.CommandText = "SELECT * FROM User WHERE Id = @id";
+                        c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+                        using (SQLiteDataReader r = c.ExecuteReader())
+                        {
+                            r.Read();
+
+                            switch ()
+                            {
+                            }
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    throw exc;
+                }
+            }
+
+            var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUser);
+            editUserWindow.Show();
+            editUserWindow.Focus();
+            editUserWindow.Closed += re_populate_lists;
         }
     }
 }
