@@ -86,7 +86,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 Unit NewUnit = new Unit(0,txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
 
-                if(Admin.SearchUnit(NewUnit.Code) != null)
+                if(Admin.SearchUnit(NewUnit.Code, NewUnit.Year, NewUnit.Trimester) != null)
                 {
                     MessageBox.Show("Please alter Unit Code, Year and/or Trimester", "Unit already exists!");
                     return;
