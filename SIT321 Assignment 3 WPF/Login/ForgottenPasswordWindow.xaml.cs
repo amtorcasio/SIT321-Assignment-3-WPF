@@ -20,9 +20,11 @@ namespace SIT321_Assignment_3_WPF
     /// </summary>
     public partial class ForgottenPasswordWindow : Window
     {
-        public ForgottenPasswordWindow()
+        private LoginWindow _from;
+        public ForgottenPasswordWindow(LoginWindow from)
         {
             InitializeComponent();
+            _from = from;
         }
 
         private void btnSendPassword_Click(object sender, RoutedEventArgs e)
@@ -35,6 +37,11 @@ namespace SIT321_Assignment_3_WPF
             {
                 MessageBox.Show("An error occured sending you an email. Perhaps the email you entered does not exist in our system?", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _from.IsEnabled = true;
         }
     }
 }

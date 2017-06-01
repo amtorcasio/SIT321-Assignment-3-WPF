@@ -13,7 +13,7 @@
     <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <GroupBox x:Name="gboUnits" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" FontSize="16" BorderThickness="0">
             <GroupBox.Header>
-                <TextBlock FontWeight="Bold" FontSize="16">Units</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="18">Units</TextBlock>
             </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>

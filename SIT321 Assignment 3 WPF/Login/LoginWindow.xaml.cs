@@ -55,7 +55,7 @@ namespace SIT321_Assignment_3_WPF
         private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
         {
             this.IsEnabled = false;
-            var forgotWin = new ForgottenPasswordWindow();
+            var forgotWin = new ForgottenPasswordWindow(this);
             forgotWin.Show();
             forgotWin.Focus();
         }
