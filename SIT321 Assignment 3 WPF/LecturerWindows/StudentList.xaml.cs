@@ -24,7 +24,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
     {
         private Window _from;
         private Unit _context;
-        private bool infoVisible = true;
+        private bool infoVisible = false;
 
         public StudentList(string windowTitle, string listTitle, Window from)
         {
@@ -107,7 +107,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             }
             else if (info.Count == 1)
             {
-                ToggleInfoVisibility();
+                if (!infoVisible) ToggleInfoVisibility();
+                tboInfo.Visibility = Visibility.Collapsed;
                 var su = info.Single();
                 txtLecturesAttended.Text = su.LectureAttendance.ToString();
                 txtPracticalsAttended.Text = su.PracticalAttendance.ToString();
