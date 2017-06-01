@@ -146,10 +146,10 @@ namespace SARMS.Users
                     {
                         account = user,
                         unit = temp,
-                        LectureAttendance = Convert.ToInt32(reader[2]),
-                        PracticalAttendance = Convert.ToInt32(reader[3]),
-                        StaffFeedback = reader[4].ToString(),
-                        StudentFeedback = reader[5].ToString()
+                        LectureAttendance = (reader[2] != DBNull.Value) ? Convert.ToInt32(reader[2]) : (int?)null,
+                        PracticalAttendance = (reader[3] != DBNull.Value) ? Convert.ToInt32(reader[3]) : (int?)null,
+                        StaffFeedback = (reader[4] != DBNull.Value) ? reader[4].ToString() : null,
+                        StudentFeedback = (reader[5] != DBNull.Value) ? reader[5].ToString() : null
                     });
                 }
             }
