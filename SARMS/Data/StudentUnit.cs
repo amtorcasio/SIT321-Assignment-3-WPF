@@ -7,11 +7,11 @@ namespace SARMS.Data
     {
         private Unit _unit;
         private Account _account;
-        private int _lectureAttendance;
-        private int _practicalAttendance;
+        private int? _lectureAttendance;
+        private int? _practicalAttendance;
         private string _staffFeedback;
         private string _studentFeedback;
-        private bool _atRisk;
+        private bool? _atRisk;
 
         #region Getters and Setters
         public Unit unit
@@ -19,12 +19,12 @@ namespace SARMS.Data
             get { return _unit; }
             set { _unit = value; }
         }
-        public int LectureAttendance
+        public int? LectureAttendance
         {
             get { return _lectureAttendance; }
             set { _lectureAttendance = value; }
         }
-        public int PracticalAttendance
+        public int? PracticalAttendance
         {
             get { return _practicalAttendance; }
             set { _practicalAttendance = value; }
@@ -44,7 +44,7 @@ namespace SARMS.Data
             get { return _account; }
             set { _account = value; }
         }
-        public bool AtRisk
+        public bool? AtRisk
         {
             get { return _atRisk; }
             set { _atRisk = value; }
