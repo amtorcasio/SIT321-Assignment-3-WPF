@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS.Users;
 using SARMS.Content;
+using SARMS.Data;
 using System.Diagnostics;
 
 namespace SIT321_Assignment_3_WPF.LecturerWindows
@@ -23,27 +24,29 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
     public partial class StudentList : Window
     {
         private Window _from;
+        private Lecturer _loggedIn;
         private Unit _context;
-        private bool infoVisible = false;
+        private bool infoVisible = true;
 
-        public StudentList(string windowTitle, string listTitle, Window from)
+        public StudentList(Lecturer loggedIn, string windowTitle, string listTitle, Window from)
         {
             InitializeComponent();
             this.Title = windowTitle;
             tboUnit.Text = listTitle;
             _from = from;
+            _loggedIn = loggedIn;
         }
 
         //All Students At Risk
-        public StudentList(Lecturer lecturer, Window from) :
-            this ("List of Students At Risk (" + lecturer.Email + ")", 
-                "SARs in units lectured by " + lecturer.FirstName + " " + lecturer.LastName, from)
+        public StudentList(Lecturer loggedIn, Window from) :
+            this (loggedIn, "List of Students At Risk (" + loggedIn.Email + ")", 
+                "SARs in units lectured by " + loggedIn.FirstName + " " + loggedIn.LastName, from)
         {
             _context = null;
             var students = new List<Student>();
-            foreach (Unit u in lecturer.Units)
+            foreach (Unit u in loggedIn.Units)
             {
-                students.AddRange(lecturer.viewSAR(u).ConvertAll(i => (Student)i));
+                students.AddRange(loggedIn.viewSAR(u).ConvertAll(i => (Student)i));
             }
             if (students.Count > 0)
             {
@@ -55,7 +58,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         //All Students of a unit
         public StudentList(Lecturer loggedIn, Unit unit, Window from):
-            this ("List of Students (" + loggedIn.Email + ")", unit.Code + ": " + unit.Name, from)
+            this (loggedIn, "List of Students (" + loggedIn.Email + ")", unit.Code + ": " + unit.Name, from)
         {
             _context = unit;
             var students = loggedIn.SearchAccountsByUnit(unit);
@@ -179,6 +182,58 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 txtAtRisk.Visibility = Visibility.Visible;
 
                 infoVisible = true;
+            }
+        }
+
+        private void btnAddAttendance_Click(object sender, RoutedEventArgs e)
+        {
+            if (lsvStudents.SelectedIndex == -1)
+            {
+                MessageBox.Show("You must select a student to change the attendence for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            StudentUnit info = null;
+            if (lsvInfo.Visibility == Visibility.Visible)
+            {
+                if (lsvInfo.SelectedIndex == -1)
+                {
+                    MessageBox.Show("You must select an unit to change the attendance for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                info = lsvInfo.SelectedItem as SARMS.Data.StudentUnit;
+                if (info == null)
+                {
+                    throw new InvalidCastException("Student info from list is null after cast. This should not happen");
+                }
+            }
+            else
+            {
+                var student = lsvStudents.SelectedItem as Student;
+                if (student == null)
+                {
+                    throw new Exception("Student from list is null after cast. This should not happen");
+                }
+                info = student.Units.Where(su => (su.unit.ID == _context.ID)).Single();
+
+                var attendLecture = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the lecture?",
+                    "Lecture Attendance", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+                if (attendLecture == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+
+                var attendPractical = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the practical?",
+                    "Practical Attendance", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+                if (attendPractical == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+
+                bool didAttendLecture = (attendLecture == MessageBoxResult.Yes);
+                bool didAttendPractical = (attendPractical == MessageBoxResult.Yes);
+                _loggedIn.AddStudentAttendance(student, info.unit, didAttendLecture, didAttendPractical);
             }
         }
     }
