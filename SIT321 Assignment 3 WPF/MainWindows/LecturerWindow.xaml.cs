@@ -100,9 +100,12 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             {
                 lsvUnits.Visibility = Visibility.Hidden;
                 txtbNoUnits.Visibility = Visibility.Visible;
+
                 UriBuilder builder = new UriBuilder(emailUrl);
                 var query = HttpUtility.ParseQueryString(builder.Query);
-
+                query["subject"] = "Lecturer ID: " + lecturer.ID + " has no units listed and is requesting access";
+                builder.Query = query.ToString();
+                hypEmail.NavigateUri = builder.Uri;
             }
             else
             {
