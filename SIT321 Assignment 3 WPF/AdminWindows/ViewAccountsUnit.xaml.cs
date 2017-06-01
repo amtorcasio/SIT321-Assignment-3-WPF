@@ -70,7 +70,18 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 }
             }
 
+            // list account
             UniteeUserAccount = Admin.SearchAccountsByUnit(Unitee);
+
+            foreach(Account a in UniteeUserAccount)
+            {
+                ListBoxItem lbi = new ListBoxItem();
+                lbi.Content = string.Format("{0}, {1}", a.FirstName, a.LastName);
+                lbi.FontSize = 14;
+                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                lstbAccounts.Items.Add(lbi);
+            }
         }
     }
 }

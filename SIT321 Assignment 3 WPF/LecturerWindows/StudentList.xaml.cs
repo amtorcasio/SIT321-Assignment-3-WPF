@@ -181,11 +181,5 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 infoVisible = true;
             }
         }
-
-        private void gboSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (gboInfo.Width < gboPerformance.Width) gboInfo.Width = gboPerformance.Width;
-            if (gboPerformance.Width < gboInfo.Width) gboPerformance.Width = gboInfo.Width;
-        }
     }
 }
