@@ -119,6 +119,15 @@
     <Compile Include="AdminWindows\SetUpAccount.xaml.cs">
       <DependentUpon>SetUpAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LecturerWindows\AssessmentList.xaml.cs">
+      <DependentUpon>AssessmentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LecturerWindows\StudentData.xaml.cs">
+      <DependentUpon>StudentData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LecturerWindows\StudentList.xaml.cs">
+      <DependentUpon>StudentList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +159,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindows\SetUpAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LecturerWindows\AssessmentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LecturerWindows\StudentData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LecturerWindows\StudentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
