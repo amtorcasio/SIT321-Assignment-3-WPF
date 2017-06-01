@@ -62,7 +62,6 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             string CodeNumStr;
             string CodeLetters;
             DateTime year;
-            string unitid;
 
             try
             {
@@ -106,13 +105,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
             else
             {
-                // compile unit id
-                unitid = ((int)CodeLetters[0]).ToString() + ((int)CodeLetters[1]).ToString() + ((int)CodeLetters[2]).ToString() +
-                    CodeNumStr.ToString() + Trimester.ToString() + int.Parse(txtYear.Text).ToString();
-
-                int longunitid = int.Parse(unitid);
-
-                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
+                Unit NewUnit = new Unit(0, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
 
                 if (Admin.DoesRecordExist(NewUnit))
