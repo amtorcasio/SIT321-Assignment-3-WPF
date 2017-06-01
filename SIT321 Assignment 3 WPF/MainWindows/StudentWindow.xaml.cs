@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS;
 using SARMS.Users;
+using SARMS.Data;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -23,53 +24,12 @@ namespace SIT321_Assignment_3_WPF.MainWindows
     {
         public Student LoggedInAccount { get; private set; }
 
-        public StudentWindow(Account lAccount)
+
+        public StudentWindow(Student student)
         {
-            LoggedInAccount = lAccount as Student;
+            LoggedInAccount = student;
             InitializeComponent();
-
-            PopulateList();
-        }
-
-        private void PopulateList(object sender, EventArgs e)
-        {
-            PopulateList();
-        }
-
-        private void PopulateList()
-        {
-            // clear list if previously populated
-            lsbUnits.Items.Clear();
-
-            var conn = Utilities.GetDatabaseSQLConnection();
-            try
-            {
-                conn.Open();
-
-                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-                c.CommandText = "SELECT * FROM UserUnits WHERE UserID = @id";
-                c.Parameters.AddWithValue("@id", LoggedInAccount.ID);
-                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
-
-                if (r.HasRows)
-                {
-                    while (r.Read())
-                    {
-                        ListBoxItem lbi = new ListBoxItem();
-                        lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
-                        lbi.FontSize = 14;
-                        lbi.Padding = new Thickness(5, 5, 5, 5);
-
-                        lsbUnits.Items.Add(lbi);
-                    }
-                }
-
-                lsbUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            lsbUnits.ItemsSource = student.Units;
         }
 
         private void ListItem_Clicked(object sender, RoutedEventArgs e)
@@ -78,32 +38,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 btnShowReport.IsEnabled = true;
         }
 
-        private void btnShowReport_Clicked(object sender, RoutedEventArgs e)
+        private void btnShowReport_Click(object sender, RoutedEventArgs e)
         {
-            /*var conn = Utilities.GetDatabaseSQLConnection();
+            var readFeedbackWindow = new Student_Windows.ShowFeedback();
+            readFeedbackWindow.Show();
+            readFeedbackWindow.Focus();
 
-            try
-            {
-                conn.Open();
 
-                System.Data.SQLite.SQLiteCommand c = conn.CreateCommand();
-
-                System.Data.SQLite.SQLiteDataReader r = c.ExecuteReader();
-                r.Read();
-                Account SelectedUser;
-
-                var winReport = //todo add window for report Generation
-                winReport.Show();
-                winReport.Focus();
-            }
-            catch (Exception exc)
-            {
-                throw exc;
-            }
-            finally
-            {
-                conn.Close();
-            }*/
+            
         }
     }
 }
