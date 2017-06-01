@@ -28,8 +28,7 @@
         <Button x:Name="btnUnenrol" Content="Unenrol/Unassign" HorizontalAlignment="Left" Margin="494,496,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnUnenrol_Click"/>
         <Label x:Name="lblUnassignUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,498,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtUnenrolUnitCode" HorizontalAlignment="Left" Height="22" Margin="667,502,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
-        <Button x:Name="btnViewAccountsInUnit" Content="View Accounts in Unit" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewAccountsInUnit_Click"/>
-        <Button x:Name="btnViewStudentData" Content="View Student Unit Data" HorizontalAlignment="Left" Margin="10,452,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewStudentData_Click"/>
+        <Button x:Name="btnViewStudentData" Content="View Student Unit Data" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewStudentData_Click"/>
         <Button x:Name="btnRefresh" Content="Refresh Lists" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="160" Height="23" Click="btnRefresh_Click"/>
 
     </Grid>
