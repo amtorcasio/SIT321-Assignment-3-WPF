@@ -548,7 +548,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 }
                 else
                 {
-                    MessageBox.Show("You must select an account to unenrol fropm unit");
+                    MessageBox.Show("You must select an account to unenrol from unit");
                     return;
                 }
             }
