@@ -5,7 +5,7 @@ namespace SARMS.Content
     public class Assessment : IEquatable<Assessment>
     {
         #region Private Fields
-        private int _assessmentID;
+        private long _assessmentID;
         private string _name;
         private int _totalMarks;
         private decimal _weight;
@@ -13,7 +13,7 @@ namespace SARMS.Content
         #endregion
 
         #region Getters and Setters
-        public int AssessmentID
+        public long AssessmentID
         {
             get { return _assessmentID; }
             set { _assessmentID = value; }
@@ -60,7 +60,7 @@ namespace SARMS.Content
         }
 
         // constructor
-        public Assessment(int id, string name, int totalMark, decimal weight, Unit unit)
+        public Assessment(long id, string name, int totalMark, decimal weight, Unit unit)
         {
             _assessmentID = id;
             _name = name;
