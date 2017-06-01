@@ -175,6 +175,55 @@ namespace SARMS.Users
         }
 
         // get user status a user
+        public List<Unit> GatUnitsbyAccount(Account account)
+        {
+            List<long> unitids = new List<long>();
+            List<Unit> returnunits = new List<Unit>();
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
+                try
+                {
+                    connection.Open();
+
+                    command = connection.CreateCommand();
+                    command.CommandText = "SELECT UnitID FROM UserUnits WHERE UserId = @id";
+                    command.Parameters.AddWithValue("@id", account.ID);
+
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+
+                        long result = -1;
+                        long.TryParse(reader[0].ToString(), out result);
+
+                        unitids.Add(result);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                finally
+                {
+                    if (reader != null) reader.Close();
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+            }
+
+            foreach(long id in unitids)
+            {
+                returnunits.Add(GetUnit(id));
+            }
+
+            return returnunits;
+
+        }
+
+        // get user status a user
         public int GetStatus(Account account)
         {
             if (DoesRecordExist(account))
