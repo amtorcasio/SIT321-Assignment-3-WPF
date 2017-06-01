@@ -35,6 +35,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             tboUnit.Text = listTitle;
             _from = from;
             _loggedIn = loggedIn;
+            if (loggedIn.ID == "admin.sarms") btnAddAttendance.Visibility = Visibility.Collapsed;
         }
 
         //All Students At Risk
@@ -53,6 +54,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvStudents.ItemsSource = students;
                 lsvStudents.Visibility = Visibility.Visible;
                 tboNoStudents.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                tboNoStudents.Text = "Congratulations. It appears no students in your units are at risk";
             }
         }
 
@@ -128,7 +133,21 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvInfo.Visibility = Visibility.Hidden;
                 tboInfo.Visibility = Visibility.Collapsed;
                 var su = info.Single();
-                txtLecturesAttended.Text = su.LectureAttendance.ToString();
+
+                Binding lecBinding = new Binding();
+                lecBinding.Source = su;
+                lecBinding.Path = new PropertyPath("LectureAttendance");
+                lecBinding.Mode = BindingMode.TwoWay;
+                lecBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                BindingOperations.SetBinding(txtLecturesAttended, TextBox.TextProperty, lecBinding);
+
+                Binding pracBinding = new Binding();
+                pracBinding.Source = su;
+                pracBinding.Path = new PropertyPath("PracticalAttendance");
+                pracBinding.Mode = BindingMode.TwoWay;
+                pracBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                BindingOperations.SetBinding(txtPracticalsAttended, TextBox.TextProperty, pracBinding);
+
                 txtPracticalsAttended.Text = su.PracticalAttendance.ToString();
                 tboStaffFeedback.Text = su.StaffFeedback;
                 tboStudentFeedback.Text = su.StudentFeedback;
@@ -235,6 +254,30 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 bool didAttendPractical = (attendPractical == MessageBoxResult.Yes);
                 _loggedIn.AddStudentAttendance(student, info.unit, didAttendLecture, didAttendPractical);
             }
+        }
+
+        private void btnEditAttendance_Click(object sender, RoutedEventArgs e)
+        {
+            var student = lsvStudents.SelectedItem as Student;
+            var info = student.Units;
+            long unitID;
+            if (_context != null)
+            {
+                unitID = info.Where(su => (su.unit.ID == _context.ID)).Single().unit.ID;
+            }
+            else
+            {
+                if (info.Count == 1)
+                {
+                    unitID = info.Single().unit.ID;
+                }
+                else
+                {
+                    unitID = (lsvInfo.SelectedItem as StudentUnit).unit.ID;
+                }
+            }
+            var editWindow = new EditAttendanceWindow(_loggedIn, this, ref student, unitID);
+            editWindow.Show();
         }
     }
 }

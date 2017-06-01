@@ -125,6 +125,9 @@
     <Compile Include="LecturerWindows\AssessmentList.xaml.cs">
       <DependentUpon>AssessmentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LecturerWindows\EditAttendanceWindow.xaml.cs">
+      <DependentUpon>EditAttendanceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LecturerWindows\StudentData.xaml.cs">
       <DependentUpon>StudentData.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LecturerWindows\AssessmentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LecturerWindows\EditAttendanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

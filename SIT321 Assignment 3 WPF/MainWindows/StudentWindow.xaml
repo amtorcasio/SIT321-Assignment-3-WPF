@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.MainWindows"
         mc:Ignorable="d"
-        Title="Student At Risk Management System:" Height="540" Width="597" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,4,7">
-        <ListBox x:Name="lsbUnits" HorizontalAlignment="Left" Height="420" Margin="30,60,0,0" VerticalAlignment="Top" Width="420" SelectionChanged="lsbUnits_SelectionChanged"/>
-        <TextBlock x:Name="txtUnits" HorizontalAlignment="Left" Margin="30,36,0,0" TextWrapping="Wrap" Text="Units" VerticalAlignment="Top"/>
-        <Button x:Name="btnShowReport" Content="Show Feedback" HorizontalAlignment="Left" Margin="470,432,0,0" VerticalAlignment="Top" Width="102" Click="btnShowReport_Click"/>
+        Title="Student At Risk Management System:" Height="440" Width="470" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ListBox x:Name="lsbUnits" HorizontalAlignment="Left" Height="317" Margin="10,41,0,0" VerticalAlignment="Top" Width="434" SelectionChanged="lsbUnits_SelectionChanged"/>
+        <Button x:Name="btnShowFeedback" Content="Show Feedback" HorizontalAlignment="Left" Margin="340,363,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Click="btnShowFeedback_Click"/>
+        <Label x:Name="lbEnrolledUnits" Content="Enrolled units" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
