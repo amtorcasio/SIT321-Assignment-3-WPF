@@ -231,10 +231,10 @@ namespace SARMS.Users
         }
 
         // view student at risk
-        public List<Account> viewSAR(Unit unit)
+        public List<Student> viewSAR(Unit unit)
         {
             // create empty return variable
-            List<Account> SARs = new List<Account>();
+            List<Student> SARs = new List<Student>();
 
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteCommand command = null;
@@ -245,6 +245,19 @@ namespace SARMS.Users
                 connection.Open();
 
                 command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM User INNER JOIN UserUnits ON User.Id = UserUnits.UserID WHERE UserUnits.UnitID = @unitID AND UserUnits.AtRisk = 1";
+                command.Parameters.AddWithValue("@unitID", unit.ID);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Student temp = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                    LoadStudent(ref temp);
+                    SARs.Add(temp);
+                }
+                
+                /*
                 command.CommandText = "SELECT [UserID] FROM [UserUnits] WHERE UnitID = @unitid AND AtRisk = 1";
                 command.Parameters.AddWithValue("@unitid", unit.ID);
 
@@ -280,7 +293,7 @@ namespace SARMS.Users
                 }
 
                 connection.Close();
-
+                */
             }
             finally
             {

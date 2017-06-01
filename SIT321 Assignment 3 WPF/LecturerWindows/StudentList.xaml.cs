@@ -40,11 +40,22 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 "SARs in units lectured by " + lecturer.FirstName + " " + lecturer.LastName, from)
         {
             _context = null;
+            var students = new List<Student>();
+            foreach (Unit u in lecturer.Units)
+            {
+                students.AddRange(lecturer.viewSAR(u).ConvertAll(i => (Student)i));
+            }
+            if (students.Count > 0)
+            {
+                lsvStudents.ItemsSource = students;
+                lsvStudents.Visibility = Visibility.Visible;
+                tboNoStudents.Visibility = Visibility.Hidden;
+            }
         }
 
         //All Students of a unit
         public StudentList(Lecturer loggedIn, Unit unit, Window from):
-            this ("List of Students", unit.Code + ": " + unit.Name, from)
+            this ("List of Students (" + loggedIn.Email + ")", unit.Code + ": " + unit.Name, from)
         {
             _context = unit;
             var students = loggedIn.SearchAccountsByUnit(unit);
@@ -100,7 +111,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             }
 
             var info = student.Units;
-            if (_context != null) info.Where(su => (su.unit.ID == _context.ID)).ToList();
+            if (_context != null)
+            {
+                info = info.Where(su => (su.unit.ID == _context.ID)).ToList();
+            }
             if (info.Count == 0)
             {
                 throw new Exception("This should never happen");
@@ -108,6 +122,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             else if (info.Count == 1)
             {
                 if (!infoVisible) ToggleInfoVisibility();
+                lsvInfo.Visibility = Visibility.Hidden;
                 tboInfo.Visibility = Visibility.Collapsed;
                 var su = info.Single();
                 txtLecturesAttended.Text = su.LectureAttendance.ToString();
@@ -118,7 +133,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             }
             else
             {
-
+                if (infoVisible) ToggleInfoVisibility();
+                tboInfo.Visibility = Visibility.Collapsed;
+                lsvInfo.Visibility = Visibility.Visible;
+                lsvInfo.ItemsSource = info;
             }
         }
 
@@ -162,6 +180,12 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
                 infoVisible = true;
             }
+        }
+
+        private void gboSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (gboInfo.Width < gboPerformance.Width) gboInfo.Width = gboPerformance.Width;
+            if (gboPerformance.Width < gboInfo.Width) gboPerformance.Width = gboInfo.Width;
         }
     }
 }

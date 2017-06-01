@@ -605,6 +605,7 @@ namespace SARMS.Users
                 {
                     if (reader != null) reader.Close();
                     if (command != null) command.Dispose();
+                    if (reader != null) reader.Close();
                     if (connection != null) connection.Close();
                 }
                 return result;

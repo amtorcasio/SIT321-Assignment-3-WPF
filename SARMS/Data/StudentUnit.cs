@@ -50,5 +50,15 @@ namespace SARMS.Data
             set { _atRisk = value; }
         }
         #endregion
+
+        public string IsAtRisk
+        {
+            get
+            {
+                if (_atRisk == null || _atRisk == false) return "No";
+                else return "Yes";
+            }
+            private set { }
+        }
     }
 }
