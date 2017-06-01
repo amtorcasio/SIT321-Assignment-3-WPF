@@ -561,7 +561,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnViewAccountsInUnit_Click(object sender, RoutedEventArgs e)
         {
+            Unit SelectedUnit;
 
+            SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
+
+            var ViewAccountsWindow = new AdminWindows.ViewAccountsUnit(LoggedInAccount, SelectedUnit);
+            ViewAccountsWindow.Show();
+            ViewAccountsWindow.Focus();
+            ViewAccountsWindow.Closed += re_populate_lists;
         }
     }
 }
