@@ -91,9 +91,9 @@ namespace SIT321_Assignment_3_WPF.MainWindows
     }
 
         
-        private void btnShowReport_Click(object sender, RoutedEventArgs e)
+        private void btnShowFeedback_Click(object sender, RoutedEventArgs e)
         {
-            btnShowReport.IsEnabled = false;
+            btnShowFeedback.IsEnabled = false;
             var readFeedbackWindow = new StudentWindows.ShowFeedback();
             readFeedbackWindow.Show();
             readFeedbackWindow.Focus();
@@ -104,11 +104,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             if (lsbUnits.SelectedIndex != -1)
             {
-                btnShowReport.IsEnabled = true;
+                btnShowFeedback.IsEnabled = true;
             }
             else
             {
-                btnShowReport.IsEnabled = false;
+                btnShowFeedback.IsEnabled = false;
             }
         }
     }
