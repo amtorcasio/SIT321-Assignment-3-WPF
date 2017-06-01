@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS.Users;
 using SARMS.Content;
-using System.ComponentModel;
+using System.Diagnostics;
 
 namespace SIT321_Assignment_3_WPF.LecturerWindows
 {
@@ -28,7 +28,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         {
             InitializeComponent();
             this.Title = windowTitle;
-            lblUnit.Content = listTitle;
+            tboUnit.Text = listTitle;
             _from = from;
         }
 
@@ -44,7 +44,13 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         public StudentList(Lecturer loggedIn, Unit unit, Window from):
             this ("List of Students", unit.Code + ": " + unit.Name, from)
         {
-            lsvStudents.ItemsSource = loggedIn.SearchAccountsByUnit(unit);
+            var students = loggedIn.SearchAccountsByUnit(unit);
+            if (students.Count > 0)
+            {
+                lsvStudents.ItemsSource = students;
+                lsvStudents.Visibility = Visibility.Visible;
+                tboNoStudents.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -55,7 +61,31 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         private void lsvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lsvPerformance.ItemsSource = (lsvStudents.SelectedItem as Student).Performance;
+            if (lsvStudents.SelectedIndex == -1)
+            {
+                tboPerformance.Text = "Select a student to view his/her marks";
+                lsvPerformance.Visibility = Visibility.Collapsed;
+                tboPerformance.Visibility = Visibility.Visible;
+            }
+            var perf = (lsvStudents.SelectedItem as Student).Performance;
+            if (perf.Count == 0)
+            {
+                lsvPerformance.Visibility = Visibility.Collapsed;
+                tboPerformance.Visibility = Visibility.Visible;
+                tboPerformance.Text = "No assessments marks are on record for the selected student";
+            }
+            else
+            {
+                lsvPerformance.ItemsSource = perf;
+                lsvPerformance.Visibility = Visibility.Visible;
+                tboPerformance.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void OnNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
         }
     }
 }
