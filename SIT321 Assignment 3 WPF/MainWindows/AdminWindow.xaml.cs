@@ -643,7 +643,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                     }
                 }
 
-                List<Unit> resultunits = LoggedInAccount.GatUnitsbyAccount(tempacc);
+                List<Unit> resultunits = LoggedInAccount.GetUnitsbyAccount(tempacc);
+
+                if(resultunits == null)
+                {
+                    listUnits.Items.Clear();
+                    listedUnits = new List<string>();
+                    return;
+                }
 
                 listedUnits = new List<string>();
 

@@ -175,7 +175,7 @@ namespace SARMS.Users
         }
 
         // get user status a user
-        public List<Unit> GatUnitsbyAccount(Account account)
+        public List<Unit> GetUnitsbyAccount(Account account)
         {
             List<long> unitids = new List<long>();
             List<Unit> returnunits = new List<Unit>();
