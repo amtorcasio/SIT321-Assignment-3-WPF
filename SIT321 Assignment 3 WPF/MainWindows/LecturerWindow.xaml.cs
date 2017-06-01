@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Web;
 using System.Diagnostics;
+using SIT321_Assignment_3_WPF.LecturerWindows;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -55,7 +56,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnViewStudents_Click(object sender, RoutedEventArgs e)
         {
-
+            var listWindow = new StudentList(LoggedIn, lsvUnits.SelectedItem as Unit, this);
+            listWindow.Show();
+            listWindow.Focus();
+            this.Hide();
         }
 
         private void btnAddAssessment_Click(object sender, RoutedEventArgs e)

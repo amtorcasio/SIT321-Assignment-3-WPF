@@ -260,6 +260,7 @@ namespace SARMS.Users
                         {
                             result.Add(new StudentAssessment() { account = student, Assessment = ass, Mark = Convert.ToDecimal(reader[0]) });
                         }
+                        reader.Close();
                     }
                 }
 
