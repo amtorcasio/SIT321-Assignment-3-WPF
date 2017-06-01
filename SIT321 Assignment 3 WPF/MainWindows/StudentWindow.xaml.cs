@@ -32,20 +32,26 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             lsbUnits.ItemsSource = student.Units;
         }
 
-        private void ListItem_Clicked(object sender, RoutedEventArgs e)
-        {
-            if ((sender as ListBox).Name == lsbUnits.Name)
-                btnShowReport.IsEnabled = true;
-        }
-
+        
         private void btnShowReport_Click(object sender, RoutedEventArgs e)
         {
+            btnShowReport.IsEnabled = false;
             var readFeedbackWindow = new StudentWindows.ShowFeedback();
             readFeedbackWindow.Show();
             readFeedbackWindow.Focus();
+            lsbUnits.UnselectAll();
+        }
 
-
-            
+        private void lsbUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lsbUnits.SelectedIndex != -1)
+            {
+                btnShowReport.IsEnabled = true;
+            }
+            else
+            {
+                btnShowReport.IsEnabled = false;
+            }
         }
     }
 }
