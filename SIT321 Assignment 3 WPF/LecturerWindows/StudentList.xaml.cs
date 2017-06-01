@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS.Users;
 using SARMS.Content;
+using System.ComponentModel;
 
 namespace SIT321_Assignment_3_WPF.LecturerWindows
 {

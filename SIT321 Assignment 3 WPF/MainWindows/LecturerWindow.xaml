@@ -20,8 +20,7 @@
                     <RowDefinition Height="33*"/>
                     <RowDefinition Height="26*"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="lsvUnits" VerticalAlignment="Top" Margin="0,5,0,0" FontSize="14"
-                  ButtonBase.Click = "GridViewColumnHeaderClickedHandler" HorizontalAlignment="Center" Foreground="Black" Loaded="lsvUnits_Loaded" TabIndex="3" HorizontalContentAlignment="Center" >
+                <ListView x:Name="lsvUnits" VerticalAlignment="Top" Margin="0,5,0,0" FontSize="14" HorizontalAlignment="Center" Foreground="Black" Loaded="lsvUnits_Loaded" TabIndex="3" HorizontalContentAlignment="Center" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
                             <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
@@ -31,11 +30,6 @@
                             <GridViewColumn Header="Lectures to date" DisplayMemberBinding="{Binding TotalLectures}"/>
                             <GridViewColumn Header="Practicals to date" DisplayMemberBinding="{Binding TotalPracticals}" />
                             <GridViewColumn Header="No. of Assessments" DisplayMemberBinding="{Binding AssessmentCount}" />
-                            <GridView.ColumnHeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}">
-                                    <Setter Property="MinWidth" Value="75" />
-                                </Style>
-                            </GridView.ColumnHeaderContainerStyle>
                         </GridView>
                     </ListView.View>
                     <ListView.ItemContainerStyle>
@@ -54,26 +48,5 @@
             <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Center" Text="ask an admin" /></Hyperlink>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Center" Width="Auto"/>
         </TextBlock>
-
     </Grid>
-    <Window.Resources>
-        <DataTemplate x:Key="HeaderTemplateArrowUp">
-            <DockPanel>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
-                <Path x:Name="arrow"
-           StrokeThickness = "1"					  
-           Fill            = "gray"
-           Data            = "M 5,10 L 15,10 L 10,5 L 5,10"/>
-            </DockPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="HeaderTemplateArrowDown">
-            <DockPanel>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding }"/>
-                <Path x:Name="arrow"
-              StrokeThickness = "1"					  
-              Fill            = "gray"
-              Data            = "M 5,5 L 10,10 L 15,5 L 5,5"/>
-            </DockPanel>
-        </DataTemplate>
-    </Window.Resources>
 </Window>
