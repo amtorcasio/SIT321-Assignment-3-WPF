@@ -568,7 +568,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             var ViewAccountsWindow = new AdminWindows.ViewAccountsUnit(LoggedInAccount, SelectedUnit);
             ViewAccountsWindow.Show();
             ViewAccountsWindow.Focus();
-            ViewAccountsWindow.Closed += re_populate_lists;
         }
     }
 }
