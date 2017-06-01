@@ -160,17 +160,38 @@ namespace SIT321_Assignment_3_WPF
             {
                 if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == false)
                 {
-                    // do we want to filter both tables at the same time?
+                    MessageBox.Show("Select a filter");
                 }
-                else if (DBFilterUnits.IsChecked == true)
+                else
                 {
-                    MessageBox.Show("DB queried with only Units filtered");
-                }
-                else if (DBFilterUnits.IsChecked == false)
-                {
-                    MessageBox.Show("DB queried with only Users filtered");
-                }
+                    using (var conn = Utilities.GetDatabaseSQLConnection())
+                    {
+                        SQLiteCommand c = null;
 
+                        try
+                        {
+                            conn.Open();
+
+                            c = conn.CreateCommand();
+                            if (DBFilterUnits.IsChecked == true)
+                            {
+                                MessageBox.Show("Queried with only Units filtered");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Queried with only Users filtered");
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            throw exc;
+                        }
+                        finally
+                        {
+                            if (c != null) c.Dispose();
+                        }
+                    }
+                }
             }
         }
 
