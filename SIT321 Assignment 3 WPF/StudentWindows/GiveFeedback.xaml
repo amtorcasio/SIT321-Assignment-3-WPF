@@ -11,7 +11,7 @@
         <Label Content="Subject" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtSubject" HorizontalAlignment="Left" Height="23" Margin="77,10,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="585"/>
         <TextBox x:Name="txtComment" HorizontalAlignment="Left" Height="133" Margin="77,43,0,0" TextWrapping="Wrap" Padding="5,5,5,5" VerticalAlignment="Top" Width="585"/>
-        <Button x:Name="btnPostComment" Background="#54e5be" BorderBrush="#3ed1a9" Content="Post" HorizontalAlignment="Left" Margin="507,181,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnPostComment" Background="#00d89f" BorderBrush="#004432" Content="Post" HorizontalAlignment="Left" Margin="507,181,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="587,181,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="75"/>
         <Label Content="Comment" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
 
