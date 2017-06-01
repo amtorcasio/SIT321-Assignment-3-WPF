@@ -77,7 +77,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnViewSAR_Click(object sender, RoutedEventArgs e)
         {
-
+            var listWindow = new StudentList(LoggedIn, this);
+            listWindow.Show();
+            listWindow.Focus();
+            this.Hide();
         }
     }
 }

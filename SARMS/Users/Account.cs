@@ -49,7 +49,7 @@ namespace SARMS.Users
         //Constructors
         public Account(Administrator creator)
         { }
-        protected Account(string id, string firstName, string lastName, string email, string password)
+        public Account(string id, string firstName, string lastName, string email, string password)
         {
             _ID = id;
             _firstName = firstName;
