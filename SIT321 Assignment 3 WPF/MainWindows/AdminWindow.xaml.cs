@@ -387,6 +387,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                         MessageBox.Show("Unit does not exist");
                         return;
                     }
+                    else
+                    {
+                        if(LoggedInAccount.isAccountEnrolled(enrol.ID, listedUsers[listUsers.SelectedIndex]))
+                        {
+                            MessageBox.Show("Account already Enrolled to Unit");
+                            return;
+                        }
+                    }
 
                     using (var conn = Utilities.GetDatabaseSQLConnection())
                     {

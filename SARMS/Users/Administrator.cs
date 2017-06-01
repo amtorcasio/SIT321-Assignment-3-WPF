@@ -518,6 +518,40 @@ namespace SARMS.Users
             }
         }
 
+        public bool isAccountEnrolled(long unitid, string userid)
+        {
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
+
+                try
+                {
+                    connection.Open();
+                    command = connection.CreateCommand();
+
+                    command.CommandText = "SELECT * FROM UserUnits WHERE UserID = @userid AND UnitID = @unitid";
+                    command.Parameters.AddWithValue("@userid", userid);
+                    command.Parameters.AddWithValue("@unitid", unitid);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                finally
+                {
+                    if (reader != null) reader.Close();
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+            }
+        }
+
         public List<Account> SearchAccountsByUnit(Unit unit)
         {
             List<Account> result = new List<Account>();
