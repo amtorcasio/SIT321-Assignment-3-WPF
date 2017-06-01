@@ -28,6 +28,8 @@
         <Button x:Name="btnUnenrol" Content="Unenrol/Unassign" HorizontalAlignment="Left" Margin="494,496,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnUnenrol_Click"/>
         <Label x:Name="lblUnassignUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,498,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtUnenrolUnitCode" HorizontalAlignment="Left" Height="22" Margin="667,502,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <Button x:Name="btnViewAccountsInUnit" Content="View Accounts in Unit" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewAccountsInUnit_Click"/>
+        <ListBox x:Name="listUnits_Copy" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450"/>
 
     </Grid>
 </Window>
