@@ -184,7 +184,7 @@ namespace SARMS.Users
                 {
                     reader.Read();
                     result = new Unit(
-                        Convert.ToInt32(reader[0]),
+                        Convert.ToInt64(reader[0]),
                         reader[1].ToString(),
                         reader[2].ToString(),
                         Convert.ToInt16(reader[3]),
@@ -222,7 +222,7 @@ namespace SARMS.Users
 
                 while (reader.Read())
                 {
-                    result.Add(new Assessment(Convert.ToInt32(reader[0]), reader[1].ToString(),
+                    result.Add(new Assessment(Convert.ToInt64(reader[0]), reader[1].ToString(),
                         Convert.ToInt32(reader[2]), Convert.ToDecimal(reader[3]), u));
                 }
                 return result;
