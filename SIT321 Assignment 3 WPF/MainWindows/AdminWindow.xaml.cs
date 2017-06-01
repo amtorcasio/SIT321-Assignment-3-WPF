@@ -574,14 +574,17 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnViewStudentData_Click(object sender, RoutedEventArgs e)
         {
-            Unit SelectedUnit;
-            SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
+            if (listUnits.SelectedIndex >= 0)
+            {
+                Unit SelectedUnit;
+                SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
 
-            var listWindow = new StudentList(gimmeprivs, SelectedUnit, this);
+                var listWindow = new StudentList(gimmeprivs, SelectedUnit, this);
 
-            listWindow.Show();
-            listWindow.Focus();
-            this.Hide();
+                listWindow.Show();
+                listWindow.Focus();
+                this.Hide();
+            }
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
