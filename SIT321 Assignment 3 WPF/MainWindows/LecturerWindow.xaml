@@ -10,21 +10,29 @@
         x:Class="SIT321_Assignment_3_WPF.MainWindows.LecturerWindow"
         mc:Ignorable="d"
         Title="Student At Risk Management System:" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Left" VerticalAlignment="Top" SizeToContent="WidthAndHeight">
-    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Label x:Name="lblUnits" Content="Units" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="Auto" RenderTransformOrigin="2.243,0.269" FontWeight="Bold" FontSize="16"/>
-        <ListView x:Name="lsvUnits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,46,10,10" FontSize="14"
-                  GridViewColumnHeader.Click = "GridViewColumnHeaderClickedHandler" >
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Trimester" DisplayMemberBinding="{Binding Trimester}"/>
-                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Year}"/>
-                    <GridViewColumn Header="Lectures to date" DisplayMemberBinding="{Binding TotalLectures}"/>
-                    <GridViewColumn Header="Practicals to date" DisplayMemberBinding="{Binding TotalPracticals}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="551">
+        <GroupBox x:Name="gboUnits" Header="Units" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" BorderThickness="0" Width="527">
+            <ListView x:Name="lsvUnits" VerticalAlignment="Top" Margin="0" FontSize="14"
+                  ButtonBase.Click = "GridViewColumnHeaderClickedHandler" >
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Trimester" DisplayMemberBinding="{Binding Trimester}"/>
+                        <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Year}"/>
+                        <GridViewColumn Header="Lectures to date" DisplayMemberBinding="{Binding TotalLectures}"/>
+                        <GridViewColumn Header="Practicals to date" DisplayMemberBinding="{Binding TotalPracticals}" />
+                        <GridViewColumn Header="No. of Assessments" DisplayMemberBinding="{Binding AssessmentCount}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Center" Margin="12,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="You do not appear to have any units listed under your account. Please" VerticalAlignment="Bottom" Width="Auto"/>
+            <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Top" Text="ask an admin" /></Hyperlink>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Bottom" Width="Auto"/>
+        </TextBlock>
+
     </Grid>
     <Window.Resources>
         <DataTemplate x:Key="HeaderTemplateArrowUp">

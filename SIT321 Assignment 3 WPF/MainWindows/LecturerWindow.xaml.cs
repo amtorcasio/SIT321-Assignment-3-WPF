@@ -15,6 +15,7 @@ using SARMS.Content;
 using SARMS.Users;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Web;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -24,6 +25,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
     public partial class LecturerWindow : Window
     {
         private Lecturer LoggedIn;
+        private static string emailUrl = "mailto:sarms.edu@gmail.com";
 
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
@@ -94,10 +96,26 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             InitializeComponent();
             LoggedIn = lecturer;
-            lsvUnits.ItemsSource = lecturer.Units;
+            if (lecturer.Units.Count == 0)
+            {
+                lsvUnits.Visibility = Visibility.Hidden;
+                txtbNoUnits.Visibility = Visibility.Visible;
+                UriBuilder builder = new UriBuilder(emailUrl);
+                var query = HttpUtility.ParseQueryString(builder.Query);
+
+            }
+            else
+            {
+                lsvUnits.ItemsSource = lecturer.Units;
+            }
         }
 
         private void lsvUnitsGVCH_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
 
         }

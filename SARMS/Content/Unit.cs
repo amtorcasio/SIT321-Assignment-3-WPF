@@ -55,6 +55,12 @@ namespace SARMS.Content
 
         public List<Assessment> Assessments;
 
+        public string AssessmentCount
+        {
+            get { return (Assessments != null) ? Assessments.Count.ToString() : "0"; }
+            private set { }
+        }
+
         // constructor
         public Unit(long id, string name, string code, int year, int trimester, int totalLectures, int totalPracticals)
         {
