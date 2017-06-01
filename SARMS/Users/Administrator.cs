@@ -609,13 +609,10 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@unitcode", unitCode);
                     reader = command.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        Unit temp = new Unit(Convert.ToInt64(reader[0]), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
-                        temp.Assessments = GetUnitAssessments(temp);
-                        return temp;
-                    }
-                    return null;
+                    reader.Read();
+                    Unit temp = new Unit(Convert.ToInt64(reader[0]), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                    temp.Assessments = GetUnitAssessments(temp);
+                    return temp;
                 }
                 finally
                 {
