@@ -240,7 +240,7 @@ namespace SARMS.Users
             else return false;
         }
 
-        public bool AddUnit(long id, string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
+        public bool AddUnit(string name, string code, DateTime year, int trimester, int totalLectures, int totalPracticals)
         {
             //Do we need a DoesRecordExist function to check for existing units in its table?
             using (var connection = Utilities.GetDatabaseSQLConnection())
@@ -251,8 +251,7 @@ namespace SARMS.Users
                     connection.Open();
 
                     command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO Unit (Id, Name, Code, Year, Trimester, TotalLectures, TotalPracticals) VALUES (@id, @name, @code, @year, @trimester, @totallect, @totalprac)";
-                    command.Parameters.AddWithValue("@id", id);
+                    command.CommandText = "INSERT INTO Unit (Id, Name, Code, Year, Trimester, TotalLectures, TotalPracticals) VALUES (NULL, @name, @code, @year, @trimester, @totallect, @totalprac)";
                     command.Parameters.AddWithValue("@name", name);
                     command.Parameters.AddWithValue("@code", code);
                     command.Parameters.AddWithValue("@year", year.Year); // datetime holds day,month, and year. but we only need year, and receiving input from the frontend is a string, not a datetime object (at least i don't think so)
@@ -278,7 +277,7 @@ namespace SARMS.Users
                 try
                 {
                     // add the edited unit
-                    AddUnit(newunit.ID, newunit.Name, newunit.Code, Convert.ToDateTime("01/01/" + newunit.Year.ToString()), newunit.Trimester, newunit.TotalLectures, newunit.TotalPracticals);
+                    AddUnit(newunit.Name, newunit.Code, Convert.ToDateTime("01/01/" + newunit.Year.ToString()), newunit.Trimester, newunit.TotalLectures, newunit.TotalPracticals);
 
                     // begin process to delink old unit and link newunit
                     connection.Open();
@@ -582,7 +581,7 @@ namespace SARMS.Users
                     reader = command.ExecuteReader();
 
                     reader.Read();
-                    Unit temp = new Unit(long.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                    Unit temp = new Unit(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
                     return temp;
                 }
                 finally

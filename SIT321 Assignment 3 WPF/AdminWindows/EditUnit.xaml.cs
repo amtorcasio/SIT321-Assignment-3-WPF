@@ -110,7 +110,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 unitid = ((int)CodeLetters[0]).ToString() + ((int)CodeLetters[1]).ToString() + ((int)CodeLetters[2]).ToString() +
                     CodeNumStr.ToString() + Trimester.ToString() + int.Parse(txtYear.Text).ToString();
 
-                long longunitid = long.Parse(unitid);
+                int longunitid = int.Parse(unitid);
 
                 Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
