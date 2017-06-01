@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SQLite;
-
+using System.Text.RegularExpressions;
 using SARMS;
 using SARMS.Users;
 using SARMS.Content;
@@ -375,11 +375,64 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             if(txtEnrolUnitCode.Text.Trim().Count() == 6)
             {
-                // prepare unitcode
-                string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
+                if (listUsers.SelectedIndex >= 0)
+                {
+                    // prepare unitcode
+                    string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
 
-                // get unit
-                Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
+                    // get unit
+                    Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
+
+                    using (var conn = Utilities.GetDatabaseSQLConnection())
+                    {
+                        try
+                        {
+                            conn.Open();
+
+                            using (SQLiteCommand c = conn.CreateCommand())
+                            {
+                                c.CommandText = "SELECT * FROM User WHERE Id = @id";
+                                c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+                                using (SQLiteDataReader r = c.ExecuteReader())
+                                {
+                                    r.Read();
+
+                                    switch ((UserType)Convert.ToInt32(r[3]))
+                                    {
+                                        case UserType.Administrator:
+                                            MessageBox.Show("You cannot enrol a fellow administrator to a unit");
+                                            return;
+                                        case UserType.Lecturer:
+                                            Lecturer templec = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            LoggedInAccount.AddLecturerUnit(templec, enrol);
+                                            break;
+                                        case UserType.Student:
+                                            Student tempstu = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            LoggedInAccount.AddStudentUnit(tempstu, enrol);
+                                            break;
+                                        default:
+                                            return;
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            throw exc;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You must select an account to enrol to unit");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("UnitCode must be 6 character!");
+                return;
             }
         }
     }
