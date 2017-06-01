@@ -97,6 +97,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             InitializeComponent();
             LoggedIn = lecturer;
+            this.Title += " (" + lecturer.Email + ")";
             if (lecturer.Units.Count == 0)
             {
                 gboUnits.Visibility = Visibility.Hidden;
@@ -115,6 +116,29 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
+        }
+
+        private void btnViewStudents_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddAssessment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lsvUnits_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (lsvUnits.Items.Count > 0)
+            {
+                lsvUnits.SelectedIndex = 0;
+            }
+        }
+
+        private void btnViewSAR_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
