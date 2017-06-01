@@ -599,9 +599,54 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             if (listUsers.SelectedIndex >= 0)
             {
-                Account tempaccount = LoggedInAccount.SearchAccountsById(listedUsers[listUsers.SelectedIndex]);
+                Account tempacc;
+                listUnits.Items.Clear();
 
-                List<Unit> resultunits = LoggedInAccount.GatUnitsbyAccount(tempaccount);
+                using (var connection = Utilities.GetDatabaseSQLConnection())
+                {
+                    SQLiteCommand command = null;
+                    SQLiteDataReader r = null;
+
+                    try
+                    {
+                        connection.Open();
+                        command = connection.CreateCommand();
+
+                        command.CommandText = "SELECT * FROM User WHERE Id = @userid";
+                        command.Parameters.AddWithValue("@userid", listedUsers[listUsers.SelectedIndex]);
+                        r = command.ExecuteReader();
+
+                        if (r.HasRows)
+                        {
+                            r.Read();
+                            tempacc = new Account(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[7].ToString(), r[6].ToString());
+                        }
+                        else
+                            return;
+                    }
+                    finally
+                    {
+                        if (r != null) r.Close();
+                        if (command != null) command.Dispose();
+                        if (connection != null) connection.Close();
+                    }
+                }
+
+                List<Unit> resultunits = LoggedInAccount.GatUnitsbyAccount(tempacc);
+
+                listedUnits = new List<string>();
+
+                foreach(Unit u in resultunits)
+                {
+                    ListBoxItem lbi = new ListBoxItem();
+                    lbi.Content = string.Format("{0}: {1}", u.Code, u.Name);
+                    lbi.FontSize = 14;
+                    lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                    listUnits.Items.Add(lbi);
+                    listedUnits.Add(u.ID.ToString());
+                }
+
             }
         }
 
@@ -612,6 +657,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 Unit temppass = new Unit(long.Parse(listedUnits[listUnits.SelectedIndex]), null, null, 0, 0, 0, 0);
                 List<Account> unitusers = LoggedInAccount.SearchAccountsByUnit(temppass);
                 listUsers.Items.Clear();
+                listedUsers = new List<string>();
 
                 foreach (Account a in unitusers)
                 {
@@ -636,6 +682,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                     }
 
                     listUsers.Items.Add(lbi);
+                    listedUsers.Add(a.ID);
                 }
             }
         }
