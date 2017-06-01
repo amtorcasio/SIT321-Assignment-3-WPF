@@ -602,6 +602,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             if (listUsers.SelectedIndex >= 0)
             {
+                string daid = listedUsers[listUsers.SelectedIndex];
+
+                if ( LoggedInAccount.GetType(daid) == 0 )
+                {
+                    MessageBox.Show("Cannot Select an Administrator!");
+                    return;
+                }
+
                 Account tempacc;
                 listUnits.Items.Clear();
 
