@@ -259,6 +259,11 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         private void btnEditAttendance_Click(object sender, RoutedEventArgs e)
         {
             var student = lsvStudents.SelectedItem as Student;
+            if (student == null)
+            {
+                MessageBox.Show("Student Must be Selected!", "Caution!");
+                return;
+            }
             var info = student.Units;
             long unitID;
             if (_context != null)
