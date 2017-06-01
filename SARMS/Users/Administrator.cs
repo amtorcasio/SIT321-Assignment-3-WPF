@@ -337,7 +337,7 @@ namespace SARMS.Users
                         removed = true;
                     }
 
-                    if (DoesRecordExist("SELECT 1 FROM Unit WHERE UnitID = " + unit.ID))
+                    if (DoesRecordExist("SELECT 1 FROM Unit WHERE ID = " + unit.ID))
                     {
                         command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
                         command.ExecuteNonQuery();
