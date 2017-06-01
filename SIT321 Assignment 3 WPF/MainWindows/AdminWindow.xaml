@@ -13,10 +13,10 @@
 
         <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450"/>
         <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450"/>
-        <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="209,452,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown"/>
+        <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="188,494,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown"/>
 
-        <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="119,460,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>
-        <RadioButton Name="DBFilterUnits" Content="Search units" HorizontalAlignment="Left" Margin="31,460,0,0" VerticalAlignment="Top" Click="DBFilterUnits_Click"/>
+        <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="98,502,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>
+        <RadioButton Name="DBFilterUnits" Content="Search units" HorizontalAlignment="Left" Margin="10,502,0,0" VerticalAlignment="Top" Click="DBFilterUnits_Click"/>
 
         <Button Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="844,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUser_Click"/>
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
@@ -29,6 +29,7 @@
         <Label x:Name="lblUnassignUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,498,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtUnenrolUnitCode" HorizontalAlignment="Left" Height="22" Margin="667,502,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
         <Button x:Name="btnViewAccountsInUnit" Content="View Accounts in Unit" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewAccountsInUnit_Click"/>
+        <Button x:Name="btnViewStudentData" Content="View Student Unit Data" HorizontalAlignment="Left" Margin="10,452,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewStudentData_Click"/>
 
     </Grid>
 </Window>

@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using SARMS;
 using SARMS.Users;
 using SARMS.Content;
+using SIT321_Assignment_3_WPF.LecturerWindows;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -568,6 +569,19 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             var ViewAccountsWindow = new AdminWindows.ViewAccountsUnit(LoggedInAccount, SelectedUnit);
             ViewAccountsWindow.Show();
             ViewAccountsWindow.Focus();
+        }
+
+        private void btnViewStudentData_Click(object sender, RoutedEventArgs e)
+        {
+            Unit SelectedUnit;
+            SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
+
+            Lecturer gimmeprivs = new Lecturer("","","","","");
+            var listWindow = new StudentList(gimmeprivs, SelectedUnit, this);
+
+            listWindow.Show();
+            listWindow.Focus();
+            this.Hide();
         }
     }
 }
