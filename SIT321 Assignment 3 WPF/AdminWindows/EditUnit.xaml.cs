@@ -122,7 +122,16 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         private void btnRemoveUnit_Click(object sender, RoutedEventArgs e)
         {
-            Admin.RemoveUnit(Unitee);
+            if (Admin.RemoveUnit(Unitee) )
+            {
+                MessageBox.Show("Unit has been successfully removed from database");
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Error in removing unit from database", "Error");
+                Close();
+            }
         }
     }
 }

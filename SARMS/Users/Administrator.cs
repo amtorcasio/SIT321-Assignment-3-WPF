@@ -306,8 +306,9 @@ namespace SARMS.Users
             }
         }
 
-        public void RemoveUnit(Unit unit)
+        public bool RemoveUnit(Unit unit)
         {
+            bool removed = false;
             using (var connection = Utilities.GetDatabaseSQLConnection())
             {
                 SQLiteCommand command = null;
@@ -325,6 +326,7 @@ namespace SARMS.Users
                         // TABLE: UserUnits - Remove Records of Unit
                         command.CommandText = "DELETE FROM UserUnits WHERE UnitID = @uid";
                         command.ExecuteNonQuery();
+                        removed = true;
                     }
 
                     if (DoesRecordExist("SELECT 1 FROM Assessment WHERE UnitID = " + unit.ID))
@@ -332,11 +334,17 @@ namespace SARMS.Users
                         // TABLE: Assessment - Remove Records of Unit
                         command.CommandText = "DELETE FROM Assessment WHERE UnitID = @uid";
                         command.ExecuteNonQuery();
+                        removed = true;
                     }
 
-                    // TABLE: Unit - Remove Records of Unit
-                    command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
-                    command.ExecuteNonQuery();
+                    if (DoesRecordExist("SELECT 1 FROM Unit WHERE UnitID = " + unit.ID))
+                    {
+                        command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                        command.ExecuteNonQuery();
+                        removed = true;
+                    }
+
+                    return removed;
 
                 }
                 finally
