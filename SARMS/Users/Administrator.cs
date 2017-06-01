@@ -368,7 +368,7 @@ namespace SARMS.Users
                     command = connection.CreateCommand();
 
                     command.CommandText = "INSERT INTO UserUnits" +
-                                            "([UserID],[UnitID],[LectureAttendance],[PracticalAttendance],[StaffFeedback],[StudentFeedback])" +
+                                            "([UserID],[UnitID],[LectureAttendance],[PracticalAttendance])" +
                                             "VALUES( @sid, @unitid, 0, 0 )";
 
                     command.Parameters.AddWithValue("@sid", student.ID);
