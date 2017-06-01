@@ -400,7 +400,16 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@sid", student.ID);
                     command.Parameters.AddWithValue("@unitid", unit.ID);
 
-                    return command.ExecuteNonQuery() == 0 ? false : true;
+                    if(command.ExecuteNonQuery() != 0)
+                    {
+                        command.CommandText = "DELETE FROM UserAssessment WHERE UserID = @sid";
+                        if(command.ExecuteNonQuery() != 0)
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
                 }
                 finally
                 {
@@ -423,7 +432,7 @@ namespace SARMS.Users
                     command = connection.CreateCommand();
 
                     command.CommandText = "INSERT INTO UserUnits" +
-                                            "([UserID],[UnitID],[LectureAttendance],[PracticalAttendance],[StaffFeedback],[StudentFeedback])" +
+                                            "([UserID],[UnitID])" +
                                             "VALUES( @lid, @unitid )";
 
                     command.Parameters.AddWithValue("@lid", lecturer.ID);
