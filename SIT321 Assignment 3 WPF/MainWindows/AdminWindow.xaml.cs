@@ -416,20 +416,29 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                         case UserType.Administrator:
                                             MessageBox.Show("You cannot enrol a fellow administrator to a unit");
                                             r.Close();
+                                            c.Dispose();
                                             conn.Close();
                                             return;
                                         case UserType.Lecturer:
                                             Lecturer templec = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
                                             r.Close();
+                                            c.Dispose();
                                             conn.Close();
-                                            LoggedInAccount.AddLecturerUnit(templec, enrol);
-                                            break;
+                                            if(LoggedInAccount.AddLecturerUnit(templec, enrol))
+                                            {
+                                                MessageBox.Show("Lecturer " + templec.FirstName + " " + templec.LastName + " has been assigned to Unit");
+                                            }
+                                            return;
                                         case UserType.Student:
                                             Student tempstu = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
                                             r.Close();
+                                            c.Dispose();
                                             conn.Close();
-                                            LoggedInAccount.AddStudentUnit(tempstu, enrol);
-                                            break;
+                                            if(LoggedInAccount.AddStudentUnit(tempstu, enrol))
+                                            {
+                                                MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been enrolled to Unit");
+                                            }
+                                            return;
                                         default:
                                             return;
                                     }
