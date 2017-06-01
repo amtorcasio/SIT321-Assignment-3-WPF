@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using SARMS;
 using SARMS.Users;
 using SARMS.Data;
+using System.Data.SQLite;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -24,13 +25,70 @@ namespace SIT321_Assignment_3_WPF.MainWindows
     {
         public Student LoggedInAccount { get; private set; }
 
+        private List<string> listedUnits;
 
         public StudentWindow(Student student)
         {
             LoggedInAccount = student;
             InitializeComponent();
-            lsbUnits.ItemsSource = student.Units;
-        }
+            //lsbUnits.ItemsSource = student.Units;
+
+            // clear listboxes if previously populated
+            listedUnits = new List<string>();
+            lsbUnits.Items.Clear();
+
+
+
+            // Get database connection to populate listboxes
+            using (var conn = Utilities.GetDatabaseSQLConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    SQLiteCommand c = conn.CreateCommand();
+                    
+                    c.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON UnitID WHERE UserID = @id";
+                    c.Parameters.AddWithValue("@id", LoggedInAccount.ID);
+                    using (SQLiteDataReader r = c.ExecuteReader())
+                    {
+                        if (r.HasRows)
+                        {
+                            int count = 0;
+                            while (r.Read())
+                            {
+                                listedUnits.Add(r[0].ToString());
+                                ListBoxItem lbi = new ListBoxItem();
+                                lbi.Content = r[2].ToString() + ": " + r[1].ToString();
+                                lbi.FontSize = 14;
+                                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                                switch (count % 2)
+                                {
+                                    case 0:
+                                        lbi.Background = System.Windows.Media.Brushes.LightGray;
+                                        break;
+                                    case 1:
+                                        lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                                        break;
+                                    default:
+                                        return;
+                                }
+
+                                lsbUnits.Items.Add(lbi);
+                                count++;
+                            }
+                        }
+                    }
+
+                    c.Dispose();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+    }
 
         
         private void btnShowReport_Click(object sender, RoutedEventArgs e)
