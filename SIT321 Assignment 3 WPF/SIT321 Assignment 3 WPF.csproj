@@ -146,6 +146,12 @@
     <Compile Include="MainWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StudentWindows\GiveFeedback.xaml.cs">
+      <DependentUpon>GiveFeedback.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StudentWindows\ShowFeedback.xaml.cs">
+      <DependentUpon>ShowFeedback.xaml</DependentUpon>
+    </Compile>
     <Page Include="AdminWindows\AddUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +207,14 @@
     <Page Include="MainWindows\StudentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StudentWindows\GiveFeedback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StudentWindows\ShowFeedback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

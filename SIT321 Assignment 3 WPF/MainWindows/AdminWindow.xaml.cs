@@ -17,7 +17,7 @@ using SARMS;
 using SARMS.Users;
 using SARMS.Content;
 
-namespace SIT321_Assignment_3_WPF
+namespace SIT321_Assignment_3_WPF.MainWindows
 {
     /// <summary>
     /// Interaction logic for AdminWindow.xaml

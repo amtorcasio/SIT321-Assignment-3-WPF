@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="StudentList" Height="300" Width="300">
-    <Grid>
-        
+        Title="List of Students" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <GroupBox x:Name="gboUnits" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" FontSize="16" BorderThickness="0">
+            <GroupBox.Header>
+                <TextBlock x:Name="gpoLabel" FontWeight="Bold" FontSize="18" Text="Unit name here"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="26*"/>
+                </Grid.RowDefinitions>
+                <ListView x:Name="lsvStudents" VerticalAlignment="Top" Margin="0,5,0,0" FontSize="14"
+                        ButtonBase.Click = "GridViewColumnHeaderClickedHandler" HorizontalAlignment="Center" Foreground="Black" Loaded="lsvUnits_Loaded" TabIndex="3" HorizontalContentAlignment="Center" >
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="MinWidth" Value="75" />
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="First Name"/>
+                            <GridViewColumn Header="Last Name"/>
+                            <GridViewColumn Header="Email"/>
+                            <GridViewColumn Header="Average Mark"/>
+                            <GridViewColumn Header="Lecture Attendance"/>
+                            <GridViewColumn Header="Lecture Performance"/>
+                            <GridViewColumn Header="Average Mark" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <Button x:Name="btnAddAssessment" Content="Add Assessment" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="135" Grid.Row="1" Margin="0,10,0,0" Click="btnAddAssessment_Click" TabIndex="2"/>
+                <Button x:Name="btnViewStudents" Content="View Student List" HorizontalAlignment="Right" Margin="0,10,140,0" VerticalAlignment="Top" Width="143" Grid.Row="1" Click="btnViewStudents_Click" TabIndex="1" IsDefault="True"/>
+                <Button x:Name="btnViewSAR" Content="View all students at risk" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="185" Click="btnViewSAR_Click"/>
+            </Grid>
+        </GroupBox>
+        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Left" Margin="12,26,10,10" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Visibility="Collapsed"><InlineUIContainer>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="You do not appear to have any units listed under your account. Please" VerticalAlignment="Center" Width="Auto"/>
+                </InlineUIContainer><Run Text=" "/><Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><InlineUIContainer>
+                        <TextBlock VerticalAlignment="Center" Text="ask an admin" />
+                    </InlineUIContainer></Hyperlink><Run Text=" "/><InlineUIContainer>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Center" Width="Auto"/>
+                </InlineUIContainer></TextBlock>
+
     </Grid>
 </Window>
