@@ -382,6 +382,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                     // get unit
                     Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
+                    if (enrol == null)
+                    {
+                        MessageBox.Show("Unit does not exist");
+                        return;
+                    }
 
                     using (var conn = Utilities.GetDatabaseSQLConnection())
                     {
@@ -393,6 +398,8 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                             {
                                 c.CommandText = "SELECT * FROM User WHERE Id = @id";
                                 c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+
 
                                 using (SQLiteDataReader r = c.ExecuteReader())
                                 {
