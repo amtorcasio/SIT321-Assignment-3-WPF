@@ -288,13 +288,13 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@newlectol", newunit.TotalLectures);
                     command.Parameters.AddWithValue("@newpractol", newunit.TotalPracticals);
 
-                    command.CommandText =   "UPDATE [Unit] SET,"+
-                                                   "[Name] = @newname,"+
-                                                   "[Code] = @newcode," +
-                                                   "[Year] = @newyear," +
-                                                   "[Trimester] = @newtri," +
-                                                   "[TotalLectures] = @newlectol," +
-                                                   "[TotalPracticals] = @newpractol" +
+                    command.CommandText =   "UPDATE [Unit] SET "+
+                                                   "[Name] = @newname, "+
+                                                   "[Code] = @newcode, " +
+                                                   "[Year] = @newyear, " +
+                                                   "[Trimester] = @newtri, " +
+                                                   "[TotalLectures] = @newlectol, " +
+                                                   "[TotalPracticals] = @newpractol " +
                                                    "WHERE Id = @uid";
                     command.ExecuteNonQuery();
                 }
