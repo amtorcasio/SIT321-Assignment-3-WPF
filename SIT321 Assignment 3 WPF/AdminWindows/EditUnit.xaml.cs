@@ -110,7 +110,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 if (Admin.DoesRecordExist(NewUnit))
                 {
-                    MessageBox.Show("Unit already exists, please alter alpha and/or numeric section of Unit Code.");
+                    MessageBox.Show("Please alter Unit Code, Year and/or Trimester", "Unit already exists!");
                     return;
                 }
 
