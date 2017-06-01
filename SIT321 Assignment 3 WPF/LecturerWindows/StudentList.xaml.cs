@@ -22,25 +22,40 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
     /// </summary>
     public partial class StudentList : Window
     {
-        public StudentList(string windowTitle, string listTitle)
+        private Window _from;
+
+        public StudentList(string windowTitle, string listTitle, Window from)
         {
+            InitializeComponent();
             this.Title = windowTitle;
-            gpoLabel.Text = listTitle;
+            lblUnit.Content = listTitle;
+            _from = from;
         }
 
         //All Students At Risk
-        public StudentList(Lecturer lecturer) :
+        public StudentList(Lecturer lecturer, Window from) :
             this ("List of Students At Risk (" + lecturer.Email + ")", 
-                "SARs in units lectured by " + lecturer.FirstName + " " + lecturer.LastName)
+                "SARs in units lectured by " + lecturer.FirstName + " " + lecturer.LastName, from)
         {
-            InitializeComponent();
+            
         }
 
         //All Students of a unit
-        public StudentList(Unit unit):
-            this ("List of Students", unit.Code + ": " + unit.Name)
+        public StudentList(Lecturer loggedIn, Unit unit, Window from):
+            this ("List of Students", unit.Code + ": " + unit.Name, from)
         {
-            InitializeComponent();
+            lsvStudents.ItemsSource = loggedIn.SearchAccountsByUnit(unit);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _from.Show();
+            _from.Focus();
+        }
+
+        private void lsvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lsvPerformance.ItemsSource = (lsvStudents.SelectedItem as Student).Performance;
         }
     }
 }

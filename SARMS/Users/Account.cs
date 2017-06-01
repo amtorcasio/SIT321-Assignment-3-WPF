@@ -258,8 +258,10 @@ namespace SARMS.Users
 
                         if (reader.HasRows)
                         {
+                            reader.Read();
                             result.Add(new StudentAssessment() { account = student, Assessment = ass, Mark = Convert.ToDecimal(reader[0]) });
                         }
+                        reader.Close();
                     }
                 }
 

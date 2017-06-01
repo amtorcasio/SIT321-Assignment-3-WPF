@@ -290,5 +290,51 @@ namespace SARMS.Users
             }
             return SARs;
         }
+
+        public List<Account> SearchAccountsByUnit(Unit unit)
+        {
+            List<Account> result = new List<Account>();
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
+
+                try
+                {
+                    connection.Open();
+                    command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM User INNER JOIN UserUnits ON User.Id = UserUnits.UserID WHERE UserUnits.UnitID = @id";
+                    command.Parameters.AddWithValue("@id", unit.ID);
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        switch ((UserType)Convert.ToInt32(reader[3]))
+                        {
+                            //UserType.Administrator should not happen
+                            case UserType.Administrator:
+                                break;
+                            case UserType.Lecturer:
+                                break;
+                            case UserType.Student:
+                                Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
+                                LoadStudent(ref student);
+                                result.Add(student);
+                                break;
+                            default:
+                                return null;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+                return result;
+            }
+        }
+
     }
 }
