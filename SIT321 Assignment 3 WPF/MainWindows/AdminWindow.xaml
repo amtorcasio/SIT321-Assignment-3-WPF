@@ -11,9 +11,9 @@
         <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="494,10,0,0" VerticalAlignment="Top"/>
 
-        <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450"/>
+        <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450" SelectionChanged="listUnits_SelectionChanged"/>
         <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450"/>
-        <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="188,494,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown"/>
+        <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="188,494,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown" TextChanged="txtDBQuery_TextChanged"/>
 
         <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="98,502,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>
         <RadioButton Name="DBFilterUnits" Content="Search units" HorizontalAlignment="Left" Margin="10,502,0,0" VerticalAlignment="Top" Click="DBFilterUnits_Click"/>

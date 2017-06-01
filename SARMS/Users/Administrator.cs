@@ -135,6 +135,45 @@ namespace SARMS.Users
             return false;
         }
 
+        // get type of user
+        public int GetType(string accountid)
+        {
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
+                try
+                {
+                    connection.Open();
+
+                    command = connection.CreateCommand();
+                    command.CommandText = "SELECT Type FROM User WHERE Id = @id";
+                    command.Parameters.AddWithValue("@id", accountid);
+
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+
+                        int result = -1;
+                        int.TryParse(reader[0].ToString(), out result);
+
+                        return result;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+                finally
+                {
+                    if (reader != null) reader.Close();
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+            }
+        }
+
         // get user status a user
         public int GetStatus(Account account)
         {

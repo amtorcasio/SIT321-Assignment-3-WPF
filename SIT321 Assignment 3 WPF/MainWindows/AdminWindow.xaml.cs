@@ -594,5 +594,43 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             txtUnenrolUnitCode.Text = string.Empty;
             MessageBox.Show("Window has been Refreshed");
         }
+
+        private void listUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Unit temppass = new Unit(long.Parse(listedUnits[listUnits.SelectedIndex]), null, null, 0, 0, 0, 0);
+            List<Account> unitusers = LoggedInAccount.SearchAccountsByUnit(temppass);
+            listUsers.Items.Clear();
+
+            foreach (Account a in unitusers)
+            {
+                ListBoxItem lbi = new ListBoxItem();
+                lbi.Content = string.Format("{0}, {1}", a.FirstName, a.LastName);
+                lbi.FontSize = 14;
+                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                switch ((UserType)Convert.ToInt32(LoggedInAccount.GetType(a.ID)))
+                {
+                    case UserType.Administrator:
+                        lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                        break;
+                    case UserType.Lecturer:
+                        lbi.Background = System.Windows.Media.Brushes.Aqua;
+                        break;
+                    case UserType.Student:
+                        lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                        break;
+                    default:
+                        return;
+                }
+
+                listUsers.Items.Add(lbi);
+            }
+
+        }
+
+        private void txtDBQuery_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
