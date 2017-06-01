@@ -43,10 +43,10 @@
                 <Button x:Name="btnViewSAR" Content="View all students at risk" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="185" Click="btnViewSAR_Click"/>
             </Grid>
         </GroupBox>
-        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Left" Margin="12,26,10,10" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Visibility="Collapsed">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="You do not appear to have any units listed under your account. Please" VerticalAlignment="Center" Width="Auto"/>
+        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="14" Width="440" Visibility="Hidden">
+            You do not appear to have any units listed under your account. Please
             <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Center" Text="ask an admin" /></Hyperlink>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Center" Width="Auto"/>
+            to add units to your account if you believe this is an error
         </TextBlock>
     </Grid>
 </Window>
