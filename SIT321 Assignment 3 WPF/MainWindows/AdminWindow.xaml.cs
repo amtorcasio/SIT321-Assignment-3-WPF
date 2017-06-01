@@ -370,5 +370,17 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             editUnitWindow.Focus();
             editUnitWindow.Closed += re_populate_lists;
         }
+
+        private void btnEnrol_Click(object sender, RoutedEventArgs e)
+        {
+            if(txtEnrolUnitCode.Text.Trim().Count() == 6)
+            {
+                // prepare unitcode
+                string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
+
+                // get unit
+                Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
+            }
+        }
     }
 }
