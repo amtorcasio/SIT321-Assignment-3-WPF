@@ -16,6 +16,7 @@ using SARMS.Users;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Web;
+using System.Diagnostics;
 
 namespace SIT321_Assignment_3_WPF.MainWindows
 {
@@ -98,14 +99,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             LoggedIn = lecturer;
             if (lecturer.Units.Count == 0)
             {
-                lsvUnits.Visibility = Visibility.Hidden;
+                gboUnits.Visibility = Visibility.Hidden;
                 txtbNoUnits.Visibility = Visibility.Visible;
 
-                UriBuilder builder = new UriBuilder(emailUrl);
-                var query = HttpUtility.ParseQueryString(builder.Query);
-                query["subject"] = "Lecturer ID: " + lecturer.ID + " has no units listed and is requesting access";
-                builder.Query = query.ToString();
-                hypEmail.NavigateUri = builder.Uri;
+                emailUrl += "?subject=Lecturer ID: '" + lecturer.ID + "' has no units listed and is requesting access";
+                hypEmail.NavigateUri = new Uri(emailUrl);
             }
             else
             {
@@ -113,14 +111,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             }
         }
 
-        private void lsvUnitsGVCH_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void OnNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
         }
     }
 }

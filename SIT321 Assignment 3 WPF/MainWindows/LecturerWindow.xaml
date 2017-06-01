@@ -10,10 +10,13 @@
         x:Class="SIT321_Assignment_3_WPF.MainWindows.LecturerWindow"
         mc:Ignorable="d"
         Title="Student At Risk Management System:" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Left" VerticalAlignment="Top" SizeToContent="WidthAndHeight">
-    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="551">
-        <GroupBox x:Name="gboUnits" Header="Units" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" BorderThickness="0" Width="527">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <GroupBox x:Name="gboUnits" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" FontSize="16" BorderThickness="0">
+            <GroupBox.Header>
+                <TextBlock FontWeight="Bold" FontSize="16">Units</TextBlock>
+            </GroupBox.Header>
             <ListView x:Name="lsvUnits" VerticalAlignment="Top" Margin="0" FontSize="14"
-                  ButtonBase.Click = "GridViewColumnHeaderClickedHandler" >
+                  ButtonBase.Click = "GridViewColumnHeaderClickedHandler" HorizontalAlignment="Left" >
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
@@ -23,14 +26,19 @@
                         <GridViewColumn Header="Lectures to date" DisplayMemberBinding="{Binding TotalLectures}"/>
                         <GridViewColumn Header="Practicals to date" DisplayMemberBinding="{Binding TotalPracticals}" />
                         <GridViewColumn Header="No. of Assessments" DisplayMemberBinding="{Binding AssessmentCount}" />
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
                     </GridView>
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Center" Margin="12,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Visibility="Hidden">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="You do not appear to have any units listed under your account. Please" VerticalAlignment="Bottom" Width="Auto"/>
-            <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Top" Text="ask an admin" /></Hyperlink>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Bottom" Width="Auto"/>
+        <TextBlock x:Name="txtbNoUnits" HorizontalAlignment="Left" Margin="12,26,10,10" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Visibility="Collapsed">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="You do not appear to have any units listed under your account. Please" VerticalAlignment="Center" Width="Auto"/>
+            <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Center" Text="ask an admin" /></Hyperlink>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="to add units to your account if you believe this is an error" VerticalAlignment="Center" Width="Auto"/>
         </TextBlock>
 
     </Grid>
