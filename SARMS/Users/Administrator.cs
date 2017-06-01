@@ -276,30 +276,26 @@ namespace SARMS.Users
                 SQLiteCommand command = null;
                 try
                 {
-                    // add the edited unit
-                    AddUnit(newunit.Name, newunit.Code, Convert.ToDateTime("01/01/" + newunit.Year.ToString()), newunit.Trimester, newunit.TotalLectures, newunit.TotalPracticals);
-
                     // begin process to delink old unit and link newunit
                     connection.Open();
 
                     command = connection.CreateCommand();
                     command.Parameters.AddWithValue("@uid", oldunitid);
-                    command.Parameters.AddWithValue("@newid", newunit.ID);
+                    command.Parameters.AddWithValue("@newname", newunit.Name);
+                    command.Parameters.AddWithValue("@newcode", newunit.Code);
+                    command.Parameters.AddWithValue("@newyear", Convert.ToDateTime("01/01/" + newunit.Year.ToString()) );
+                    command.Parameters.AddWithValue("@newtri", newunit.Trimester);
+                    command.Parameters.AddWithValue("@newlectol", newunit.TotalLectures);
+                    command.Parameters.AddWithValue("@newpractol", newunit.TotalPracticals);
 
-                    if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UnitID = " + oldunitid))
-                    {
-                        // TABLE: UserUnits - Remove Records of Unit
-                        command.CommandText = "UPDATE UserUnits SET UnitID = @newid WHERE UnitID = @uid";
-                        command.ExecuteNonQuery();
-                    }
-                    if (DoesRecordExist("SELECT 1 FROM Assessment WHERE UnitID = " + oldunitid))
-                    {
-                        // TABLE: Assessment - Remove Records of Unit
-                        command.CommandText = "UPDATE Assessment SET UnitID = @newid WHERE UnitID = @uid";
-                        command.ExecuteNonQuery();
-                    }
-                    // TABLE: Unit - Remove Records of Unit
-                    command.CommandText = "DELETE FROM Unit WHERE ID = @uid";
+                    command.CommandText =   "UPDATE [Unit] SET "+
+                                                   "[Name] = @newname, "+
+                                                   "[Code] = @newcode, " +
+                                                   "[Year] = @newyear, " +
+                                                   "[Trimester] = @newtri, " +
+                                                   "[TotalLectures] = @newlectol, " +
+                                                   "[TotalPracticals] = @newpractol " +
+                                                   "WHERE Id = @uid";
                     command.ExecuteNonQuery();
                 }
                 finally

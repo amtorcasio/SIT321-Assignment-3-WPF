@@ -51,7 +51,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 {
                     formatfix += "\nSecond Textbox of Unit Code must be NUMBERS ONLY and maximum 3 characters!";
                 }
-                if (!Regex.IsMatch(txtYear.Text, "^(19|20)[0-9][0-9]") || (int.Parse(txtYear.Text) < DateTime.Now.Year))
+                if (!Regex.IsMatch(txtYear.Text, "^(19|20)[0-9][0-9]"))
                 {
                     formatfix += "\nYear provided must be in appropriate full year format (e.g. " + DateTime.Now.Year.ToString() + ")!";
                 }
