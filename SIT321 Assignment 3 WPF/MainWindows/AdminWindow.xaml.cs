@@ -583,5 +583,15 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             listWindow.Focus();
             this.Hide();
         }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            PopulateList();
+            DBFilterUnits.IsChecked = false;
+            DBFilterUsers.IsChecked = false;
+            txtDBQuery.Text = string.Empty;
+            txtEnrolUnitCode.Text = string.Empty;
+            txtUnenrolUnitCode.Text = string.Empty;
+        }
     }
 }
