@@ -29,6 +29,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         // list to store users before populating listbox
         private List<string> UniteeUsers;
 
+        private List<Account> UniteeUserAccount;
+
         public ViewAccountsUnit(Administrator admin, Unit unitee)
         {
             InitializeComponent();
@@ -39,7 +41,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             // create new list of strings
             UniteeUsers = new List<string>();
 
-            // Get database connection to populate listboxes
+            // Get database connection to get user ids
             using (var conn = Utilities.GetDatabaseSQLConnection())
             {
                 // try get user ids from UserUnits
@@ -67,6 +69,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     throw e;
                 }
             }
+
+            UniteeUserAccount = Admin.SearchAccountsByUnit(Unitee);
         }
     }
 }
