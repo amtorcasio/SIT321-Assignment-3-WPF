@@ -12,7 +12,7 @@
         <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="494,10,0,0" VerticalAlignment="Top"/>
 
         <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450"/>
-        <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450"/>
+        <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450" SelectionChanged="listUsers_SelectionChanged"/>
         <TextBox Name="txtDBQuery" HorizontalAlignment="Left" Height="30" Margin="209,452,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" VerticalContentAlignment="Center" KeyDown="txtDBQuery_KeyDown"/>
 
         <RadioButton Name="DBFilterUsers" Content="Search users" HorizontalAlignment="Left" Margin="119,460,0,0" VerticalAlignment="Top" Click="DBFilterUsers_Click"/>
@@ -22,7 +22,7 @@
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
         <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUnit_Click"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUnit_Click"/>
-        <Button x:Name="btnEnrol" Content="Enrol" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click" IsEnabled="False"/>
+        <Button x:Name="btnEnrol" Content="Enrol" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click"/>
         <Label x:Name="lblEnrolUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,454,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEnrolUnitCode" HorizontalAlignment="Left" Height="23" Margin="667,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
 

@@ -285,13 +285,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             if ((sender as ListBox).Name == listUsers.Name)
             {
                 btnEditUser.IsEnabled = true;
-                btnEnrol.IsEnabled = true;
                 btnEditUnit.IsEnabled = false;
             }
             else
             {
                 btnEditUser.IsEnabled = false;
-                btnEnrol.IsEnabled = false;
                 btnEditUnit.IsEnabled = true;
             }
         }
