@@ -22,7 +22,7 @@
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
         <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUnit_Click"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUnit_Click"/>
-        <Button x:Name="btnEnrol" Content="Enrol" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30"/>
+        <Button x:Name="btnEnrol" Content="Enrol" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click"/>
         <Label x:Name="lblEnrolUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,454,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEnrolUnitCode" HorizontalAlignment="Left" Height="23" Margin="667,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
 

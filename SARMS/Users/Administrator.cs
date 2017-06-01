@@ -584,9 +584,49 @@ namespace SARMS.Users
                     command.Parameters.AddWithValue("@unitid", unitid);
                     reader = command.ExecuteReader();
 
-                    reader.Read();
-                    Unit temp = new Unit(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
-                    return temp;
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        Unit temp = new Unit(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                        return temp;
+                    }
+                    else
+                        return null;
+                }
+                finally
+                {
+                    if (reader != null) reader.Close();
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+            }
+        }
+
+        // get unit by id
+        public Unit GetLatestUnit(string unitcode)
+        {
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
+
+                try
+                {
+                    connection.Open();
+                    command = connection.CreateCommand();
+
+                    command.CommandText = "SELECT * FROM Unit WHERE Code = @unitcode ORDER BY Year DESC LIMIT 1";
+                    command.Parameters.AddWithValue("@unitcode", unitcode);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        Unit temp = new Unit(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), Convert.ToInt16(reader[3]), Convert.ToByte(reader[4]), Convert.ToInt32(reader[5]), Convert.ToInt32(reader[6]));
+                        return temp;
+                    }
+                    else
+                        return null;
                 }
                 finally
                 {
