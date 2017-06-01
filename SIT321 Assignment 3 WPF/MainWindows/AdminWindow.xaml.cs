@@ -509,7 +509,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                     switch ((UserType)Convert.ToInt32(r[3]))
                                     {
                                         case UserType.Administrator:
-                                            MessageBox.Show("You cannot enrol a fellow administrator to a unit");
+                                            MessageBox.Show("Administrator cannot be passed into this command");
                                             r.Close();
                                             c.Dispose();
                                             conn.Close();
@@ -548,7 +548,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 }
                 else
                 {
-                    MessageBox.Show("You must select an account to enrol to unit");
+                    MessageBox.Show("You must select an account to unenrol fropm unit");
                     return;
                 }
             }
