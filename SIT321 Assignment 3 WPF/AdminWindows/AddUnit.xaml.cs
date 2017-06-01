@@ -41,7 +41,6 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             string CodeNumStr;
             string CodeLetters;
             DateTime year;
-            string unitid;
 
             try {
                 if ((!Regex.IsMatch(txtCodeLetters.Text, @"^[a-zA-Z]+$")) || (txtCodeLetters.Text.Count() != 3))
@@ -84,22 +83,16 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             }
             else
             {
-                // compile unit id
-                unitid = (  (int)CodeLetters[0]).ToString() + ((int)CodeLetters[1]).ToString() + ((int)CodeLetters[2]).ToString() +
-                    CodeNumStr.ToString() + Trimester.ToString() + int.Parse(txtYear.Text).ToString();
-
-                long longunitid = long.Parse(unitid);
-
-                Unit NewUnit = new Unit(longunitid, txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
+                Unit NewUnit = new Unit(0,txtName.Text.ToUpper().Trim(), (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     int.Parse(txtYear.Text), Trimester, TotalLectures, TotalPracticals);
 
-                if(Admin.DoesRecordExist(NewUnit))
+                if(Admin.SearchUnit(NewUnit.Code) != null)
                 {
                     MessageBox.Show("Unit already exists, please alter alpha and/or numeric section of Unit Code.");
                     return;
                 }
 
-                Admin.AddUnit(longunitid, NewUnit.Name, (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
+                Admin.AddUnit(NewUnit.Name, (txtCodeLetters.Text.ToUpper() + CodeNumStr.ToString()),
                     year, NewUnit.Trimester, NewUnit.TotalLectures, NewUnit.TotalPracticals);
                 MessageBox.Show("Unit: " + NewUnit.Code + " successfuly added to database", "Success");
                 Close();
