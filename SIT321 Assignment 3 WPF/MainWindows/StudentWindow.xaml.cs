@@ -48,7 +48,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                     SQLiteCommand c = conn.CreateCommand();
                     
-                    c.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON UnitID WHERE UserID = @id";
+                    c.CommandText = "SELECT * FROM Unit INNER JOIN UserUnits ON UserUnits.UnitID = Unit.Id WHERE UserUnits.UserId = @id";
                     c.Parameters.AddWithValue("@id", LoggedInAccount.ID);
                     using (SQLiteDataReader r = c.ExecuteReader())
                     {
