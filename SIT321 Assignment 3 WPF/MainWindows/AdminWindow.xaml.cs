@@ -28,6 +28,7 @@ namespace SIT321_Assignment_3_WPF
 
         private List<string> listedUsers;
         private List<string> listedUnits;
+
         EventHandler re_populate_lists;     // repopulate list with event handler
 
         public AdminWindow(Account lAccount)
@@ -156,7 +157,10 @@ namespace SIT321_Assignment_3_WPF
 
         private void txtDBQuery_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            /* to reset the list before a query is made, clear the textbox then press the Enter key
+             * neither listboxes will reset when changing filters mid-search
+             */
+            if (e.Key == Key.Enter && txtDBQuery.Text != "")
             {
                 if (DBFilterUnits.IsChecked == false && DBFilterUsers.IsChecked == false)
                 {
@@ -175,11 +179,80 @@ namespace SIT321_Assignment_3_WPF
                             c = conn.CreateCommand();
                             if (DBFilterUnits.IsChecked == true)
                             {
-                                MessageBox.Show("Queried with only Units filtered");
+                                c.CommandText = "SELECT * FROM Unit WHERE Name LIKE @word OR Code LIKE @word";
+                                c.Parameters.AddWithValue("@word", "%" + txtDBQuery.Text + "%");
+
+                                using (SQLiteDataReader r = c.ExecuteReader())
+                                {
+                                    if (r.HasRows)
+                                    {
+                                        listUnits.Items.Clear();
+                                        listedUnits.Clear();
+
+                                        for (int count = 0; r.Read(); count++)
+                                        {
+                                            listedUnits.Add(r[0].ToString());
+                                            ListBoxItem lbi = new ListBoxItem();
+                                            lbi.Content = r[2].ToString() + ": " + r[1].ToString();
+                                            lbi.FontSize = 14;
+                                            lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                                            switch (count % 2)
+                                            {
+                                                case 0:
+                                                    lbi.Background = System.Windows.Media.Brushes.LightGray;
+                                                    break;
+                                                case 1:
+                                                    lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                                                    break;
+                                                default:
+                                                    return;
+                                            }
+
+                                            listUnits.Items.Add(lbi);
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Queried with only Users filtered");
+                                c.CommandText = "SELECT * FROM User WHERE FirstName LIKE @word OR LastName LIKE @word";
+                                c.Parameters.AddWithValue("@word", "%" + txtDBQuery.Text + "%");
+
+                                using (SQLiteDataReader r = c.ExecuteReader())
+                                {
+                                    if (r.HasRows)
+                                    {
+                                        listUsers.Items.Clear();
+                                        listedUsers.Clear();
+
+                                        while (r.Read())
+                                        {
+                                            listedUsers.Add(r[0].ToString());
+                                            ListBoxItem lbi = new ListBoxItem();
+                                            lbi.Content = String.Format("{0}, {1}", r[2], r[1]);
+                                            lbi.FontSize = 14;
+                                            lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                                            switch ((UserType)Convert.ToInt32(r[3]))
+                                            {
+                                                case UserType.Administrator:
+                                                    lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                                    break;
+                                                case UserType.Lecturer:
+                                                    lbi.Background = System.Windows.Media.Brushes.Aqua;
+                                                    break;
+                                                case UserType.Student:
+                                                    lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                                                    break;
+                                                default:
+                                                    return;
+                                            }
+
+                                            listUsers.Items.Add(lbi);
+                                        }
+                                    }
+                                }
                             }
                         }
                         catch (Exception exc)
@@ -193,6 +266,8 @@ namespace SIT321_Assignment_3_WPF
                     }
                 }
             }
+            else if (e.Key == Key.Enter && txtDBQuery.Text == "")
+                PopulateList();
         }
 
         private void DBFilterUsers_Click(object sender, RoutedEventArgs e)
