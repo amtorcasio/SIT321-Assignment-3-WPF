@@ -407,8 +407,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                 c.CommandText = "SELECT * FROM User WHERE Id = @id";
                                 c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
 
-
-
                                 using (SQLiteDataReader r = c.ExecuteReader())
                                 {
                                     r.Read();
@@ -417,13 +415,19 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                     {
                                         case UserType.Administrator:
                                             MessageBox.Show("You cannot enrol a fellow administrator to a unit");
+                                            r.Close();
+                                            conn.Close();
                                             return;
                                         case UserType.Lecturer:
                                             Lecturer templec = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            r.Close();
+                                            conn.Close();
                                             LoggedInAccount.AddLecturerUnit(templec, enrol);
                                             break;
                                         case UserType.Student:
                                             Student tempstu = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            r.Close();
+                                            conn.Close();
                                             LoggedInAccount.AddStudentUnit(tempstu, enrol);
                                             break;
                                         default:
