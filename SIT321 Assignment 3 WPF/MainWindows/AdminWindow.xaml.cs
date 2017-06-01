@@ -592,6 +592,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             txtDBQuery.Text = string.Empty;
             txtEnrolUnitCode.Text = string.Empty;
             txtUnenrolUnitCode.Text = string.Empty;
+            MessageBox.Show("Window has been Refreshed");
         }
     }
 }
