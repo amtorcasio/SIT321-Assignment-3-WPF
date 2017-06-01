@@ -605,7 +605,8 @@ namespace SARMS.Users
                     connection.Open();
                     command = connection.CreateCommand();
 
-                    command.CommandText = "SELECT * FROM Unit WHERE Code = @code ORDER BY Year, Trimester DESC LIMIT 1";
+                    command.CommandText = "SELECT * FROM Unit WHERE Code = @unitcode ORDER BY Year, Trimester DESC LIMIT 1";
+                    command.Parameters.AddWithValue("@unitcode", unitCode);
                     reader = command.ExecuteReader();
 
                     if (reader.HasRows)
