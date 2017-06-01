@@ -27,7 +27,7 @@ namespace SARMS.Users
                 command = connection.CreateCommand();
                 command.CommandText =   "INSERT INTO [Assessment] ([Id],[Name],[TotalMarks],[Weight],[UnitID])" +
                                         "VALUES(@aid, @aname, @atotalm, @weight, @unitid)";
-                command.Parameters.AddWithValue("@id", assessment.AssessmentID);
+                command.Parameters.AddWithValue("@id", DBNull.Value);
                 command.Parameters.AddWithValue("@aname", assessment.Name);
                 command.Parameters.AddWithValue("@atotalm", assessment.TotalMarks);
                 command.Parameters.AddWithValue("@weight", assessment.Weight);
