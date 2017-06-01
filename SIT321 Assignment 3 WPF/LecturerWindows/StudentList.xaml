@@ -8,44 +8,69 @@
         Title="List of Students" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.934,0.569" HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="131*"/>
+            <RowDefinition Height="129*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lsvStudents" VerticalAlignment="Top" Margin="10,39,10,10" FontSize="14" HorizontalAlignment="Left" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" SelectionChanged="lsvStudents_SelectionChanged" >
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
-                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                </GridView>
-            </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
-        <Label x:Name="lblUnit" Content="Unit name here" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.635,0.097"/>
-        <Label x:Name="label_Copy" Content="Student Info" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.635,0.097" Grid.Column="1" Height="31" Width="104"/>
-        <ListView x:Name="lsvPerformance" VerticalAlignment="Top" Margin="10,39,10,10" FontSize="14" HorizontalAlignment="Left" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" Grid.Column="2" >
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Assessment.Name}"/>
-                    <GridViewColumn Header="Marks" DisplayMemberBinding="{Binding Mark}"/>
-                    <GridViewColumn Header="Marks Available" DisplayMemberBinding="{Binding Assessment.TotalMarks}"/>
-                    <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Assessment.Weight}"/>
-                </GridView>
-            </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
-        <Label x:Name="label_Copy1" Content="Student Performance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.635,0.097" Height="31" Width="170" Grid.Column="2"/>
+        <GroupBox x:Name="gboInfo" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.901,4.696" Grid.Column="1" Margin="10">
+            <GroupBox.Header>
+                <TextBlock FontWeight="Bold" FontSize="16">Student Info</TextBlock>
+            </GroupBox.Header>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="gboPerformance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" MinWidth="399" Grid.Row="1" Grid.Column="1">
+            <GroupBox.Header>
+                <TextBlock FontWeight="Bold" FontSize="16">Student Performance</TextBlock>
+            </GroupBox.Header>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                <ListView x:Name="lsvPerformance" VerticalAlignment="Center" Margin="0,5" FontSize="14" HorizontalAlignment="Center" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" Grid.Column="2" Visibility="Collapsed" >
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Assessment.Name}"/>
+                            <GridViewColumn Header="Marks" DisplayMemberBinding="{Binding Mark}"/>
+                            <GridViewColumn Header="Marks Available" DisplayMemberBinding="{Binding Assessment.TotalMarks}"/>
+                            <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Assessment.Weight}"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <TextBlock x:Name="tboPerformance" Grid.Column="2" Margin="5,12" TextWrapping="Wrap" Text="Select a student to view his/her marks" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="377" TextAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="gpoClassList" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Grid.RowSpan="2">
+            <GroupBox.Header>
+                <TextBlock x:Name="tboUnit" FontWeight="Bold" FontSize="16" Text="Unit name here"/>
+            </GroupBox.Header>
+            <Grid>
+                <ListView x:Name="lsvStudents" Margin="0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" SelectionChanged="lsvStudents_SelectionChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" >
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <TextBlock x:Name="tboNoStudents" HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Width="303">
+                    You do not appear to have any students listed in this unit. Please
+                    <Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><TextBlock VerticalAlignment="Center" Text="ask an admin" /></Hyperlink>
+                    to add students to this unit if you believe this is in error.
+                </TextBlock>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
