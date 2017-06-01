@@ -40,7 +40,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnShowReport_Click(object sender, RoutedEventArgs e)
         {
-            var readFeedbackWindow = new Student_Windows.ShowFeedback();
+            var readFeedbackWindow = new StudentWindows.ShowFeedback();
             readFeedbackWindow.Show();
             readFeedbackWindow.Focus();
 
