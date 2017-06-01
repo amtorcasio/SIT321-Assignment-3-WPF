@@ -42,8 +42,8 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
         {
             InitializeComponent();
 
-            lsbFeedbackList.Items.Add(new FeedbackItem("John Smith", DateTime.Now, "Hello World"));
-            lsbFeedbackList.Items.Add(new FeedbackItem("Amy Marilyn", DateTime.Now, "Hello John"));
+            //lsbFeedbackList.Items.Add(new FeedbackItem("John Smith", DateTime.Now, "Hello World"));
+            //lsbFeedbackList.Items.Add(new FeedbackItem("Amy Marilyn", DateTime.Now, "Hello John"));
             /*
             lsbFeedbackList.Items.Add(new FeedbackItem("Maggie Harold", DateTime.Now, "Hello Amy"));
             lsbFeedbackList.Items.Add(new FeedbackItem("Susan Ford", DateTime.Now, "Hello Maggie"));

@@ -35,6 +35,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             tboUnit.Text = listTitle;
             _from = from;
             _loggedIn = loggedIn;
+            if (loggedIn.ID == "admin.sarms") btnAddAttendance.Visibility = Visibility.Collapsed;
         }
 
         //All Students At Risk
@@ -53,6 +54,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvStudents.ItemsSource = students;
                 lsvStudents.Visibility = Visibility.Visible;
                 tboNoStudents.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                tboNoStudents.Text = "Congratulations. It appears no students in your units are at risk";
             }
         }
 
