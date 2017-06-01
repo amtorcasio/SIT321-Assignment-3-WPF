@@ -26,6 +26,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
     public partial class AdminWindow : Window
     {
         public Administrator LoggedInAccount { get; private set; }
+        Lecturer gimmeprivs = new Lecturer("admin.sarms", "", "", "", "");
 
         private List<string> listedUsers;
         private List<string> listedUnits;
@@ -576,7 +577,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             Unit SelectedUnit;
             SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
 
-            Lecturer gimmeprivs = new Lecturer("","","","","");
             var listWindow = new StudentList(gimmeprivs, SelectedUnit, this);
 
             listWindow.Show();
