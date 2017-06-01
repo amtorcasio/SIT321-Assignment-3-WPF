@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using SARMS;
 using SARMS.Users;
 using SARMS.Content;
+using System.Data.SQLite;
 
 namespace SIT321_Assignment_3_WPF.AdminWindows
 {
@@ -22,9 +23,54 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     /// </summary>
     public partial class ViewAccountsUnit : Window
     {
+        private Administrator Admin;
+        private Unit Unitee;
+
+        // list to store users before populating listbox
+        private List<string> UniteeUsers;
+
+        private List<Account> UniteeUserAccount;
+
         public ViewAccountsUnit(Administrator admin, Unit unitee)
         {
             InitializeComponent();
+
+            Admin = admin;      // make class admin equal to passed administrator
+            Unitee = unitee;
+
+            // create new list of strings
+            UniteeUsers = new List<string>();
+
+            // Get database connection to get user ids
+            using (var conn = Utilities.GetDatabaseSQLConnection())
+            {
+                // try get user ids from UserUnits
+                try
+                {
+                    conn.Open();
+
+                    SQLiteCommand c = conn.CreateCommand();
+                    c.CommandText = "SELECT * FROM UserUnits WHERE UnitID = @unitid";
+                    c.Parameters.AddWithValue("@unitid",unitee.ID);
+                    using (SQLiteDataReader r = c.ExecuteReader())
+                    {
+                        if (r.HasRows)
+                        {
+                            while (r.Read())
+                            {
+                                UniteeUsers.Add(r[0].ToString());
+                            }
+                        }
+                    }
+                    c.Dispose();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            UniteeUserAccount = Admin.SearchAccountsByUnit(Unitee);
         }
     }
 }
