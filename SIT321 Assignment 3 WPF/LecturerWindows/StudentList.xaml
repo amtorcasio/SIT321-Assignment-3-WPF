@@ -60,7 +60,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button x:Name="btnEditAttendance" Content="Edit Attendance" Grid.Column="2" HorizontalAlignment="Left" Margin="10" Grid.Row="5" VerticalAlignment="Bottom" Width="104" Height="31"/>
+                <Button x:Name="btnEditAttendance" Content="Edit Attendance" Grid.Column="2" HorizontalAlignment="Left" Margin="10" Grid.Row="5" VerticalAlignment="Bottom" Width="104" Height="31" Click="btnEditAttendance_Click"/>
                 <Button x:Name="btnAddAttendance" Content="Add attendance" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="5" VerticalAlignment="Bottom" Width="109" Height="31" Click="btnAddAttendance_Click"/>
             </Grid>
         </GroupBox>

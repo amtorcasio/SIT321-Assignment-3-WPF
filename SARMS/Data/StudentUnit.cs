@@ -1,9 +1,10 @@
 ﻿using SARMS.Content;
 using SARMS.Users;
+using System.ComponentModel;
 
 namespace SARMS.Data
 {
-    public class StudentUnit
+    public class StudentUnit : INotifyPropertyChanged
     {
         private Unit _unit;
         private Account _account;
@@ -12,6 +13,8 @@ namespace SARMS.Data
         private string _staffFeedback;
         private string _studentFeedback;
         private bool? _atRisk;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Getters and Setters
         public Unit unit
@@ -22,12 +25,20 @@ namespace SARMS.Data
         public int? LectureAttendance
         {
             get { return _lectureAttendance; }
-            set { _lectureAttendance = value; }
+            set
+            {
+                _lectureAttendance = value;
+                OnPropertyChanged("LectureAttendance");
+            }
         }
         public int? PracticalAttendance
         {
             get { return _practicalAttendance; }
-            set { _practicalAttendance = value; }
+            set
+            {
+                _practicalAttendance = value;
+                OnPropertyChanged("PracticalAttendance");
+            }
         }
         public string StaffFeedback
         {
@@ -59,6 +70,15 @@ namespace SARMS.Data
                 else return "Yes";
             }
             private set { }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
