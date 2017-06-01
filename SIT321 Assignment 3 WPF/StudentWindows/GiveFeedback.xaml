@@ -5,24 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.StudentWindows"
         mc:Ignorable="d"
-        Title="GiveFeedback" Height="490" Width="650">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="70" Margin="10,336,0,0" Padding="5,5,5,5" TextWrapping="Wrap" Text="Enter feedback here..." VerticalAlignment="Top" Width="612"/>
-        <Button Content="Publish feedback" HorizontalAlignment="Left" Margin="510,411,0,0" VerticalAlignment="Top" Padding="10,5,10,5" />
-        <Label Content="Showing feedback for current user" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        Title="GiveFeedback" Height="260" Width="540" ResizeMode="CanMinimize">
 
-        <ListBox x:Name="lsbFeedbackList" Height="295" Margin="10,36,20,0" BorderBrush="#f0f0f0" VerticalAlignment="Top">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Label Name="lbNameOfUser" Content="{Binding Path=UserName}" Padding="0,0,0,0" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
-                        <Label Name="lbDatePublished" Content="{Binding Path=TimeStamp}" Padding="0,0,0,0" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
-                        <Label Name="lbMainComment" Content="{Binding Path=PublishedComment}" Padding="0,0,0,0" HorizontalAlignment="Left" Margin="5,20,0,20" VerticalAlignment="Top"/>
-                        <Button Name="btnViewThread" Content="View Thread" HorizontalAlignment="Left" Padding="10,5,10,5" Margin="480,0,10,10" VerticalAlignment="Bottom"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+    <Grid>
+        <Label Content="Subject" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSubject" HorizontalAlignment="Left" Height="23" Margin="77,10,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="435"/>
+        <TextBox x:Name="txtComment" HorizontalAlignment="Left" Height="133" Margin="77,43,0,0" TextWrapping="Wrap" Padding="5,5,5,5" VerticalAlignment="Top" Width="435"/>
+        <Button x:Name="btnPostComment" Background="#00d89f" BorderBrush="#004432" Content="Post" HorizontalAlignment="Left" Margin="357,181,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="75" Click="btnPostComment_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="437,181,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        <Label Content="Comment" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
