@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.MainWindows"
         mc:Ignorable="d"
-        Title="Student At Risk Monitoring System" Height="550" Width="970" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Student At Risk Monitoring System" Height="577" Width="970" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -22,9 +22,12 @@
         <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
         <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUnit_Click"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUnit_Click"/>
-        <Button x:Name="btnEnrol" Content="Enrol" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click"/>
+        <Button x:Name="btnEnrol" Content="Enrol/Assign" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click"/>
         <Label x:Name="lblEnrolUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,454,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEnrolUnitCode" HorizontalAlignment="Left" Height="23" Margin="667,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <Button x:Name="btnUnenrol" Content="Unenrol/Unassign" HorizontalAlignment="Left" Margin="494,496,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnUnenrol_Click"/>
+        <Label x:Name="lblUnassignUnitCode" Content="Unit Code:" HorizontalAlignment="Left" Margin="596,498,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtUnenrolUnitCode" HorizontalAlignment="Left" Height="22" Margin="667,502,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
 
     </Grid>
 </Window>

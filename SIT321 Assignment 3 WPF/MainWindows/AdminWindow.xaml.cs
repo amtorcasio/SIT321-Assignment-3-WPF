@@ -407,8 +407,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                 c.CommandText = "SELECT * FROM User WHERE Id = @id";
                                 c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
 
-
-
                                 using (SQLiteDataReader r = c.ExecuteReader())
                                 {
                                     r.Read();
@@ -417,15 +415,30 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                     {
                                         case UserType.Administrator:
                                             MessageBox.Show("You cannot enrol a fellow administrator to a unit");
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
                                             return;
                                         case UserType.Lecturer:
                                             Lecturer templec = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
-                                            LoggedInAccount.AddLecturerUnit(templec, enrol);
-                                            break;
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
+                                            if(LoggedInAccount.AddLecturerUnit(templec, enrol))
+                                            {
+                                                MessageBox.Show("Lecturer " + templec.FirstName + " " + templec.LastName + " has been assigned to Unit");
+                                            }
+                                            return;
                                         case UserType.Student:
                                             Student tempstu = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
-                                            LoggedInAccount.AddStudentUnit(tempstu, enrol);
-                                            break;
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
+                                            if(LoggedInAccount.AddStudentUnit(tempstu, enrol))
+                                            {
+                                                MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been enrolled to Unit");
+                                            }
+                                            return;
                                         default:
                                             return;
                                     }
@@ -441,6 +454,101 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 else
                 {
                     MessageBox.Show("You must select an account to enrol to unit");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("UnitCode must be 6 character!");
+                return;
+            }
+        }
+
+        private void btnUnenrol_Click(object sender, RoutedEventArgs e)
+        {
+            // if unitcode is appropriate length
+            if (txtEnrolUnitCode.Text.Trim().Count() == 6)
+            {
+                // if user is selected
+                if (listUsers.SelectedIndex >= 0)
+                {
+                    // prepare unitcode
+                    string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
+
+                    // get unit
+                    Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
+                    if (enrol == null)
+                    {
+                        MessageBox.Show("Unit does not exist");
+                        return;
+                    }
+                    else
+                    {
+                        if (!LoggedInAccount.isAccountEnrolled(enrol.ID, listedUsers[listUsers.SelectedIndex]))
+                        {
+                            MessageBox.Show("Account is not Enrolled to Unit");
+                            return;
+                        }
+                    }
+
+                    using (var conn = Utilities.GetDatabaseSQLConnection())
+                    {
+                        try
+                        {
+                            conn.Open();
+
+                            using (SQLiteCommand c = conn.CreateCommand())
+                            {
+                                c.CommandText = "SELECT * FROM User WHERE Id = @id";
+                                c.Parameters.AddWithValue("@id", listedUsers[listUsers.SelectedIndex]);
+
+                                using (SQLiteDataReader r = c.ExecuteReader())
+                                {
+                                    r.Read();
+
+                                    switch ((UserType)Convert.ToInt32(r[3]))
+                                    {
+                                        case UserType.Administrator:
+                                            MessageBox.Show("Administrator cannot be passed into this command");
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
+                                            return;
+                                        case UserType.Lecturer:
+                                            Lecturer templec = new Lecturer(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
+                                            if (LoggedInAccount.RemoveLecturerUnit(templec, enrol))
+                                            {
+                                                MessageBox.Show("Lecturer " + templec.FirstName + " " + templec.LastName + " has been unassigned from Unit");
+                                            }
+                                            return;
+                                        case UserType.Student:
+                                            Student tempstu = new Student(r[0].ToString(), r[1].ToString(), r[2].ToString(), r[6].ToString(), r[5].ToString());
+                                            r.Close();
+                                            c.Dispose();
+                                            conn.Close();
+                                            if (LoggedInAccount.RemoveStudentUnit(tempstu, enrol))
+                                            {
+                                                MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been unenrolled from Unit");
+                                            }
+                                            return;
+                                        default:
+                                            return;
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            throw exc;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You must select an account to unenrol fropm unit");
                     return;
                 }
             }
