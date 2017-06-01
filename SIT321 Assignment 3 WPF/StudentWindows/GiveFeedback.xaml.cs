@@ -26,5 +26,15 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
         {
             InitializeComponent();
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnPostComment_Click(object sender, RoutedEventArgs e)
+        {
+            // do something with txtSubject.Text and txtComment.Text
+        }
     }
 }
