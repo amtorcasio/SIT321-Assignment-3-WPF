@@ -572,6 +572,7 @@ namespace SARMS.Users
 
                 try
                 {
+                    connection.Open();
                     command = connection.CreateCommand();
                     command.CommandText = "SELECT * FROM User WHERE Id = @id";
                     command.Parameters.AddWithValue("@id", id);
