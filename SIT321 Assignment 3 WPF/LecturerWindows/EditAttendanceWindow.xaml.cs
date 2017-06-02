@@ -51,14 +51,14 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             string errorString = string.Empty;
             int lectureAttendance;
             int practicalAttendance;
-            if (!int.TryParse(txtLectureAttendance.Text, out lectureAttendance))
+            if (!int.TryParse(txtLectureAttendance.Text, out lectureAttendance) && !(lectureAttendance >= 0))
             {
-                errorString += "Invalid lecture attendance value";
+                errorString += "Invalid lecture attendance value (must be greater than or equal to 0)";
             }
-            if (!int.TryParse(txtPracticalAttendance.Text, out practicalAttendance))
+            if (!int.TryParse(txtPracticalAttendance.Text, out practicalAttendance) && !(practicalAttendance >= 0))
             {
                 if (!string.IsNullOrEmpty(errorString)) errorString += Environment.NewLine;
-                errorString += "Invalid practical attendance value";
+                errorString += "Invalid practical attendance value (must be greater than or equal to 0)";
             }
             if (!string.IsNullOrEmpty(errorString))
             {

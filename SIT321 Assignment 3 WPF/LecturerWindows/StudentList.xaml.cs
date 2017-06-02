@@ -121,7 +121,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvPerformance.ItemsSource = perf;
                 lsvPerformance.Visibility = Visibility.Visible;
                 tboPerformance.Visibility = Visibility.Collapsed;
-                btnAddPerformance.Visibility = Visibility.Visible;
+                if (_loggedIn.ID != "admin.sarms") btnAddPerformance.Visibility = Visibility.Visible;
                 btnEditPerformance.Visibility = Visibility.Visible;
             }
 
