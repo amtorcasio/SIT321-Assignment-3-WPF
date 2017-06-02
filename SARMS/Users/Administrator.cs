@@ -238,12 +238,14 @@ namespace SARMS.Users
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        reader.Read();
+                        while (reader.Read())
+                        {
 
-                        long result = -1;
-                        long.TryParse(reader[0].ToString(), out result);
+                            long result = -1;
+                            long.TryParse(reader[0].ToString(), out result);
 
-                        unitids.Add(result);
+                            unitids.Add(result);
+                        }
                     }
                     else
                     {
