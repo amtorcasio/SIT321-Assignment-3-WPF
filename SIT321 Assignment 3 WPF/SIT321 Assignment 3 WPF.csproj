@@ -128,9 +128,6 @@
     <Compile Include="LecturerWindows\EditPerformance.xaml.cs">
       <DependentUpon>EditPerformance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LecturerWindows\StudentData.xaml.cs">
-      <DependentUpon>StudentData.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LecturerWindows\StudentList.xaml.cs">
       <DependentUpon>StudentList.xaml</DependentUpon>
     </Compile>
@@ -183,10 +180,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LecturerWindows\EditPerformance.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LecturerWindows\StudentData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

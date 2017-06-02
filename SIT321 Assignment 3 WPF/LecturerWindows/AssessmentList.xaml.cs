@@ -23,5 +23,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         {
             InitializeComponent();
         }
+
+        private void hypCreateAssessment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
