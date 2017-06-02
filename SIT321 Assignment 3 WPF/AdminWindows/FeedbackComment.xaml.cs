@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using SARMS;
 using SARMS.Users;
 using SARMS.Content;
+using System.Text.RegularExpressions;
 
 namespace SIT321_Assignment_3_WPF.AdminWindows
 {
@@ -71,6 +72,19 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             _from.Focus();
         }
 
+        private void lstUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lstUnits.SelectedIndex;
+            if (index >= 0)
+            {
+                string stafffeed, studentfeed;
+                Admin.GetFeedback(Student, UnitsList[index], out stafffeed, out studentfeed);
 
+                string[] stafftemp, studenttemp;
+
+                stafftemp = stafffeed.Split('|');
+                MessageBox.Show(Utilities.CommentTail());
+            }
+        }
     }
 }
