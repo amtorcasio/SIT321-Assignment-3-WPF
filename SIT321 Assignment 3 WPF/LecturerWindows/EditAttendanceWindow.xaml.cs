@@ -36,6 +36,9 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             txtLectureAttendance.Text = _unit.LectureAttendance.ToString();
             txtPracticalAttendance.Text = _unit.PracticalAttendance.ToString();
             _student = student;
+
+            lblStudent.Content += " " + student.LastName + " " + student.FirstName;
+            lblUnit.Content += " " + _unit.unit.Code + " " + _unit.unit.Name;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

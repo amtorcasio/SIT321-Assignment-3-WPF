@@ -5,24 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Edit Attendance" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ToolWindow" Width="285" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Closed="Window_Closed">
+        Title="Edit Attendance" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ToolWindow" Width="285" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Closed="Window_Closed" Height="239.667">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="46*"/>
-            <RowDefinition Height="47*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label x:Name="lblStudent" Content="Student:" HorizontalAlignment="Left" Margin="10,5,0,5" VerticalAlignment="Top" FontSize="14" Height="27" Width="259" Grid.ColumnSpan="2" Focusable="True"/>
-        <Label x:Name="label1" Content="Lecture Attendance" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label x:Name="label1_Copy" Content="Practical Attendance" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="2" VerticalAlignment="Top"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="10,5" Grid.Row="3" VerticalAlignment="Top" Width="119" Grid.Column="1" Height="27" IsDefault="True" IsTabStop="False" TabIndex="4" Click="btnSubmit_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,5" Grid.Row="3" VerticalAlignment="Top" Width="120" Height="27" TabIndex="3" Click="btnCancel_Click"/>
-        <TextBox x:Name="txtLectureAttendance" HorizontalAlignment="Center" Height="26" Margin="133,5,10,5" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="136" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" Grid.ColumnSpan="2" TabIndex="1"/>
-        <TextBox x:Name="txtPracticalAttendance" HorizontalAlignment="Left" Height="26" Margin="133,5,0,5" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" Grid.ColumnSpan="2" TabIndex="2"/>
+        <Label x:Name="lblUnit" Content="Unit:" Margin="10,5" VerticalAlignment="Center" Grid.ColumnSpan="2" Focusable="True" Grid.Row="1"/>
+        <Label x:Name="label1" Content="Lecture Attendance" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="2" VerticalAlignment="Center"/>
+        <Label x:Name="label1_Copy" Content="Practical Attendance" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="3" VerticalAlignment="Center"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="4" VerticalAlignment="Center" Width="119" Grid.Column="1" Height="27" IsDefault="True" IsTabStop="False" TabIndex="4" Click="btnSubmit_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="4" VerticalAlignment="Center" Width="120" Height="27" TabIndex="3" Click="btnCancel_Click"/>
+        <TextBox x:Name="txtLectureAttendance" HorizontalAlignment="Center" Height="26" Margin="133,5,10,5" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="136" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" Grid.ColumnSpan="2" TabIndex="1"/>
+        <TextBox x:Name="txtPracticalAttendance" HorizontalAlignment="Left" Height="26" Margin="133,5,0,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="135" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" Grid.ColumnSpan="2" TabIndex="2"/>
+        <Label x:Name="lblStudent" Content="Student:" Margin="10,2" Grid.ColumnSpan="2" Focusable="True" VerticalAlignment="Center"/>
     </Grid>
 </Window>

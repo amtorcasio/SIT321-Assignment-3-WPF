@@ -111,6 +111,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             if (perf.Count == 0)
             {
                 lsvPerformance.Visibility = Visibility.Collapsed;
+                btnAddPerformance.Visibility = Visibility.Hidden;
+                btnEditPerformance.Visibility = Visibility.Hidden;
                 tboPerformance.Visibility = Visibility.Visible;
                 tboPerformance.Text = "No assessments marks are on record for the selected student";
             }
@@ -119,6 +121,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvPerformance.ItemsSource = perf;
                 lsvPerformance.Visibility = Visibility.Visible;
                 tboPerformance.Visibility = Visibility.Collapsed;
+                btnAddPerformance.Visibility = Visibility.Visible;
+                btnEditPerformance.Visibility = Visibility.Visible;
             }
 
             var info = student.Units;
@@ -294,6 +298,16 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             }
             var editWindow = new EditAttendanceWindow(_loggedIn, this, ref student, unitID);
             editWindow.Show();
+        }
+
+        private void btnEditPerformance_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddPerformance_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
