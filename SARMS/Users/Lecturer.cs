@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using SARMS.Content;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace SARMS.Users
 {
     public class Lecturer : Account
     {
-        public List<Unit> Units; // Lecturer.Units hides inherited member Acccount.Units
+        public ObservableCollection<Unit> Units; // Lecturer.Units hides inherited member Acccount.Units
 
         // constructor
         public Lecturer(string id, string firstName, string lastName, string email, string password) :
@@ -144,7 +146,7 @@ namespace SARMS.Users
                 if (success)
                 {
                     // edit student performance on assessment
-                    student.Performance.Find(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Mark = mark;
+                    student.Performance.Where(e => (e.Assessment.AssessmentID == assessment.AssessmentID)).Single().Mark = mark;
                     return success;
                 }
                 return success;

@@ -6,6 +6,8 @@ using SARMS.Content;
 using System.Data.SQLite;
 using System.Net.Mail;
 using SARMS.Data;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace SARMS
 {
@@ -30,11 +32,11 @@ namespace SARMS
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student
-        public static Tuple<List<StudentAssessment>, StudentUnit> GetStudentData(Student s, Unit u)
+        public static Tuple<ObservableCollection<StudentAssessment>, StudentUnit> GetStudentData(Student s, Unit u)
         {
-            List<StudentAssessment> performance = s.Performance.FindAll(e => (e.Assessment.unit.ID == u.ID));
+            ObservableCollection<StudentAssessment> performance = new ObservableCollection<StudentAssessment>(s.Performance.Where(e => (e.Assessment.unit.ID == u.ID)).ToList());
             StudentUnit attendance = s.Units.Find(e => (e.unit.ID == u.ID));
-            return new Tuple<List<StudentAssessment>, StudentUnit>(performance, attendance);
+            return new Tuple<ObservableCollection<StudentAssessment>, StudentUnit>(performance, attendance);
         }
         
         // IsStudentAtRisk accessible by UserTypes Administrator and Lecturer

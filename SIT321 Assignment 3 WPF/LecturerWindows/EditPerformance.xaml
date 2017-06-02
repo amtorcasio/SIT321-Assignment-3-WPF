@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Edit Performance" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Closed="Window_Closed">
+        Title="Edit Performance" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Closed="Window_Closed" Width="334.333">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -19,14 +19,17 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label x:Name="lblUnit" Content="Unit:" Margin="10,5" VerticalAlignment="Center" Focusable="True" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <Label x:Name="lblUnit" Content="Unit:" Margin="10,5" VerticalAlignment="Center" Focusable="True" Grid.Row="1"/>
         <Label x:Name="lblMark" Content="Mark" HorizontalAlignment="Left" Margin="10,5,0,5" Grid.Row="3" VerticalAlignment="Center"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Center" Margin="10,5" Grid.Row="4" VerticalAlignment="Center" Width="119" Grid.Column="1" Height="27" IsDefault="True" IsTabStop="False" TabIndex="3" Click="btnSubmit_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Center" Margin="10,5" Grid.Row="4" VerticalAlignment="Center" Width="199" Grid.Column="1" Height="27" IsDefault="True" IsTabStop="False" TabIndex="3" Click="btnSubmit_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,5" Grid.Row="4" VerticalAlignment="Center" Width="80" Height="27" TabIndex="2" Click="btnCancel_Click"/>
-        <TextBox x:Name="txtMark" HorizontalAlignment="Center" Height="26" Margin="10,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" TabIndex="1" FontSize="14" Grid.Column="1"/>
-        <Label x:Name="lblStudent" Content="Student:" Margin="10,5" Grid.ColumnSpan="3" Focusable="True" VerticalAlignment="Center"/>
-        <Label x:Name="lblAssessment" Content="Assessment:" Margin="10,5" VerticalAlignment="Center" Grid.ColumnSpan="3" Focusable="True" Grid.Row="2"/>
+        <TextBox x:Name="txtMark" HorizontalAlignment="Center" Height="26" Margin="47,5,13,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" TabIndex="1" FontSize="14" Grid.Column="1"/>
+        <Label x:Name="lblstuff" Content="Student:" Margin="10,5,43,5" Focusable="True" VerticalAlignment="Center"/>
+        <Label x:Name="lblAssessment" Content="Assessment:" Margin="10,5" VerticalAlignment="Center" Focusable="True" Grid.Row="2"/>
         <Label x:Name="lblMark_Copy" Content="/" HorizontalAlignment="Center" Margin="0,5" Grid.Row="3" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtTotalMark" HorizontalAlignment="Center" Height="26" Margin="10,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" TabIndex="1" FontSize="14" Grid.Column="2" IsEnabled="False"/>
+        <TextBox x:Name="txtTotalMark" HorizontalAlignment="Center" Height="26" Margin="12,5,47,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" TabIndex="1" FontSize="14" Grid.Column="2" IsEnabled="False"/>
+        <ComboBox x:Name="cboUnit" DisplayMemberPath="Name" SelectedValuePath="Name" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" Margin="10,7" Grid.Row="1" VerticalAlignment="Center" Width="199" IsEnabled="False" SelectionChanged="cboUnit_SelectionChanged"/>
+        <ComboBox x:Name="cboAssessment" DisplayMemberPath="Name" SelectedValuePath="Name" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" Margin="10,7" Grid.Row="2" VerticalAlignment="Center" Width="199" IsEnabled="False" SelectionChanged="cboAssessment_SelectionChanged"/>
+        <Label x:Name="lblStudent" Content="" Margin="10,5,44,5" Focusable="True" VerticalAlignment="Center" Grid.Column="1"/>
     </Grid>
 </Window>

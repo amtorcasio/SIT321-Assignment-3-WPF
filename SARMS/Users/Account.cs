@@ -113,13 +113,13 @@ namespace SARMS.Users
             {
                 units.Add(GetUnitInfo(su.unit.ID.ToString()));
             }
-            lecturer.Units = units;
+            lecturer.Units = new ObservableCollection<Unit>(units);
         }
 
         protected static void LoadStudent(ref Student student)
         {
             student.Units = GetUserUnitInfo(student);
-            student.Performance = GetStudentPerformance(student, student.Units);
+            student.Performance = new ObservableCollection<StudentAssessment>(GetStudentPerformance(student, student.Units));
         }
 
         protected static List<StudentUnit> GetUserUnitInfo(Account user)

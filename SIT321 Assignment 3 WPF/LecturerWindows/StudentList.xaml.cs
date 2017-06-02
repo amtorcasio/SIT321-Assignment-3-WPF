@@ -15,6 +15,7 @@ using SARMS.Users;
 using SARMS.Content;
 using SARMS.Data;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace SIT321_Assignment_3_WPF.LecturerWindows
 {
@@ -99,9 +100,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             if (student == null) return;
 
             var perf = student.Performance;
+            var matchContext = CollectionViewSource.GetDefaultView(perf);
             if (_context != null)
             {
-                perf = perf.Where(sa => (sa.Assessment.unit.ID == _context.ID)).ToList();
+                matchContext.Filter = sa => ((sa as StudentAssessment).Assessment.unit.ID == _context.ID);
             }
             else
             {
@@ -234,7 +236,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 {
                     if (lsvInfo.SelectedIndex == -1)
                     {
-                        MessageBox.Show("You must select an unit to change the attendance for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        MessageBox.Show("You must select a unit to add the attendance for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                         return;
                     }
                     studentUnit = (lsvInfo.SelectedItem as StudentUnit);
@@ -293,6 +295,11 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 }
                 else
                 {
+                    if (lsvInfo.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Unit to change attendance for must be selected", "Error!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        return;
+                    }
                     unitID = (lsvInfo.SelectedItem as StudentUnit).unit.ID;
                 }
             }
@@ -329,7 +336,12 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         private void btnAddPerformance_Click(object sender, RoutedEventArgs e)
         {
+            var student = lsvStudents.SelectedItem as Student;
 
+            var addPerfWin = new EditPerformance(_loggedIn, this, ref student);
+
+            addPerfWin.Show();
+            addPerfWin.Focus();
         }
     }
 }
