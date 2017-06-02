@@ -748,7 +748,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                     if (chkSAR.IsChecked == true)
                     {
-                        if (LoggedInAccount.chkifSAR(r[0].ToString()) == true)
+                        if (LoggedInAccount.chkifSAR(a.ID) == true)
                         {
                             lbi.Background = libSAR;
                         }
