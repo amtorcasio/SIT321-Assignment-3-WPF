@@ -5,8 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="AssessmentList" Height="300" Width="300">
-    <Grid>
-        
+        Title="Assessment List" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="gpoClassList" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top">
+            <GroupBox.Header>
+                <TextBlock x:Name="tboUnit" FontWeight="Bold" FontSize="16" Text="Unit name here"/>
+            </GroupBox.Header>
+            <Grid>
+                <ListView x:Name="lsvStudents" Margin="0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" SelectionChanged="lsvStudents_SelectionChanged" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" >
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <TextBlock x:Name="tboNoStudents" HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Width="303"><Run Text="You do not appear to have any students listed in this unit. Please "/><Hyperlink x:Name="hypEmail" RequestNavigate="OnNavigate"><InlineUIContainer>
+                            <TextBlock VerticalAlignment="Center" Text="ask an admin" />
+                        </InlineUIContainer></Hyperlink><Run Text=" to add students to this unit if you believe this is in error."/></TextBlock>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="gboInfo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="3.901,4.696" Margin="10" MinWidth="400" Grid.Column="1">
+            <GroupBox.Header>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Assessment Info"/>
+            </GroupBox.Header>
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="26"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="tboInfo" Margin="0,4" TextWrapping="Wrap" Text="Select a student to view his/her info" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Height="18" Grid.ColumnSpan="3" Visibility="Hidden" Grid.Row="2"/>
+                <Label x:Name="lblLectures" Content="Name:" HorizontalAlignment="Left" Width="109" RenderTransformOrigin="0.385,0.115" Margin="10,0,0,1"/>
+                <Label x:Name="lblPracticals" Content="Total Marks" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Margin="10,0,0,0" Height="26" Width="114"/>
+                <Label x:Name="lblStaffFeedback" Content="Weight" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="10,0,0,0" Height="26" Width="90"/>
+                <TextBox x:Name="txtLecturesAttended" HorizontalAlignment="Center" Height="22" Margin="14.5,2,15,2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="233" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" IsEnabled="False" BorderThickness="0,0,0,1"/>
+                <TextBox x:Name="txtPracticalsAttended" HorizontalAlignment="Center" Height="22" Margin="10,2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="233" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Grid.Row="1" IsEnabled="False" BorderThickness="0,0,0,1" Grid.ColumnSpan="2"/>
+                <ListView x:Name="lsvInfo" Margin="10,0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Visibility="Hidden" Grid.RowSpan="5" >
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="Unit Code" DisplayMemberBinding="{Binding unit.Code}" Width="Auto"/>
+                            <GridViewColumn Header="Lectures Attended" DisplayMemberBinding="{Binding LectureAttendance}" Width="Auto"/>
+                            <GridViewColumn Header="Practicals Attended" DisplayMemberBinding="{Binding PracticalAttendance}" Width="Auto"/>
+                            <GridViewColumn Header="Is At Risk" DisplayMemberBinding="{Binding IsAtRisk}" Width="Auto"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <Button x:Name="btnEditAssessment" Content="Edit Assessment" Margin="10" Grid.Row="3" HorizontalAlignment="Center" Height="25" Width="158" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtPracticalsAttended_Copy" HorizontalAlignment="Center" Height="22" Margin="20,2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="232" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Grid.Row="2" IsEnabled="False" BorderThickness="0,0,0,1"/>
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>
