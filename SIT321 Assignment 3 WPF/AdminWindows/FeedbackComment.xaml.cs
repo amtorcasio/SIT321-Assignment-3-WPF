@@ -15,6 +15,7 @@ using SARMS;
 using SARMS.Users;
 using SARMS.Content;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace SIT321_Assignment_3_WPF.AdminWindows
 {
@@ -29,6 +30,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private List<Unit> UnitsList;
 
         private Window _from;
+
+        SortedDictionary<DateTime, string[]> comments = new SortedDictionary<DateTime, string[]>();
 
         public FeedbackComment(Administrator admin, Account student, List<Unit> units, Window from)
         {
@@ -77,16 +80,33 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
+                comments = new SortedDictionary<DateTime, string[]>();
+
                 // get feedback
                 string stafffeed, studentfeed;
                 Admin.GetFeedback(Student, UnitsList[index], out stafffeed, out studentfeed);
 
                 // split feedback
-                string[] stafftemp, studenttemp;
-                stafftemp = stafffeed.Split('\n');
-                studenttemp = studentfeed.Split('\n');
+                List<string> stafftemp, studenttemp;
+                stafftemp = stafffeed.Split('\n').ToList();
+                studenttemp = studentfeed.Split('\n').ToList();
 
-                MessageBox.Show(Utilities.CommentTail());
+                foreach (string s in stafftemp)
+                {
+                    string[] split = s.Split('<');
+                    string stemp = split[0];
+                    DateTime dtemp = DateTime.Parse(split[1]);
+                    comments.Add(dtemp, [stemp, "staff"]);
+                }
+                foreach (string s in studenttemp)
+                {
+                    string[] split = s.Split('<');
+                    string stemp = split[0];
+                    DateTime dtemp = DateTime.Parse(split[1]);
+                    comments.Add(dtemp, [stemp, "student"]);
+                }
+
+
             }
         }
     }
