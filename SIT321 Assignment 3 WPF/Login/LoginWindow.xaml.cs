@@ -41,7 +41,7 @@ namespace SIT321_Assignment_3_WPF
                 else if (result is Lecturer)
                     nextWindow = new LecturerWindow(result as Lecturer);
                 else if (result is Student)
-                    nextWindow = new StudentWindow(result as Student);
+                    nextWindow = new AdminWindows.FeedbackComment(result as Student);
 
                 this.Close(); // this.Hide();
                 nextWindow.Show();

@@ -343,7 +343,6 @@ namespace SARMS.Users
 
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteCommand command = null;
-            SQLiteDataReader reader = null;
 
             try
             {
@@ -355,7 +354,7 @@ namespace SARMS.Users
                 command.Parameters.AddWithValue("@unitID", unit.ID);
 
                 string currentFeedback = "";
-                using (reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader())
                 {
 
                     if (reader.HasRows)
@@ -364,16 +363,12 @@ namespace SARMS.Users
                         currentFeedback = reader[0].ToString();
                     }
                 }
-                reader.Close();
-
                 //if (currentFeedback.Length > 0) currentFeedback += "\n";
 
                 command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
                 string newfeedback = currentFeedback + feedback + Utilities.CommentTail();
                 command.Parameters.AddWithValue("@feedback", newfeedback);
-
-                if (command.ExecuteNonQuery() == 0)
-                    return false;
+                int rows = command.ExecuteNonQuery();
 
                 var studentUnit = student.Units.Find(e => (e.unit.ID == unit.ID));
                 if (by is Administrator || by is Lecturer)
@@ -386,13 +381,8 @@ namespace SARMS.Users
                 }
                 return true;
             }
-            catch (Exception)
-            {
-                throw;
-            }
             finally
             {
-                if (reader != null) reader.Close();
                 if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
@@ -429,13 +419,10 @@ namespace SARMS.Users
                 staffFeeback = null;
                 studentFeedback = null;
             }
-            catch (Exception)
-            {
-                throw;
-            }
             finally
             {
                 if (command != null) command.Dispose();
+                if (reader != null) reader.Close();
                 if (connection != null) connection.Close();
             }
         }
