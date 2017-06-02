@@ -446,6 +446,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             if(LoggedInAccount.AddStudentUnit(tempstu, enrol))
                                             {
                                                 MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been enrolled to Unit");
+                                                PopulateList();
                                             }
                                             return;
                                         default:
@@ -541,6 +542,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             if (LoggedInAccount.RemoveStudentUnit(tempstu, enrol))
                                             {
                                                 MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been unenrolled from Unit");
+                                                PopulateList();
                                             }
                                             return;
                                         default:
