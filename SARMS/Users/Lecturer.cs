@@ -130,10 +130,9 @@ namespace SARMS.Users
                 connection.Open();
 
                 command = connection.CreateCommand();
-                command.CommandText =   "UPDATE [UserAssessment]" +
-                                        "SET [AssessmentID] = @assid," +
-                                            "[Mark] = @mark" +
-                                        "WHERE UserID = @sid";
+                command.CommandText =   "UPDATE [UserAssessment] " +
+                                        "SET [Mark] = @mark " +
+                                        "WHERE UserID = @sid AND AssessmentID = @assid";
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@assid", assessment.AssessmentID);
                 command.Parameters.AddWithValue("@mark", mark);

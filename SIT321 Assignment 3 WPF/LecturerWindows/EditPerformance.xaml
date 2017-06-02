@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Edit Performance" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="Edit Performance" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Closed="Window_Closed">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

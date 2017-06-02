@@ -302,7 +302,29 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         private void btnEditPerformance_Click(object sender, RoutedEventArgs e)
         {
+            if (lsvPerformance.SelectedIndex == -1)
+            {
+                if (lsvPerformance.Items.Count == 1)
+                {
+                    lsvPerformance.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("You must select an assessment item before editing it", "Selection incomplete", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+            }
 
+            var perf = lsvPerformance.SelectedItem as StudentAssessment;
+            if (perf != null)
+            {
+                var editWindow = new EditPerformance(_loggedIn, this, ref perf);
+                editWindow.Show();
+            }
+            else
+            {
+                throw new InvalidCastException("Error occured casting performance item. This should never happen");
+            }
         }
 
         private void btnAddPerformance_Click(object sender, RoutedEventArgs e)

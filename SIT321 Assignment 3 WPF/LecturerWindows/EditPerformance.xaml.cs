@@ -24,7 +24,6 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         private Lecturer _loggedIn;
         private Window _from;
         private StudentAssessment _performance;
-        private Student _student;
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -41,7 +40,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
             _performance = performance;
             txtMark.Text = _performance.Mark.ToString();
-            txtTotalMark.Text = _performance.Assessment.ToString();
+            txtTotalMark.Text = _performance.Assessment.TotalMarks.ToString();
 
             lblStudent.Content += " " + _performance.account.LastName + " " + _performance.account.FirstName;
             lblUnit.Content += " " + _performance.Assessment.unit.Code + " " + _performance.Assessment.unit.Name;
@@ -61,7 +60,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 }
                 return;
             }
-            if (!_loggedIn.EditStudentPerformance(_student, _performance.Assessment, mark))
+            if (!_loggedIn.EditStudentPerformance(_performance.account as Student, _performance.Assessment, mark))
             {
                 var msgResult = MessageBox.Show("An error occured with editing the database, retry?", "Database Error", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
                 if (msgResult == MessageBoxResult.No)
@@ -73,6 +72,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                     return;
                 }
             }
+            this.Close();
         }
 
         private void Window_Closed(object sender, EventArgs e)
