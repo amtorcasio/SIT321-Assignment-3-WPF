@@ -803,7 +803,21 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnFeedbackComment_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listUsers.SelectedIndex >= 0)
+            {
+                if(LoggedInAccount.GetType(listedUsers[listUsers.SelectedIndex]) == 2)
+                {
+                    List<string> selecteduserunits = listedUnits;
+                }
+                else
+                {
+                    MessageBox.Show("Must Select a Account of type Student");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Must Select a Student");
+            }
         }
     }
 }
