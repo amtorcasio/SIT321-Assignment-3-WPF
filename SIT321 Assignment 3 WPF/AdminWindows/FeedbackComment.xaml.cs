@@ -90,6 +90,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
+                lstFeedbackComments.Items.Clear();
+
                 comments = new SortedDictionary<DateTime, string[]>();
 
                 // get feedback
