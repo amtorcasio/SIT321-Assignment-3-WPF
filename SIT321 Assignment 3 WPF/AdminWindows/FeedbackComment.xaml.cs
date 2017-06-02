@@ -96,17 +96,38 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     string[] split = s.Split('<');
                     string stemp = split[0];
                     DateTime dtemp = DateTime.Parse(split[1]);
-                    comments.Add(dtemp, [stemp, "staff"]);
+                    string[] values = { stemp, "staff" };
+                    comments.Add(dtemp, values);
                 }
                 foreach (string s in studenttemp)
                 {
                     string[] split = s.Split('<');
                     string stemp = split[0];
                     DateTime dtemp = DateTime.Parse(split[1]);
-                    comments.Add(dtemp, [stemp, "student"]);
+                    string[] values = { stemp, "student" };
+                    comments.Add(dtemp, values);
                 }
 
+                int count = 0;
+                foreach (KeyValuePair<DateTime, string[]> commm in comments)
+                {
+                    ListBoxItem lbi = new ListBoxItem();
+                    lbi.Content = commm.Key.ToString() + "\n" + commm.Value[0];
+                    lbi.FontSize = 12;
+                    lbi.Padding = new Thickness(5, 5, 5, 5);
 
+                    if (commm.Value[1] == "student")
+                    {
+                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
+                    }
+                    else
+                    {
+                        lbi.Background = System.Windows.Media.Brushes.LightSalmon;
+                    }
+
+                    lstFeedbackComments.Items.Add(lbi);
+                    count++;
+                }
             }
         }
     }
