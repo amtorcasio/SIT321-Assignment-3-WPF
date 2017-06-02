@@ -337,7 +337,7 @@ namespace SARMS.Users
             }
         }
 
-        public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
+        public bool AddFeedBack(Account by, Account student, Unit unit, string feedback)
         {
             if (feedback.Trim().Length == 0) return false;
 
