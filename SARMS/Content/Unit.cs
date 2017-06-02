@@ -73,5 +73,10 @@ namespace SARMS.Content
             _totalLectures = totalLectures;
             _totalPracticals = totalPracticals;
         }
+
+        public override string ToString()
+        {
+            return Code + ": " + Name;
+        }
     }
 }
