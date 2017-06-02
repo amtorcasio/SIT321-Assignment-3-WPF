@@ -69,32 +69,34 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
                     c.Parameters.AddWithValue("@id", selectedUnit);
                     
                     r = c.ExecuteReader();
+
                     if (r.HasRows && r.Read())
-                    {
-                        string[] staffFeedback = r[0].ToString().Split('\n');
-                        string[] studentFeedback = r[1].ToString().Split('\n');
-
-                        string matchFullResult = "";
-                        foreach (string s in staffFeedback)
+                        if (r[0].ToString() != "")
                         {
-                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
-                                matchFullResult += m.Value;
-                            
-                            allFeedback.Add(new FeedbackItem(DateTime.Parse(matchFullResult), s.Substring(s.IndexOf('>') + 1)));
-                        }
+                            string[] staffFeedback = r[0].ToString().Split('\n');
+                            string[] studentFeedback = r[1].ToString().Split('\n');
 
-                        matchFullResult = "";
-                        foreach (string s in studentFeedback)
-                        {
-                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
-                                matchFullResult += m.Value;
+                            foreach (string s in staffFeedback)
+                                allFeedback.Add(new FeedbackItem(DateTime.Parse(s.Substring(s.IndexOf('<') + 1)), s.Remove(s.IndexOf('<') + 1)));
 
-                            DateTime d = DateTime.Parse(matchFullResult);
-                            for (int i = 0; i < allFeedback.Count; i++)
-                                if (d < allFeedback[i].Timestamp)
-                                    allFeedback.Insert(i, new FeedbackItem(d, s.Substring(s.IndexOf('>') + 1)));
+                            foreach (string s in studentFeedback)
+                            {
+                                DateTime d = DateTime.Parse(s.Substring(s.IndexOf('<') + 1));
+                                allFeedback.Insert(0, new FeedbackItem(d, s.Remove(s.IndexOf('<') + 1)));
+                                for (int i = 0; i < allFeedback.Count - 1; i++)
+                                {
+                                    if (allFeedback[i].Timestamp > allFeedback[i + 1].Timestamp)
+                                    {
+                                        var temp = allFeedback[i];
+                                        allFeedback[i] = allFeedback[i + 1];
+                                        allFeedback[i + 1] = temp;
+                                    }
+                                    else
+                                        break;
+                                }
+
+                            }
                         }
-                    }
                 }
                 finally
                 {

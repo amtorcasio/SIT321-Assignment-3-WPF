@@ -368,7 +368,7 @@ namespace SARMS.Users
 
                 command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
                 string newfeedback = currentFeedback + feedback + Utilities.CommentTail();
-                command.Parameters.AddWithValue("@feeback", newfeedback);
+                command.Parameters.AddWithValue("@feedback", newfeedback);
 
                 if (command.ExecuteNonQuery() == 0)
                     return false;
@@ -419,7 +419,8 @@ namespace SARMS.Users
                 {
                     reader.Read();
                     staffFeeback = reader[0].ToString();
-                    studentFeedback = reader[0].ToString();
+                    studentFeedback = reader[1].ToString();
+                    return;
                 }
 
                 staffFeeback = null;
