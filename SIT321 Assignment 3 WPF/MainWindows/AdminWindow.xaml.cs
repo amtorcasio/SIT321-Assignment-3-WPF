@@ -33,12 +33,18 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         EventHandler re_populate_lists;     // repopulate list with event handler
 
+        SolidColorBrush libadmin = System.Windows.Media.Brushes.LimeGreen;
+        SolidColorBrush liblecturer = System.Windows.Media.Brushes.Aqua;
+        SolidColorBrush libstudent = System.Windows.Media.Brushes.LightGoldenrodYellow;
+        SolidColorBrush libSAR = System.Windows.Media.Brushes.OrangeRed;
+
         public AdminWindow(Account lAccount)
         {
             LoggedInAccount = lAccount as Administrator;
             InitializeComponent();
             PopulateList();
             re_populate_lists = new EventHandler(PopulateList);
+            chkSAR.Background = System.Windows.Media.Brushes.OrangeRed;
         }
 
         private void PopulateList(object sender, EventArgs e)
@@ -46,6 +52,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             PopulateList();
             btnEditUser.IsEnabled = btnEditUnit.IsEnabled = false;
             btnAddUser.IsEnabled = btnAddUnit.IsEnabled = true;
+        }
+
+        private void ifChkSAR(object sender, EventArgs e)
+        {
+
         }
 
         private void PopulateList()
@@ -83,13 +94,16 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                 switch ((UserType)Convert.ToInt32(r[3]))
                                 {
                                     case UserType.Administrator:
-                                        lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                        lbi.Background = libadmin;
+                                        chkAdmin.Background = libadmin;
                                         break;
                                     case UserType.Lecturer:
-                                        lbi.Background = System.Windows.Media.Brushes.Aqua;
+                                        lbi.Background = liblecturer;
+                                        chkLecturer.Background = liblecturer;
                                         break;
                                     case UserType.Student:
-                                        lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                                        lbi.Background = libstudent;
+                                        chkStudent.Background = libstudent;
                                         break;
                                     default:
                                         return;
@@ -244,13 +258,13 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             switch ((UserType)Convert.ToInt32(r[3]))
                                             {
                                                 case UserType.Administrator:
-                                                    lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                                    lbi.Background = libadmin;
                                                     break;
                                                 case UserType.Lecturer:
-                                                    lbi.Background = System.Windows.Media.Brushes.Aqua;
+                                                    lbi.Background = liblecturer;
                                                     break;
                                                 case UserType.Student:
-                                                    lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                                                    lbi.Background = libstudent;
                                                     break;
                                                 default:
                                                     return;
@@ -709,13 +723,13 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                     switch ((UserType)Convert.ToInt32(LoggedInAccount.GetType(a.ID)))
                     {
                         case UserType.Administrator:
-                            lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                            lbi.Background = libadmin;
                             break;
                         case UserType.Lecturer:
-                            lbi.Background = System.Windows.Media.Brushes.Aqua;
+                            lbi.Background = liblecturer;
                             break;
                         case UserType.Student:
-                            lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                            lbi.Background = libstudent;
                             break;
                         default:
                             return;
@@ -730,6 +744,21 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void txtDBQuery_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void chkAdmin_Checked(object sender, RoutedEventArgs e)
+        {
+            chkAdmin.IsChecked = false;
+        }
+
+        private void chkLecturer_Checked(object sender, RoutedEventArgs e)
+        {
+            chkLecturer.IsChecked = false;
+        }
+
+        private void chkStudent_Checked(object sender, RoutedEventArgs e)
+        {
+            chkStudent.IsChecked = false;
         }
     }
 }
