@@ -7,7 +7,7 @@ namespace SARMS.Data
     {
         private Account _account;
         private Assessment _assessment;
-        private decimal _mark;
+        private double _mark;
 
         public Account account
         {
@@ -19,7 +19,7 @@ namespace SARMS.Data
             get { return _assessment; }
             set { _assessment = value; }
         }
-        public decimal Mark
+        public double Mark
         {
             get { return _mark; }
             set { _mark = value; }

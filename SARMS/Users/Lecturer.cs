@@ -81,7 +81,7 @@ namespace SARMS.Users
         }
 
         // add student performance to assessment
-        public bool AddStudentPerformance(Student student, Assessment assessment, int mark)
+        public bool AddStudentPerformance(Student student, Assessment assessment, double mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteCommand command = null;
@@ -120,7 +120,7 @@ namespace SARMS.Users
         }
 
         // edit student performance data
-        public bool EditStudentPerformance(Student student, Assessment assessment, int mark)
+        public bool EditStudentPerformance(Student student, Assessment assessment, double mark)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteCommand command = null;

@@ -56,7 +56,7 @@ namespace SARMS
             //Check performance
             foreach (StudentAssessment sa in student.Performance)
             {
-                if ((sa.Mark / sa.Assessment.TotalMarks) < 50.0M)
+                if ((sa.Mark / sa.Assessment.TotalMarks) < 50.0d)
                 {
                     var su = student.Units.Find(e => (e.unit.ID == sa.Assessment.unit.ID));
                     su.AtRisk = true;
