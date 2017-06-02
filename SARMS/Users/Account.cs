@@ -419,7 +419,7 @@ namespace SARMS.Users
                 {
                     reader.Read();
                     staffFeeback = reader[0].ToString();
-                    studentFeedback = reader[0].ToString();
+                    studentFeedback = reader[1].ToString();
                 }
 
                 staffFeeback = null;

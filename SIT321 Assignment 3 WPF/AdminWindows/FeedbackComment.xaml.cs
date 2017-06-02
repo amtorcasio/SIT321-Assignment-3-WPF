@@ -82,65 +82,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         private void lstUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int index = lstUnits.SelectedIndex;
-            if (index >= 0)
-            {
-                comments = new SortedDictionary<DateTime, string[]>();
-
-                // get feedback
-                string stafffeed, studentfeed;
-                Admin.GetFeedback(Student, UnitsList[index], out stafffeed, out studentfeed);
-
-                // split feedback
-                List<string> stafftemp, studenttemp;
-
-                if (stafffeed != null)
-                {
-                    stafftemp = stafffeed.Split('\n').ToList();
-                    foreach (string s in stafftemp)
-                    {
-                        string[] split = s.Split('<');
-                        string stemp = split[0];
-                        DateTime dtemp = DateTime.Parse(split[1]);
-                        string[] values = { stemp, "staff" };
-                        comments.Add(dtemp, values);
-                    }
-                }
-
-                if (studentfeed != null)
-                {
-                    studenttemp = studentfeed.Split('\n').ToList();
-                    foreach (string s in studenttemp)
-                    {
-                        string[] split = s.Split('<');
-                        string stemp = split[0];
-                        DateTime dtemp = DateTime.Parse(split[1]);
-                        string[] values = { stemp, "student" };
-                        comments.Add(dtemp, values);
-                    }
-                }
-
-                int count = 0;
-                foreach (KeyValuePair<DateTime, string[]> commm in comments)
-                {
-                    ListBoxItem lbi = new ListBoxItem();
-                    lbi.Content = commm.Key.ToString() + "\n" + commm.Value[0];
-                    lbi.FontSize = 12;
-                    lbi.Padding = new Thickness(5, 5, 5, 5);
-
-                    if (commm.Value[1] == "student")
-                    {
-                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
-                    }
-                    else
-                    {
-                        lbi.Background = System.Windows.Media.Brushes.LightSalmon;
-                    }
-
-                    lstFeedbackComments.Items.Add(lbi);
-                    count++;
-                }
-            }
+            loadFeedback();
         }
 
         private void loadFeedback()
