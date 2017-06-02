@@ -24,11 +24,44 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     {
         private Administrator Admin;
 
+        private Account Student;
+        private List<Unit> UnitsList;
+
         public FeedbackComment(Administrator admin, Account student, List<Unit> units)
         {
             InitializeComponent();
 
+            // set window object variables to parameters inserted
             Admin = admin;
+            Student = student;
+            UnitsList = units;
+
+            // fill lstunits items
+            int count = 0;
+            foreach(Unit u in UnitsList)
+            {
+                ListBoxItem lbi = new ListBoxItem();
+                lbi.Content = u.Code + ": " + u.Name;
+                lbi.FontSize = 14;
+                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                switch (count % 2)
+                {
+                    case 0:
+                        lbi.Background = System.Windows.Media.Brushes.LightGray;
+                        break;
+                    case 1:
+                        lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                        break;
+                    default:
+                        return;
+                }
+
+                lstUnits.Items.Add(lbi);
+                count++;
+            }
         }
+
+
     }
 }
