@@ -32,6 +32,9 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         SortedDictionary<DateTime, string[]> comments = new SortedDictionary<DateTime, string[]>();
 
+        SolidColorBrush studentbrush = System.Windows.Media.Brushes.LightBlue;
+        SolidColorBrush staffbrush = System.Windows.Media.Brushes.LightSalmon;
+
         public FeedbackComment(Administrator admin, Account student, List<Unit> units, Window from)
         {
             InitializeComponent();
@@ -46,6 +49,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Account.LoadStudent(ref temp);
 
             ClassStudent = temp;
+
+            txtSubmitText.Background = staffbrush;
 
             // fill lstunits items
             int count = 0;
@@ -193,11 +198,12 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                     if (commm.Value[1] == "student")
                     {
-                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
+                        lbi.Background = studentbrush;
+                        lbi.HorizontalContentAlignment = HorizontalAlignment.Right;
                     }
                     else
                     {
-                        lbi.Background = System.Windows.Media.Brushes.LightSalmon;
+                        lbi.Background = staffbrush;
                     }
 
                     lstFeedbackComments.Items.Add(lbi);

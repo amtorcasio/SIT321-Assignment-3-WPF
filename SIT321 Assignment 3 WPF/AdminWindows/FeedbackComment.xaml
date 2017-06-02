@@ -8,9 +8,9 @@
         Title="FeedbackComment" Height="600" Width="759.657" Closed="Window_Closed">
     <Grid>
         <ListBox x:Name="lstUnits" HorizontalAlignment="Left" Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="247" SelectionChanged="lstUnits_SelectionChanged"/>
-        <ListBox x:Name="lstFeedbackComments" HorizontalAlignment="Left" Height="521" Margin="262,10,0,0" VerticalAlignment="Top" Width="480"/>
-        <TextBox x:Name="txtSubmitText" HorizontalAlignment="Left" Height="23" Margin="262,536,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="644,536,0,0" VerticalAlignment="Top" Width="98" Height="24" Click="btnSubmit_Click"/>
+        <ListBox x:Name="lstFeedbackComments" HorizontalAlignment="Left" Height="481" Margin="262,10,0,0" VerticalAlignment="Top" Width="480"/>
+        <TextBox x:Name="txtSubmitText" HorizontalAlignment="Left" Height="63" Margin="262,496,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="617,496,0,0" VerticalAlignment="Top" Width="125" Height="63" Click="btnSubmit_Click"/>
 
     </Grid>
 </Window>
