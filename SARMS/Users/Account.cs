@@ -3,6 +3,7 @@ using System.Data.SQLite;
 using SARMS.Content;
 using SARMS.Data;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SARMS.Users
 {
@@ -193,7 +194,7 @@ namespace SARMS.Users
                         Convert.ToInt32(reader[5]),
                         Convert.ToInt32(reader[6]));
                 }
-                result.Assessments = GetUnitAssessments(result);
+                result.Assessments = new ObservableCollection<Assessment>(GetUnitAssessments(result));
 
                 return result;
             }
