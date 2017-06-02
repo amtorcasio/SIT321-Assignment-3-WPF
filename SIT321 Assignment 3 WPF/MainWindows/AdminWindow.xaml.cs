@@ -152,9 +152,9 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                     c.Dispose();
                 }
-                catch (Exception e)
+                finally
                 {
-                    throw e;
+                    if (conn != null) conn.Close();
                 }
             }
 

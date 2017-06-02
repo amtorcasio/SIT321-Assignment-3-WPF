@@ -122,12 +122,13 @@ namespace SARMS.Users
                         command.CommandText = "SELECT AtRisk FROM UserUnits WHERE UserId = @id";
                         command.Parameters.AddWithValue("@id", accountid);
 
-                        command.ExecuteReader();
+                        reader = command.ExecuteReader();
 
                         if (reader.HasRows)
                         {
                             while (reader.Read())
                             {
+                                if (reader[0] == DBNull.Value) continue;
                                 if (int.Parse(reader[0].ToString()) == 1)
                                     return true;
                             }
