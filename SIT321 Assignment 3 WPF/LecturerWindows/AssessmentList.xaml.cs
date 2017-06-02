@@ -41,14 +41,20 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         private void hypCreateAssessment_Click(object sender, RoutedEventArgs e)
         {
-            var createWin = new AssessmentWindow(this, ref _unit);
-            createWin.Focus();
+            btnAddAssignment_Click(sender, e);
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             _from.Show();
             _from.Focus();
+        }
+
+        private void btnAddAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            var createWin = new AssessmentWindow(_loggedIn, this, ref _unit);
+            createWin.Show();
+            createWin.Focus();
         }
     }
 }

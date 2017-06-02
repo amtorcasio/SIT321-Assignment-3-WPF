@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SARMS.Content
 {
@@ -53,7 +54,7 @@ namespace SARMS.Content
         }
         #endregion
 
-        public List<Assessment> Assessments;
+        public ObservableCollection<Assessment> Assessments;
 
         public string AssessmentCount
         {

@@ -26,19 +26,19 @@ namespace SARMS.Users
 
                 command = connection.CreateCommand();
                 command.CommandText =   "INSERT INTO [Assessment] ([Id],[Name],[TotalMarks],[Weight],[UnitID]) " +
-                                        "VALUES(@aid, @aname, @atotalm, @weight, @unitid); " +
+                                        "VALUES(NULL, @aname, @atotalm, @weight, @unitid); " +
                                         "SELECT last_insert_rowid();";
-                command.Parameters.AddWithValue("@id", DBNull.Value);
                 command.Parameters.AddWithValue("@aname", assessment.Name);
                 command.Parameters.AddWithValue("@atotalm", assessment.TotalMarks);
                 command.Parameters.AddWithValue("@weight", assessment.Weight);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
+
                 object obj = command.ExecuteScalar();
-                long id = (long)obj;
+                long? id = obj as long?;
 
                 if (id != null)
                 {
-                    assessment.AssessmentID = id;
+                    assessment.AssessmentID = (long)id;
                     // add assessment to unit after added to database
                     unit.Assessments.Add(assessment);
                     return true;
