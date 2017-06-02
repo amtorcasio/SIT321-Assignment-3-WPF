@@ -23,8 +23,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     /// </summary>
     public partial class FeedbackComment : Window
     {
-        private Administrator Admin;
-
+        private Account Admin;
         private Account Student;
         private Student ClassStudent;
         private List<Unit> UnitsList;
@@ -38,7 +37,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             InitializeComponent();
 
             // set window object variables to parameters inserted
-            Admin = admin;
+            //Admin = admin;
             Student = student;
             UnitsList = units;
             _from = from;
@@ -51,6 +50,44 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             // fill lstunits items
             int count = 0;
             foreach(Unit u in UnitsList)
+            {
+                ListBoxItem lbi = new ListBoxItem();
+                lbi.Content = u.Code + ": " + u.Name;
+                lbi.FontSize = 12;
+                lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                switch (count % 2)
+                {
+                    case 0:
+                        lbi.Background = System.Windows.Media.Brushes.LightGray;
+                        break;
+                    case 1:
+                        lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                        break;
+                    default:
+                        return;
+                }
+
+                lstUnits.Items.Add(lbi);
+                count++;
+            }
+        }
+
+        public FeedbackComment(Lecturer lecturer, Student student, Window from)
+        {
+            InitializeComponent();
+
+            //set window object variables to parameters inserted
+            Admin = lecturer;
+            Student = student;
+            UnitsList = lecturer.Units.Intersect(student.Units.Select(u => u.unit)).ToList();
+            _from = from;
+
+            ClassStudent = student;
+
+            // fill lstunits items
+            int count = 0;
+            foreach (Unit u in UnitsList)
             {
                 ListBoxItem lbi = new ListBoxItem();
                 lbi.Content = u.Code + ": " + u.Name;
