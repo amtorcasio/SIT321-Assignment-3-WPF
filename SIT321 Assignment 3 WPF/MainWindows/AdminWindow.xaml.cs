@@ -583,6 +583,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 listWindow.Focus();
                 this.Hide();
             }
+            else
+            {
+                MessageBox.Show("Must select a unit!");
+            }
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
