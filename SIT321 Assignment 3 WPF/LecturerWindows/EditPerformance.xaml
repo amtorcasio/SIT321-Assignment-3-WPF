@@ -30,6 +30,6 @@
         <TextBox x:Name="txtTotalMark" HorizontalAlignment="Center" Height="26" Margin="12,5,47,5" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SnapsToDevicePixels="True" TabIndex="1" FontSize="14" Grid.Column="2" IsEnabled="False"/>
         <ComboBox x:Name="cboUnit" DisplayMemberPath="Name" SelectedValuePath="Name" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" Margin="10,7" Grid.Row="1" VerticalAlignment="Center" Width="199" IsEnabled="False" SelectionChanged="cboUnit_SelectionChanged"/>
         <ComboBox x:Name="cboAssessment" DisplayMemberPath="Name" SelectedValuePath="Name" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" Margin="10,7" Grid.Row="2" VerticalAlignment="Center" Width="199" IsEnabled="False" SelectionChanged="cboAssessment_SelectionChanged"/>
-        <Label x:Name="lblStudent" Content="" Margin="10,5,44,5" Focusable="True" VerticalAlignment="Center" Grid.Column="1"/>
+        <Label x:Name="lblStudent" Content="" Margin="10,5" Focusable="True" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Left"/>
     </Grid>
 </Window>
