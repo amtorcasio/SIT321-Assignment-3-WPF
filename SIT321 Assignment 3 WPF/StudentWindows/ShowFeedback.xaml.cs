@@ -77,12 +77,12 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
                             string[] studentFeedback = r[1].ToString().Split('\n');
 
                             foreach (string s in staffFeedback)
-                                allFeedback.Add(new FeedbackItem(DateTime.Parse(s.Substring(s.IndexOf('<') + 1)), s.Remove(s.IndexOf('<') + 1)));
+                                allFeedback.Add(new FeedbackItem(DateTime.Parse(s.Substring(s.IndexOf('<') + 1)), s.Remove(s.IndexOf('<'))));
 
                             foreach (string s in studentFeedback)
                             {
                                 DateTime d = DateTime.Parse(s.Substring(s.IndexOf('<') + 1));
-                                allFeedback.Insert(0, new FeedbackItem(d, s.Remove(s.IndexOf('<') + 1)));
+                                allFeedback.Insert(0, new FeedbackItem(d, s.Remove(s.IndexOf('<'))));
                                 for (int i = 0; i < allFeedback.Count - 1; i++)
                                 {
                                     if (allFeedback[i].Timestamp > allFeedback[i + 1].Timestamp)
