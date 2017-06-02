@@ -83,13 +83,16 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                 switch ((UserType)Convert.ToInt32(r[3]))
                                 {
                                     case UserType.Administrator:
-                                        lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                        lbi.Background = System.Windows.Media.Brushes.LimeGreen;
+                                        chkAdmin.Background = System.Windows.Media.Brushes.LimeGreen;
                                         break;
                                     case UserType.Lecturer:
                                         lbi.Background = System.Windows.Media.Brushes.Aqua;
+                                        chkLecturer.Background = System.Windows.Media.Brushes.Aqua;
                                         break;
                                     case UserType.Student:
                                         lbi.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
+                                        chkStudent.Background = System.Windows.Media.Brushes.LightGoldenrodYellow;
                                         break;
                                     default:
                                         return;
@@ -244,7 +247,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             switch ((UserType)Convert.ToInt32(r[3]))
                                             {
                                                 case UserType.Administrator:
-                                                    lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                                                    lbi.Background = System.Windows.Media.Brushes.LimeGreen;
                                                     break;
                                                 case UserType.Lecturer:
                                                     lbi.Background = System.Windows.Media.Brushes.Aqua;
@@ -709,7 +712,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                     switch ((UserType)Convert.ToInt32(LoggedInAccount.GetType(a.ID)))
                     {
                         case UserType.Administrator:
-                            lbi.Background = System.Windows.Media.Brushes.OrangeRed;
+                            lbi.Background = System.Windows.Media.Brushes.LimeGreen;
                             break;
                         case UserType.Lecturer:
                             lbi.Background = System.Windows.Media.Brushes.Aqua;
@@ -730,6 +733,21 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void txtDBQuery_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void chkAdmin_Checked(object sender, RoutedEventArgs e)
+        {
+            chkAdmin.IsChecked = false;
+        }
+
+        private void chkLecturer_Checked(object sender, RoutedEventArgs e)
+        {
+            chkLecturer.IsChecked = false;
+        }
+
+        private void chkStudent_Checked(object sender, RoutedEventArgs e)
+        {
+            chkStudent.IsChecked = false;
         }
     }
 }

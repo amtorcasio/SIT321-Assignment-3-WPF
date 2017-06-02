@@ -9,7 +9,6 @@
     <Grid>
 
         <Label Content="Units currently in Database" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Users currently in Database" HorizontalAlignment="Left" Margin="494,10,0,0" VerticalAlignment="Top"/>
 
         <ListBox Name="listUnits" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="10,41,0,0" VerticalAlignment="Top" Width="450" SelectionChanged="listUnits_SelectionChanged"/>
         <ListBox Name="listUsers" BorderBrush="LightGray" HorizontalAlignment="Left" Height="370" Margin="494,41,0,0" VerticalAlignment="Top" Width="450" SelectionChanged="listUsers_SelectionChanged"/>
@@ -30,6 +29,9 @@
         <TextBox x:Name="txtUnenrolUnitCode" HorizontalAlignment="Left" Height="22" Margin="667,502,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
         <Button x:Name="btnViewStudentData" Content="View Student Unit Data" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Width="130" Height="23" Click="btnViewStudentData_Click"/>
         <Button x:Name="btnRefresh" Content="Refresh Lists" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="160" Height="23" Click="btnRefresh_Click"/>
+        <CheckBox x:Name="chkAdmin" Content="Administrator" HorizontalAlignment="Left" Margin="494,15,0,0" VerticalAlignment="Top" Checked="chkAdmin_Checked"/>
+        <CheckBox x:Name="chkLecturer" Content="Lecturer" HorizontalAlignment="Left" Margin="613,15,0,0" VerticalAlignment="Top" Checked="chkLecturer_Checked"/>
+        <CheckBox x:Name="chkStudent" Content="Student" HorizontalAlignment="Left" Margin="703,15,0,0" VerticalAlignment="Top" Checked="chkStudent_Checked"/>
 
     </Grid>
 </Window>
