@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="Assessment List" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid Margin="0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <GroupBox x:Name="gpoClassList" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top">
             <GroupBox.Header>
                 <TextBlock x:Name="tboUnit" FontWeight="Bold" FontSize="16" Text="Unit name here"/>
@@ -38,12 +34,10 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <TextBlock x:Name="tboNoAssessments" HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="14" Width="279">
-                    <Run Text="You do not appear to have any assessments listed in this unit. To add an assessment "/>
+                <TextBlock x:Name="tboNoAssessments" Margin="5" TextWrapping="Wrap" FontSize="14" Width="279" Grid.ColumnSpan="2">
+                    You do not appear to have any assessments listed in this unit. To add an assessment
                     <Hyperlink x:Name="hypCreateAssessment">
-                        <InlineUIContainer>
                             <TextBlock VerticalAlignment="Center" Text="click here." />
-                        </InlineUIContainer>
                     </Hyperlink>
                 </TextBlock>
                 <Button x:Name="btnRemoveAssessment" Content="Remove Assessment" Grid.Column="1" Margin="10" Grid.Row="1" VerticalAlignment="Top" Width="115" Height="25" HorizontalAlignment="Center" Click="btnRemoveAssessment_Click" Visibility="Collapsed"/>

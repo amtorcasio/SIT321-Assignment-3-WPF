@@ -35,6 +35,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             _unit = unit;
 
             lsvAssessments.ItemsSource = _unit.Assessments;
+            tboUnit.Text = unit.Code + ": " + unit.Name;
             CheckVisibility();
         }
 

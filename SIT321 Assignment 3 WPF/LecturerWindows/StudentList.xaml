@@ -33,7 +33,7 @@
                     <RowDefinition Height="Auto" MinHeight="26"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="tboInfo" Margin="0,4" TextWrapping="Wrap" Text="Select a student to view his/her info" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Height="18" Grid.ColumnSpan="3" Visibility="Hidden" Grid.Row="2"/>
+                <TextBlock x:Name="tboInfo" Margin="5" TextWrapping="Wrap" Text="Select a student to view his/her info" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Height="18" Grid.ColumnSpan="3" Visibility="Hidden" Grid.RowSpan="6" HorizontalAlignment="Center"/>
                 <Label x:Name="lblLectures" Content="Lectures Attended:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.385,0.115" Margin="10,0,0,0" Height="26"/>
                 <Label x:Name="lblPracticals" Content="Practicals Attended:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Margin="10,0,0,0" Height="26" Width="114"/>
                 <Label x:Name="lblStaffFeedback" Content="Staff Feedback:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="10,0,0,0" Height="26" Width="90"/>
@@ -59,8 +59,8 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button x:Name="btnEditAttendance" Content="Edit Attendance" Grid.Column="1" Margin="5" Grid.Row="5" Click="btnEditAttendance_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2" Height="25" Width="113"/>
-                <Button x:Name="btnAddAttendance" Content="Add attendance" Margin="5" Grid.Row="5" Click="btnAddAttendance_Click" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="25" Width="113"/>
+                <Button x:Name="btnEditAttendance" Content="Edit Attendance" Grid.Column="1" Margin="5" Grid.Row="5" Click="btnEditAttendance_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2" Height="25" Width="113" Visibility="Collapsed"/>
+                <Button x:Name="btnAddAttendance" Content="Add attendance" Margin="5" Grid.Row="5" Click="btnAddAttendance_Click" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="25" Width="113" Visibility="Collapsed"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gboPerformance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" MinWidth="400" Grid.Row="1" Grid.Column="1" MinHeight="200" Width="410">
@@ -99,8 +99,8 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
                 <TextBlock x:Name="tboPerformance" Margin="0" TextWrapping="Wrap" Text="Select a student to view his/her marks" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Grid.ColumnSpan="3" HorizontalAlignment="Center" Grid.RowSpan="2"/>
-                <Button x:Name="btnEditPerformance" Content="Edit Performance" Grid.Column="1" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="113" Height="26" Grid.Row="1" Click="btnEditPerformance_Click"/>
-                <Button x:Name="btnAddPerformance" Content="Add Performance" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112" Height="25" Click="btnAddPerformance_Click"/>
+                <Button x:Name="btnEditPerformance" Content="Edit Performance" Grid.Column="1" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="113" Height="26" Grid.Row="1" Click="btnEditPerformance_Click" Visibility="Hidden"/>
+                <Button x:Name="btnAddPerformance" Content="Add Performance" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112" Height="25" Click="btnAddPerformance_Click" Visibility="Hidden"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gpoClassList" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Grid.RowSpan="2">

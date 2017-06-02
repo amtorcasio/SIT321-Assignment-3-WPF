@@ -50,7 +50,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             double mark;
-            if (!double.TryParse(txtMark.Text, out mark))
+            if (!double.TryParse(txtMark.Text, out mark) && !(mark >= 0))
             {
                 var msgResult = MessageBox.Show("Invalid mark value" + Environment.NewLine + Environment.NewLine + "Do you wish to try again?", 
                     "Error", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);

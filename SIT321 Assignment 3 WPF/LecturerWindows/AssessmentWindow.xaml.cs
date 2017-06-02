@@ -61,14 +61,19 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             string errorString = string.Empty;
             int totalMarks;
             double weight;
-            if (!int.TryParse(txtTotalMarks.Text, out totalMarks))
+            if (!int.TryParse(txtTotalMarks.Text, out totalMarks) && !(totalMarks > 0))
             {
-                errorString += "Invalid total marks value";
+                errorString += "Invalid total marks value (must be greater than 0)";
             }
-            if (!double.TryParse(txtWeight.Text, out weight))
+            if (!double.TryParse(txtWeight.Text, out weight) && !(weight > 0 && weight <= 100))
             {
                 if (!string.IsNullOrEmpty(errorString)) errorString += Environment.NewLine;
-                errorString += "Invalid weight value";
+                errorString += "Invalid weight value (1-100 %)";
+            }
+            if (string.IsNullOrWhiteSpace(txtAssessmentName.Text))
+            {
+                if (!string.IsNullOrEmpty(errorString)) errorString += Environment.NewLine;
+                errorString += "You must enter a name for the assignment";
             }
             if (!string.IsNullOrEmpty(errorString))
             {
