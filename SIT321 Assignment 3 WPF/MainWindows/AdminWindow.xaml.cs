@@ -273,6 +273,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                                     return;
                                             }
 
+                                            if (chkSAR.IsChecked == true)
+                                            {
+                                                if (LoggedInAccount.chkifSAR(r[0].ToString()) == true)
+                                                {
+                                                    lbi.Background = libSAR;
+                                                }
+                                            }
+
                                             listUsers.Items.Add(lbi);
                                         }
                                     }
@@ -736,6 +744,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                             break;
                         default:
                             return;
+                    }
+
+                    if (chkSAR.IsChecked == true)
+                    {
+                        if (LoggedInAccount.chkifSAR(r[0].ToString()) == true)
+                        {
+                            lbi.Background = libSAR;
+                        }
                     }
 
                     listUsers.Items.Add(lbi);
