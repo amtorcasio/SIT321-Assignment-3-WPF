@@ -28,7 +28,8 @@ namespace SARMS
 
         public static string GetPathData()
         {
-            return Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
+            //return Directory.GetParent(Directory.GetParent(Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).ToString()).ToString()) + "\\Data\\";
+            return Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory) + "\\Data\\";
         }
 
         // getStudentData accessible by UserTypes Administrator, Lecturer and Student

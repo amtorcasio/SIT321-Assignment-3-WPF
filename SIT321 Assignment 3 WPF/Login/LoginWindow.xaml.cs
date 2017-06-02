@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SARMS.Users;
 using SIT321_Assignment_3_WPF.MainWindows;
-
+using SARMS;
 
 namespace SIT321_Assignment_3_WPF
 {
@@ -26,7 +26,6 @@ namespace SIT321_Assignment_3_WPF
         {
             InitializeComponent();
             this.Focus();
-
             //(new StudentWindows.GiveFeedback()).Show();
         }
 
