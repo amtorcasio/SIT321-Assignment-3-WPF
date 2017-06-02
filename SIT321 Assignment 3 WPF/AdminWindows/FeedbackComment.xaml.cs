@@ -37,7 +37,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             InitializeComponent();
 
             // set window object variables to parameters inserted
-            //Admin = admin;
+            Admin = admin;
             Student = student;
             UnitsList = units;
             _from = from;
