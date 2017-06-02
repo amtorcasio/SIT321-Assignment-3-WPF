@@ -77,12 +77,15 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
+                // get feedback
                 string stafffeed, studentfeed;
                 Admin.GetFeedback(Student, UnitsList[index], out stafffeed, out studentfeed);
 
+                // split feedback
                 string[] stafftemp, studenttemp;
+                stafftemp = stafffeed.Split('\n');
+                studenttemp = studentfeed.Split('\n');
 
-                stafftemp = stafffeed.Split('|');
                 MessageBox.Show(Utilities.CommentTail());
             }
         }
