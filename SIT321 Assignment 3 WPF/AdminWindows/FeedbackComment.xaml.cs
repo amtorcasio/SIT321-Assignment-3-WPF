@@ -99,6 +99,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
             ClassStudent = student;
 
+            txtSubmitText.Background = staffbrush;
+
             // fill lstunits items
             int count = 0;
             foreach (Unit u in UnitsList)

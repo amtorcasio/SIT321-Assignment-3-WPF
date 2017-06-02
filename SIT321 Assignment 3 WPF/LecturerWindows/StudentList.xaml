@@ -15,7 +15,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="gboInfo" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.901,4.696" Grid.Column="1" Margin="10,10,0,0" MinHeight="150" MinWidth="400" Width="410" Height="150">
+        <GroupBox x:Name="gboInfo" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.901,4.696" Grid.Column="1" Margin="10" MinHeight="150" MinWidth="400" Width="410" Height="150">
             <GroupBox.Header>
                 <TextBlock FontWeight="Bold" FontSize="16">Student Info</TextBlock>
             </GroupBox.Header>
@@ -57,7 +57,7 @@
                 <Button x:Name="btnAddAttendance" Content="Add attendance" Margin="5" Grid.Row="3" Click="btnAddAttendance_Click" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="25" Width="113" Visibility="Collapsed"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gboPerformance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" MinWidth="400" Grid.Row="1" Grid.Column="1" MinHeight="200" Width="410" Height="200">
+        <GroupBox x:Name="gboPerformance" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" MinWidth="400" Grid.Row="1" Grid.Column="1" MinHeight="200" Width="410" Height="200">
             <GroupBox.Header>
                 <TextBlock FontWeight="Bold" FontSize="16">Student Performance</TextBlock>
             </GroupBox.Header>
