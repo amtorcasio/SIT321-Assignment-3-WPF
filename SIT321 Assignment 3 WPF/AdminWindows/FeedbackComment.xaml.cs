@@ -30,6 +30,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         private Window _from;
 
+        SortedDictionary<DateTime, string[]> comments = new SortedDictionary<DateTime, string[]>();
+
         public FeedbackComment(Administrator admin, Account student, List<Unit> units, Window from)
         {
             InitializeComponent();
@@ -77,13 +79,61 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
+                comments = new SortedDictionary<DateTime, string[]>();
+
+                // get feedback
                 string stafffeed, studentfeed;
                 Admin.GetFeedback(Student, UnitsList[index], out stafffeed, out studentfeed);
 
-                string[] stafftemp, studenttemp;
+                // split feedback
+                List<string> stafftemp, studenttemp;
 
-                stafftemp = stafffeed.Split('|');
-                MessageBox.Show(Utilities.CommentTail());
+                if (stafffeed != null)
+                {
+                    stafftemp = stafffeed.Split('\n').ToList();
+                    foreach (string s in stafftemp)
+                    {
+                        string[] split = s.Split('<');
+                        string stemp = split[0];
+                        DateTime dtemp = DateTime.Parse(split[1]);
+                        string[] values = { stemp, "staff" };
+                        comments.Add(dtemp, values);
+                    }
+                }
+
+                if (studentfeed != null)
+                {
+                    studenttemp = studentfeed.Split('\n').ToList();
+                    foreach (string s in studenttemp)
+                    {
+                        string[] split = s.Split('<');
+                        string stemp = split[0];
+                        DateTime dtemp = DateTime.Parse(split[1]);
+                        string[] values = { stemp, "student" };
+                        comments.Add(dtemp, values);
+                    }
+                }
+
+                int count = 0;
+                foreach (KeyValuePair<DateTime, string[]> commm in comments)
+                {
+                    ListBoxItem lbi = new ListBoxItem();
+                    lbi.Content = commm.Key.ToString() + "\n" + commm.Value[0];
+                    lbi.FontSize = 12;
+                    lbi.Padding = new Thickness(5, 5, 5, 5);
+
+                    if (commm.Value[1] == "student")
+                    {
+                        lbi.Background = System.Windows.Media.Brushes.LightBlue;
+                    }
+                    else
+                    {
+                        lbi.Background = System.Windows.Media.Brushes.LightSalmon;
+                    }
+
+                    lstFeedbackComments.Items.Add(lbi);
+                    count++;
+                }
             }
         }
     }

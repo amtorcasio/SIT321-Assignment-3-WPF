@@ -34,7 +34,7 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
 
         private void btnPostComment_Click(object sender, RoutedEventArgs e)
         {
-            // do something with txtSubject.Text and txtComment.Text
+            // do something with txtComment.Text
         }
     }
 }

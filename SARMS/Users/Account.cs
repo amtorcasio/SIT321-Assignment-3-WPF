@@ -365,7 +365,7 @@ namespace SARMS.Users
                 if (currentFeedback.Length > 0) currentFeedback += "\n";
 
                 command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
-                string newfeedback = currentFeedback + feedback;
+                string newfeedback = currentFeedback + feedback + Utilities.CommentTail();
                 command.Parameters.AddWithValue("@feeback", newfeedback);
 
                 if (command.ExecuteNonQuery() == 0)

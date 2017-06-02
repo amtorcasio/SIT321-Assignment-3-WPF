@@ -11,19 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SQLite;
+using System.Text.RegularExpressions;
+
+using SARMS;
+using SARMS.Users;
 
 namespace SIT321_Assignment_3_WPF.StudentWindows
 {
     public class FeedbackItem
     {
-        public string   Name { get; set; }
         public DateTime Timestamp { get; set; }
         public string   Comment { get; set; }
         
-        public FeedbackItem(string name, DateTime tstamp, string comment)
+        public FeedbackItem(DateTime tstamp, string comment)
         {
-            Name        = name;
-            Timestamp   = tstamp;
+            Timestamp = tstamp;
             Comment     = comment;
         }
     }
@@ -32,15 +35,78 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
     /// </summary>
     public partial class ShowFeedback : Window
     {
-        public ShowFeedback()
+        public List<FeedbackItem> allFeedback;
+
+        public Account loggedInAccount;
+        public int selectedUnit;
+
+        public ShowFeedback(Account a, int unit)
         {
             InitializeComponent();
 
-            List<FeedbackItem> lfbi = new List<FeedbackItem>();
-            lfbi.Add(new FeedbackItem("Damian Weiss", DateTime.Now, "Welcome to my unit!"));
-            lfbi.Add(new FeedbackItem("Lucy Mary", DateTime.Now, "Hi Damian, hope to have a great trimester with you!"));
+            loggedInAccount = a;
+            selectedUnit = unit;
 
-            lsbFeedbackList.ItemsSource = lfbi;
+            OutputAllFeedback();
+
+        }
+
+        private void OutputAllFeedback()
+        {
+            allFeedback = new List<FeedbackItem>();
+            using (var conn = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand c = null;
+                SQLiteDataReader r = null;
+
+                try
+                {
+                    conn.Open();
+
+                    c = conn.CreateCommand();
+                    c.CommandText = "SELECT StaffFeedback, StudentFeedback FROM UserUnits WHERE UserID = @user AND UnitID = @id";
+                    c.Parameters.AddWithValue("@user", loggedInAccount.ID);
+                    c.Parameters.AddWithValue("@id", selectedUnit);
+                    
+                    r = c.ExecuteReader();
+                    if (r.HasRows && r.Read())
+                    {
+                        string[] staffFeedback = r[0].ToString().Split('\n');
+                        string[] studentFeedback = r[1].ToString().Split('\n');
+
+                        string matchFullResult = "";
+                        foreach (string s in staffFeedback)
+                        {
+                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
+                                matchFullResult += m.Value;
+                            
+                            allFeedback.Add(new FeedbackItem(DateTime.Parse(matchFullResult), s.Substring(s.IndexOf('>') + 1)));
+                        }
+
+                        matchFullResult = "";
+                        foreach (string s in studentFeedback)
+                        {
+                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
+                                matchFullResult += m.Value;
+
+                            DateTime d = DateTime.Parse(matchFullResult);
+                            for (int i = 0; i < allFeedback.Count; i++)
+                                if (d < allFeedback[i].Timestamp)
+                                    allFeedback.Insert(i, new FeedbackItem(d, s.Substring(s.IndexOf('>') + 1)));
+                        }
+                    }
+                }
+                finally
+                {
+                    if (c != null) c.Dispose();
+                    if (r != null) r.Close();
+                }
+            }
+
+            if (allFeedback.Count == 0)
+                lsbFeedbackList.Items.Add(new ListBoxItem() { Content = "No feedback available. Check again later!", Padding = new Thickness(10,5,5,5) });
+            else
+                lsbFeedbackList.ItemsSource = allFeedback;
         }
 
         private void btnGiveFeedback_Click(object sender, RoutedEventArgs e)
@@ -49,5 +115,6 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
             giveFeedbackWindow.Show();
             giveFeedbackWindow.Focus();
         }
+
     }
 }
