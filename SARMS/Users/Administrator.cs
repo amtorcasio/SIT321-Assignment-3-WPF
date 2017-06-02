@@ -108,7 +108,7 @@ namespace SARMS.Users
 
         public bool chkifSAR(string accountid)
         {
-            if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UnitID = " + accountid))
+            if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UserID = " + accountid))
             {
                 using (var connection = Utilities.GetDatabaseSQLConnection())
                 {
