@@ -185,6 +185,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     if (commm.Value[1] == "student")
                     {
                         lbi.Background = System.Windows.Media.Brushes.LightBlue;
+                        lbi.HorizontalContentAlignment = HorizontalAlignment.Right;
                     }
                     else
                     {
