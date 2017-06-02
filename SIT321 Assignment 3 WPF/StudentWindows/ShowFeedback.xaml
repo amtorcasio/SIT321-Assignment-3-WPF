@@ -9,8 +9,8 @@
     <Window.Resources>
         <DataTemplate x:Key="FeedbackItemTemplate">
             <StackPanel>
-                <Label Content="{Binding Timestamp}" Padding="0,0,0,0" Margin="5,0,0,0"/>
-                <Label Content="{Binding Comment}" Padding="0,0,0,0" Margin="5,10,0,10"/>
+                <Label Content="{Binding Timestamp}" Padding="0,0,0,0" Margin="5,5,0,0"/>
+                <Label Content="{Binding Comment}" Padding="0,0,0,0" Margin="5,5,0,20"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>

@@ -94,7 +94,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void btnShowFeedback_Click(object sender, RoutedEventArgs e)
         {
             btnShowFeedback.IsEnabled = false;
-            var readFeedbackWindow = new StudentWindows.ShowFeedback() { selectedUnit = Int32.Parse(listedUnits[lsbUnits.SelectedIndex]), loggedInStudent = LoggedInAccount };
+            var readFeedbackWindow = new StudentWindows.ShowFeedback(LoggedInAccount, Int32.Parse(listedUnits[lsbUnits.SelectedIndex]));
             readFeedbackWindow.Show();
             readFeedbackWindow.Focus();
             lsbUnits.UnselectAll();

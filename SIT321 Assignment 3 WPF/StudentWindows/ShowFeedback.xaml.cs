@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 using SARMS;
 using SARMS.Users;
@@ -39,9 +40,13 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
         public Student loggedInStudent;
         public int selectedUnit;
 
-        public ShowFeedback()
+        public ShowFeedback(Student s, int unit)
         {
             InitializeComponent();
+
+            loggedInStudent = s;
+            selectedUnit = unit;
+
             OutputAllFeedback();
 
         }
@@ -60,30 +65,34 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
 
                     c = conn.CreateCommand();
                     c.CommandText = "SELECT * FROM UserUnits WHERE UserID = @user AND UnitID = @id";
-                    c.Parameters.AddWithValue("@user", loggedInStudent);
+                    c.Parameters.AddWithValue("@user", loggedInStudent.ID);
                     c.Parameters.AddWithValue("@id", selectedUnit);
                     
                     r = c.ExecuteReader();
                     if (r.HasRows && r.Read())
                     {
-                        string[] staffFeedback = r[4].ToString().Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                        string[] studentFeedback = r[5].ToString().Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] staffFeedback = r[4].ToString().Split('\n');
+                        string[] studentFeedback = r[5].ToString().Split('\n');
 
+                        string matchFullResult = "";
                         foreach (string s in staffFeedback)
                         {
-                            string[] comment_item = new string[2] { new System.Text.RegularExpressions.Regex(@"[^<>]").Match(s).ToString(), s.Substring(s.IndexOf('>') + 1) };
-                            allFeedback.Add(new FeedbackItem(DateTime.Parse(comment_item[0]), comment_item[1]));
+                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
+                                matchFullResult += m.Value;
+                            
+                            allFeedback.Add(new FeedbackItem(DateTime.Parse(matchFullResult), s.Substring(s.IndexOf('>') + 1)));
                         }
 
+                        matchFullResult = "";
                         foreach (string s in studentFeedback)
                         {
-                            string[] comment_item = new string[2] { new System.Text.RegularExpressions.Regex(@"[^<>]").Match(s).ToString(), s.Substring(s.IndexOf('>') + 1) };
+                            foreach (Match m in Regex.Matches(s, @"[0-9A-Z\s].+?M"))
+                                matchFullResult += m.Value;
+
+                            DateTime d = DateTime.Parse(matchFullResult);
                             for (int i = 0; i < allFeedback.Count; i++)
-                            {
-                                DateTime d = DateTime.Parse(comment_item[0]);
                                 if (d < allFeedback[i].Timestamp)
-                                    allFeedback.Insert(i, new FeedbackItem(d, comment_item[1]));
-                            }
+                                    allFeedback.Insert(i, new FeedbackItem(d, s.Substring(s.IndexOf('>') + 1)));
                         }
                     }
                 }
