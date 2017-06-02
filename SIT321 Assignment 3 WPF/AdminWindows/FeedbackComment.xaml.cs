@@ -159,7 +159,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 if (stafffeed != null)
                 {
-                    stafftemp = stafffeed.Split('\n').ToList();
+                    stafftemp = stafffeed.Split('|').ToList();
                     foreach (string s in stafftemp)
                     {
                         string[] split = s.Split('<');
@@ -172,7 +172,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 if (studentfeed != null)
                 {
-                    studenttemp = studentfeed.Split('\n').ToList();
+                    studenttemp = studentfeed.Split('|').ToList();
                     foreach (string s in studenttemp)
                     {
                         string[] split = s.Split('<');
