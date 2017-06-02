@@ -808,6 +808,15 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 if(LoggedInAccount.GetType(listedUsers[listUsers.SelectedIndex]) == 2)
                 {
                     List<string> selecteduserunits = listedUnits;
+
+                    string test = "";
+
+                    foreach(string ele in selecteduserunits)
+                    {
+                        test += ele + " ";
+                    }
+
+                    MessageBox.Show(test);
                 }
                 else
                 {
