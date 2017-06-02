@@ -24,7 +24,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
     {
         private Administrator Admin;
 
-        public FeedbackComment(Administrator admin, List<Unit> units)
+        public FeedbackComment(Administrator admin, Account student, List<Unit> units)
         {
             InitializeComponent();
 

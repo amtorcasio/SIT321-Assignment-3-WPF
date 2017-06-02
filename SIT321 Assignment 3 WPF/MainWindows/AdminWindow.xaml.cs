@@ -812,7 +812,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                     Account selectedAccount = LoggedInAccount.SearchAccountsById(accountid);
                     List<Unit> selectedAccountUnits = LoggedInAccount.GetUnitsbyAccount(selectedAccount);
 
-                    var feedbackcommentwindow = new AdminWindows.FeedbackComment(LoggedInAccount, selectedAccountUnits);
+                    var feedbackcommentwindow = new AdminWindows.FeedbackComment(LoggedInAccount, selectedAccount , selectedAccountUnits);
 
                     feedbackcommentwindow.Show();
                     feedbackcommentwindow.Focus();
