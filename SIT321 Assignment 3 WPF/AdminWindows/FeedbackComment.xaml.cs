@@ -158,6 +158,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 Admin.AddFeedBack(Admin, ClassStudent, UnitsList[lstUnits.SelectedIndex], txtSubmitText.Text);
                 loadFeedback();
+                txtSubmitText.Text = string.Empty;
             }
         }
     }
