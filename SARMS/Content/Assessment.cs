@@ -100,5 +100,10 @@ namespace SARMS.Content
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
