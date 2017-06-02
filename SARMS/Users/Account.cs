@@ -364,6 +364,7 @@ namespace SARMS.Users
                         currentFeedback = reader[0].ToString();
                     }
                 }
+                reader.Close();
 
                 //if (currentFeedback.Length > 0) currentFeedback += "\n";
 

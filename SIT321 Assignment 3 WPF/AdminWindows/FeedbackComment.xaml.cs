@@ -146,10 +146,13 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                         string[] split = s.Split('<');
                         if (split[0] == string.Empty)
                             break;
-                        string stemp = split[0];
-                        DateTime dtemp = DateTime.Parse(split[1]);
-                        string[] values = { stemp, "staff" };
-                        comments.Add(dtemp, values);
+                        for (int i = 0; i < split.Count() - 1; i++)
+                        {
+                            string stemp = split[i];
+                            DateTime dtemp = DateTime.Parse(split[1]);
+                            string[] values = { stemp, "staff" };
+                            comments.Add(dtemp, values);
+                        }
                     }
                 }
 
@@ -161,10 +164,13 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                         string[] split = s.Split('<');
                         if (split[0] == string.Empty)
                             break;
-                        string stemp = split[0];
-                        DateTime dtemp = DateTime.Parse(split[1]);
-                        string[] values = { stemp, "student" };
-                        comments.Add(dtemp, values);
+                        for (int i = 0; i < split.Count() - 1; i++)
+                        {
+                            string stemp = split[i];
+                            DateTime dtemp = DateTime.Parse(split[1]);
+                            string[] values = { stemp, "student" };
+                            comments.Add(dtemp, values);
+                        }
                     }
                 }
 
