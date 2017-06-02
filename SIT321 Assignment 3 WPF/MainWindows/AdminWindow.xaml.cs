@@ -476,13 +476,13 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void btnUnenrol_Click(object sender, RoutedEventArgs e)
         {
             // if unitcode is appropriate length
-            if (txtEnrolUnitCode.Text.Trim().Count() == 6)
+            if (txtUnenrolUnitCode.Text.Trim().Count() == 6)
             {
                 // if user is selected
                 if (listUsers.SelectedIndex >= 0)
                 {
                     // prepare unitcode
-                    string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
+                    string unitcode = txtUnenrolUnitCode.Text.Trim().ToUpper();
 
                     // get unit
                     Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
