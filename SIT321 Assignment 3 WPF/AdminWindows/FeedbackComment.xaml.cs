@@ -88,24 +88,31 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 // split feedback
                 List<string> stafftemp, studenttemp;
-                stafftemp = stafffeed.Split('\n').ToList();
-                studenttemp = studentfeed.Split('\n').ToList();
 
-                foreach (string s in stafftemp)
+                if (stafffeed != null)
                 {
-                    string[] split = s.Split('<');
-                    string stemp = split[0];
-                    DateTime dtemp = DateTime.Parse(split[1]);
-                    string[] values = { stemp, "staff" };
-                    comments.Add(dtemp, values);
+                    stafftemp = stafffeed.Split('\n').ToList();
+                    foreach (string s in stafftemp)
+                    {
+                        string[] split = s.Split('<');
+                        string stemp = split[0];
+                        DateTime dtemp = DateTime.Parse(split[1]);
+                        string[] values = { stemp, "staff" };
+                        comments.Add(dtemp, values);
+                    }
                 }
-                foreach (string s in studenttemp)
+
+                if (studentfeed != null)
                 {
-                    string[] split = s.Split('<');
-                    string stemp = split[0];
-                    DateTime dtemp = DateTime.Parse(split[1]);
-                    string[] values = { stemp, "student" };
-                    comments.Add(dtemp, values);
+                    studenttemp = studentfeed.Split('\n').ToList();
+                    foreach (string s in studenttemp)
+                    {
+                        string[] split = s.Split('<');
+                        string stemp = split[0];
+                        DateTime dtemp = DateTime.Parse(split[1]);
+                        string[] values = { stemp, "student" };
+                        comments.Add(dtemp, values);
+                    }
                 }
 
                 int count = 0;
