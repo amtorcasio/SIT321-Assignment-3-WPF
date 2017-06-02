@@ -629,22 +629,16 @@ namespace SARMS.Users
                     {
                         reader.Read();
 
-                        temp.ID = id;
-                        temp.FirstName = reader[1].ToString();
-                        temp.LastName = reader[2].ToString();
-                        temp.Password = reader[5].ToString();
-                        temp.Email = reader[6].ToString();
-
                         switch ((UserType)Convert.ToInt32(reader[3]))
                         {
                             case UserType.Administrator:
-                                return temp as Administrator;
+                                return new Administrator(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                             case UserType.Lecturer:
-                                var lecturer = temp as Lecturer;
+                                Lecturer lecturer = new Lecturer(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                                 LoadLecturer(ref lecturer);
                                 return lecturer;
                             case UserType.Student:
-                                var student = temp as Student;
+                                Student student = new Student(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[6].ToString(), reader[5].ToString());
                                 LoadStudent(ref student);
                                 return student;
                             default:
