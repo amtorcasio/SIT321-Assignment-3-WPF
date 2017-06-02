@@ -298,6 +298,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
+            if (listUsers.SelectedIndex < 0)
+            {
+                return;
+            }
             btnAddUnit.IsEnabled = false;
             btnAddUser.IsEnabled = false;
             btnEditUser.IsEnabled = false;
@@ -360,17 +364,20 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnEditUnit_Click(object sender, RoutedEventArgs e)
         {
-            btnAddUnit.IsEnabled = false;
-            btnAddUser.IsEnabled = false;
-            btnEditUnit.IsEnabled = false;
-            Unit SelectedUnit;
+            if (listUnits.SelectedIndex >= 0)
+            {
+                btnAddUnit.IsEnabled = false;
+                btnAddUser.IsEnabled = false;
+                btnEditUnit.IsEnabled = false;
+                Unit SelectedUnit;
 
-            SelectedUnit = LoggedInAccount.GetUnit( long.Parse(listedUnits[listUnits.SelectedIndex]) );
+                SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
 
-            var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUnit);
-            editUnitWindow.Show();
-            editUnitWindow.Focus();
-            editUnitWindow.Closed += re_populate_lists;
+                var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUnit);
+                editUnitWindow.Show();
+                editUnitWindow.Focus();
+                editUnitWindow.Closed += re_populate_lists;
+            }
         }
 
         private void btnEnrol_Click(object sender, RoutedEventArgs e)
