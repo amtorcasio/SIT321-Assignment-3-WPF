@@ -57,6 +57,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             {
                 lsvStudents.ItemsSource = students;
                 lsvStudents.Visibility = Visibility.Visible;
+                btnDetailFeedback.Visibility = Visibility.Visible;
                 tboNoStudents.Visibility = Visibility.Hidden;
             }
             else
@@ -76,6 +77,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvStudents.ItemsSource = students;
                 lsvStudents.Visibility = Visibility.Visible;
                 tboNoStudents.Visibility = Visibility.Hidden;
+                btnDetailFeedback.Visibility = Visibility.Visible;
             }
         }
 
@@ -159,8 +161,6 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 BindingOperations.SetBinding(txtPracticalsAttended, TextBox.TextProperty, pracBinding);
 
                 txtPracticalsAttended.Text = su.PracticalAttendance.ToString();
-                tboStaffFeedback.Text = su.StaffFeedback;
-                tboStudentFeedback.Text = su.StudentFeedback;
                 txtAtRisk.Text = (bool)su.AtRisk ? "Yes" : "No";
             }
             else
@@ -186,14 +186,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             {
                 lblLectures.Visibility = Visibility.Collapsed;
                 lblPracticals.Visibility = Visibility.Collapsed;
-                lblStaffFeedback.Visibility = Visibility.Collapsed;
-                lblStudentFeedback.Visibility = Visibility.Collapsed;
                 lblAtRisk.Visibility = Visibility.Collapsed;
 
                 txtLecturesAttended.Visibility = Visibility.Collapsed;
                 txtPracticalsAttended.Visibility = Visibility.Collapsed;
-                tboStaffFeedback.Visibility = Visibility.Collapsed;
-                tboStudentFeedback.Visibility = Visibility.Collapsed;
                 txtAtRisk.Visibility = Visibility.Collapsed;
 
                 infoVisible = false;
@@ -202,14 +198,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             {
                 lblLectures.Visibility = Visibility.Visible;
                 lblPracticals.Visibility = Visibility.Visible;
-                lblStaffFeedback.Visibility = Visibility.Visible;
-                lblStudentFeedback.Visibility = Visibility.Visible;
                 lblAtRisk.Visibility = Visibility.Visible;
 
                 txtLecturesAttended.Visibility = Visibility.Visible;
                 txtPracticalsAttended.Visibility = Visibility.Visible;
-                tboStaffFeedback.Visibility = Visibility.Visible;
-                tboStudentFeedback.Visibility = Visibility.Visible;
                 txtAtRisk.Visibility = Visibility.Visible;
 
                 infoVisible = true;
@@ -351,6 +343,20 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
             addPerfWin.Show();
             addPerfWin.Focus();
+        }
+
+        private void btnDetailFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            if (lsvStudents.SelectedIndex == -1)
+            {
+                MessageBox.Show("You must select a student first", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            var window = new AdminWindows.FeedbackComment(_loggedIn, lsvStudents.SelectedItem as Student, this);
+            window.Show();
+            window.Focus();
+            this.Hide();
         }
     }
 }
