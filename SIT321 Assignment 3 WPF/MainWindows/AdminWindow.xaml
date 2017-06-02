@@ -18,7 +18,7 @@
         <RadioButton Name="DBFilterUnits" Content="Search units" HorizontalAlignment="Left" Margin="10,502,0,0" VerticalAlignment="Top" Click="DBFilterUnits_Click"/>
 
         <Button Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="844,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUser_Click"/>
-        <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="739,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUser_Click"/>
+        <Button x:Name="btnEditUser" IsEnabled="false" Content="Edit User" HorizontalAlignment="Left" Margin="767,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="72" Height="Auto" Click="btnEditUser_Click"/>
         <Button x:Name="btnAddUnit" Content="Add Unit" HorizontalAlignment="Left" Margin="360,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnAddUnit_Click"/>
         <Button x:Name="btnEditUnit" IsEnabled="false" Content="Edit Unit" HorizontalAlignment="Left" Margin="255,416,0,0" Padding="10,5,10,5" VerticalAlignment="Top" Width="100" Height="Auto" Click="btnEditUnit_Click"/>
         <Button x:Name="btnEnrol" Content="Enrol/Assign" HorizontalAlignment="Left" Margin="494,452,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="btnEnrol_Click"/>
@@ -34,6 +34,7 @@
         <CheckBox x:Name="chkStudent" Content="Student" HorizontalAlignment="Left" Margin="835,15,0,0" VerticalAlignment="Top" Checked="chkStudent_Checked" />
         <CheckBox x:Name="chkSAR" Content="Show Students-At-Risk" HorizontalAlignment="Left" Margin="494,423,0,0" VerticalAlignment="Top" Unchecked="chkSAR_Checked" Checked="chkSAR_Checked" />
         <Label x:Name="lbluserlegend" Content="User Legend:" HorizontalAlignment="Left" Margin="494,9,0,0" VerticalAlignment="Top" Width="85"/>
+        <Button x:Name="btnFeedbackComment" Content="Feedback/Comment" HorizontalAlignment="Left" Margin="640,416,0,0" VerticalAlignment="Top" Width="122" Height="28" Click="btnFeedbackComment_Click"/>
 
     </Grid>
 </Window>
