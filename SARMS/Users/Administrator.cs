@@ -111,6 +111,7 @@ namespace SARMS.Users
             using (var connection = Utilities.GetDatabaseSQLConnection())
             {
                 SQLiteCommand command = null;
+                SQLiteDataReader reader = null;
                 try
                 {
                     connection.Open();
@@ -119,7 +120,19 @@ namespace SARMS.Users
                     command.CommandText = "SELECT AtRisk FROM UserUnits WHERE UserId = @id";
                     command.Parameters.AddWithValue("@id", accountid);
 
-                    return command.ExecuteNonQuery() == 0 ? false : true;
+                    command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (int.Parse(reader[0].ToString()) == 1)
+                                return true;
+                            }
+                    }
+                    return false;
+
+                    //return command.ExecuteNonQuery() == 0 ? false : true;
                 }
                 finally
                 {
