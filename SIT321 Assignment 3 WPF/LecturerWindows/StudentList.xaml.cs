@@ -164,7 +164,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvInfo.Visibility = Visibility.Visible;
                 lsvInfo.ItemsSource = info;
             }
-            btnAddAttendance.Visibility = Visibility.Visible;
+            if (_loggedIn.ID != "admin.sarms") btnAddAttendance.Visibility = Visibility.Visible;
             btnEditAttendance.Visibility = Visibility.Visible;
         }
 
