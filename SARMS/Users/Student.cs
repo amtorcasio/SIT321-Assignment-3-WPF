@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using SARMS.Content;
+﻿using System.Collections.Generic;
 using SARMS.Data;
+using System.Collections.ObjectModel;
 
 namespace SARMS.Users
 {
@@ -12,7 +11,7 @@ namespace SARMS.Users
             base (id, firstName, lastName, email, password)
         { }
 
-        public List<StudentAssessment> Performance;
+        public ObservableCollection<StudentAssessment> Performance;
         public List<StudentUnit> Units;
 
     }

@@ -15,7 +15,6 @@ using SARMS;
 using SARMS.Users;
 using SARMS.Content;
 using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace SIT321_Assignment_3_WPF.AdminWindows
 {
