@@ -26,6 +26,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private Administrator Admin;
 
         private Account Student;
+        private Student ClassStudent;
         private List<Unit> UnitsList;
 
         private Window _from;
@@ -41,6 +42,11 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Student = student;
             UnitsList = units;
             _from = from;
+
+            Student temp = new Student(Student.ID, Student.FirstName, Student.LastName, Student.Email, Student.Password);
+            Account.LoadStudent(ref temp);
+
+            ClassStudent = temp;
 
             // fill lstunits items
             int count = 0;
@@ -76,6 +82,11 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
         private void lstUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            loadFeedback();
+        }
+
+        private void loadFeedback()
+        {
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
@@ -90,7 +101,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 if (stafffeed != null)
                 {
-                    stafftemp = stafffeed.Split('\n').ToList();
+                    stafftemp = stafffeed.Split('|').ToList();
                     foreach (string s in stafftemp)
                     {
                         string[] split = s.Split('<');
@@ -103,7 +114,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
 
                 if (studentfeed != null)
                 {
-                    studenttemp = studentfeed.Split('\n').ToList();
+                    studenttemp = studentfeed.Split('|').ToList();
                     foreach (string s in studenttemp)
                     {
                         string[] split = s.Split('<');
@@ -134,6 +145,15 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     lstFeedbackComments.Items.Add(lbi);
                     count++;
                 }
+            }
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtSubmitText.Text.Trim().Count() > 0)
+            {
+                Admin.AddFeedBack(Admin, ClassStudent, UnitsList[lstUnits.SelectedIndex], txtSubmitText.Text);
+                loadFeedback();
             }
         }
     }

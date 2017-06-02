@@ -116,7 +116,7 @@ namespace SARMS.Users
             lecturer.Units = new ObservableCollection<Unit>(units);
         }
 
-        protected static void LoadStudent(ref Student student)
+        public static void LoadStudent(ref Student student)
         {
             student.Units = GetUserUnitInfo(student);
             student.Performance = new ObservableCollection<StudentAssessment>(GetStudentPerformance(student, student.Units));
@@ -362,11 +362,13 @@ namespace SARMS.Users
                     currentFeedback = reader[0].ToString();
                 }
 
-                if (currentFeedback.Length > 0) currentFeedback += "\n";
+                reader.Close();
+
+                //if (currentFeedback.Length > 0) currentFeedback += "\n";
 
                 command.CommandText = "UPDATE UserUnits SET " + feedBackType + " = @feedback WHERE UserID = @userID AND UnitID = @unitID";
                 string newfeedback = currentFeedback + feedback + Utilities.CommentTail();
-                command.Parameters.AddWithValue("@feeback", newfeedback);
+                command.Parameters.AddWithValue("@feedback", newfeedback);
 
                 if (command.ExecuteNonQuery() == 0)
                     return false;
@@ -417,7 +419,8 @@ namespace SARMS.Users
                 {
                     reader.Read();
                     staffFeeback = reader[0].ToString();
-                    studentFeedback = reader[0].ToString();
+                    studentFeedback = reader[1].ToString();
+                    return;
                 }
 
                 staffFeeback = null;
