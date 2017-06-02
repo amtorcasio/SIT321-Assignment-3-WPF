@@ -45,6 +45,9 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             PopulateList();
             re_populate_lists = new EventHandler(PopulateList);
             chkSAR.Background = System.Windows.Media.Brushes.OrangeRed;
+            chkAdmin.Background = libadmin;
+            chkLecturer.Background = liblecturer;
+            chkStudent.Background = libstudent;
         }
 
         private void PopulateList(object sender, EventArgs e)
@@ -52,11 +55,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             PopulateList();
             btnEditUser.IsEnabled = btnEditUnit.IsEnabled = false;
             btnAddUser.IsEnabled = btnAddUnit.IsEnabled = true;
-        }
-
-        private void ifChkSAR(object sender, EventArgs e)
-        {
-
         }
 
         private void PopulateList()
@@ -95,18 +93,23 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                 {
                                     case UserType.Administrator:
                                         lbi.Background = libadmin;
-                                        chkAdmin.Background = libadmin;
                                         break;
                                     case UserType.Lecturer:
                                         lbi.Background = liblecturer;
-                                        chkLecturer.Background = liblecturer;
                                         break;
                                     case UserType.Student:
                                         lbi.Background = libstudent;
-                                        chkStudent.Background = libstudent;
                                         break;
                                     default:
                                         return;
+                                }
+
+                                if (chkSAR.IsChecked == true)
+                                {
+                                    if (LoggedInAccount.chkifSAR(r[0].ToString()) == true)
+                                    {
+                                        lbi.Background = libSAR;
+                                    }
                                 }
 
                                 listUsers.Items.Add(lbi);
