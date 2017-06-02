@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace SARMS.Content
 {
-    public class Unit
+    public class Unit : IEquatable<Unit>
     {
         #region Private Fields
         private long _id;
@@ -77,6 +77,22 @@ namespace SARMS.Content
         public override string ToString()
         {
             return Code + ": " + Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Unit);
+        }
+
+        public bool Equals (Unit other)
+        {
+            if (other == null) return false;
+            if (other.ID == ID) return true;
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
