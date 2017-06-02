@@ -45,7 +45,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 ListBoxItem lbi = new ListBoxItem();
                 lbi.Content = u.Code + ": " + u.Name;
-                lbi.FontSize = 10;
+                lbi.FontSize = 12;
                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
                 switch (count % 2)
