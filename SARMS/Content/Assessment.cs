@@ -9,7 +9,7 @@ namespace SARMS.Content
         private long _assessmentID;
         private string _name;
         private int _totalMarks;
-        private decimal _weight;
+        private double _weight;
         private Unit _unit;
         #endregion
 
@@ -39,7 +39,7 @@ namespace SARMS.Content
                 OnPropertyChanged("TotalMarks");
             }
         }
-        public decimal Weight
+        public double Weight
         {
             get { return _weight; }
             set
@@ -75,7 +75,7 @@ namespace SARMS.Content
         }
 
         // constructor
-        public Assessment(long id, string name, int totalMark, decimal weight, Unit unit)
+        public Assessment(long id, string name, int totalMark, double weight, Unit unit)
         {
             _assessmentID = id;
             _name = name;

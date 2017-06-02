@@ -224,7 +224,7 @@ namespace SARMS.Users
                 while (reader.Read())
                 {
                     result.Add(new Assessment(Convert.ToInt64(reader[0]), reader[1].ToString(),
-                        Convert.ToInt32(reader[2]), Convert.ToDecimal(reader[3]), u));
+                        Convert.ToInt32(reader[2]), Convert.ToDouble(reader[3]), u));
                 }
                 return result;
             }
