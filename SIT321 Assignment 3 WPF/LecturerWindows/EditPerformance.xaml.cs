@@ -62,7 +62,16 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         {
             _student = student;
 
-            cboUnit.ItemsSource = loggedIn.Units;
+            var hasAssessments = CollectionViewSource.GetDefaultView(loggedIn.Units);
+            hasAssessments.Filter = u => ((u as Unit).Assessments.Count > 0);
+
+            cboUnit.ItemsSource = hasAssessments;
+            if (cboUnit.Items.Count == 0)
+            {
+                MessageBox.Show("There are no units with assessable content listed under your account", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                this.Close();
+            }
             cboUnit.SelectedIndex = 0;
             cboUnit.IsEnabled = true;
 
@@ -81,7 +90,13 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         {
             _student = student;
 
-            cboUnit.Items.Add(unit);
+            if (unit.Assessments.Count == 0)
+            {
+                MessageBox.Show("There are assessments listed in the current unit", "Error",
+                       MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                this.Close();
+            }
+            cboUnit.ItemsSource = new ObservableCollection<Unit>() { unit };
             cboUnit.SelectedIndex = 0;
             cboUnit.IsEnabled = true;
 
@@ -117,10 +132,10 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                     }
 
                     double mark;
-                    if (!double.TryParse(txtMark.Text, out mark) && !(mark >= 0))
+                    if (!double.TryParse(txtMark.Text, out mark) && !(mark >= 0) && !(mark <= assessment.TotalMarks))
                     {
                         if (!string.IsNullOrEmpty(errorString)) errorString += Environment.NewLine;
-                        errorString += "You must select an assessment";
+                        errorString += "Invalid number entered for mark (must be less than total available)";
                     }
 
                     if (!string.IsNullOrEmpty(errorString))
@@ -154,9 +169,9 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             else
             {
                 double mark;
-                if (!double.TryParse(txtMark.Text, out mark) && !(mark >= 0))
+                if (!double.TryParse(txtMark.Text, out mark) && !(mark >= 0) && !(mark <= _performance.Assessment.TotalMarks))
                 {
-                    var msgResult = MessageBox.Show("Invalid mark value" + Environment.NewLine + Environment.NewLine + "Do you wish to try again?",
+                    var msgResult = MessageBox.Show("Invalid mark value (must be less than total available marks)" + Environment.NewLine + Environment.NewLine + "Do you wish to try again?",
                         "Error", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
                     if (msgResult == MessageBoxResult.No)
                     {
@@ -188,12 +203,12 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
 
         private void cboUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cboAssessment.ItemsSource = null;
             cboAssessment.ItemsSource = (cboUnit.SelectedItem as Unit).Assessments;
         }
 
         private void cboAssessment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (cboAssessment.SelectedIndex == -1) cboAssessment.SelectedIndex = 0;
             txtTotalMark.Text = (cboAssessment.SelectedItem as Assessment).TotalMarks.ToString();
         }
     }

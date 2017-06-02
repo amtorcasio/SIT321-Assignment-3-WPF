@@ -37,6 +37,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             _from = from;
             _loggedIn = loggedIn;
             if (loggedIn.ID == "admin.sarms") btnAddAttendance.Visibility = Visibility.Collapsed;
+            if (loggedIn.ID == "admin.sarms") btnAddPerformance.Visibility = Visibility.Collapsed;
             if (infoVisible) ToggleInfoVisibility();
             tboInfo.Visibility = Visibility.Visible;
         }
@@ -92,7 +93,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvPerformance.Visibility = Visibility.Collapsed;
                 tboPerformance.Visibility = Visibility.Visible;
                 tboInfo.Visibility = Visibility.Visible;
-                btnAddAttendance.Visibility = Visibility.Collapsed;
+                if (_loggedIn.ID != "admin.sarms") btnAddAttendance.Visibility = Visibility.Visible;
                 btnEditAttendance.Visibility = Visibility.Collapsed;
             }
 
@@ -113,7 +114,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             if (perf.Count == 0)
             {
                 lsvPerformance.Visibility = Visibility.Collapsed;
-                btnAddPerformance.Visibility = Visibility.Hidden;
+                if (_loggedIn.ID != "admin.sarms") btnAddPerformance.Visibility = Visibility.Visible;
                 btnEditPerformance.Visibility = Visibility.Hidden;
                 tboPerformance.Visibility = Visibility.Visible;
                 tboPerformance.Text = "No assessments marks are on record for the selected student";
@@ -338,7 +339,15 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         {
             var student = lsvStudents.SelectedItem as Student;
 
-            var addPerfWin = new EditPerformance(_loggedIn, this, ref student);
+            Window addPerfWin = null;
+            if (_context == null)
+            {
+                addPerfWin = new EditPerformance(_loggedIn, this, ref student);
+            }
+            else
+            {
+                addPerfWin = new EditPerformance(_loggedIn, this, ref student, _context);
+            }
 
             addPerfWin.Show();
             addPerfWin.Focus();
