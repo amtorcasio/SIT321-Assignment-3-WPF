@@ -652,15 +652,29 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                 listedUnits = new List<string>();
 
-                foreach(Unit u in resultunits)
+                int count = 0;
+                foreach (Unit u in resultunits)
                 {
                     ListBoxItem lbi = new ListBoxItem();
                     lbi.Content = string.Format("{0}: {1}", u.Code, u.Name);
                     lbi.FontSize = 14;
                     lbi.Padding = new Thickness(5, 5, 5, 5);
 
+                    switch (count % 2)
+                    {
+                        case 0:
+                            lbi.Background = System.Windows.Media.Brushes.LightGray;
+                            break;
+                        case 1:
+                            lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                            break;
+                        default:
+                            return;
+                    }
+
                     listUnits.Items.Add(lbi);
                     listedUnits.Add(u.ID.ToString());
+                    count++;
                 }
 
             }
