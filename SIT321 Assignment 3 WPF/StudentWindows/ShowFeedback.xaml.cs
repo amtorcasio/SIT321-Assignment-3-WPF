@@ -66,8 +66,8 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
                     r = c.ExecuteReader();
                     if (r.HasRows && r.Read())
                     {
-                        string[] staffFeedback = r[4].ToString().Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                        string[] studentFeedback = r[5].ToString().Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] staffFeedback = r[4].ToString().Split('\n');
+                        string[] studentFeedback = r[5].ToString().Split('\n');
 
                         foreach (string s in staffFeedback)
                         {
