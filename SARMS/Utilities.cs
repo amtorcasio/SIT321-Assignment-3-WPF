@@ -190,6 +190,11 @@ namespace SARMS
                 client.Send(message);
             }
         }
+
+        public static string CommentTail()
+        {
+            return "<"+DateTime.Now.ToString()+">|";
+        }
         /* 
         protected DataContext GetDatabaseDataContext()
         {

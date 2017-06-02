@@ -398,7 +398,7 @@ namespace SARMS.Users
             return student.Units.Find(e => (e.unit.ID == unit.ID));
         }
 
-        public void GetFeedback(Student student, Unit unit, out string staffFeeback, out string studentFeedback)
+        public void GetFeedback(Account student, Unit unit, out string staffFeeback, out string studentFeedback)
         {
             var connection = Utilities.GetDatabaseSQLConnection();
             SQLiteCommand command = null;
