@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.StudentWindows"
         mc:Ignorable="d"
-        Title="GiveFeedback" Height="240" Width="540" ResizeMode="CanMinimize">
+        Title="GiveFeedback" Height="240" Width="540" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <TextBox x:Name="txtComment" AcceptsReturn="False" HorizontalAlignment="Left" Height="148" Margin="77,10,0,0" TextWrapping="Wrap" Padding="5,5,5,5" VerticalAlignment="Top" Width="435"/>

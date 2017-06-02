@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.StudentWindows"
         mc:Ignorable="d"
-        Title="ShowFeedback" Height="370" Width="650">
+        Title="ShowFeedback" Height="370" Width="650" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Key="FeedbackItemTemplate">
             <StackPanel>
