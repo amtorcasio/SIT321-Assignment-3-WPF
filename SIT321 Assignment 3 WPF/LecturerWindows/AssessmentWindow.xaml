@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Assessment" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Assessment" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid>
         <GroupBox x:Name="gboInfo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="3.901,4.696" Margin="10" MinWidth="400" Grid.Column="1">
             <GroupBox.Header>
@@ -45,7 +45,7 @@
                 </ListView>
                 <Button x:Name="btnSubmit" Content="Submit" Margin="10,5" Grid.Row="3" HorizontalAlignment="Center" Height="25" Width="158" VerticalAlignment="Center" Grid.Column="1"/>
                 <TextBox x:Name="txtPracticalsAttended_Copy" HorizontalAlignment="Center" Height="22" Margin="19,2,20,2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="233" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Grid.Row="2" IsEnabled="False" BorderThickness="0,0,0,1"/>
-                <Button x:Name="btnCancel" Content="Cancel" Margin="10,5" HorizontalAlignment="Center" Height="25" Width="87" VerticalAlignment="Center" Grid.Row="3"/>
+                <Button x:Name="btnCancel" Content="Cancel" Margin="10,5" HorizontalAlignment="Center" Height="25" Width="87" VerticalAlignment="Center" Grid.Row="3" Click="btnCancel_Click"/>
             </Grid>
         </GroupBox>
     </Grid>

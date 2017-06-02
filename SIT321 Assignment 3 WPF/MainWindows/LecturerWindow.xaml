@@ -42,7 +42,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button x:Name="btnViewAssessments" Content="View Assessment List" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="156" Grid.Row="1" TabIndex="2" Grid.Column="1"/>
+                <Button x:Name="btnViewAssessments" Content="View Assessment List" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="156" Grid.Row="1" TabIndex="2" Grid.Column="1" Click="btnViewAssessments_Click"/>
                 <Button x:Name="btnViewStudents" Content="View Student List" HorizontalAlignment="Right" Margin="0,10,161,0" VerticalAlignment="Top" Width="143" Grid.Row="1" Click="btnViewStudents_Click" TabIndex="1" IsDefault="True" Grid.Column="1"/>
                 <Button x:Name="btnViewSAR" Content="View all students at risk" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="185" Click="btnViewSAR_Click"/>
             </Grid>

@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SARMS.Users;
+using SARMS.Content;
+using SARMS.Data;
 
 namespace SIT321_Assignment_3_WPF.LecturerWindows
 {
@@ -19,14 +22,33 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
     /// </summary>
     public partial class AssessmentList : Window
     {
-        public AssessmentList()
+        private Window _from;
+        private Lecturer _loggedIn;
+        private Unit _unit;
+
+        public AssessmentList(Lecturer loggedIn, Unit unit, Window from)
         {
             InitializeComponent();
+
+            _loggedIn = loggedIn;
+            _from = from;
+            _unit = unit;
+
+            lsvAssessments.ItemsSource = unit.Assessments;
+            lsvAssessments.Visibility = Visibility.Visible;
+            tboNoAssessments.Visibility = Visibility.Collapsed;
         }
 
         private void hypCreateAssessment_Click(object sender, RoutedEventArgs e)
         {
+            var createWin = new AssessmentWindow(this, ref _unit);
+            createWin.Focus();
+        }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _from.Show();
+            _from.Focus();
         }
     }
 }

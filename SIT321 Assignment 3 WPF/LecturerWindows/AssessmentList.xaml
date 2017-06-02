@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Assessment List" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Assessment List" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,9 +19,9 @@
                 <ListView x:Name="lsvAssessments" Margin="0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
-                            <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Assignment Name" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Total Marks" DisplayMemberBinding="{Binding TotalMarks}"/>
+                            <GridViewColumn Header="Weight (%)" DisplayMemberBinding="{Binding Weight}"/>
                         </GridView>
                     </ListView.View>
                     <ListView.ItemContainerStyle>
@@ -30,7 +30,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <TextBlock x:Name="tboNoStudents" HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Width="303">
+                <TextBlock x:Name="tboNoAssessments" HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Width="303">
                     <Run Text="You do not appear to have any assessments listed in this unit. To add an assessment click here "/>
                     <Hyperlink x:Name="hypCreateAssessment">
                         <InlineUIContainer>

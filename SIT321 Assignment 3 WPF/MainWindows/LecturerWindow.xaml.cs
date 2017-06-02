@@ -77,5 +77,13 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             listWindow.Focus();
             this.Hide();
         }
+
+        private void btnViewAssessments_Click(object sender, RoutedEventArgs e)
+        {
+            var assListWin = new AssessmentList(LoggedIn, lsvUnits.SelectedItem as Unit, this);
+            assListWin.Focus();
+            assListWin.Show();
+            this.Hide();
+        }
     }
 }
