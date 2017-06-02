@@ -5,11 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.StudentWindows"
         mc:Ignorable="d"
-        Title="ShowFeedback" Height="360" Width="640">
+        Title="ShowFeedback" Height="370" Width="650">
+    <Window.Resources>
+        <DataTemplate x:Key="FeedbackItemTemplate">
+            <StackPanel>
+                <Label Content="{Binding Name}" Padding="0,0,0,0" Margin="5,5,0,0"/>
+                <Label Content="{Binding Timestamp}" Padding="0,0,0,0" Margin="5,0,0,0"/>
+                <Label Content="{Binding Comment}" Padding="0,0,0,0" Margin="5,10,0,10"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Label Content="Feedback for student regarding unit" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnGiveFeedback" IsEnabled="False" Content="Give Feedback" HorizontalAlignment="Left" Margin="523,291,0,0" VerticalAlignment="Top" Width="Auto" Padding="10,5,10,5" Click="btnGiveFeedback_Click"/>
-        <ListBox HorizontalAlignment="Left" Height="245" Margin="10,41,0,0" VerticalAlignment="Top" Width="612"/>
+        <Button x:Name="btnGiveFeedback" Content="Give Feedback" HorizontalAlignment="Left" Margin="523,291,0,0" VerticalAlignment="Top" Width="Auto" Padding="10,5,10,5" Click="btnGiveFeedback_Click"/>
+        <ListBox x:Name="lsbFeedbackList" HorizontalAlignment="Left" Height="250" Margin="10,36,0,0" VerticalAlignment="Top" Width="612" ItemTemplate="{StaticResource FeedbackItemTemplate}" />
+        <Border BorderBrush="#A0A0A0" BorderThickness="1" HorizontalAlignment="Left" Height="250" Margin="10,36,0,0" VerticalAlignment="Top" Width="612"/>
 
     </Grid>
 </Window>

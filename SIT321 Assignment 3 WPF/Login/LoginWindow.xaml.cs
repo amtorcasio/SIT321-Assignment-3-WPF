@@ -26,6 +26,8 @@ namespace SIT321_Assignment_3_WPF
         {
             InitializeComponent();
             this.Focus();
+
+            (new StudentWindows.ShowFeedback()).Show();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
