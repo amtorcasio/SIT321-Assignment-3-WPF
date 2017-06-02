@@ -55,6 +55,8 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             listedUnits = new List<string>();
             listUnits.Items.Clear();
             listUsers.Items.Clear();
+            listUnits.SelectedIndex = -1;
+            listUsers.SelectedIndex = -1;
 
 
             // Get database connection to populate listboxes
@@ -143,6 +145,9 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             // group both listboxes under one event handler
             listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
             listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
+
+            btnEditUnit.IsEnabled = false;
+            btnEditUser.IsEnabled = false;
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
