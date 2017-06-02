@@ -622,13 +622,19 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
+            refreshform(this, e);
+            chkSAR.IsChecked = false;
+            MessageBox.Show("Window has been Refreshed");
+        }
+
+        private void refreshform(object sender, RoutedEventArgs e)
+        {
             PopulateList();
             DBFilterUnits.IsChecked = false;
             DBFilterUsers.IsChecked = false;
             txtDBQuery.Text = string.Empty;
             txtEnrolUnitCode.Text = string.Empty;
             txtUnenrolUnitCode.Text = string.Empty;
-            MessageBox.Show("Window has been Refreshed");
         }
 
         private void listUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -782,7 +788,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void chkSAR_Checked(object sender, RoutedEventArgs e)
         {
-            PopulateList();
+            refreshform(this, e);
         }
     }
 }
