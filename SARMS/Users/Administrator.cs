@@ -108,37 +108,44 @@ namespace SARMS.Users
 
         public bool chkifSAR(string accountid)
         {
-            using (var connection = Utilities.GetDatabaseSQLConnection())
+            if (DoesRecordExist("SELECT 1 FROM UserUnits WHERE UserID = " + accountid))
             {
-                SQLiteCommand command = null;
-                SQLiteDataReader reader = null;
-                try
+                using (var connection = Utilities.GetDatabaseSQLConnection())
                 {
-                    connection.Open();
-
-                    command = connection.CreateCommand();
-                    command.CommandText = "SELECT AtRisk FROM UserUnits WHERE UserId = @id";
-                    command.Parameters.AddWithValue("@id", accountid);
-
-                    command.ExecuteReader();
-
-                    if (reader.HasRows)
+                    SQLiteCommand command = null;
+                    SQLiteDataReader reader = null;
+                    try
                     {
-                        while (reader.Read())
-                        {
-                            if (int.Parse(reader[0].ToString()) == 1)
-                                return true;
-                            }
-                    }
-                    return false;
+                        connection.Open();
 
-                    //return command.ExecuteNonQuery() == 0 ? false : true;
+                        command = connection.CreateCommand();
+                        command.CommandText = "SELECT AtRisk FROM UserUnits WHERE UserId = @id";
+                        command.Parameters.AddWithValue("@id", accountid);
+
+                        command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                if (int.Parse(reader[0].ToString()) == 1)
+                                    return true;
+                            }
+                        }
+                        return false;
+
+                        //return command.ExecuteNonQuery() == 0 ? false : true;
+                    }
+                    finally
+                    {
+                        if (command != null) command.Dispose();
+                        if (connection != null) connection.Close();
+                    }
                 }
-                finally
-                {
-                    if (command != null) command.Dispose();
-                    if (connection != null) connection.Close();
-                }
+            }
+            else
+            {
+                return false;
             }
         }
 
