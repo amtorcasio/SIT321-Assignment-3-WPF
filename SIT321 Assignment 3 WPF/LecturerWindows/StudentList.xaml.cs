@@ -102,7 +102,6 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             if (_context != null)
             {
                 perf = perf.Where(sa => (sa.Assessment.unit.ID == _context.ID)).ToList();
-                gvcUnitCode.Width = 0;
             }
             else
             {

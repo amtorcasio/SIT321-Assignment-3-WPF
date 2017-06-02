@@ -69,10 +69,10 @@
                 <TextBlock FontWeight="Bold" FontSize="16">Student Performance</TextBlock>
             </GroupBox.Header>
             <Grid VerticalAlignment="Center" Margin="0">
-                <ListView x:Name="lsvPerformance" VerticalAlignment="Center" Margin="10,5" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" Visibility="Collapsed" >
+                <ListView x:Name="lsvPerformance" VerticalAlignment="Center" Margin="10,5" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
-                            <GridViewColumn x:Name="gvcUnitCode" Header="Unit Code" DisplayMemberBinding="{Binding Assessment.unit.Code}" Width="Auto"/>
+                            <GridViewColumn x:Name="gvcUnitCode" Header="Unit Code" DisplayMemberBinding="{Binding Assessment.unit.Code}" Width="0"/>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Assessment.Name}" Width="Auto"/>
                             <GridViewColumn Header="Marks" DisplayMemberBinding="{Binding Mark}" Width="Auto"/>
                             <GridViewColumn Header="Marks Available" DisplayMemberBinding="{Binding Assessment.TotalMarks}" Width="Auto"/>
