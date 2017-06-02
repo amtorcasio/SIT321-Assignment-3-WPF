@@ -24,7 +24,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="lsvAssessments" Margin="10,10,10,0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" >
+                <ListView x:Name="lsvAssessments" Margin="10,10,10,0" FontSize="14" Foreground="Black" TabIndex="3" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" Visibility="Hidden" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
                             <GridViewColumn Header="Assignment Name" DisplayMemberBinding="{Binding Name}"/>
@@ -38,16 +38,16 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <TextBlock x:Name="tboNoAssessments" HorizontalAlignment="Left" Margin="5,5,-14,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Width="303" Visibility="Collapsed" Grid.ColumnSpan="2">
-                    <Run Text="You do not appear to have any assessments listed in this unit. To add an assessment click here "/>
+                <TextBlock x:Name="tboNoAssessments" HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="14" Width="279">
+                    <Run Text="You do not appear to have any assessments listed in this unit. To add an assessment "/>
                     <Hyperlink x:Name="hypCreateAssessment">
                         <InlineUIContainer>
                             <TextBlock VerticalAlignment="Center" Text="click here." />
                         </InlineUIContainer>
                     </Hyperlink>
                 </TextBlock>
-                <Button x:Name="btnEditAssessment" Content="Edit Assignment" Grid.Column="1" Margin="10" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" HorizontalAlignment="Center"/>
-                <Button x:Name="btnAddAssignment" Content="Add Assignment" Margin="10" Grid.Row="1" VerticalAlignment="Center" Width="100" Height="25" HorizontalAlignment="Center" Click="btnAddAssignment_Click"/>
+                <Button x:Name="btnRemoveAssessment" Content="Remove Assessment" Grid.Column="1" Margin="10" Grid.Row="1" VerticalAlignment="Top" Width="115" Height="25" HorizontalAlignment="Center" Click="btnRemoveAssessment_Click" Visibility="Collapsed"/>
+                <Button x:Name="btnAddAssignment" Content="Add Assignment" Margin="10" Grid.Row="1" VerticalAlignment="Center" Width="115" Height="25" HorizontalAlignment="Center" Click="btnAddAssignment_Click" Visibility="Collapsed"/>
             </Grid>
         </GroupBox>
 

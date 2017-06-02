@@ -34,9 +34,26 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             _from = from;
             _unit = unit;
 
-            lsvAssessments.ItemsSource = unit.Assessments;
-            lsvAssessments.Visibility = Visibility.Visible;
-            tboNoAssessments.Visibility = Visibility.Collapsed;
+            lsvAssessments.ItemsSource = _unit.Assessments;
+            CheckVisibility();
+        }
+
+        private void CheckVisibility()
+        {
+            if (_unit.Assessments.Count > 0)
+            {
+                lsvAssessments.Visibility = Visibility.Visible;
+                tboNoAssessments.Visibility = Visibility.Collapsed;
+                btnAddAssignment.Visibility = Visibility.Visible;
+                btnRemoveAssessment.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lsvAssessments.Visibility = Visibility.Hidden;
+                tboNoAssessments.Visibility = Visibility.Visible;
+                btnAddAssignment.Visibility = Visibility.Collapsed;
+                btnRemoveAssessment.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void hypCreateAssessment_Click(object sender, RoutedEventArgs e)
@@ -55,6 +72,26 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             var createWin = new AssessmentWindow(_loggedIn, this, ref _unit);
             createWin.Show();
             createWin.Focus();
+        }
+
+        private void btnRemoveAssessment_Click(object sender, RoutedEventArgs e)
+        {
+            if (lsvAssessments.Items.Count == -1)
+            {
+                lsvAssessments.SelectedIndex = 0;
+            }
+            if (lsvAssessments.SelectedIndex == -1)
+            {
+                MessageBox.Show("You must select an assignment in order to remove it", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
+
+            var assessment = lsvAssessments.SelectedItem as Assessment;
+            var msgResult = MessageBox.Show("Are you sure you want to remove '" + assessment.Name + "'?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+            if (msgResult == MessageBoxResult.Yes)
+            {
+                _loggedIn.RemoveAssessment(_unit, lsvAssessments.SelectedItem as Assessment);
+                CheckVisibility();
+            }
         }
     }
 }
