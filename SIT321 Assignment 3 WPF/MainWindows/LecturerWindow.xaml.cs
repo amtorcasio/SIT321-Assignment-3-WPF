@@ -62,11 +62,6 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             this.Hide();
         }
 
-        private void btnAddAssessment_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void lsvUnits_Loaded(object sender, RoutedEventArgs e)
         {
             if (lsvUnits.Items.Count > 0)

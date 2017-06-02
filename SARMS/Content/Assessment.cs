@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SARMS.Content
 {
-    public class Assessment : IEquatable<Assessment>
+    public class Assessment : IEquatable<Assessment>, INotifyPropertyChanged
     {
         #region Private Fields
         private long _assessmentID;
@@ -11,6 +12,8 @@ namespace SARMS.Content
         private decimal _weight;
         private Unit _unit;
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Getters and Setters
         public long AssessmentID
@@ -21,17 +24,29 @@ namespace SARMS.Content
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
         }
         public int TotalMarks
         {
             get { return _totalMarks; }
-            set { _totalMarks = value; }
+            set
+            {
+                _totalMarks = value;
+                OnPropertyChanged("TotalMarks");
+            }
         }
         public decimal Weight
         {
             get { return _weight; }
-            set { _weight = value; }
+            set
+            {
+                _weight = value;
+                OnPropertyChanged("Weight");
+            }
         }
         public Unit unit
         {
@@ -67,6 +82,15 @@ namespace SARMS.Content
             _totalMarks = totalMark;
             _weight = weight;
             _unit = unit;
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
