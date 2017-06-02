@@ -763,5 +763,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             chkStudent.IsChecked = false;
         }
+
+        private void chkSAR_Checked(object sender, RoutedEventArgs e)
+        {
+            PopulateList();
+        }
     }
 }
