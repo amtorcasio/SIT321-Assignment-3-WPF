@@ -116,7 +116,7 @@ namespace SARMS.Users
             lecturer.Units = new ObservableCollection<Unit>(units);
         }
 
-        protected static void LoadStudent(ref Student student)
+        public static void LoadStudent(ref Student student)
         {
             student.Units = GetUserUnitInfo(student);
             student.Performance = new ObservableCollection<StudentAssessment>(GetStudentPerformance(student, student.Units));
@@ -337,7 +337,7 @@ namespace SARMS.Users
             }
         }
 
-        public bool AddFeedBack(Account by, Account student, Unit unit, string feedback)
+        public bool AddFeedBack(Account by, Student student, Unit unit, string feedback)
         {
             if (feedback.Trim().Length == 0) return false;
 
@@ -361,6 +361,8 @@ namespace SARMS.Users
                     reader.Read();
                     currentFeedback = reader[0].ToString();
                 }
+
+                reader.Close();
 
                 if (currentFeedback.Length > 0) currentFeedback += "\n";
 

@@ -26,6 +26,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private Administrator Admin;
 
         private Account Student;
+        private Student ClassStudent;
         private List<Unit> UnitsList;
 
         private Window _from;
@@ -41,6 +42,11 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Student = student;
             UnitsList = units;
             _from = from;
+
+            Student temp = new Student(Student.ID, Student.FirstName, Student.LastName, Student.Email, Student.Password);
+            Account.LoadStudent(ref temp);
+
+            ClassStudent = temp;
 
             // fill lstunits items
             int count = 0;
@@ -204,7 +210,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         {
             if (txtSubmitText.Text.Trim().Count() > 0)
             {
-                Admin.AddFeedBack(Admin, Student, UnitsList[lstUnits.SelectedIndex], txtSubmitText.Text);
+                Admin.AddFeedBack(Admin, ClassStudent, UnitsList[lstUnits.SelectedIndex], txtSubmitText.Text);
                 loadFeedback();
             }
         }
