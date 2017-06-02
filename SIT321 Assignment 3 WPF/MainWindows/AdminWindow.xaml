@@ -31,7 +31,7 @@
         <Button x:Name="btnRefresh" Content="Refresh Lists" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="160" Height="23" Click="btnRefresh_Click"/>
         <CheckBox x:Name="chkAdmin" Content="Administrator" HorizontalAlignment="Left" Margin="626,15,0,0" VerticalAlignment="Top" Checked="chkAdmin_Checked"/>
         <CheckBox x:Name="chkLecturer" Content="Lecturer" HorizontalAlignment="Left" Margin="745,15,0,0" VerticalAlignment="Top" Checked="chkLecturer_Checked"/>
-        <CheckBox x:Name="chkStudent" Content="Student" HorizontalAlignment="Left" Margin="835,15,0,0" VerticalAlignment="Top" Checked="chkStudent_Checked"/>
+        <CheckBox x:Name="chkStudent" Content="Student" HorizontalAlignment="Left" Margin="835,15,0,0" VerticalAlignment="Top" Unchecked="chkStudent_Checked" Checked="chkStudent_Checked"/>
         <CheckBox x:Name="chkSAR" Content="Show Students-At-Risk" HorizontalAlignment="Left" Margin="494,423,0,0" VerticalAlignment="Top" Checked="chkSAR_Checked"/>
         <Label x:Name="lbluserlegend" Content="User Legend:" HorizontalAlignment="Left" Margin="494,9,0,0" VerticalAlignment="Top" Width="85"/>
 
