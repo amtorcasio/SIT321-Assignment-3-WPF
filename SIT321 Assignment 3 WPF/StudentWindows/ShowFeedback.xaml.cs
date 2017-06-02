@@ -73,8 +73,8 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
                     if (r.HasRows && r.Read())
                         if (r[0].ToString() != "")
                         {
-                            string[] staffFeedback = r[0].ToString().Split('\n');
-                            string[] studentFeedback = r[1].ToString().Split('\n');
+                            string[] staffFeedback = r[0].ToString().Split('|');
+                            string[] studentFeedback = r[1].ToString().Split('|');
 
                             foreach (string s in staffFeedback)
                                 allFeedback.Add(new FeedbackItem(DateTime.Parse(s.Substring(s.IndexOf('<') + 1)), s.Remove(s.IndexOf('<'))));
