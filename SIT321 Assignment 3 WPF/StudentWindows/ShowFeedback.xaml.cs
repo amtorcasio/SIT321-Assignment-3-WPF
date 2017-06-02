@@ -23,5 +23,12 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
         {
             InitializeComponent();
         }
+
+        private void btnGiveFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            var giveFeedbackWindow = new GiveFeedback();
+            giveFeedbackWindow.Show();
+            giveFeedbackWindow.Focus();
+        }
     }
 }

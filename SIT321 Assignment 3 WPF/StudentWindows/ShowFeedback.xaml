@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.StudentWindows"
         mc:Ignorable="d"
-        Title="ShowFeedback" Height="300" Width="300">
+        Title="ShowFeedback" Height="360" Width="640">
     <Grid>
-        
+        <Label Content="Feedback for student regarding unit" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnGiveFeedback" IsEnabled="False" Content="Give Feedback" HorizontalAlignment="Left" Margin="523,291,0,0" VerticalAlignment="Top" Width="Auto" Padding="10,5,10,5" Click="btnGiveFeedback_Click"/>
+        <ListBox HorizontalAlignment="Left" Height="245" Margin="10,41,0,0" VerticalAlignment="Top" Width="612"/>
+
     </Grid>
 </Window>
