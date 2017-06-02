@@ -273,6 +273,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                                     return;
                                             }
 
+                                            if (chkSAR.IsChecked == true)
+                                            {
+                                                if (LoggedInAccount.chkifSAR(r[0].ToString()) == true)
+                                                {
+                                                    lbi.Background = libSAR;
+                                                }
+                                            }
+
                                             listUsers.Items.Add(lbi);
                                         }
                                     }
@@ -738,6 +746,14 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                             return;
                     }
 
+                    if (chkSAR.IsChecked == true)
+                    {
+                        if (LoggedInAccount.chkifSAR(a.ID) == true)
+                        {
+                            lbi.Background = libSAR;
+                        }
+                    }
+
                     listUsers.Items.Add(lbi);
                     listedUsers.Add(a.ID);
                 }
@@ -762,6 +778,11 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void chkStudent_Checked(object sender, RoutedEventArgs e)
         {
             chkStudent.IsChecked = false;
+        }
+
+        private void chkSAR_Checked(object sender, RoutedEventArgs e)
+        {
+            PopulateList();
         }
     }
 }
