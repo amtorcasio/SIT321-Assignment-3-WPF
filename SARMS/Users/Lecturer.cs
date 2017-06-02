@@ -167,7 +167,7 @@ namespace SARMS.Users
                 command = connection.CreateCommand();
                 command.CommandText = "UPDATE [UserUnits] SET "+
                                              "[LectureAttendance] = [LectureAttendance] + @lectbool," +
-                                             "[PracticalAttendance] = [PracticalAttendance] + @pracbool" +
+                                             "[PracticalAttendance] = [PracticalAttendance] + @pracbool " +
                                              "WHERE UserID = @sid AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);
@@ -205,7 +205,7 @@ namespace SARMS.Users
                 command = connection.CreateCommand();
                 command.CommandText = "UPDATE [UserUnits] SET " +
                                              "[LectureAttendance] = @lect," +
-                                             "[PracticalAttendance] = @prac" +
+                                             "[PracticalAttendance] = @prac " +
                                              "WHERE UserID = @sid AND UnitID = @unitid";
                 command.Parameters.AddWithValue("@sid", student.ID);
                 command.Parameters.AddWithValue("@unitid", unit.ID);

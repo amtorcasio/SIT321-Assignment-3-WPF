@@ -36,6 +36,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             _from = from;
             _loggedIn = loggedIn;
             if (loggedIn.ID == "admin.sarms") btnAddAttendance.Visibility = Visibility.Collapsed;
+            if (infoVisible) ToggleInfoVisibility();
+            tboInfo.Visibility = Visibility.Visible;
         }
 
         //All Students At Risk
@@ -89,6 +91,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvPerformance.Visibility = Visibility.Collapsed;
                 tboPerformance.Visibility = Visibility.Visible;
                 tboInfo.Visibility = Visibility.Visible;
+                btnAddAttendance.Visibility = Visibility.Collapsed;
+                btnEditAttendance.Visibility = Visibility.Collapsed;
             }
 
             Student student = lsvStudents.SelectedItem as Student;
@@ -160,6 +164,8 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 lsvInfo.Visibility = Visibility.Visible;
                 lsvInfo.ItemsSource = info;
             }
+            btnAddAttendance.Visibility = Visibility.Visible;
+            btnEditAttendance.Visibility = Visibility.Visible;
         }
 
         private void OnNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
@@ -212,47 +218,53 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 return;
             }
 
-            StudentUnit info = null;
-            if (lsvInfo.Visibility == Visibility.Visible)
+            Student student = lsvStudents.SelectedItem as Student;
+            var info = student.Units;
+            StudentUnit studentUnit = null;
+            if (_context == null)
             {
-                if (lsvInfo.SelectedIndex == -1)
+                if (info.Count == 1)
                 {
-                    MessageBox.Show("You must select an unit to change the attendance for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                    return;
+                    studentUnit = info.Single();
                 }
-
-                info = lsvInfo.SelectedItem as SARMS.Data.StudentUnit;
-                if (info == null)
+                else
                 {
-                    throw new InvalidCastException("Student info from list is null after cast. This should not happen");
+                    if (lsvInfo.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("You must select an unit to change the attendance for", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        return;
+                    }
+                    studentUnit = (lsvInfo.SelectedItem as StudentUnit);
                 }
             }
             else
             {
-                var student = lsvStudents.SelectedItem as Student;
                 if (student == null)
                 {
                     throw new Exception("Student from list is null after cast. This should not happen");
                 }
-                info = student.Units.Where(su => (su.unit.ID == _context.ID)).Single();
+                studentUnit = student.Units.Where(su => (su.unit.ID == _context.ID)).Single();
+            }
 
-                var attendLecture = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the lecture?",
+            var attendLecture = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the lecture?",
                     "Lecture Attendance", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
-                if (attendLecture == MessageBoxResult.Cancel)
-                {
-                    return;
-                }
+            if (attendLecture == MessageBoxResult.Cancel)
+            {
+                return;
+            }
 
-                var attendPractical = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the practical?",
-                    "Practical Attendance", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
-                if (attendPractical == MessageBoxResult.Cancel)
-                {
-                    return;
-                }
+            var attendPractical = MessageBox.Show("Did " + student.LastName + " " + student.FirstName + "attend the practical?",
+                "Practical Attendance", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+            if (attendPractical == MessageBoxResult.Cancel)
+            {
+                return;
+            }
 
-                bool didAttendLecture = (attendLecture == MessageBoxResult.Yes);
-                bool didAttendPractical = (attendPractical == MessageBoxResult.Yes);
-                _loggedIn.AddStudentAttendance(student, info.unit, didAttendLecture, didAttendPractical);
+            bool didAttendLecture = (attendLecture == MessageBoxResult.Yes);
+            bool didAttendPractical = (attendPractical == MessageBoxResult.Yes);
+            if (!_loggedIn.AddStudentAttendance(student, studentUnit.unit, didAttendLecture, didAttendPractical))
+            {
+                MessageBox.Show("An error occurred updating these details in the database", "Databse Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -261,7 +273,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             var student = lsvStudents.SelectedItem as Student;
             if (student == null)
             {
-                MessageBox.Show("Student Must be Selected!", "Caution!");
+                MessageBox.Show("Student Must be Selected!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
             }
             var info = student.Units;

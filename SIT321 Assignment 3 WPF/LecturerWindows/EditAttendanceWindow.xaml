@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.LecturerWindows"
         mc:Ignorable="d"
-        Title="Edit Attendance" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ToolWindow" Width="285" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Closed="Window_Closed">
+        Title="Edit Attendance" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ToolWindow" Width="285" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Closed="Window_Closed">
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

@@ -23,6 +23,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
         private Lecturer _loggedIn;
         private Window _from;
         private SARMS.Data.StudentUnit _unit;
+        private Student _student;
 
         public EditAttendanceWindow(Lecturer loggedIn, Window from, ref Student student, long unitID)
         {
@@ -34,6 +35,7 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
             _unit = student.Units.Find(e => (e.unit.ID == unitID));
             txtLectureAttendance.Text = _unit.LectureAttendance.ToString();
             txtPracticalAttendance.Text = _unit.PracticalAttendance.ToString();
+            _student = student;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -61,8 +63,15 @@ namespace SIT321_Assignment_3_WPF.LecturerWindows
                 var result = MessageBox.Show(errorString, "Error", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
                 if (result == MessageBoxResult.No) this.Close();
             }
-            _unit.LectureAttendance = lectureAttendance;
-            _unit.PracticalAttendance = practicalAttendance;
+            if(!_loggedIn.EditStudentAttendance(_student, _unit.unit, lectureAttendance, practicalAttendance))
+            {
+                var msgResult = MessageBox.Show("An error occured with editing the database, retry?", "Database Error", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
+                if (msgResult == MessageBoxResult.No)
+                {
+                    this.Close();
+                }
+            }
+            this.Close();
         }
 
         private void Window_Closed(object sender, EventArgs e)
