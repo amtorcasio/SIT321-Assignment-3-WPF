@@ -106,6 +106,29 @@ namespace SARMS.Users
             return false;
         }
 
+        public bool chkifSAR(string accountid)
+        {
+            using (var connection = Utilities.GetDatabaseSQLConnection())
+            {
+                SQLiteCommand command = null;
+                try
+                {
+                    connection.Open();
+
+                    command = connection.CreateCommand();
+                    command.CommandText = "SELECT AtRisk FROM UserUnits WHERE UserId = @id";
+                    command.Parameters.AddWithValue("@id", accountid);
+
+                    return command.ExecuteNonQuery() == 0 ? false : true;
+                }
+                finally
+                {
+                    if (command != null) command.Dispose();
+                    if (connection != null) connection.Close();
+                }
+            }
+        }
+
         // un-suspend a user
         public bool ReactivateUser(Account account)
         {
