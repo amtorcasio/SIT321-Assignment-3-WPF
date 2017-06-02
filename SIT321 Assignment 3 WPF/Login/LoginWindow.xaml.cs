@@ -26,6 +26,7 @@ namespace SIT321_Assignment_3_WPF
         {
             InitializeComponent();
             this.Focus();
+            txtEmail.Focus();
 
             //(new StudentWindows.ShowFeedback()).Show();
         }

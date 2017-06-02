@@ -27,7 +27,9 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
         private Account Student;
         private List<Unit> UnitsList;
 
-        public FeedbackComment(Administrator admin, Account student, List<Unit> units)
+        private Window _from;
+
+        public FeedbackComment(Administrator admin, Account student, List<Unit> units, Window from)
         {
             InitializeComponent();
 
@@ -35,6 +37,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             Admin = admin;
             Student = student;
             UnitsList = units;
+            _from = from;
 
             // fill lstunits items
             int count = 0;
@@ -42,7 +45,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 ListBoxItem lbi = new ListBoxItem();
                 lbi.Content = u.Code + ": " + u.Name;
-                lbi.FontSize = 14;
+                lbi.FontSize = 10;
                 lbi.Padding = new Thickness(5, 5, 5, 5);
 
                 switch (count % 2)
@@ -60,6 +63,12 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 lstUnits.Items.Add(lbi);
                 count++;
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _from.Show();
+            _from.Focus();
         }
 
 
