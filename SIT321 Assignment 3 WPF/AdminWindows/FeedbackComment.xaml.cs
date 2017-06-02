@@ -127,6 +127,8 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             int index = lstUnits.SelectedIndex;
             if (index >= 0)
             {
+                lstFeedbackComments.Items.Clear();
+
                 comments = new SortedDictionary<DateTime, string[]>();
 
                 // get feedback
@@ -195,6 +197,7 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             {
                 Admin.AddFeedBack(Admin, ClassStudent, UnitsList[lstUnits.SelectedIndex], txtSubmitText.Text);
                 loadFeedback();
+                txtSubmitText.Text = string.Empty;
             }
         }
     }
