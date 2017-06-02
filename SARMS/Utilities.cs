@@ -193,7 +193,7 @@ namespace SARMS
 
         public static string CommentTail()
         {
-            return "<"+DateTime.Now.ToString()+">\n";
+            return "<"+DateTime.Now.ToString()+"\n";
         }
         /* 
         protected DataContext GetDatabaseDataContext()
