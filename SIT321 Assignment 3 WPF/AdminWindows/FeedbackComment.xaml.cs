@@ -99,12 +99,14 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                 // split feedback
                 List<string> stafftemp, studenttemp;
 
-                if (stafffeed != null)
+                if (stafffeed != string.Empty)
                 {
                     stafftemp = stafffeed.Split('|').ToList();
                     foreach (string s in stafftemp)
                     {
                         string[] split = s.Split('<');
+                        if (split[0] == string.Empty)
+                            break;
                         string stemp = split[0];
                         DateTime dtemp = DateTime.Parse(split[1]);
                         string[] values = { stemp, "staff" };
@@ -112,12 +114,14 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
                     }
                 }
 
-                if (studentfeed != null)
+                if (studentfeed != string.Empty)
                 {
                     studenttemp = studentfeed.Split('|').ToList();
                     foreach (string s in studenttemp)
                     {
                         string[] split = s.Split('<');
+                        if (split[0] == string.Empty)
+                            break;
                         string stemp = split[0];
                         DateTime dtemp = DateTime.Parse(split[1]);
                         string[] values = { stemp, "student" };

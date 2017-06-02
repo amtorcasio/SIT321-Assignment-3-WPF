@@ -353,16 +353,17 @@ namespace SARMS.Users
                 command.CommandText = "SELECT " + feedBackType + " FROM UserUnits WHERE UserID = @userID AND UnitID = @unitID";
                 command.Parameters.AddWithValue("@userID", student.ID);
                 command.Parameters.AddWithValue("@unitID", unit.ID);
-                reader = command.ExecuteReader();
 
                 string currentFeedback = "";
-                if (reader.HasRows)
+                using (reader = command.ExecuteReader())
                 {
-                    reader.Read();
-                    currentFeedback = reader[0].ToString();
-                }
 
-                reader.Close();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        currentFeedback = reader[0].ToString();
+                    }
+                }
 
                 //if (currentFeedback.Length > 0) currentFeedback += "\n";
 
@@ -390,6 +391,7 @@ namespace SARMS.Users
             }
             finally
             {
+                if (reader != null) reader.Close();
                 if (command != null) command.Dispose();
                 if (connection != null) connection.Close();
             }
