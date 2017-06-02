@@ -84,6 +84,14 @@ namespace SARMS.Content
             _unit = unit;
         }
 
+        public Assessment(string name, int totalMark, double weight, Unit unit)
+        {
+            _name = name;
+            _totalMarks = totalMark;
+            _weight = weight;
+            _unit = unit;
+        }
+
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
