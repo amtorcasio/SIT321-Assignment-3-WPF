@@ -55,6 +55,8 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             listedUnits = new List<string>();
             listUnits.Items.Clear();
             listUsers.Items.Clear();
+            listUnits.SelectedIndex = -1;
+            listUsers.SelectedIndex = -1;
 
 
             // Get database connection to populate listboxes
@@ -143,6 +145,9 @@ namespace SIT321_Assignment_3_WPF.MainWindows
             // group both listboxes under one event handler
             listUnits.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
             listUsers.SelectionChanged += new SelectionChangedEventHandler(ListItem_Clicked);
+
+            btnEditUnit.IsEnabled = false;
+            btnEditUser.IsEnabled = false;
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -298,6 +303,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
+            if (listUsers.SelectedIndex < 0)
+            {
+                return;
+            }
             btnAddUnit.IsEnabled = false;
             btnAddUser.IsEnabled = false;
             btnEditUser.IsEnabled = false;
@@ -360,17 +369,20 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
         private void btnEditUnit_Click(object sender, RoutedEventArgs e)
         {
-            btnAddUnit.IsEnabled = false;
-            btnAddUser.IsEnabled = false;
-            btnEditUnit.IsEnabled = false;
-            Unit SelectedUnit;
+            if (listUnits.SelectedIndex >= 0)
+            {
+                btnAddUnit.IsEnabled = false;
+                btnAddUser.IsEnabled = false;
+                btnEditUnit.IsEnabled = false;
+                Unit SelectedUnit;
 
-            SelectedUnit = LoggedInAccount.GetUnit( long.Parse(listedUnits[listUnits.SelectedIndex]) );
+                SelectedUnit = LoggedInAccount.GetUnit(long.Parse(listedUnits[listUnits.SelectedIndex]));
 
-            var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUnit);
-            editUnitWindow.Show();
-            editUnitWindow.Focus();
-            editUnitWindow.Closed += re_populate_lists;
+                var editUnitWindow = new AdminWindows.EditUnit(LoggedInAccount, SelectedUnit);
+                editUnitWindow.Show();
+                editUnitWindow.Focus();
+                editUnitWindow.Closed += re_populate_lists;
+            }
         }
 
         private void btnEnrol_Click(object sender, RoutedEventArgs e)
@@ -439,6 +451,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             if(LoggedInAccount.AddStudentUnit(tempstu, enrol))
                                             {
                                                 MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been enrolled to Unit");
+                                                PopulateList();
                                             }
                                             return;
                                         default:
@@ -469,13 +482,13 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         private void btnUnenrol_Click(object sender, RoutedEventArgs e)
         {
             // if unitcode is appropriate length
-            if (txtEnrolUnitCode.Text.Trim().Count() == 6)
+            if (txtUnenrolUnitCode.Text.Trim().Count() == 6)
             {
                 // if user is selected
                 if (listUsers.SelectedIndex >= 0)
                 {
                     // prepare unitcode
-                    string unitcode = txtEnrolUnitCode.Text.Trim().ToUpper();
+                    string unitcode = txtUnenrolUnitCode.Text.Trim().ToUpper();
 
                     // get unit
                     Unit enrol = LoggedInAccount.GetLatestUnit(unitcode);
@@ -534,6 +547,7 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                                             if (LoggedInAccount.RemoveStudentUnit(tempstu, enrol))
                                             {
                                                 MessageBox.Show("Student " + tempstu.FirstName + " " + tempstu.LastName + " has been unenrolled from Unit");
+                                                PopulateList();
                                             }
                                             return;
                                         default:
@@ -573,6 +587,10 @@ namespace SIT321_Assignment_3_WPF.MainWindows
                 listWindow.Show();
                 listWindow.Focus();
                 this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Must select a unit!");
             }
         }
 
@@ -643,15 +661,29 @@ namespace SIT321_Assignment_3_WPF.MainWindows
 
                 listedUnits = new List<string>();
 
-                foreach(Unit u in resultunits)
+                int count = 0;
+                foreach (Unit u in resultunits)
                 {
                     ListBoxItem lbi = new ListBoxItem();
                     lbi.Content = string.Format("{0}: {1}", u.Code, u.Name);
                     lbi.FontSize = 14;
                     lbi.Padding = new Thickness(5, 5, 5, 5);
 
+                    switch (count % 2)
+                    {
+                        case 0:
+                            lbi.Background = System.Windows.Media.Brushes.LightGray;
+                            break;
+                        case 1:
+                            lbi.Background = System.Windows.Media.Brushes.SlateGray;
+                            break;
+                        default:
+                            return;
+                    }
+
                     listUnits.Items.Add(lbi);
                     listedUnits.Add(u.ID.ToString());
+                    count++;
                 }
 
             }
