@@ -37,14 +37,14 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
     {
         public List<FeedbackItem> allFeedback;
 
-        public Student loggedInStudent;
+        public Account loggedInAccount;
         public int selectedUnit;
 
-        public ShowFeedback(Student s, int unit)
+        public ShowFeedback(Account a, int unit)
         {
             InitializeComponent();
 
-            loggedInStudent = s;
+            loggedInAccount = a;
             selectedUnit = unit;
 
             OutputAllFeedback();
@@ -64,15 +64,15 @@ namespace SIT321_Assignment_3_WPF.StudentWindows
                     conn.Open();
 
                     c = conn.CreateCommand();
-                    c.CommandText = "SELECT * FROM UserUnits WHERE UserID = @user AND UnitID = @id";
-                    c.Parameters.AddWithValue("@user", loggedInStudent.ID);
+                    c.CommandText = "SELECT StaffFeedback, StudentFeedback FROM UserUnits WHERE UserID = @user AND UnitID = @id";
+                    c.Parameters.AddWithValue("@user", loggedInAccount.ID);
                     c.Parameters.AddWithValue("@id", selectedUnit);
                     
                     r = c.ExecuteReader();
                     if (r.HasRows && r.Read())
                     {
-                        string[] staffFeedback = r[4].ToString().Split('\n');
-                        string[] studentFeedback = r[5].ToString().Split('\n');
+                        string[] staffFeedback = r[0].ToString().Split('\n');
+                        string[] studentFeedback = r[1].ToString().Split('\n');
 
                         string matchFullResult = "";
                         foreach (string s in staffFeedback)
