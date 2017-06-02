@@ -805,18 +805,18 @@ namespace SIT321_Assignment_3_WPF.MainWindows
         {
             if (listUsers.SelectedIndex >= 0)
             {
-                if(LoggedInAccount.GetType(listedUsers[listUsers.SelectedIndex]) == 2)
+                string accountid = listedUsers[listUsers.SelectedIndex];
+
+                if (LoggedInAccount.GetType(accountid) == 2)
                 {
-                    List<string> selecteduserunits = listedUnits;
+                    Account selectedAccount = LoggedInAccount.SearchAccountsById(accountid);
+                    List<Unit> selectedAccountUnits = LoggedInAccount.GetUnitsbyAccount(selectedAccount);
 
-                    string test = "";
+                    var feedbackcommentwindow = new AdminWindows.FeedbackComment(LoggedInAccount, selectedAccountUnits);
 
-                    foreach(string ele in selecteduserunits)
-                    {
-                        test += ele + " ";
-                    }
-
-                    MessageBox.Show(test);
+                    feedbackcommentwindow.Show();
+                    feedbackcommentwindow.Focus();
+                    this.Hide();
                 }
                 else
                 {
