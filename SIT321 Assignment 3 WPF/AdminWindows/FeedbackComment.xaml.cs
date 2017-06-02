@@ -85,7 +85,16 @@ namespace SIT321_Assignment_3_WPF.AdminWindows
             //set window object variables to parameters inserted
             Admin = lecturer;
             Student = student;
-            UnitsList = lecturer.Units.Intersect(student.Units.Select(u => u.unit)).ToList();
+            UnitsList = new List<Unit>();
+
+            foreach (Unit a in lecturer.Units)
+            {
+                student.Units.ForEach(b => 
+                {
+                    if (b.unit.Equals(a)) UnitsList.Add(a);
+                });
+            }
+
             _from = from;
 
             ClassStudent = student;
