@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIT321_Assignment_3_WPF.AdminWindows"
         mc:Ignorable="d"
-        Title="FeedbackComment" Height="600" Width="759.657" Closed="Window_Closed">
+        Title="FeedbackComment" Height="600" Width="759.657" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox x:Name="lstUnits" HorizontalAlignment="Left" Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="247" SelectionChanged="lstUnits_SelectionChanged"/>
         <ListBox x:Name="lstFeedbackComments" HorizontalAlignment="Left" Height="481" Margin="262,10,0,0" VerticalAlignment="Top" Width="480"/>
